@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
 
 type TipoAsset = 'conto' | 'azioni' | 'obbligazioni' | 'etf' | 'fondi' | 'cripto' | 'altro_finanziario'
 type TipoImmobile = 'residenziale' | 'commerciale' | 'terreno'
@@ -691,6 +691,8 @@ export default function CalcolatoreIVAFEIVIE() {
           </Link>
         </div>
       </section>
+
+      <RelatedTools tools={toolCorrelations['ivafe-ivie']} />
 
       <Footer />
     </main>

@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
 
 export default function CalcolatoreFIRE() {
   const [speseAnnue, setSpeseAnnue] = useState(30000)
@@ -258,6 +258,8 @@ export default function CalcolatoreFIRE() {
           </Link>
         </div>
       </section>
+
+      <RelatedTools tools={toolCorrelations.fire} />
 
       <Footer />
     </main>

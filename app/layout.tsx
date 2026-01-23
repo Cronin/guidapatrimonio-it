@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { JsonLd, organizationSchema, websiteSchema } from '@/components'
 
 export const metadata: Metadata = {
   title: 'Guida Patrimonio | Consulenza Patrimoniale Indipendente',
@@ -24,27 +25,6 @@ export const metadata: Metadata = {
   },
 }
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FinancialService',
-  name: 'Guida Patrimonio',
-  description: 'Consulenza patrimoniale e finanziaria indipendente per proteggere e far crescere il tuo patrimonio.',
-  url: 'https://guidapatrimonio.it',
-  logo: 'https://guidapatrimonio.it/logo.png',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Milano',
-    addressRegion: 'Lombardia',
-    addressCountry: 'IT',
-  },
-  areaServed: {
-    '@type': 'Country',
-    name: 'Italia',
-  },
-  priceRange: '$$',
-  serviceType: ['Consulenza Patrimoniale', 'Pianificazione Finanziaria', 'Wealth Management', 'Pianificazione Successoria'],
-}
-
 export default function RootLayout({
   children,
 }: {
@@ -57,10 +37,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/favicon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <JsonLd data={[organizationSchema, websiteSchema]} />
       </head>
       <body className="font-body antialiased">
         {children}

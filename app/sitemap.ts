@@ -22,6 +22,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
   const tools = [
+    // Portfolio & Investimenti
+    'backtest-portafoglio',
     // Strutture Societarie
     'holding',
     'family-office',

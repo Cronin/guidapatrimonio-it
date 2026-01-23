@@ -2,23 +2,25 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 const footerLinks = {
-  servizi: [
-    { label: 'Pianificazione Patrimoniale', href: '#' },
-    { label: 'Consulenza Investimenti', href: '#' },
-    { label: 'Ottimizzazione Fiscale', href: '#' },
-    { label: 'Passaggio Generazionale', href: '#' },
+  strumenti: [
+    { label: 'Simulatore Holding', href: '/strumenti/holding' },
+    { label: 'Trust vs Donazione', href: '/strumenti/trust-donazione' },
+    { label: 'Family Office', href: '/strumenti/family-office' },
+    { label: 'Exit Strategy', href: '/strumenti/exit-strategy' },
+    { label: 'Tutti gli strumenti', href: '/strumenti' },
   ],
-  risorse: [
-    { label: 'Blog', href: '#' },
-    { label: 'Guide Gratuite', href: '#' },
-    { label: 'Calcolatori', href: '#' },
-    { label: 'FAQ', href: '#' },
+  calcolatori: [
+    { label: 'Successione', href: '/strumenti/successione' },
+    { label: 'Patrimonio Netto', href: '/strumenti/patrimonio-netto' },
+    { label: 'FIRE Calculator', href: '/strumenti/fire' },
+    { label: 'Dashboard Macro', href: '/strumenti/dashboard-macro' },
+    { label: 'Confronto ETF', href: '/strumenti/confronto-etf' },
   ],
   azienda: [
-    { label: 'Chi Siamo', href: '#chi-siamo' },
-    { label: 'Il Nostro Metodo', href: '#come-lavoriamo' },
-    { label: 'Contatti', href: '#contatti' },
-    { label: 'Privacy Policy', href: '#' },
+    { label: 'Chi Siamo', href: '/#chi-siamo' },
+    { label: 'Il Nostro Metodo', href: '/#come-lavoriamo' },
+    { label: 'Contatti', href: '/#contatti' },
+    { label: 'Blog', href: '/blog' },
   ],
 }
 
@@ -66,9 +68,9 @@ export default function Footer() {
 
             {/* Links Columns */}
             <div>
-              <h4 className="font-body font-semibold text-body mb-4">Servizi</h4>
+              <h4 className="font-body font-semibold text-body mb-4">Strumenti</h4>
               <ul className="space-y-3">
-                {footerLinks.servizi.map((link) => (
+                {footerLinks.strumenti.map((link) => (
                   <li key={link.label}>
                     <Link href={link.href} className="text-body text-white/60 hover:text-white transition-colors">
                       {link.label}
@@ -79,9 +81,9 @@ export default function Footer() {
             </div>
 
             <div>
-              <h4 className="font-body font-semibold text-body mb-4">Risorse</h4>
+              <h4 className="font-body font-semibold text-body mb-4">Calcolatori</h4>
               <ul className="space-y-3">
-                {footerLinks.risorse.map((link) => (
+                {footerLinks.calcolatori.map((link) => (
                   <li key={link.label}>
                     <Link href={link.href} className="text-body text-white/60 hover:text-white transition-colors">
                       {link.label}

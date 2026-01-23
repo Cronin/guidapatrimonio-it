@@ -2,7 +2,35 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer, JsonLd, createCalculatorSchema, createBreadcrumbSchema, createFAQSchema } from '@/components'
+
+// Static schema data
+const calculatorSchema = createCalculatorSchema({
+  name: 'Calcolatore Interesse Composto',
+  description: 'Calcola la crescita del tuo capitale con l\'interesse composto. Simula rendimenti, versamenti periodici e proiezioni a lungo termine.',
+  url: 'https://guidapatrimonio.it/strumenti/interesse-composto',
+})
+
+const breadcrumbSchema = createBreadcrumbSchema([
+  { name: 'Home', url: 'https://guidapatrimonio.it' },
+  { name: 'Strumenti', url: 'https://guidapatrimonio.it/strumenti' },
+  { name: 'Calcolatore Interesse Composto', url: 'https://guidapatrimonio.it/strumenti/interesse-composto' },
+])
+
+const faqSchema = createFAQSchema([
+  {
+    question: 'Come funziona l\'interesse composto?',
+    answer: 'L\'interesse composto e il meccanismo per cui gli interessi generati da un investimento vengono reinvestiti e generano a loro volta nuovi interessi. La formula e: Montante = Capitale x (1 + tasso)^anni.',
+  },
+  {
+    question: 'Qual e la differenza tra interesse semplice e composto?',
+    answer: 'L\'interesse semplice si calcola solo sul capitale iniziale, mentre l\'interesse composto si calcola anche sugli interessi gia maturati, creando un effetto esponenziale nel tempo.',
+  },
+  {
+    question: 'Quanto rende l\'interesse composto?',
+    answer: 'Con 10.000 EUR investiti al 7% annuo per 20 anni, otterresti circa 38.700 EUR - quasi 4 volte il capitale iniziale grazie all\'effetto dell\'interesse composto.',
+  },
+])
 
 export default function InteresseComposto() {
   const [capitale, setCapitale] = useState(10000)
@@ -66,6 +94,7 @@ export default function InteresseComposto() {
 
   return (
     <main>
+      <JsonLd data={[calculatorSchema, breadcrumbSchema, faqSchema]} />
       <Navbar />
 
       {/* Hero */}

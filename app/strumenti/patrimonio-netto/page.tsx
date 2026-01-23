@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
 
 interface Asset {
   id: string
@@ -400,6 +400,8 @@ export default function CalcolatorePatrimonioNetto() {
           </Link>
         </div>
       </section>
+
+      <RelatedTools tools={toolCorrelations['patrimonio-netto']} />
 
       <Footer />
     </main>

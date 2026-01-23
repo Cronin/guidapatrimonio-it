@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
 
 interface Erede {
   id: string
@@ -539,6 +539,8 @@ export default function CalcolatoreSuccessione() {
           </div>
         </div>
       </section>
+
+      <RelatedTools tools={toolCorrelations.successione} />
 
       <section className="section-sm bg-green-600">
         <div className="container-custom text-center">

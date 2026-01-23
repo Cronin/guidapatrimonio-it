@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
 
 interface MacroData {
   spreadBtpBund: {
@@ -763,6 +763,10 @@ export default function DashboardMacro() {
           </div>
         </div>
       </section>
+
+      <div className="bg-gray-50">
+        <RelatedTools tools={toolCorrelations['dashboard-macro']} />
+      </div>
 
       {/* CTA */}
       <section className="py-12 bg-[#0d1117] border-t border-gray-800">

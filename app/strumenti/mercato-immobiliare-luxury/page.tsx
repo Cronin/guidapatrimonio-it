@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
 
 // Static data - imported directly for SSG compatibility
 const luxuryData = {
@@ -758,6 +758,8 @@ export default function MercatoImmobiliareLuxury() {
           </p>
         </div>
       </section>
+
+      <RelatedTools tools={toolCorrelations['mercato-immobiliare-luxury']} />
 
       <Footer />
     </main>

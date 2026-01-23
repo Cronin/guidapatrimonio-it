@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
 
 interface Auction {
   id: string
@@ -687,6 +687,8 @@ export default function AsteImmobiliariLuxury() {
           </Link>
         </div>
       </section>
+
+      <RelatedTools tools={toolCorrelations['aste-immobiliari-luxury']} />
 
       <Footer />
     </main>

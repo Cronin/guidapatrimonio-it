@@ -167,8 +167,25 @@ export default async function NewsArticlePage({ params }: Props) {
     .filter(n => n.slug !== article.slug && n.category === article.category)
     .slice(0, 3)
 
+  // JSON-LD schemas
+  const newsArticleSchema = createNewsArticleSchema({
+    title: article.title,
+    description: article.excerpt,
+    url: `https://guidapatrimonio.it/notizie/${article.slug}`,
+    image: article.image,
+    datePublished: article.date,
+    source: article.source,
+  })
+
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'Home', url: 'https://guidapatrimonio.it' },
+    { name: 'Notizie', url: 'https://guidapatrimonio.it/notizie' },
+    { name: article.title, url: `https://guidapatrimonio.it/notizie/${article.slug}` },
+  ])
+
   return (
     <main>
+      <JsonLd data={[newsArticleSchema, breadcrumbSchema]} />
       <Navbar />
 
       {/* Hero */}

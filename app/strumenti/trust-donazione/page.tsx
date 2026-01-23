@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
 
 type Relazione = 'coniuge' | 'figlio' | 'fratello' | 'altro'
 type Priorita = 'protezione' | 'controllo' | 'fiscale' | 'flessibilita'
@@ -751,6 +751,8 @@ export default function ConfrontoTrustDonazione() {
           </div>
         </div>
       </section>
+
+      <RelatedTools tools={toolCorrelations['trust-donazione']} />
 
       <section className="section-sm bg-green-600">
         <div className="container-custom text-center">

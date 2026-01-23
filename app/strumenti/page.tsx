@@ -1,10 +1,16 @@
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer, JsonLd, createToolListSchema, createBreadcrumbSchema } from '@/components'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Strumenti per Grandi Patrimoni | Guida Patrimonio',
-  description: 'Strumenti di pianificazione patrimoniale per chi gestisce patrimoni importanti. Holding, trust, family office, ottimizzazione fiscale internazionale.',
+  title: 'Strumenti Finanziari GRATIS | Calcolatori Investimenti Italia',
+  description: 'Calcolatori GRATIS: plusvalenze, minusvalenze, portfolio tracker, Monte Carlo, backtest portafoglio. Alternative gratuite a JustETF e Wallible.',
+  keywords: ['calcolatore plusvalenze gratis', 'portfolio tracker gratis', 'calcolatore minusvalenze', 'simulatore monte carlo', 'backtest portafoglio', 'analizzatore costi fondi', 'strumenti investimento gratuiti', 'alternativa justetf gratis'],
+  openGraph: {
+    title: 'Strumenti Finanziari GRATIS | Calcolatori Investimenti',
+    description: 'Portfolio tracker, calcolatore plusvalenze, simulatore Monte Carlo e 40+ strumenti gratuiti per investitori italiani.',
+    type: 'website',
+  },
 }
 
 interface Tool {
@@ -19,6 +25,61 @@ interface ToolCategory {
 }
 
 const toolCategories: ToolCategory[] = [
+  {
+    title: 'Calcolatori Fiscali GRATIS',
+    tools: [
+      {
+        title: 'Calcolatore Plusvalenze GRATIS',
+        description: 'Calcola tasse su azioni, ETF, obbligazioni. Aliquote 26% e 12.5%.',
+        href: '/strumenti/calcolatore-plusvalenze'
+      },
+      {
+        title: 'Calcolatore Minusvalenze GRATIS',
+        description: 'Gestisci zainetto fiscale, scadenze e compensazioni.',
+        href: '/strumenti/calcolatore-minusvalenze'
+      },
+      {
+        title: 'Tax Loss Harvesting',
+        description: 'Ottimizza la compensazione tra plus e minusvalenze.',
+        href: '/strumenti/tax-loss-harvesting'
+      },
+    ],
+  },
+  {
+    title: 'Portfolio & Investimenti GRATIS',
+    tools: [
+      {
+        title: 'Portfolio Tracker GRATIS',
+        description: 'Traccia azioni, ETF, fondi. Calcola P&L e composizione.',
+        href: '/strumenti/portfolio-tracker'
+      },
+      {
+        title: 'Backtest Portafoglio GRATIS',
+        description: 'Simula rendimenti storici. CAGR, Sharpe ratio, confronto benchmark.',
+        href: '/strumenti/backtest-portafoglio'
+      },
+      {
+        title: 'Simulatore Monte Carlo GRATIS',
+        description: 'Simula 1000+ scenari. Probabilità di successo investimenti.',
+        href: '/strumenti/simulatore-monte-carlo'
+      },
+      {
+        title: 'Analizzatore Costi Fondi GRATIS',
+        description: 'Calcola TER, commissioni nascoste e impatto sul rendimento.',
+        href: '/strumenti/analizzatore-costi-fondi'
+      },
+      {
+        title: 'Simulatore PAC',
+        description: 'Piano di Accumulo Capitale. Crescita con interesse composto.',
+        href: '/strumenti/pac'
+      },
+      {
+        title: 'Calcolatore Dividendi',
+        description: 'Calcola rendita da dividendi. Simulazione reinvestimento.',
+        href: '/strumenti/calcolatore-dividendi'
+      },
+    ],
+  },
   {
     title: 'Strutture Societarie',
     tools: [
@@ -112,8 +173,24 @@ const toolCategories: ToolCategory[] = [
 ]
 
 export default function Strumenti() {
+  // Flatten all tools for schema
+  const allTools = toolCategories.flatMap(cat =>
+    cat.tools.map(tool => ({
+      name: tool.title,
+      description: tool.description,
+      url: `https://guidapatrimonio.it${tool.href}`,
+    }))
+  )
+
+  const toolListSchema = createToolListSchema(allTools)
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'Home', url: 'https://guidapatrimonio.it' },
+    { name: 'Strumenti', url: 'https://guidapatrimonio.it/strumenti' },
+  ])
+
   return (
     <main>
+      <JsonLd data={[toolListSchema, breadcrumbSchema]} />
       <Navbar />
 
       {/* Hero */}

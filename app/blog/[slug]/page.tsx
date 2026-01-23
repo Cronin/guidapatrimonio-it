@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer, JsonLd, createArticleSchema, createBreadcrumbSchema } from '@/components'
 import { getPostBySlug, getAllPosts } from '@/content/blog/posts'
 import type { Metadata } from 'next'
 
@@ -74,6 +74,21 @@ export default async function BlogPost({ params }: Props) {
   }
 
   const toc = extractTOC(post.content)
+
+  // JSON-LD schemas
+  const articleSchema = createArticleSchema({
+    title: post.title,
+    description: post.excerpt,
+    url: `https://guidapatrimonio.it/blog/${post.slug}`,
+    image: post.image,
+    datePublished: post.date,
+  })
+
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'Home', url: 'https://guidapatrimonio.it' },
+    { name: 'Blog', url: 'https://guidapatrimonio.it/blog' },
+    { name: post.title, url: `https://guidapatrimonio.it/blog/${post.slug}` },
+  ])
 
   // Simple markdown-like rendering
   const renderContent = (content: string) => {
@@ -193,6 +208,7 @@ export default async function BlogPost({ params }: Props) {
 
   return (
     <main>
+      <JsonLd data={[articleSchema, breadcrumbSchema]} />
       <Navbar />
 
       {/* Hero */}

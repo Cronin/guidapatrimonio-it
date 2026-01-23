@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'AI Wealth Advisor - Consulente Patrimoniale AI | Guida Patrimonio',
-  description: 'Consulente patrimoniale virtuale basato su intelligenza artificiale. Risposte immediate su pianificazione patrimoniale, fiscalita, successioni, trust e holding.',
-  keywords: 'AI wealth advisor, consulente patrimoniale AI, chatbot finanziario, consulenza fiscale AI, trust, holding, successioni, pianificazione patrimoniale',
+  title: 'AI Wealth Advisor - Consulente AI | Guida Patrimonio',
+  description: 'Consulente patrimoniale AI per HNWI: risposte su trust, holding, successioni, fiscalita internazionale. Assistente virtuale wealth management.',
+  keywords: ['AI wealth advisor', 'consulente patrimoniale AI', 'HNWI', 'trust', 'holding familiare', 'pianificazione successoria', 'consulenza fiscale', 'wealth management'],
   openGraph: {
     title: 'AI Wealth Advisor - Consulente Patrimoniale AI',
-    description: 'Consulente patrimoniale virtuale basato su intelligenza artificiale. Risposte immediate su fiscalita, successioni, trust e holding.',
+    description: 'Assistente AI per domande su trust, holding, successioni, fiscalita. Per HNWI e family office.',
     type: 'website',
     locale: 'it_IT',
     url: 'https://guidapatrimonio.it/strumenti/ai-advisor',

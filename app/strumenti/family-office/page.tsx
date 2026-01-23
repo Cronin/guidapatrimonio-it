@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
 
 type ServiceOption = 'private-banking' | 'multi-fo' | 'single-fo'
 
@@ -557,6 +557,8 @@ export default function CalcolatoreFamilyOffice() {
           </div>
         </div>
       </section>
+
+      <RelatedTools tools={toolCorrelations['family-office']} />
 
       {/* CTA */}
       <section className="section-sm bg-green-600">

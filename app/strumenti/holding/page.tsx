@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
 
 export default function SimulatoreHolding() {
   // Input values
@@ -518,6 +518,8 @@ export default function SimulatoreHolding() {
           </div>
         </div>
       </section>
+
+      <RelatedTools tools={toolCorrelations.holding} />
 
       <section className="section-sm bg-green-600">
         <div className="container-custom text-center">

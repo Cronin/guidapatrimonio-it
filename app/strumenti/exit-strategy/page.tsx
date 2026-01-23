@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
 
 type ExitOption = 'trade_sale' | 'mbo' | 'family' | 'ipo'
 type HoldingStructure = 'direct' | 'holding_pex' | 'reinvestment'
@@ -719,6 +719,8 @@ export default function ExitStrategyPlanner() {
           </div>
         </div>
       </section>
+
+      <RelatedTools tools={toolCorrelations['exit-strategy']} />
 
       {/* CTA Section */}
       <section className="section-sm bg-green-600">
