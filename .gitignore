@@ -54,3 +54,7 @@ temp/
 
 # Analytics data
 .orchestrator/
+
+# Scripts (not part of build)
+capture-*.ts
+screenshots/
