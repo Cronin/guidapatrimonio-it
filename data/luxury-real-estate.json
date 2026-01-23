@@ -1,0 +1,243 @@
+{
+  "lastUpdate": "2026-01-23",
+  "source": "market-research",
+  "markets": [
+    {
+      "id": "milano-centro",
+      "name": "Milano Centro Storico",
+      "zone": "Quadrilatero della Moda",
+      "city": "Milano",
+      "region": "Lombardia",
+      "pricePerSqm": 15000,
+      "priceRange": {
+        "min": 12000,
+        "max": 25000
+      },
+      "trend": 3.5,
+      "yoyChange": 5.2,
+      "topSales": "Fino a 25.000 EUR/mq",
+      "description": "Il cuore del lusso milanese, tra Via Montenapoleone e Via della Spiga. Richiesta internazionale costante.",
+      "coordinates": { "lat": 45.4685, "lng": 9.1924 },
+      "highlights": ["Fashion district", "Buyer internazionali", "Trophy assets"]
+    },
+    {
+      "id": "milano-brera",
+      "name": "Milano Brera",
+      "zone": "Brera / Garibaldi",
+      "city": "Milano",
+      "region": "Lombardia",
+      "pricePerSqm": 12000,
+      "priceRange": {
+        "min": 9000,
+        "max": 16000
+      },
+      "trend": 2.8,
+      "yoyChange": 4.1,
+      "topSales": "Fino a 16.000 EUR/mq",
+      "description": "Quartiere artistico e bohemien, ora tra i piu esclusivi. Forte domanda da professionisti e creativi.",
+      "coordinates": { "lat": 45.4728, "lng": 9.1862 },
+      "highlights": ["Arte e cultura", "Nightlife esclusiva", "Loft di pregio"]
+    },
+    {
+      "id": "roma-centro",
+      "name": "Roma Centro",
+      "zone": "Via Condotti / Piazza di Spagna",
+      "city": "Roma",
+      "region": "Lazio",
+      "pricePerSqm": 14000,
+      "priceRange": {
+        "min": 10000,
+        "max": 20000
+      },
+      "trend": 2.1,
+      "yoyChange": 3.5,
+      "topSales": "Fino a 20.000 EUR/mq",
+      "description": "Il triangolo d'oro romano, con vista sui monumenti storici. Mercato stabile e resiliente.",
+      "coordinates": { "lat": 41.9057, "lng": 12.4823 },
+      "highlights": ["Vista iconiche", "Patrimonio storico", "Clientela diplomatica"]
+    },
+    {
+      "id": "roma-parioli",
+      "name": "Roma Parioli",
+      "zone": "Parioli / Pinciano",
+      "city": "Roma",
+      "region": "Lazio",
+      "pricePerSqm": 8500,
+      "priceRange": {
+        "min": 6500,
+        "max": 12000
+      },
+      "trend": 1.8,
+      "yoyChange": 2.8,
+      "topSales": "Fino a 12.000 EUR/mq",
+      "description": "Quartiere residenziale elegante, preferito da famiglie facoltose e professionisti.",
+      "coordinates": { "lat": 41.9264, "lng": 12.4936 },
+      "highlights": ["Verde e tranquillita", "Scuole internazionali", "Ville con giardino"]
+    },
+    {
+      "id": "lago-como",
+      "name": "Lago di Como",
+      "zone": "Cernobbio / Bellagio",
+      "city": "Como",
+      "region": "Lombardia",
+      "pricePerSqm": 8000,
+      "priceRange": {
+        "min": 5000,
+        "max": 15000
+      },
+      "trend": 4.2,
+      "yoyChange": 6.8,
+      "topSales": "Fino a 15.000 EUR/mq per lakefront",
+      "description": "Destinazione iconica per VIP internazionali. Ville storiche con vista lago molto richieste.",
+      "coordinates": { "lat": 45.8564, "lng": 9.0852 },
+      "highlights": ["Ville storiche", "Vista lago", "Celebrity hotspot"]
+    },
+    {
+      "id": "portofino",
+      "name": "Portofino",
+      "zone": "Portofino / Santa Margherita",
+      "city": "Portofino",
+      "region": "Liguria",
+      "pricePerSqm": 18000,
+      "priceRange": {
+        "min": 12000,
+        "max": 30000
+      },
+      "trend": 1.5,
+      "yoyChange": 2.3,
+      "topSales": "Fino a 30.000 EUR/mq",
+      "description": "Il borgo piu esclusivo d'Italia. Offerta limitatissima, domanda sempre superiore.",
+      "coordinates": { "lat": 44.3035, "lng": 9.2096 },
+      "highlights": ["Esclusivita massima", "Yacht lifestyle", "Offerta limitata"]
+    },
+    {
+      "id": "forte-marmi",
+      "name": "Forte dei Marmi",
+      "zone": "Roma Imperiale",
+      "city": "Forte dei Marmi",
+      "region": "Toscana",
+      "pricePerSqm": 12000,
+      "priceRange": {
+        "min": 8000,
+        "max": 18000
+      },
+      "trend": 2.0,
+      "yoyChange": 3.0,
+      "topSales": "Fino a 18.000 EUR/mq",
+      "description": "Meta estiva dell'elite italiana e russa. Ville con spiaggia privata molto ricercate.",
+      "coordinates": { "lat": 43.9614, "lng": 10.1688 },
+      "highlights": ["Beach lifestyle", "Clientela VIP", "Ville con giardino"]
+    },
+    {
+      "id": "capri",
+      "name": "Capri",
+      "zone": "Centro / Marina Grande",
+      "city": "Capri",
+      "region": "Campania",
+      "pricePerSqm": 16000,
+      "priceRange": {
+        "min": 10000,
+        "max": 25000
+      },
+      "trend": 1.8,
+      "yoyChange": 2.5,
+      "topSales": "Fino a 25.000 EUR/mq",
+      "description": "L'isola dei VIP per eccellenza. Pochissime proprieta disponibili sul mercato.",
+      "coordinates": { "lat": 40.5507, "lng": 14.2426 },
+      "highlights": ["Isola esclusiva", "Vista Faraglioni", "Rarita assoluta"]
+    },
+    {
+      "id": "cortina",
+      "name": "Cortina d'Ampezzo",
+      "zone": "Centro / Pocol",
+      "city": "Cortina d'Ampezzo",
+      "region": "Veneto",
+      "pricePerSqm": 14000,
+      "priceRange": {
+        "min": 10000,
+        "max": 20000
+      },
+      "trend": 5.0,
+      "yoyChange": 8.2,
+      "topSales": "Fino a 20.000 EUR/mq",
+      "description": "In forte crescita per le Olimpiadi 2026. Chalet di lusso e residenze esclusive.",
+      "coordinates": { "lat": 46.5404, "lng": 12.1357 },
+      "highlights": ["Olimpiadi 2026", "Sci di lusso", "Boom investimenti"]
+    },
+    {
+      "id": "firenze-centro",
+      "name": "Firenze Centro",
+      "zone": "Oltrarno / Santo Spirito",
+      "city": "Firenze",
+      "region": "Toscana",
+      "pricePerSqm": 7500,
+      "priceRange": {
+        "min": 5500,
+        "max": 12000
+      },
+      "trend": 2.5,
+      "yoyChange": 3.8,
+      "topSales": "Fino a 12.000 EUR/mq",
+      "description": "Appartamenti in palazzi storici con vista su chiese e piazze rinascimentali.",
+      "coordinates": { "lat": 43.7696, "lng": 11.2558 },
+      "highlights": ["Patrimonio UNESCO", "Arte e storia", "Buyer americani"]
+    },
+    {
+      "id": "costa-smeralda",
+      "name": "Costa Smeralda",
+      "zone": "Porto Cervo / Cala di Volpe",
+      "city": "Arzachena",
+      "region": "Sardegna",
+      "pricePerSqm": 15000,
+      "priceRange": {
+        "min": 10000,
+        "max": 25000
+      },
+      "trend": 3.2,
+      "yoyChange": 4.5,
+      "topSales": "Fino a 25.000 EUR/mq",
+      "description": "Il playground estivo dei miliardari. Ville con accesso al mare privatissime.",
+      "coordinates": { "lat": 41.0936, "lng": 9.5374 },
+      "highlights": ["Mare cristallino", "Yacht club", "Privacy totale"]
+    },
+    {
+      "id": "venezia-centro",
+      "name": "Venezia Centro",
+      "zone": "San Marco / Dorsoduro",
+      "city": "Venezia",
+      "region": "Veneto",
+      "pricePerSqm": 9000,
+      "priceRange": {
+        "min": 6000,
+        "max": 15000
+      },
+      "trend": 1.2,
+      "yoyChange": 1.8,
+      "topSales": "Fino a 15.000 EUR/mq",
+      "description": "Palazzi storici sul Canal Grande. Mercato di nicchia per collezionisti.",
+      "coordinates": { "lat": 45.4337, "lng": 12.3382 },
+      "highlights": ["Palazzi storici", "Canal Grande", "Unicita mondiale"]
+    }
+  ],
+  "nationalStats": {
+    "avgLuxuryPrice": 12000,
+    "yoyGrowth": 4.2,
+    "transactionVolume": "3.2 miliardi EUR",
+    "foreignBuyerShare": 35,
+    "topNationalities": ["USA", "UK", "Germania", "Svizzera", "Francia"]
+  },
+  "marketInsights": [
+    {
+      "title": "Olimpiadi 2026 spingono Cortina",
+      "text": "I prezzi a Cortina d'Ampezzo sono cresciuti dell'8.2% nell'ultimo anno, trainati dagli investimenti per le Olimpiadi invernali."
+    },
+    {
+      "title": "Buyer americani dominano Firenze",
+      "text": "Il 45% degli acquirenti di immobili di lusso a Firenze proviene dagli Stati Uniti, attratti dal cambio favorevole e dal lifestyle toscano."
+    },
+    {
+      "title": "Lago di Como sempre piu esclusivo",
+      "text": "Con +6.8% anno su anno, il Lago di Como conferma il trend di crescita grazie alla domanda internazionale di ville storiche."
+    }
+  ]
+}

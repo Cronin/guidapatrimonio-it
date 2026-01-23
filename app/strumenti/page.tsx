@@ -3,14 +3,14 @@ import { Navbar, Footer } from '@/components'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Strumenti Finanziari Gratuiti | Guida Patrimonio',
-  description: 'Calcolatori finanziari gratuiti per pianificare investimenti, pensione, mutuo e ottimizzazione fiscale.',
+  title: 'Strumenti per Grandi Patrimoni | Guida Patrimonio',
+  description: 'Strumenti di pianificazione patrimoniale per chi gestisce patrimoni importanti. Holding, trust, family office, ottimizzazione fiscale internazionale.',
 }
 
 interface Tool {
   title: string
+  description: string
   href: string
-  external?: boolean
 }
 
 interface ToolCategory {
@@ -20,58 +20,88 @@ interface ToolCategory {
 
 const toolCategories: ToolCategory[] = [
   {
-    title: 'Investimenti',
+    title: 'Strutture Societarie',
     tools: [
-      { title: 'Interesse Composto', href: '/strumenti/interesse-composto' },
-      { title: 'Simulatore PAC', href: '/strumenti/pac' },
-      { title: 'Calcolatore Dividendi', href: '/strumenti/calcolatore-dividendi' },
-      { title: 'Inflazione', href: '/strumenti/inflazione' },
-      { title: 'Portfolio Rebalancer', href: '/strumenti/portfolio-rebalancer' },
-      { title: 'Confronto ETF', href: '/strumenti/confronto-etf' },
+      {
+        title: 'Simulatore Holding',
+        description: 'Confronto persona fisica vs holding. Regime PEX, dividendi, exit.',
+        href: '/strumenti/holding'
+      },
+      {
+        title: 'Family Office Calculator',
+        description: 'Analisi costi-benefici per patrimoni da €5M+.',
+        href: '/strumenti/family-office'
+      },
+      {
+        title: 'Exit Strategy Planner',
+        description: 'Trade sale, MBO, IPO. Ottimizzazione fiscale con PEX.',
+        href: '/strumenti/exit-strategy'
+      },
     ],
   },
   {
-    title: 'Pianificazione',
+    title: 'Passaggio Generazionale',
     tools: [
-      { title: 'Calcolatore FIRE', href: '/strumenti/fire' },
-      { title: 'Pensione', href: '/strumenti/pensione' },
-      { title: 'Fondo Emergenza', href: '/strumenti/fondo-emergenza' },
-      { title: 'Budget 50/30/20', href: '/strumenti/budget' },
-      { title: 'Patrimonio Netto', href: '/strumenti/patrimonio-netto' },
-      { title: 'Patrimonio Netto Avanzato', href: '/strumenti/calcolatore-patrimonio-netto' },
+      {
+        title: 'Trust vs Donazione',
+        description: 'Protezione, controllo, fiscalità a confronto.',
+        href: '/strumenti/trust-donazione'
+      },
+      {
+        title: 'Pianificatore Successione',
+        description: 'Imposte, franchigie, strategie di ottimizzazione.',
+        href: '/strumenti/successione'
+      },
     ],
   },
   {
-    title: 'Lavoro',
+    title: 'Fiscalità Internazionale',
     tools: [
-      { title: 'Stipendio Netto', href: '/strumenti/stipendio-netto' },
-      { title: 'Calcolatore TFR', href: '/strumenti/tfr' },
+      {
+        title: 'Flat Tax Neo-Residenti',
+        description: 'Regime €100k per redditi esteri. Simulazione risparmio.',
+        href: '/strumenti/flat-tax-100k'
+      },
+      {
+        title: 'IVAFE / IVIE Calculator',
+        description: 'Imposte su asset esteri. Calcolo e ottimizzazione.',
+        href: '/strumenti/ivafe-ivie'
+      },
     ],
   },
   {
-    title: 'Immobiliare',
+    title: 'Private Wealth',
     tools: [
-      { title: 'Rendita Immobiliare', href: '/strumenti/rendita-immobiliare' },
-      { title: 'Plusvalenza Immobiliare', href: 'https://calcoloplusvalenza.it', external: true },
-      { title: 'Calcolatore Mutuo', href: '/strumenti/mutuo' },
+      {
+        title: 'Confronto Private Bank',
+        description: 'Top private bank italiane e svizzere. Soglie e costi.',
+        href: '/strumenti/confronto-private-banking'
+      },
+      {
+        title: 'Fee Analyzer',
+        description: 'Management fee, performance fee, costi nascosti.',
+        href: '/strumenti/costi-private-banking'
+      },
     ],
   },
   {
-    title: 'Fiscalità',
+    title: 'Real Estate',
     tools: [
-      { title: 'Holding Company', href: '/strumenti/holding' },
-      { title: 'Flat Tax 100k', href: '/strumenti/flat-tax-100k' },
-      { title: 'IVAFE e IVIE', href: '/strumenti/ivafe-ivie' },
-      { title: 'Exit Strategy', href: '/strumenti/exit-strategy' },
-    ],
-  },
-  {
-    title: 'Patrimonio',
-    tools: [
-      { title: 'Successione e Donazioni', href: '/strumenti/successione' },
-      { title: 'Trust vs Donazione', href: '/strumenti/trust-donazione' },
-      { title: 'Family Office', href: '/strumenti/family-office' },
-      { title: 'Costi Private Banking', href: '/strumenti/costi-private-banking' },
+      {
+        title: 'Mercato Immobiliare Luxury',
+        description: 'Prezzi al mq nelle zone premium italiane. Trend e analisi.',
+        href: '/strumenti/mercato-immobiliare-luxury'
+      },
+      {
+        title: 'Portafoglio Immobiliare',
+        description: 'Ottimizzazione fiscale. Persona fisica vs società.',
+        href: '/strumenti/portafoglio-immobiliare'
+      },
+      {
+        title: 'Proiezione Patrimoniale',
+        description: 'Simulazione crescita a 10-20-30 anni.',
+        href: '/strumenti/proiezione-patrimoniale'
+      },
     ],
   },
 ]
@@ -81,45 +111,40 @@ export default function Strumenti() {
     <main>
       <Navbar />
 
-      {/* Hero - Minimal */}
+      {/* Hero */}
       <section className="bg-forest pt-navbar">
         <div className="container-custom py-20 md:py-28">
-          <h1 className="font-heading text-[40px] md:text-[56px] text-white leading-tight max-w-xl">
-            Strumenti finanziari gratuiti
+          <p className="text-green-300/60 text-sm font-medium tracking-wider uppercase mb-4">
+            Per patrimoni importanti
+          </p>
+          <h1 className="font-heading text-[40px] md:text-[56px] text-white leading-tight max-w-2xl">
+            Strumenti per chi investe seriamente
           </h1>
-          <p className="text-lg text-white/70 mt-6 max-w-md">
-            Calcola, pianifica, ottimizza. Nessuna registrazione.
+          <p className="text-lg text-white/50 mt-6 max-w-lg">
+            Holding, trust, family office, fiscalità internazionale.
           </p>
         </div>
       </section>
 
-      {/* Tools - Clean Grid */}
+      {/* Tools */}
       <section className="bg-white py-16 md:py-24">
         <div className="container-custom">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-14">
             {toolCategories.map((category) => (
               <div key={category.title}>
-                <h2 className="text-sm font-medium text-forest/50 uppercase tracking-wider mb-6">
+                <h2 className="text-xs font-medium text-forest/40 uppercase tracking-wider mb-6">
                   {category.title}
                 </h2>
-                <ul className="space-y-4">
+                <ul className="space-y-5">
                   {category.tools.map((tool) => (
                     <li key={tool.title}>
-                      <Link
-                        href={tool.href}
-                        target={tool.external ? '_blank' : undefined}
-                        rel={tool.external ? 'noopener noreferrer' : undefined}
-                        className="group flex items-center justify-between text-forest hover:text-green-600 transition-colors"
-                      >
-                        <span className="font-heading text-lg">{tool.title}</span>
-                        <svg
-                          className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
+                      <Link href={tool.href} className="group block">
+                        <span className="font-heading text-lg text-forest group-hover:text-green-600 transition-colors">
+                          {tool.title}
+                        </span>
+                        <p className="text-sm text-gray-400 mt-0.5">
+                          {tool.description}
+                        </p>
                       </Link>
                     </li>
                   ))}
@@ -130,22 +155,26 @@ export default function Strumenti() {
         </div>
       </section>
 
-      {/* CTA - Minimal */}
+      {/* CTA */}
       <section className="bg-cream py-16 md:py-20">
-        <div className="container-custom text-center">
-          <p className="text-forest/60 mb-3">Situazione complessa?</p>
-          <h2 className="font-heading text-2xl md:text-3xl text-forest mb-8">
-            Parliamo del tuo caso specifico
-          </h2>
-          <Link
-            href="/#contatti"
-            className="inline-flex items-center gap-2 text-forest font-medium border-b-2 border-forest pb-1 hover:text-green-600 hover:border-green-600 transition-colors"
-          >
-            Richiedi consulenza gratuita
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
+        <div className="container-custom">
+          <div className="max-w-xl mx-auto text-center">
+            <h2 className="font-heading text-2xl md:text-3xl text-forest mb-4">
+              Situazione complessa?
+            </h2>
+            <p className="text-gray-500 mb-8">
+              Ogni grande patrimonio ha esigenze uniche.
+            </p>
+            <Link
+              href="/#contatti"
+              className="inline-flex items-center gap-2 bg-forest text-white px-6 py-3 rounded font-medium hover:bg-green-700 transition-colors"
+            >
+              Consulenza riservata
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </section>
 

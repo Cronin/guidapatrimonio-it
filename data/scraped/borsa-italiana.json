@@ -1,0 +1,187 @@
+{
+  "lastUpdate": "2026-01-23T12:45:58.658Z",
+  "source": "yahoo-finance",
+  "ftseMib": {
+    "value": 44802,
+    "change": 314,
+    "changePercent": 0.71,
+    "open": 44905,
+    "high": 44985,
+    "low": 44790,
+    "volume": 0,
+    "previousClose": 44488
+  },
+  "topGainers": [
+    {
+      "symbol": "SPM.MI",
+      "name": "Saipem",
+      "price": 2.928,
+      "change": 0.118,
+      "changePercent": 4.2,
+      "volume": 43621291
+    },
+    {
+      "symbol": "ERG.MI",
+      "name": "ERG",
+      "price": 22.6,
+      "change": 0.78,
+      "changePercent": 3.57,
+      "volume": 49917
+    },
+    {
+      "symbol": "PIRC.MI",
+      "name": "Pirelli",
+      "price": 6.412,
+      "change": 0.132,
+      "changePercent": 2.1,
+      "volume": 189218
+    },
+    {
+      "symbol": "TEN.MI",
+      "name": "Tenaris",
+      "price": 19.085,
+      "change": 0.375,
+      "changePercent": 2,
+      "volume": 1092315
+    },
+    {
+      "symbol": "UCG.MI",
+      "name": "UniCredit",
+      "price": 71.77,
+      "change": 1.38,
+      "changePercent": 1.96,
+      "volume": 1101584
+    }
+  ],
+  "topLosers": [
+    {
+      "symbol": "CPR.MI",
+      "name": "Campari",
+      "price": 6.014,
+      "change": -0.086,
+      "changePercent": -1.41,
+      "volume": 2402196
+    },
+    {
+      "symbol": "IG.MI",
+      "name": "Italgas",
+      "price": 9.865,
+      "change": -0.08,
+      "changePercent": -0.8,
+      "volume": 545888
+    },
+    {
+      "symbol": "HER.MI",
+      "name": "Hera",
+      "price": 4.046,
+      "change": -0.028,
+      "changePercent": -0.69,
+      "volume": 1123432
+    },
+    {
+      "symbol": "DIA.MI",
+      "name": "DiaSorin",
+      "price": 73.12,
+      "change": -0.46,
+      "changePercent": -0.63,
+      "volume": 51039
+    },
+    {
+      "symbol": "STLAM.MI",
+      "name": "Stellantis",
+      "price": 8.202,
+      "change": -0.039,
+      "changePercent": -0.47,
+      "volume": 7133093
+    }
+  ],
+  "bluechips": [
+    {
+      "symbol": "TIT.MI",
+      "name": "Telecom Italia",
+      "price": 0.5672,
+      "change": 0.0026,
+      "changePercent": 0.46,
+      "volume": 73611861
+    },
+    {
+      "symbol": "SPM.MI",
+      "name": "Saipem",
+      "price": 2.928,
+      "change": 0.118,
+      "changePercent": 4.2,
+      "volume": 43621291
+    },
+    {
+      "symbol": "ISP.MI",
+      "name": "Intesa Sanpaolo",
+      "price": 5.779,
+      "change": -0.001,
+      "changePercent": -0.02,
+      "volume": 12981364
+    },
+    {
+      "symbol": "STLAM.MI",
+      "name": "Stellantis",
+      "price": 8.202,
+      "change": -0.039,
+      "changePercent": -0.47,
+      "volume": 7133093
+    },
+    {
+      "symbol": "ENI.MI",
+      "name": "Eni",
+      "price": 16.69,
+      "change": 0.178,
+      "changePercent": 1.08,
+      "volume": 4376528
+    },
+    {
+      "symbol": "ENEL.MI",
+      "name": "Enel",
+      "price": 8.998,
+      "change": 0.16,
+      "changePercent": 1.81,
+      "volume": 3881313
+    },
+    {
+      "symbol": "CPR.MI",
+      "name": "Campari",
+      "price": 6.014,
+      "change": -0.086,
+      "changePercent": -1.41,
+      "volume": 2402196
+    },
+    {
+      "symbol": "A2A.MI",
+      "name": "A2A",
+      "price": 2.477,
+      "change": 0.047,
+      "changePercent": 1.93,
+      "volume": 1581742
+    },
+    {
+      "symbol": "HER.MI",
+      "name": "Hera",
+      "price": 4.046,
+      "change": -0.028,
+      "changePercent": -0.69,
+      "volume": 1123432
+    },
+    {
+      "symbol": "UCG.MI",
+      "name": "UniCredit",
+      "price": 71.77,
+      "change": 1.38,
+      "changePercent": 1.96,
+      "volume": 1101584
+    }
+  ],
+  "history": [
+    {
+      "date": "2026-01-23",
+      "ftseMib": 44802,
+      "change": 314
+    }
+  ]
+}

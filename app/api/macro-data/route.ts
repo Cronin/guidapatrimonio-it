@@ -58,6 +58,22 @@ interface BceRatesData {
   }>
 }
 
+interface IstatInflazioneData {
+  lastUpdate: string
+  source: string
+  current: {
+    yoy: number
+    mom: number
+    core: number
+    month: string
+  }
+  history: Array<{
+    month: string
+    yoy: number
+    mom: number
+  }>
+}
+
 // Fallback data in caso di errori
 const fallbackData: MacroData = {
   spreadBtpBund: {
@@ -162,8 +178,27 @@ async function fetchBceRates(): Promise<{ depositi: number; rifinanziamento: num
 
 async function fetchInflazioneIstat(): Promise<{ value: number; month: string } | null> {
   try {
-    // ISTAT doesn't have a simple public API, use recent known data
-    // Inflation data is typically released monthly with a 2-week delay
+    // Read from scraped ISTAT inflation file
+    const dataPath = join(process.cwd(), 'data/scraped/istat-inflazione.json')
+
+    if (existsSync(dataPath)) {
+      const fileContent = readFileSync(dataPath, 'utf-8')
+      const data: IstatInflazioneData = JSON.parse(fileContent)
+
+      // Check if data is not too stale (less than 7 days old)
+      const lastUpdate = new Date(data.lastUpdate)
+      const now = new Date()
+      const daysOld = (now.getTime() - lastUpdate.getTime()) / (1000 * 60 * 60 * 24)
+
+      if (daysOld < 7 && data.current) {
+        return {
+          value: data.current.yoy,
+          month: data.current.month
+        }
+      }
+    }
+
+    // Fallback to known recent rates
     return {
       value: 1.3,
       month: 'Dicembre 2025'

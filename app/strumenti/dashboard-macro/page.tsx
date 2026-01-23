@@ -72,9 +72,39 @@ interface ApiResponse {
   fetchedAt: string
 }
 
+interface StockQuote {
+  symbol: string
+  name: string
+  price: number
+  change: number
+  changePercent: number
+  volume?: number
+  marketCap?: number
+}
+
+interface BorsaItalianaData {
+  lastUpdate: string
+  source: string
+  ftseMib: {
+    value: number
+    change: number
+    changePercent: number
+    open: number
+    high: number
+    low: number
+    volume: number
+    previousClose: number
+  }
+  topGainers: StockQuote[]
+  topLosers: StockQuote[]
+  bluechips: StockQuote[]
+  stale?: boolean
+}
+
 export default function DashboardMacro() {
   const [data, setData] = useState<MacroData | null>(null)
   const [btpYields, setBtpYields] = useState<BTPYieldsData | null>(null)
+  const [borsaData, setBorsaData] = useState<BorsaItalianaData | null>(null)
   const [loading, setLoading] = useState(true)
   const [lastFetch, setLastFetch] = useState<Date | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -84,14 +114,16 @@ export default function DashboardMacro() {
       setLoading(true)
       setError(null)
 
-      // Fetch both macro data and BTP yields in parallel
-      const [macroResponse, btpResponse] = await Promise.all([
+      // Fetch macro data, BTP yields, and Borsa Italiana data in parallel
+      const [macroResponse, btpResponse, borsaResponse] = await Promise.all([
         fetch('/api/macro-data'),
-        fetch('/api/data/btp-yields')
+        fetch('/api/data/btp-yields'),
+        fetch('/api/data/borsa-italiana')
       ])
 
       const macroResult: ApiResponse = await macroResponse.json()
       const btpResult = await btpResponse.json()
+      const borsaResult = await borsaResponse.json()
 
       if (macroResult.success) {
         setData(macroResult.data)
@@ -102,6 +134,10 @@ export default function DashboardMacro() {
 
       if (btpResult.success) {
         setBtpYields({ ...btpResult.data, stale: btpResult.stale })
+      }
+
+      if (borsaResult.success) {
+        setBorsaData({ ...borsaResult.data, stale: borsaResult.stale })
       }
     } catch {
       setError('Errore di connessione')
@@ -569,6 +605,115 @@ export default function DashboardMacro() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </Link>
+              </div>
+            </div>
+          )}
+
+          {/* Top Gainers & Losers */}
+          {borsaData && (
+            <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Top Gainers */}
+              <div className="bg-[#0d1117] border border-gray-800 rounded-lg p-5 hover:border-gray-700 transition-colors">
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <p className="text-gray-500 font-mono text-xs uppercase tracking-wider">Top Gainers</p>
+                    <p className="text-gray-600 font-mono text-[10px]">
+                      FTSE MIB - Migliori del giorno {borsaData.stale && '(dati non aggiornati)'}
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-500/10">
+                    <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  {borsaData.topGainers.slice(0, 5).map((stock, index) => (
+                    <div key={stock.symbol} className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <span className="text-gray-600 font-mono text-xs w-4">{index + 1}.</span>
+                        <div>
+                          <p className="text-white font-mono text-sm">{stock.name}</p>
+                          <p className="text-gray-600 font-mono text-[10px]">{stock.symbol}</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-white font-mono text-sm">{formatNumber(stock.price, stock.price < 1 ? 4 : 2)}</p>
+                        <p className="text-emerald-400 font-mono text-xs">+{formatNumber(stock.changePercent, 2)}%</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Top Losers */}
+              <div className="bg-[#0d1117] border border-gray-800 rounded-lg p-5 hover:border-gray-700 transition-colors">
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <p className="text-gray-500 font-mono text-xs uppercase tracking-wider">Top Losers</p>
+                    <p className="text-gray-600 font-mono text-[10px]">
+                      FTSE MIB - Peggiori del giorno {borsaData.stale && '(dati non aggiornati)'}
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-red-500/10">
+                    <svg className="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  {borsaData.topLosers.slice(0, 5).map((stock, index) => (
+                    <div key={stock.symbol} className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <span className="text-gray-600 font-mono text-xs w-4">{index + 1}.</span>
+                        <div>
+                          <p className="text-white font-mono text-sm">{stock.name}</p>
+                          <p className="text-gray-600 font-mono text-[10px]">{stock.symbol}</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-white font-mono text-sm">{formatNumber(stock.price, stock.price < 1 ? 4 : 2)}</p>
+                        <p className="text-red-400 font-mono text-xs">{formatNumber(stock.changePercent, 2)}%</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Blue Chips by Market Cap */}
+          {borsaData && borsaData.bluechips && borsaData.bluechips.length > 0 && (
+            <div className="mt-4 bg-[#0d1117] border border-gray-800 rounded-lg p-5 hover:border-gray-700 transition-colors">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <p className="text-gray-500 font-mono text-xs uppercase tracking-wider">Blue Chips Italia</p>
+                  <p className="text-gray-600 font-mono text-[10px]">
+                    Top 10 per capitalizzazione di mercato
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-gray-600 font-mono text-[10px]">
+                    Fonte: {borsaData.source}
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                {borsaData.bluechips.slice(0, 10).map((stock) => (
+                  <div key={stock.symbol} className="bg-gray-900/50 rounded p-3">
+                    <p className="text-white font-mono text-sm font-medium truncate">{stock.name}</p>
+                    <p className="text-gray-600 font-mono text-[10px] mb-2">{stock.symbol}</p>
+                    <p className="text-white font-mono text-lg">{formatNumber(stock.price, stock.price < 1 ? 4 : 2)}</p>
+                    <p className={`font-mono text-xs ${getChangeColor(stock.changePercent)}`}>
+                      {formatPercent(stock.changePercent)}
+                    </p>
+                    {stock.marketCap && (
+                      <p className="text-gray-600 font-mono text-[10px] mt-1">
+                        {(stock.marketCap / 1e9).toFixed(1)}B EUR
+                      </p>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           )}
