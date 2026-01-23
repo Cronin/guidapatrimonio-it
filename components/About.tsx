@@ -72,11 +72,13 @@ export default function About() {
           <div className="relative">
             <div className="aspect-[4/3] rounded-xl overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=2070&auto=format&fit=crop"
-                alt="Consulenza patrimoniale riservata"
+                src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=2070&auto=format&fit=crop"
+                alt="Famiglia che pianifica il futuro insieme"
                 className="w-full h-full object-cover"
               />
             </div>
+            {/* Decorative element */}
+            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-green-100 rounded-xl -z-10" />
           </div>
         </div>
       </div>

@@ -14,6 +14,12 @@ export const metadata: Metadata = {
     locale: 'it_IT',
     url: 'https://guidapatrimonio.it',
     siteName: 'Guida Patrimonio',
+    images: [{
+      url: 'https://guidapatrimonio.it/og-default.png',
+      width: 1200,
+      height: 630,
+      alt: 'Guida Patrimonio - Consulenza Patrimoniale per Grandi Patrimoni',
+    }],
   },
   twitter: {
     card: 'summary_large_image',
