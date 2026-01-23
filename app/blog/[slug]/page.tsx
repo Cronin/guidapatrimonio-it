@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Navbar, Footer } from '@/components'
-import { getPostBySlug, getAllPosts, ContentImage } from '@/content/blog/posts'
+import { getPostBySlug, getAllPosts } from '@/content/blog/posts'
 import type { Metadata } from 'next'
 
 interface Props {
@@ -243,151 +243,76 @@ export default async function BlogPost({ params }: Props) {
         </section>
       )}
 
-      {/* Content with TOC */}
+      {/* Content */}
       <section className={`${post.image ? 'pt-10' : 'section-md'} pb-20 bg-cream`}>
         <div className="container-custom">
-          <div className="max-w-5xl mx-auto">
-            <div className="lg:flex lg:gap-12">
-              {/* Table of Contents - Sticky Sidebar */}
-              {toc.length > 3 && (
-                <aside className="hidden lg:block lg:w-64 shrink-0">
-                  <div className="sticky top-24">
-                    <nav className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                      <h4 className="font-heading text-sm font-semibold text-forest uppercase tracking-wider mb-4">
-                        In questo articolo
+          <div className="max-w-3xl mx-auto">
+            {/* Table of Contents - Simple, at top */}
+            {toc.filter(item => item.level === 2).length > 2 && (
+              <nav className="bg-white rounded-xl p-6 mb-8 shadow-sm border border-gray-100">
+                <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-3">Contenuti</p>
+                <ol className="flex flex-wrap gap-x-6 gap-y-2">
+                  {toc.filter(item => item.level === 2).map((item, idx) => (
+                    <li key={item.id}>
+                      <a
+                        href={`#${item.id}`}
+                        className="text-sm text-gray-600 hover:text-green-600 transition-colors"
+                      >
+                        <span className="text-gray-400 mr-1">{idx + 1}.</span>
+                        {item.text}
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            )}
+
+            <article className="bg-white rounded-xl p-8 md:p-12 shadow-sm border border-gray-100">
+              <div className="max-w-none">
+                {renderContent(post.content)}
+              </div>
+            </article>
+
+            {/* CTA Box */}
+            <div className="bg-forest rounded-xl p-8 md:p-10 mt-8 text-center">
+              <h3 className="font-heading text-2xl text-white mb-3">
+                Hai domande su questo argomento?
+              </h3>
+              <p className="text-white/70 mb-6 max-w-md mx-auto">
+                Prenota una consulenza riservata con un nostro esperto.
+              </p>
+              <Link href="/#contatti" className="inline-flex items-center gap-2 bg-white text-forest px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+                Richiedi Consulenza
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </div>
+
+            {/* Related Posts */}
+            <div className="mt-12">
+              <h3 className="font-heading text-xl text-forest mb-6">Articoli correlati</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                {getAllPosts()
+                  .filter(p => p.slug !== post.slug)
+                  .slice(0, 2)
+                  .map(relatedPost => (
+                    <Link
+                      key={relatedPost.slug}
+                      href={`/blog/${relatedPost.slug}`}
+                      className="group bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md hover:border-green-200 transition-all"
+                    >
+                      <span className="text-xs font-medium text-green-600 bg-green-50 px-2 py-0.5 rounded">
+                        {relatedPost.category}
+                      </span>
+                      <h4 className="font-heading text-base text-forest mt-2 group-hover:text-green-600 transition-colors line-clamp-2">
+                        {relatedPost.title}
                       </h4>
-                      <ul className="space-y-2">
-                        {toc.map((item) => (
-                          <li key={item.id}>
-                            <a
-                              href={`#${item.id}`}
-                              className={`block text-sm transition-colors hover:text-green-600 ${
-                                item.level === 2
-                                  ? 'text-gray-700 font-medium'
-                                  : 'text-gray-500 pl-3 border-l-2 border-gray-200'
-                              }`}
-                            >
-                              {item.text}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </nav>
-                  </div>
-                </aside>
-              )}
-
-              {/* Main Content */}
-              <div className="flex-1 min-w-0">
-                {/* Mobile TOC */}
-                {toc.length > 3 && (
-                  <details className="lg:hidden bg-white rounded-xl p-5 shadow-sm border border-gray-100 mb-8">
-                    <summary className="font-heading text-sm font-semibold text-forest uppercase tracking-wider cursor-pointer">
-                      In questo articolo
-                    </summary>
-                    <ul className="mt-4 space-y-2">
-                      {toc.filter(item => item.level === 2).map((item) => (
-                        <li key={item.id}>
-                          <a
-                            href={`#${item.id}`}
-                            className="block text-sm text-gray-600 hover:text-green-600 transition-colors"
-                          >
-                            {item.text}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </details>
-                )}
-
-                <article className="bg-white rounded-xl p-8 md:p-12 lg:p-14 shadow-sm border border-gray-100">
-                  <div className="max-w-none">
-                    {renderContent(post.content)}
-                  </div>
-
-                  {/* Inline Images Gallery */}
-                  {post.images && post.images.length > 0 && (
-                    <div className="mt-12 pt-10 border-t border-gray-100">
-                      <h4 className="font-heading text-xl text-forest mb-6">Galleria</h4>
-                      <div className="grid gap-6">
-                        {post.images.map((img, idx) => (
-                          <figure key={idx} className="group">
-                            <div className="overflow-hidden rounded-lg">
-                              <img
-                                src={img.src}
-                                alt={img.alt}
-                                className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                                loading="lazy"
-                              />
-                            </div>
-                            {(img.caption || img.credit) && (
-                              <figcaption className="mt-3 text-sm text-gray-500">
-                                {img.caption && <span>{img.caption}</span>}
-                                {img.credit && (
-                                  <span className="block text-xs text-gray-400 mt-1">
-                                    Fonte: {img.credit}
-                                  </span>
-                                )}
-                              </figcaption>
-                            )}
-                          </figure>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </article>
-
-                {/* CTA Box */}
-                <div className="bg-forest rounded-xl p-8 md:p-10 mt-10 text-center">
-                  <h3 className="font-heading text-2xl md:text-3xl text-white mb-4">
-                    Hai domande su questo argomento?
-                  </h3>
-                  <p className="text-white/70 mb-8 text-lg max-w-lg mx-auto">
-                    Prenota una consulenza riservata con un nostro esperto.
-                  </p>
-                  <Link href="/#contatti" className="inline-flex items-center gap-2 bg-white text-forest px-8 py-4 rounded-lg font-medium hover:bg-gray-100 transition-colors">
-                    Richiedi Consulenza
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </Link>
-                </div>
-
-                {/* Related Posts */}
-                <div className="mt-14">
-                  <h3 className="font-heading text-2xl text-forest mb-8">Articoli correlati</h3>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {getAllPosts()
-                      .filter(p => p.slug !== post.slug)
-                      .slice(0, 2)
-                      .map(relatedPost => (
-                        <Link
-                          key={relatedPost.slug}
-                          href={`/blog/${relatedPost.slug}`}
-                          className="group bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-green-200 transition-all"
-                        >
-                          {relatedPost.image && (
-                            <div className="h-36 -mx-6 -mt-6 mb-5 overflow-hidden rounded-t-xl">
-                              <img
-                                src={relatedPost.image}
-                                alt={relatedPost.title}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                              />
-                            </div>
-                          )}
-                          <span className="text-xs font-medium text-green-600 bg-green-50 px-2.5 py-1 rounded-full">
-                            {relatedPost.category}
-                          </span>
-                          <h4 className="font-heading text-lg text-forest mt-3 group-hover:text-green-600 transition-colors line-clamp-2">
-                            {relatedPost.title}
-                          </h4>
-                          <p className="text-sm text-gray-500 mt-2 line-clamp-2">
-                            {relatedPost.excerpt}
-                          </p>
-                        </Link>
-                      ))}
-                  </div>
-                </div>
+                      <p className="text-sm text-gray-500 mt-1 line-clamp-2">
+                        {relatedPost.excerpt}
+                      </p>
+                    </Link>
+                  ))}
               </div>
             </div>
           </div>

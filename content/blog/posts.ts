@@ -1,10 +1,3 @@
-export interface ContentImage {
-  src: string
-  alt: string
-  caption?: string
-  credit?: string
-}
-
 export interface BlogPost {
   slug: string
   title: string
@@ -14,7 +7,6 @@ export interface BlogPost {
   readTime: number
   category: string
   image?: string
-  images?: ContentImage[] // Inline images from Wikipedia
 }
 
 export const blogPosts: BlogPost[] = [
@@ -26,26 +18,6 @@ export const blogPosts: BlogPost[] = [
     readTime: 15,
     category: 'Lifestyle',
     image: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=1200&h=630&fit=crop',
-    images: [
-      {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Superyacht_A_in_Norway.jpg/1280px-Superyacht_A_in_Norway.jpg',
-        alt: 'Superyacht A, uno dei più grandi yacht del mondo',
-        caption: 'Superyacht "A" (119 metri) - Il costo di gestione annuale supera i 20 milioni di euro',
-        credit: 'Wikipedia Commons'
-      },
-      {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Port_Hercule_Monaco.jpg/1280px-Port_Hercule_Monaco.jpg',
-        alt: 'Porto Ercole a Monaco, marina di lusso',
-        caption: 'Port Hercule, Monaco - L\'ormeggio può costare fino a €400 al metro al giorno in alta stagione',
-        credit: 'Wikipedia Commons'
-      },
-      {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Yacht_Porto_Cervo.jpg/1280px-Yacht_Porto_Cervo.jpg',
-        alt: 'Marina di Porto Cervo in Sardegna',
-        caption: 'Porto Cervo, Costa Smeralda - Una delle destinazioni più esclusive del Mediterraneo',
-        credit: 'Wikipedia Commons'
-      }
-    ],
     content: `
 ## Il Vero Costo di Uno Yacht
 
@@ -150,26 +122,6 @@ Un yacht da 5 milioni costa davvero **700.000 - 900.000 euro l'anno** tutto comp
     readTime: 12,
     category: 'Lifestyle',
     image: 'https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=1200&h=630&fit=crop',
-    images: [
-      {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Gulfstream_G650_N650GA.jpg/1280px-Gulfstream_G650_N650GA.jpg',
-        alt: 'Gulfstream G650, jet privato di lusso',
-        caption: 'Gulfstream G650 - Il top di gamma dei jet privati (prezzo: circa $65 milioni)',
-        credit: 'Wikipedia Commons'
-      },
-      {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/NetJets_Europe_Cessna_680A_Citation_Latitude_CS-LAT.jpg/1280px-NetJets_Europe_Cessna_680A_Citation_Latitude_CS-LAT.jpg',
-        alt: 'NetJets Citation Latitude',
-        caption: 'Citation Latitude di NetJets - La fractional ownership rende accessibile il volo privato',
-        credit: 'Wikipedia Commons'
-      },
-      {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Embraer_Phenom_300_interior.jpg/1280px-Embraer_Phenom_300_interior.jpg',
-        alt: 'Interno di un Embraer Phenom 300',
-        caption: 'Interni di un Phenom 300 - Comfort e produttività ad alta quota',
-        credit: 'Wikipedia Commons'
-      }
-    ],
     content: `
 ## Le Tre Vie del Volo Privato
 
@@ -290,26 +242,6 @@ Per chi vola 100 ore/anno, il **fractional** è spesso la soluzione ottimale: co
     readTime: 14,
     category: 'Investimenti Alternativi',
     image: 'https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=1200&h=630&fit=crop',
-    images: [
-      {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1280px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg',
-        alt: 'Notte Stellata di Van Gogh',
-        caption: '"Notte Stellata" di Van Gogh - Le opere dei maestri sono considerate beni rifugio',
-        credit: 'Wikipedia Commons / MoMA'
-      },
-      {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Christies_South_Kensington_auction_house.jpg/1280px-Christies_South_Kensington_auction_house.jpg',
-        alt: 'Christie\'s casa d\'aste',
-        caption: 'Christie\'s, una delle principali case d\'asta - Le commissioni possono raggiungere il 25%',
-        credit: 'Wikipedia Commons'
-      },
-      {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Art_Basel_2018_%2842166584645%29.jpg/1280px-Art_Basel_2018_%2842166584645%29.jpg',
-        alt: 'Art Basel fiera d\'arte contemporanea',
-        caption: 'Art Basel - La fiera d\'arte più importante al mondo per il mercato primario',
-        credit: 'Wikipedia Commons'
-      }
-    ],
     content: `
 ## L'Arte come Asset Class
 
@@ -435,26 +367,6 @@ L'arte è un investimento per chi ha già diversificato il patrimonio e cerca **
     readTime: 18,
     category: 'Fiscalità',
     image: 'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1200&h=630&fit=crop',
-    images: [
-      {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Monaco_City_001.jpg/1280px-Monaco_City_001.jpg',
-        alt: 'Panorama del Principato di Monaco',
-        caption: 'Il Principato di Monaco - Zero imposte sul reddito, ma costo della vita tra i più alti al mondo',
-        credit: 'Wikipedia Commons'
-      },
-      {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Lugano_view.jpg/1280px-Lugano_view.jpg',
-        alt: 'Lugano, Svizzera',
-        caption: 'Lugano, Canton Ticino - Destinazione preferita degli italiani per la vicinanza e la lingua',
-        credit: 'Wikipedia Commons'
-      },
-      {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Geneve_pont_du_Mont-Blanc.jpg/1280px-Geneve_pont_du_Mont-Blanc.jpg',
-        alt: 'Ginevra, Svizzera',
-        caption: 'Ginevra - Hub della finanza internazionale e sede di molti family office',
-        credit: 'Wikipedia Commons'
-      }
-    ],
     content: `
 ## Il Trasferimento di Residenza Fiscale
 
@@ -629,20 +541,6 @@ Consulta un fiscalista internazionale prima di muoverti.
     readTime: 10,
     category: 'Wealth Management',
     image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=630&fit=crop',
-    images: [
-      {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Rockefeller_Center_complex_from_Top_of_the_Rock.jpg/1280px-Rockefeller_Center_complex_from_Top_of_the_Rock.jpg',
-        alt: 'Rockefeller Center, sede storica del Rockefeller Family Office',
-        caption: 'Rockefeller Center - La famiglia Rockefeller ha creato il moderno concetto di family office',
-        credit: 'Wikipedia Commons'
-      },
-      {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Bahnhofstrasse_ZH.jpg/800px-Bahnhofstrasse_ZH.jpg',
-        alt: 'Bahnhofstrasse, Zurigo',
-        caption: 'Bahnhofstrasse, Zurigo - Concentrazione di private bank e family office',
-        credit: 'Wikipedia Commons'
-      }
-    ],
     content: `
 ## Cos'è un Family Office
 
@@ -791,20 +689,6 @@ Per patrimoni tra €5 e €30 milioni, un **multi family office indipendente** 
     readTime: 13,
     category: 'Investimenti Alternativi',
     image: 'https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=1200&h=630&fit=crop',
-    images: [
-      {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/BlackRock_headquarters_in_New_York_City.jpg/1280px-BlackRock_headquarters_in_New_York_City.jpg',
-        alt: 'BlackRock headquarters New York',
-        caption: 'Sede BlackRock a New York - Uno dei maggiori gestori di fondi PE al mondo',
-        credit: 'Wikipedia Commons'
-      },
-      {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/NYSE127.jpg/1024px-NYSE127.jpg',
-        alt: 'New York Stock Exchange',
-        caption: 'NYSE - Il private equity offre rendimenti decorrelati dai mercati pubblici',
-        credit: 'Wikipedia Commons'
-      }
-    ],
     content: `
 ## Perché il Private Equity
 

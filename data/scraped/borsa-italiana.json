@@ -1,13 +1,13 @@
 {
-  "lastUpdate": "2026-01-23T12:45:58.658Z",
+  "lastUpdate": "2026-01-23T13:07:53.758Z",
   "source": "yahoo-finance",
   "ftseMib": {
-    "value": 44802,
-    "change": 314,
-    "changePercent": 0.71,
+    "value": 44761,
+    "change": 273,
+    "changePercent": 0.61,
     "open": 44905,
     "high": 44985,
-    "low": 44790,
+    "low": 44731,
     "volume": 0,
     "previousClose": 44488
   },
@@ -18,7 +18,7 @@
       "price": 2.928,
       "change": 0.118,
       "changePercent": 4.2,
-      "volume": 43621291
+      "volume": 45460780
     },
     {
       "symbol": "ERG.MI",
@@ -26,83 +26,83 @@
       "price": 22.6,
       "change": 0.78,
       "changePercent": 3.57,
-      "volume": 49917
-    },
-    {
-      "symbol": "PIRC.MI",
-      "name": "Pirelli",
-      "price": 6.412,
-      "change": 0.132,
-      "changePercent": 2.1,
-      "volume": 189218
+      "volume": 51245
     },
     {
       "symbol": "TEN.MI",
       "name": "Tenaris",
-      "price": 19.085,
-      "change": 0.375,
-      "changePercent": 2,
-      "volume": 1092315
+      "price": 19.135,
+      "change": 0.425,
+      "changePercent": 2.27,
+      "volume": 1172554
     },
     {
-      "symbol": "UCG.MI",
-      "name": "UniCredit",
-      "price": 71.77,
-      "change": 1.38,
-      "changePercent": 1.96,
-      "volume": 1101584
+      "symbol": "PIRC.MI",
+      "name": "Pirelli",
+      "price": 6.418,
+      "change": 0.138,
+      "changePercent": 2.2,
+      "volume": 197770
+    },
+    {
+      "symbol": "A2A.MI",
+      "name": "A2A",
+      "price": 2.476,
+      "change": 0.046,
+      "changePercent": 1.89,
+      "volume": 1648156
     }
   ],
   "topLosers": [
     {
       "symbol": "CPR.MI",
       "name": "Campari",
-      "price": 6.014,
-      "change": -0.086,
-      "changePercent": -1.41,
-      "volume": 2402196
-    },
-    {
-      "symbol": "IG.MI",
-      "name": "Italgas",
-      "price": 9.865,
-      "change": -0.08,
-      "changePercent": -0.8,
-      "volume": 545888
+      "price": 6.034,
+      "change": -0.066,
+      "changePercent": -1.08,
+      "volume": 2583415
     },
     {
       "symbol": "HER.MI",
       "name": "Hera",
-      "price": 4.046,
-      "change": -0.028,
-      "changePercent": -0.69,
-      "volume": 1123432
+      "price": 4.042,
+      "change": -0.032,
+      "changePercent": -0.79,
+      "volume": 1185833
+    },
+    {
+      "symbol": "IG.MI",
+      "name": "Italgas",
+      "price": 9.885,
+      "change": -0.06,
+      "changePercent": -0.6,
+      "volume": 605696
     },
     {
       "symbol": "DIA.MI",
       "name": "DiaSorin",
-      "price": 73.12,
-      "change": -0.46,
-      "changePercent": -0.63,
-      "volume": 51039
+      "price": 73.16,
+      "change": -0.42,
+      "changePercent": -0.57,
+      "volume": 51659
     },
     {
-      "symbol": "STLAM.MI",
-      "name": "Stellantis",
-      "price": 8.202,
-      "change": -0.039,
-      "changePercent": -0.47,
-      "volume": 7133093
+      "symbol": "INW.MI",
+      "name": "Inwit",
+      "price": 7.375,
+      "change": -0.03,
+      "changePercent": -0.41,
+      "volume": 595558
     }
   ],
   "bluechips": [
     {
       "symbol": "TIT.MI",
       "name": "Telecom Italia",
-      "price": 0.5672,
-      "change": 0.0026,
-      "changePercent": 0.46,
-      "volume": 73611861
+      "price": 0.565,
+      "change": 0.0004,
+      "changePercent": 0.07,
+      "volume": 78393584
     },
     {
       "symbol": "SPM.MI",
@@ -110,78 +110,78 @@
       "price": 2.928,
       "change": 0.118,
       "changePercent": 4.2,
-      "volume": 43621291
+      "volume": 45460780
     },
     {
       "symbol": "ISP.MI",
       "name": "Intesa Sanpaolo",
-      "price": 5.779,
-      "change": -0.001,
-      "changePercent": -0.02,
-      "volume": 12981364
+      "price": 5.773,
+      "change": -0.007,
+      "changePercent": -0.12,
+      "volume": 13768038
     },
     {
       "symbol": "STLAM.MI",
       "name": "Stellantis",
-      "price": 8.202,
-      "change": -0.039,
-      "changePercent": -0.47,
-      "volume": 7133093
+      "price": 8.234,
+      "change": -0.007,
+      "changePercent": -0.08,
+      "volume": 7686253
     },
     {
       "symbol": "ENI.MI",
       "name": "Eni",
-      "price": 16.69,
-      "change": 0.178,
-      "changePercent": 1.08,
-      "volume": 4376528
+      "price": 16.698,
+      "change": 0.186,
+      "changePercent": 1.13,
+      "volume": 4551551
     },
     {
       "symbol": "ENEL.MI",
       "name": "Enel",
-      "price": 8.998,
-      "change": 0.16,
-      "changePercent": 1.81,
-      "volume": 3881313
+      "price": 8.995,
+      "change": 0.157,
+      "changePercent": 1.78,
+      "volume": 4010897
     },
     {
       "symbol": "CPR.MI",
       "name": "Campari",
-      "price": 6.014,
-      "change": -0.086,
-      "changePercent": -1.41,
-      "volume": 2402196
+      "price": 6.034,
+      "change": -0.066,
+      "changePercent": -1.08,
+      "volume": 2583415
     },
     {
       "symbol": "A2A.MI",
       "name": "A2A",
-      "price": 2.477,
-      "change": 0.047,
-      "changePercent": 1.93,
-      "volume": 1581742
+      "price": 2.476,
+      "change": 0.046,
+      "changePercent": 1.89,
+      "volume": 1648156
     },
     {
       "symbol": "HER.MI",
       "name": "Hera",
-      "price": 4.046,
-      "change": -0.028,
-      "changePercent": -0.69,
-      "volume": 1123432
+      "price": 4.042,
+      "change": -0.032,
+      "changePercent": -0.79,
+      "volume": 1185833
     },
     {
       "symbol": "UCG.MI",
       "name": "UniCredit",
-      "price": 71.77,
-      "change": 1.38,
-      "changePercent": 1.96,
-      "volume": 1101584
+      "price": 71.64,
+      "change": 1.25,
+      "changePercent": 1.78,
+      "volume": 1182511
     }
   ],
   "history": [
     {
       "date": "2026-01-23",
-      "ftseMib": 44802,
-      "change": 314
+      "ftseMib": 44761,
+      "change": 273
     }
   ]
 }
