@@ -22,8 +22,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
   const tools = [
-    // Portfolio & Investimenti
-    'backtest-portafoglio',
     // Strutture Societarie
     'holding',
     'family-office',
@@ -37,10 +35,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Private Wealth
     'confronto-private-banking',
     'costi-private-banking',
-    // Real Estate
+    // Real Estate Premium
+    'aste-immobiliari-luxury',
     'mercato-immobiliare-luxury',
     'portafoglio-immobiliare',
-    'proiezione-patrimoniale',
   ]
 
   const toolUrls = tools.map(tool => ({

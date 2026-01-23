@@ -3,12 +3,12 @@ import { Navbar, Footer, JsonLd, createToolListSchema, createBreadcrumbSchema } 
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Strumenti Finanziari GRATIS | Calcolatori Investimenti Italia',
-  description: 'Calcolatori GRATIS: plusvalenze, minusvalenze, portfolio tracker, Monte Carlo, backtest portafoglio. Alternative gratuite a JustETF e Wallible.',
-  keywords: ['calcolatore plusvalenze gratis', 'portfolio tracker gratis', 'calcolatore minusvalenze', 'simulatore monte carlo', 'backtest portafoglio', 'analizzatore costi fondi', 'strumenti investimento gratuiti', 'alternativa justetf gratis'],
+  title: 'Strumenti Gestione Patrimonio HNWI | Guida Patrimonio',
+  description: 'Simulatori per HNWI: holding, trust, family office, exit strategy, pianificazione successoria, ottimizzazione fiscale internazionale. Per patrimoni da €1M+.',
+  keywords: ['gestione patrimonio', 'HNWI', 'family office', 'holding familiare', 'trust italia', 'pianificazione successoria', 'private banking', 'flat tax italia'],
   openGraph: {
-    title: 'Strumenti Finanziari GRATIS | Calcolatori Investimenti',
-    description: 'Portfolio tracker, calcolatore plusvalenze, simulatore Monte Carlo e 40+ strumenti gratuiti per investitori italiani.',
+    title: 'Strumenti per Gestione Grandi Patrimoni',
+    description: 'Simulatori per holding, trust, family office, fiscalità internazionale. Per patrimoni oltre €1M.',
     type: 'website',
   },
 }
@@ -25,61 +25,6 @@ interface ToolCategory {
 }
 
 const toolCategories: ToolCategory[] = [
-  {
-    title: 'Calcolatori Fiscali GRATIS',
-    tools: [
-      {
-        title: 'Calcolatore Plusvalenze GRATIS',
-        description: 'Calcola tasse su azioni, ETF, obbligazioni. Aliquote 26% e 12.5%.',
-        href: '/strumenti/calcolatore-plusvalenze'
-      },
-      {
-        title: 'Calcolatore Minusvalenze GRATIS',
-        description: 'Gestisci zainetto fiscale, scadenze e compensazioni.',
-        href: '/strumenti/calcolatore-minusvalenze'
-      },
-      {
-        title: 'Tax Loss Harvesting',
-        description: 'Ottimizza la compensazione tra plus e minusvalenze.',
-        href: '/strumenti/tax-loss-harvesting'
-      },
-    ],
-  },
-  {
-    title: 'Portfolio & Investimenti GRATIS',
-    tools: [
-      {
-        title: 'Portfolio Tracker GRATIS',
-        description: 'Traccia azioni, ETF, fondi. Calcola P&L e composizione.',
-        href: '/strumenti/portfolio-tracker'
-      },
-      {
-        title: 'Backtest Portafoglio GRATIS',
-        description: 'Simula rendimenti storici. CAGR, Sharpe ratio, confronto benchmark.',
-        href: '/strumenti/backtest-portafoglio'
-      },
-      {
-        title: 'Simulatore Monte Carlo GRATIS',
-        description: 'Simula 1000+ scenari. Probabilità di successo investimenti.',
-        href: '/strumenti/simulatore-monte-carlo'
-      },
-      {
-        title: 'Analizzatore Costi Fondi GRATIS',
-        description: 'Calcola TER, commissioni nascoste e impatto sul rendimento.',
-        href: '/strumenti/analizzatore-costi-fondi'
-      },
-      {
-        title: 'Simulatore PAC',
-        description: 'Piano di Accumulo Capitale. Crescita con interesse composto.',
-        href: '/strumenti/pac'
-      },
-      {
-        title: 'Calcolatore Dividendi',
-        description: 'Calcola rendita da dividendi. Simulazione reinvestimento.',
-        href: '/strumenti/calcolatore-dividendi'
-      },
-    ],
-  },
   {
     title: 'Strutture Societarie',
     tools: [
@@ -135,7 +80,7 @@ const toolCategories: ToolCategory[] = [
     tools: [
       {
         title: 'Confronto Private Bank',
-        description: 'Top private bank italiane e svizzere. Soglie e costi.',
+        description: 'Top private bank italiane e svizzere. Soglie, servizi, costi.',
         href: '/strumenti/confronto-private-banking'
       },
       {
@@ -146,11 +91,11 @@ const toolCategories: ToolCategory[] = [
     ],
   },
   {
-    title: 'Real Estate',
+    title: 'Real Estate Premium',
     tools: [
       {
         title: 'Aste Immobiliari Luxury',
-        description: 'Ville, attici e immobili di pregio alle aste giudiziarie. Sconti fino al 40%.',
+        description: 'Ville, attici e immobili di pregio alle aste giudiziarie.',
         href: '/strumenti/aste-immobiliari-luxury'
       },
       {
@@ -163,17 +108,11 @@ const toolCategories: ToolCategory[] = [
         description: 'Ottimizzazione fiscale. Persona fisica vs società.',
         href: '/strumenti/portafoglio-immobiliare'
       },
-      {
-        title: 'Proiezione Patrimoniale',
-        description: 'Simulazione crescita a 10-20-30 anni.',
-        href: '/strumenti/proiezione-patrimoniale'
-      },
     ],
   },
 ]
 
 export default function Strumenti() {
-  // Flatten all tools for schema
   const allTools = toolCategories.flatMap(cat =>
     cat.tools.map(tool => ({
       name: tool.title,
@@ -197,13 +136,13 @@ export default function Strumenti() {
       <section className="bg-forest pt-navbar">
         <div className="container-custom py-20 md:py-28">
           <p className="text-green-300/60 text-sm font-medium tracking-wider uppercase mb-4">
-            Per patrimoni importanti
+            Per patrimoni oltre €1M
           </p>
           <h1 className="font-heading text-[40px] md:text-[56px] text-white leading-tight max-w-2xl">
-            Strumenti per chi investe seriamente
+            Strumenti per wealth management
           </h1>
           <p className="text-lg text-white/50 mt-6 max-w-lg">
-            Holding, trust, family office, fiscalità internazionale.
+            Holding, trust, family office, exit strategy, fiscalità internazionale.
           </p>
         </div>
       </section>
@@ -245,13 +184,13 @@ export default function Strumenti() {
               Situazione complessa?
             </h2>
             <p className="text-gray-500 mb-8">
-              Ogni grande patrimonio ha esigenze uniche.
+              Ogni grande patrimonio ha esigenze uniche. Parliamone.
             </p>
             <Link
               href="/#contatti"
               className="inline-flex items-center gap-2 bg-forest text-white px-6 py-3 rounded font-medium hover:bg-green-700 transition-colors"
             >
-              Consulenza riservata
+              Richiedi Consulenza Riservata
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
