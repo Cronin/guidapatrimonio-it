@@ -12,6 +12,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
+  const tools = [
+    'interesse-composto',
+    'pac',
+    'inflazione',
+    'pensione',
+    'mutuo',
+    'stipendio-netto',
+    'tfr',
+    'prestito',
+    'fire',
+    'budget',
+    'fondo-emergenza',
+    'rendita-immobiliare',
+    'dividendi',
+    'patrimonio-netto',
+  ]
+
+  const toolUrls = tools.map(tool => ({
+    url: `${baseUrl}/strumenti/${tool}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+
   return [
     {
       url: baseUrl,
@@ -31,30 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.9,
     },
-    {
-      url: `${baseUrl}/strumenti/interesse-composto`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/strumenti/pac`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/strumenti/inflazione`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/strumenti/pensione`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
+    ...toolUrls,
     {
       url: `${baseUrl}/blog`,
       lastModified: new Date(),
