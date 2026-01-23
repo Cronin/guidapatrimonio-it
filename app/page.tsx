@@ -6,6 +6,7 @@ import {
   HowWeHelp,
   Testimonials,
   CTA,
+  Contact,
   Footer,
 } from '@/components'
 
@@ -19,6 +20,7 @@ export default function Home() {
       <HowWeHelp />
       <Testimonials />
       <CTA />
+      <Contact />
       <Footer />
     </main>
   )
