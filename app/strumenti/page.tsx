@@ -38,6 +38,7 @@ const toolCategories: ToolCategory[] = [
       { title: 'Fondo Emergenza', href: '/strumenti/fondo-emergenza' },
       { title: 'Budget 50/30/20', href: '/strumenti/budget' },
       { title: 'Patrimonio Netto', href: '/strumenti/patrimonio-netto' },
+      { title: 'Patrimonio Netto Avanzato', href: '/strumenti/calcolatore-patrimonio-netto' },
     ],
   },
   {
