@@ -88,6 +88,11 @@ const toolCategories: ToolCategory[] = [
     title: 'Real Estate',
     tools: [
       {
+        title: 'Aste Immobiliari Luxury',
+        description: 'Ville, attici e immobili di pregio alle aste giudiziarie. Sconti fino al 40%.',
+        href: '/strumenti/aste-immobiliari-luxury'
+      },
+      {
         title: 'Mercato Immobiliare Luxury',
         description: 'Prezzi al mq nelle zone premium italiane. Trend e analisi.',
         href: '/strumenti/mercato-immobiliare-luxury'
