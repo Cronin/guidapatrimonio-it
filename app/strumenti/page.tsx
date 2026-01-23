@@ -14,12 +14,34 @@ interface Tool {
   icon: React.ReactNode
   external?: boolean
   isNew?: boolean
+  rating?: number
+  reviews?: number
 }
 
 interface ToolCategory {
   title: string
   featured?: boolean
   tools: Tool[]
+}
+
+function StarRating({ rating, reviews }: { rating: number; reviews: number }) {
+  return (
+    <div className="flex items-center gap-1.5 mt-3">
+      <div className="flex">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <svg
+            key={star}
+            className={`w-3.5 h-3.5 ${star <= Math.round(rating) ? 'text-amber-400' : 'text-gray-200'}`}
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          </svg>
+        ))}
+      </div>
+      <span className="text-xs text-gray-400">{rating.toFixed(1)} ({reviews})</span>
+    </div>
+  )
 }
 
 const toolCategories: ToolCategory[] = [
@@ -80,14 +102,15 @@ const toolCategories: ToolCategory[] = [
         ),
       },
       {
-        title: 'Calcolatore Dividendi',
-        description: 'Simula la rendita da azioni o ETF a dividendo e la crescita nel tempo.',
-        href: '/strumenti/dividendi',
+        title: 'Calcolatore Reddito da Dividendi',
+        description: 'Calcola la rendita da dividendi con tassazione standard (26%) o PEX (1.2%). Confronto reinvestimento vs spesa.',
+        href: '/strumenti/calcolatore-dividendi',
         icon: (
           <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
           </svg>
         ),
+        isNew: true,
       },
       {
         title: 'Calcolatore Inflazione',
@@ -99,11 +122,78 @@ const toolCategories: ToolCategory[] = [
           </svg>
         ),
       },
+      {
+        title: 'Bond Ladder Builder',
+        description: 'Costruisci una scala di obbligazioni per generare cedole regolari e ridurre il rischio tasso.',
+        href: '/strumenti/scala-obbligazionaria',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z" />
+          </svg>
+        ),
+        isNew: true,
+      },
+      {
+        title: 'Portfolio Rebalancer',
+        description: 'Ribilancia il tuo portafoglio: calcola quanto comprare/vendere per raggiungere l\'allocazione target.',
+        href: '/strumenti/portfolio-rebalancer',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+          </svg>
+        ),
+        isNew: true,
+      },
+      {
+        title: 'Ottimizzatore Allocazione',
+        description: 'Calcola l\'allocazione ottimale del portafoglio in base al tuo profilo di rischio e obiettivi.',
+        href: '/strumenti/ottimizzatore-allocazione',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+          </svg>
+        ),
+        isNew: true,
+      },
+      {
+        title: 'Calcolatore Copertura Valutaria',
+        description: 'Calcola se conviene coprire il rischio cambio sui tuoi investimenti in valuta estera.',
+        href: '/strumenti/copertura-valutaria',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        ),
+        isNew: true,
+      },
+      {
+        title: 'Confronto ETF',
+        description: 'Confronta i principali ETF: TER, AUM, performance. Calcola l\'impatto dei costi nel lungo periodo.',
+        href: '/strumenti/confronto-etf',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+        ),
+        isNew: true,
+      },
     ],
   },
   {
     title: 'Pianificazione',
     tools: [
+      {
+        title: 'Interesse Composto Avanzato',
+        description: 'Visualizzatore avanzato con scenari multipli, inflazione, tasse e la magia del compounding.',
+        href: '/strumenti/interesse-composto-avanzato',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+        ),
+        isNew: true,
+      },
       {
         title: 'Calcolatore FIRE',
         description: 'Financial Independence, Retire Early: calcola quando raggiungerai l\'indipendenza finanziaria.',
@@ -113,6 +203,17 @@ const toolCategories: ToolCategory[] = [
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
           </svg>
         ),
+      },
+      {
+        title: 'Tasso Prelievo Sicuro (SWR)',
+        description: 'Calcola quanto prelevare dal patrimonio senza esaurirlo. Regola del 4%, Monte Carlo e scenari.',
+        href: '/strumenti/tasso-prelievo-sicuro',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        ),
+        isNew: true,
       },
       {
         title: 'Calcolatore Pensione',
@@ -211,6 +312,17 @@ const toolCategories: ToolCategory[] = [
     title: 'Immobiliare',
     tools: [
       {
+        title: 'Immobiliare vs Azioni',
+        description: 'Confronta il rendimento di un investimento immobiliare con un portafoglio azionario su 10-20-30 anni.',
+        href: '/strumenti/immobiliare-vs-azioni',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+          </svg>
+        ),
+        isNew: true,
+      },
+      {
         title: 'Calcolo Plusvalenza Immobiliare',
         description: 'Calcola le tasse sulla vendita del tuo immobile e scopri se sei esente.',
         href: 'https://calcoloplusvalenza.it',
@@ -297,6 +409,17 @@ const toolCategories: ToolCategory[] = [
   {
     title: 'Ottimizzazione Fiscale',
     tools: [
+      {
+        title: 'Tax Loss Harvesting Calculator',
+        description: 'Calcola il risparmio fiscale vendendo posizioni in perdita per compensare le plusvalenze.',
+        href: '/strumenti/tax-loss-harvesting',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z" />
+          </svg>
+        ),
+        isNew: true,
+      },
       {
         title: 'Simulatore Holding Company',
         description: 'Confronta persona fisica vs holding SRL. Regime PEX, break-even e proiezioni.',
