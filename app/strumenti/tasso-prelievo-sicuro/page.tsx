@@ -462,43 +462,46 @@ export default function CalcolatoreTassoPrelievoSicuro() {
                     </div>
 
                     {/* Linee */}
-                    <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+                    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                       {/* Ottimistico */}
                       <polyline
                         fill="none"
                         stroke="#22c55e"
-                        strokeWidth="2"
+                        strokeWidth="0.5"
+                        vectorEffect="non-scaling-stroke"
                         points={risultati.scenarioOttimistico.data.map((d, i) => {
                           const x = (i / orizzonteTemporale) * 100
                           const y = 100 - (d.patrimonio / maxPatrimonio) * 100
-                          return `${x}%,${y}%`
+                          return `${x},${y}`
                         }).join(' ')}
                       />
                       {/* Base */}
                       <polyline
                         fill="none"
                         stroke="#6b7280"
-                        strokeWidth="2"
-                        strokeDasharray="5,5"
+                        strokeWidth="0.5"
+                        vectorEffect="non-scaling-stroke"
+                        strokeDasharray="2,2"
                         points={risultati.scenarioBase.data.map((d, i) => {
                           const x = (i / orizzonteTemporale) * 100
                           const y = 100 - (d.patrimonio / maxPatrimonio) * 100
-                          return `${x}%,${y}%`
+                          return `${x},${y}`
                         }).join(' ')}
                       />
                       {/* Pessimistico */}
                       <polyline
                         fill="none"
                         stroke="#ef4444"
-                        strokeWidth="2"
+                        strokeWidth="0.5"
+                        vectorEffect="non-scaling-stroke"
                         points={risultati.scenarioPessimistico.data.map((d, i) => {
                           const x = (i / orizzonteTemporale) * 100
                           const y = 100 - (d.patrimonio / maxPatrimonio) * 100
-                          return `${x}%,${y}%`
+                          return `${x},${y}`
                         }).join(' ')}
                       />
                       {/* Linea zero */}
-                      <line x1="0" y1="100%" x2="100%" y2="100%" stroke="#e5e7eb" strokeWidth="1" />
+                      <line x1="0" y1="100" x2="100" y2="100" stroke="#e5e7eb" strokeWidth="0.2" />
                     </svg>
                   </div>
 
