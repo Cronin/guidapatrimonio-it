@@ -22,6 +22,7 @@ export default function Navbar() {
           <span className="text-white text-2xl">
             <span className="font-heading font-medium">Guida</span>
             <span className="font-heading font-semibold">Patrimonio</span>
+            <span className="font-heading font-light opacity-70">.it</span>
           </span>
         </Link>
 
