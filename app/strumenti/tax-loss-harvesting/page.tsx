@@ -228,7 +228,7 @@ export default function TaxLossHarvestingCalculator() {
               <p className="font-heading text-3xl">{formatCurrency(risultati.tasseSenzaHarvesting)}</p>
               <p className="text-white/60 text-xs mt-1">Su plusvalenze realizzate</p>
             </div>
-            <div className="bg-blue-600 rounded-card p-6 text-white">
+            <div className="bg-forest rounded-card p-6 text-white">
               <p className="text-white/80 text-sm mb-1">Tasse con Harvesting</p>
               <p className="font-heading text-3xl">{formatCurrency(risultati.tasseConHarvesting)}</p>
               <p className="text-white/60 text-xs mt-1">Dopo compensazione</p>
@@ -264,8 +264,8 @@ export default function TaxLossHarvestingCalculator() {
             {/* Portafoglio */}
             <div className="bg-white rounded-card p-6 shadow-sm">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
                 </div>
@@ -348,7 +348,7 @@ export default function TaxLossHarvestingCalculator() {
                   </div>
                   <button
                     onClick={aggiungiPosizione}
-                    className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700"
+                    className="w-full px-4 py-2 bg-forest text-white rounded-lg text-sm hover:bg-green-700"
                   >
                     Aggiungi Posizione
                   </button>
@@ -624,9 +624,9 @@ export default function TaxLossHarvestingCalculator() {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
-                  <div className="p-4 bg-blue-50 rounded-lg">
-                    <h4 className="font-medium text-blue-800 mb-2">Come fare</h4>
-                    <ol className="text-sm text-blue-700 space-y-1 list-decimal list-inside">
+                  <div className="p-4 bg-gray-50 rounded-lg">
+                    <h4 className="font-medium text-gray-800 mb-2">Come fare</h4>
+                    <ol className="text-sm text-gray-700 space-y-1 list-decimal list-inside">
                       <li>Vendi la posizione in perdita</li>
                       <li>Realizzi la minusvalenza fiscale</li>
                       <li>Riacquista lo stesso strumento</li>
@@ -692,7 +692,7 @@ export default function TaxLossHarvestingCalculator() {
                     <strong>Opportunita:</strong> Hai una posizione in perdita di <span className="text-red-600 font-medium">-5.000 EUR</span>
                   </p>
                 </div>
-                <div className="p-3 bg-blue-50 rounded-lg">
+                <div className="p-3 bg-gray-50 rounded-lg">
                   <p className="text-gray-700">
                     <strong>Azione:</strong> Vendi la posizione in perdita e riacquistala subito
                   </p>

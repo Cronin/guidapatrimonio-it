@@ -19,7 +19,7 @@ interface Bene {
 }
 
 const relazioniInfo = {
-  coniuge: { nome: 'Coniuge', franchigia: 1000000, aliquota: 4, colore: 'bg-blue-500' },
+  coniuge: { nome: 'Coniuge', franchigia: 1000000, aliquota: 4, colore: 'bg-gray-500' },
   figlio: { nome: 'Figlio/Discendente', franchigia: 1000000, aliquota: 4, colore: 'bg-green-500' },
   fratello: { nome: 'Fratello/Sorella', franchigia: 100000, aliquota: 6, colore: 'bg-amber-500' },
   parente: { nome: 'Parente fino al 4° grado', franchigia: 0, aliquota: 6, colore: 'bg-orange-500' },
@@ -28,7 +28,7 @@ const relazioniInfo = {
 
 const tipiBeneInfo = {
   immobile: { nome: 'Immobili', colore: 'bg-amber-500', nota: 'Valore catastale rivalutato' },
-  finanziario: { nome: 'Attività finanziarie', colore: 'bg-blue-500', nota: 'Conti, titoli, fondi' },
+  finanziario: { nome: 'Attività finanziarie', colore: 'bg-gray-500', nota: 'Conti, titoli, fondi' },
   assicurazione: { nome: 'Polizze vita', colore: 'bg-green-500', nota: 'Esenti da imposta' },
   altro: { nome: 'Altri beni', colore: 'bg-gray-500', nota: 'Auto, gioielli, arte' },
 }
@@ -445,10 +445,10 @@ export default function CalcolatoreSuccessione() {
                   </p>
                 </div>
 
-                <div className="p-4 bg-blue-50 rounded-lg">
+                <div className="p-4 bg-gray-50 rounded-lg">
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-sm text-gray-600">Patrimonio esente</span>
-                    <span className="font-heading text-lg text-blue-600">{formatCurrency(risultati.assicurazioniEsenti)}</span>
+                    <span className="font-heading text-lg text-forest">{formatCurrency(risultati.assicurazioniEsenti)}</span>
                   </div>
                   <p className="text-xs text-gray-500">
                     Totale beni non soggetti a tassazione

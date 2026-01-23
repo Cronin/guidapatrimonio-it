@@ -548,11 +548,11 @@ export default function CalcolatoreTassoPrelievoSicuro() {
                 </thead>
                 <tbody>
                   {risultati.tabellaRiferimento.map((row, i) => (
-                    <tr key={i} className={`border-b ${row.patrimonio === patrimonio ? 'bg-blue-50' : ''}`}>
+                    <tr key={i} className={`border-b ${row.patrimonio === patrimonio ? 'bg-gray-50' : ''}`}>
                       <td className="py-3 px-4 font-medium text-gray-800">
                         {formatCurrency(row.patrimonio)}
                         {row.patrimonio === patrimonio && (
-                          <span className="ml-2 text-xs text-blue-600">(tuo)</span>
+                          <span className="ml-2 text-xs text-forest">(tuo)</span>
                         )}
                       </td>
                       <td className="text-center py-3 px-4 bg-green-50/50">

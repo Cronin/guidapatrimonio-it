@@ -466,8 +466,8 @@ export default function ScalaObbligazionaria() {
                             </div>
                             <span className={`text-xs px-2 py-1 rounded ${
                               step.bond.type === 'BTP'
-                                ? 'bg-blue-100 text-blue-700'
-                                : 'bg-purple-100 text-purple-700'
+                                ? 'bg-gray-100 text-gray-700'
+                                : 'bg-gray-100 text-gray-700'
                             }`}>
                               {step.bond.type}
                             </span>
@@ -546,8 +546,8 @@ export default function ScalaObbligazionaria() {
                 </div>
               </div>
 
-              <div className="bg-blue-50 border border-blue-200 rounded-card p-4">
-                <p className="text-sm text-blue-800">
+              <div className="bg-gray-50 border border-gray-200 rounded-card p-4">
+                <p className="text-sm text-gray-800">
                   <strong>Nota:</strong> I rendimenti indicati sono stime basate sui tassi attuali di mercato.
                   I rendimenti effettivi possono variare. I BTP godono della tassazione agevolata al 12.5%,
                   mentre le obbligazioni corporate sono tassate al 26%.

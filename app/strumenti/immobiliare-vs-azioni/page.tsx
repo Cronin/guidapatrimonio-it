@@ -377,11 +377,11 @@ export default function ImmobiliareVsAzioni() {
                   </p>
                 </div>
 
-                <div className="bg-blue-50 rounded-lg p-4">
-                  <p className="text-sm text-blue-800">
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-800">
                     <strong>Tassazione capital gain:</strong> 26%
                   </p>
-                  <p className="text-xs text-blue-600 mt-1">
+                  <p className="text-xs text-forest mt-1">
                     Pagata solo alla vendita (effetto differimento fiscale)
                   </p>
                 </div>

@@ -285,7 +285,7 @@ export default function DashboardMacro() {
                   <p className="text-gray-500 font-mono text-xs uppercase tracking-wider">Tassi BCE</p>
                   <p className="text-gray-600 font-mono text-[10px]">European Central Bank</p>
                 </div>
-                <svg className="w-8 h-8 text-blue-500/50" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-8 h-8 text-green-600/50" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
                 </svg>
               </div>
@@ -410,7 +410,7 @@ export default function DashboardMacro() {
                   <p className="text-gray-500 font-mono text-xs uppercase tracking-wider">Forex</p>
                   <p className="text-gray-600 font-mono text-[10px]">Cambi principali EUR</p>
                 </div>
-                <svg className="w-8 h-8 text-purple-500/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-8 h-8 text-gray-500/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                 </svg>
               </div>

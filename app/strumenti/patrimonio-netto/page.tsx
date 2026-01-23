@@ -19,7 +19,7 @@ interface Debt {
 }
 
 const categorieAttivi = {
-  liquidita: { nome: 'Liquidità', colore: 'bg-blue-500' },
+  liquidita: { nome: 'Liquidità', colore: 'bg-gray-500' },
   investimenti: { nome: 'Investimenti', colore: 'bg-green-500' },
   immobili: { nome: 'Immobili', colore: 'bg-amber-500' },
   altro: { nome: 'Altro', colore: 'bg-gray-500' },
@@ -346,7 +346,7 @@ export default function CalcolatorePatrimonioNetto() {
                 </div>
                 <div>
                   <p className="text-gray-500 text-sm mb-1">Liquidità disponibile</p>
-                  <p className="font-heading text-xl text-blue-600">
+                  <p className="font-heading text-xl text-forest">
                     {formatCurrency(risultati.liquiditaDisponibile)}
                   </p>
                 </div>

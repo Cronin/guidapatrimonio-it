@@ -264,7 +264,7 @@ const categoryLabels: Record<string, string> = {
 
 // Category colors
 const categoryColors: Record<string, { bg: string; text: string }> = {
-  'azionario-globale': { bg: 'bg-blue-100', text: 'text-blue-700' },
+  'azionario-globale': { bg: 'bg-gray-100', text: 'text-gray-700' },
   'sp500': { bg: 'bg-indigo-100', text: 'text-indigo-700' },
   'europa': { bg: 'bg-green-100', text: 'text-green-700' },
   'emergenti': { bg: 'bg-amber-100', text: 'text-amber-700' },
@@ -554,7 +554,7 @@ export default function ConfrontoETF() {
                         <span className="font-medium text-forest">{formatAUM(etf.aum)}</span>
                       </td>
                       <td className="px-4 py-4 text-center">
-                        <span className={`inline-block px-2 py-1 rounded text-xs font-medium ${etf.accumulation ? 'bg-blue-100 text-blue-700' : 'bg-purple-100 text-purple-700'}`}>
+                        <span className={`inline-block px-2 py-1 rounded text-xs font-medium ${etf.accumulation ? 'bg-gray-100 text-gray-700' : 'bg-gray-100 text-gray-700'}`}>
                           {etf.accumulation ? 'Acc' : 'Dist'}
                         </span>
                       </td>
@@ -836,14 +836,14 @@ export default function ConfrontoETF() {
           </div>
 
           {/* Disclaimer */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-8">
             <div className="flex items-start gap-3">
-              <svg className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-5 h-5 text-forest mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
               </svg>
               <div>
-                <p className="text-sm text-blue-800 font-medium">Nota informativa</p>
-                <p className="text-sm text-blue-700 mt-1">
+                <p className="text-sm text-gray-800 font-medium">Nota informativa</p>
+                <p className="text-sm text-gray-700 mt-1">
                   I dati sono indicativi e potrebbero non essere aggiornati. I rendimenti passati non sono indicativi
                   di quelli futuri. Prima di investire, verifica sempre i dati ufficiali su{' '}
                   <a href="https://www.justetf.com/it/" target="_blank" rel="noopener noreferrer" className="underline">justETF</a> o sul sito dell&apos;emittente.
@@ -876,7 +876,7 @@ export default function ConfrontoETF() {
               href="/strumenti/interesse-composto"
               className="group bg-white rounded-card p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
             >
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+              <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-forest mb-4 group-hover:bg-forest group-hover:text-white transition-colors">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                 </svg>

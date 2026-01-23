@@ -361,8 +361,8 @@ export default function OttimizzatorePortafoglio() {
               </div>
             </div>
 
-            <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-              <p className="text-sm text-blue-800">
+            <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+              <p className="text-sm text-gray-800">
                 <strong>Raccomandazione:</strong> {analisi.raccomandazione.motivazione}
               </p>
             </div>
@@ -600,7 +600,7 @@ export default function OttimizzatorePortafoglio() {
                   </div>
 
                   {item.property.mutuo.attivo && item.irpef.detrazioneInteressi > 0 && (
-                    <div className="mt-2 text-xs text-blue-600">
+                    <div className="mt-2 text-xs text-forest">
                       Include detrazione interessi mutuo: {formatCurrency(item.irpef.detrazioneInteressi)}
                     </div>
                   )}
@@ -690,7 +690,7 @@ export default function OttimizzatorePortafoglio() {
                           </div>
                           <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                             <div
-                              className="h-full bg-blue-500 rounded-full"
+                              className="h-full bg-gray-500 rounded-full"
                               style={{ width: `${(valore / analisi.totali.valore) * 100}%` }}
                             />
                           </div>
@@ -766,18 +766,18 @@ export default function OttimizzatorePortafoglio() {
 
               {/* Societa Semplice Info */}
               {properties.length >= 3 && (
-                <div className="bg-blue-50 rounded-card p-5 border border-blue-200">
-                  <h3 className="font-heading text-lg text-blue-800 mb-3">Societa Semplice</h3>
-                  <p className="text-sm text-blue-700 mb-3">
+                <div className="bg-gray-50 rounded-card p-5 border border-gray-200">
+                  <h3 className="font-heading text-lg text-gray-800 mb-3">Societa Semplice</h3>
+                  <p className="text-sm text-gray-700 mb-3">
                     Con {properties.length} immobili, potrebbe convenire intestarli a una Societa Semplice:
                   </p>
-                  <ul className="text-sm text-blue-700 space-y-1">
+                  <ul className="text-sm text-gray-700 space-y-1">
                     <li>- Protezione patrimoniale</li>
                     <li>- Passaggio generazionale agevolato</li>
                     <li>- Gestione semplificata</li>
                     <li>- Possibile ottimizzazione fiscale</li>
                   </ul>
-                  <p className="text-xs text-blue-600 mt-3">
+                  <p className="text-xs text-forest mt-3">
                     Netto stimato con SS: {formatCurrency(analisi.totali.nettoSocieta)}/anno
                   </p>
                 </div>

@@ -280,13 +280,13 @@ export default function SimulatoreHolding() {
               </div>
 
               {/* Info Box PEX */}
-              <div className="bg-blue-50 border border-blue-200 rounded-card p-5">
-                <h3 className="font-heading text-lg text-blue-800 mb-2">Regime PEX (Participation Exemption)</h3>
-                <p className="text-sm text-blue-700 mb-3">
+              <div className="bg-gray-50 border border-gray-200 rounded-card p-5">
+                <h3 className="font-heading text-lg text-gray-800 mb-2">Regime PEX (Participation Exemption)</h3>
+                <p className="text-sm text-gray-700 mb-3">
                   Il regime PEX permette alle holding di tassare solo il 5% di dividendi e plusvalenze
                   da partecipazioni qualificate, con un&apos;aliquota effettiva dell&apos;1,2% invece del 26%.
                 </p>
-                <p className="text-xs text-blue-600">
+                <p className="text-xs text-forest">
                   Requisiti: holding period 12 mesi, partecipazione in societa commerciale,
                   residenza fiscale in Paese white list.
                 </p>
@@ -490,8 +490,8 @@ export default function SimulatoreHolding() {
             </div>
 
             <div className="bg-white rounded-card p-6 shadow-sm">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>

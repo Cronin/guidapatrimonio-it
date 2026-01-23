@@ -262,8 +262,8 @@ export default function CalcolatoreDividendi() {
                 </div>
               </div>
 
-              <div className="bg-blue-50 border border-blue-200 rounded-card p-4">
-                <p className="text-sm text-blue-800">
+              <div className="bg-gray-50 border border-gray-200 rounded-card p-4">
+                <p className="text-sm text-gray-800">
                   <strong>Nota:</strong> I dividendi non sono garantiti e possono essere tagliati.
                   Diversifica sempre il tuo portafoglio e non basare la tua strategia solo sui dividendi.
                 </p>

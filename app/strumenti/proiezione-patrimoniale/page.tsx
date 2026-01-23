@@ -264,7 +264,7 @@ export default function ProiezionePatrimoniale() {
                       step="10000"
                       value={liquidita}
                       onChange={(e) => setLiquidita(Number(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-600"
                     />
                   </div>
 
@@ -294,7 +294,7 @@ export default function ProiezionePatrimoniale() {
                       step="50000"
                       value={aziendale}
                       onChange={(e) => setAziendale(Number(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-purple-600"
+                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-600"
                     />
                   </div>
 
@@ -375,7 +375,7 @@ export default function ProiezionePatrimoniale() {
                       step="0.5"
                       value={rendimentoLiquidita}
                       onChange={(e) => setRendimentoLiquidita(Number(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-600"
                     />
                   </div>
 
@@ -405,7 +405,7 @@ export default function ProiezionePatrimoniale() {
                       step="0.5"
                       value={rendimentoAziendale}
                       onChange={(e) => setRendimentoAziendale(Number(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-purple-600"
+                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-600"
                     />
                   </div>
 
@@ -697,15 +697,15 @@ export default function ProiezionePatrimoniale() {
                 {mostraDettagli && (
                   <div className="mt-6 space-y-4">
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                      <div className="bg-blue-50 p-4 rounded-lg">
-                        <p className="text-xs text-blue-600 mb-1">Capital Gains (26%)</p>
-                        <p className="font-heading text-lg text-blue-800">
+                      <div className="bg-gray-50 p-4 rounded-lg">
+                        <p className="text-xs text-forest mb-1">Capital Gains (26%)</p>
+                        <p className="font-heading text-lg text-gray-800">
                           {formatCurrency(risultati.anno10?.dettaglioTasse.capitalGains || 0)}/anno
                         </p>
                       </div>
-                      <div className="bg-purple-50 p-4 rounded-lg">
-                        <p className="text-xs text-purple-600 mb-1">Dividendi (26%)</p>
-                        <p className="font-heading text-lg text-purple-800">
+                      <div className="bg-gray-50 p-4 rounded-lg">
+                        <p className="text-xs text-gray-600 mb-1">Dividendi (26%)</p>
+                        <p className="font-heading text-lg text-gray-800">
                           {formatCurrency(risultati.anno10?.dettaglioTasse.dividendi || 0)}/anno
                         </p>
                       </div>

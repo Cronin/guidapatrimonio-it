@@ -301,9 +301,9 @@ export default function CoperturaValutaria() {
               </div>
 
               {/* ETF Example Box */}
-              <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-                <p className="text-sm font-medium text-blue-900 mb-2">Esempio ETF S&P 500</p>
-                <div className="grid grid-cols-2 gap-4 text-xs text-blue-800">
+              <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                <p className="text-sm font-medium text-gray-900 mb-2">Esempio ETF S&P 500</p>
+                <div className="grid grid-cols-2 gap-4 text-xs text-gray-800">
                   <div>
                     <p className="font-medium">CSPX (non hedged)</p>
                     <p>TER: 0.07%</p>
@@ -313,7 +313,7 @@ export default function CoperturaValutaria() {
                     <p>TER: 0.20%</p>
                   </div>
                 </div>
-                <p className="text-xs text-blue-700 mt-2">
+                <p className="text-xs text-gray-700 mt-2">
                   Costo implicito hedging: ~0.5-1%/anno (differenziale tassi EUR-USD)
                 </p>
               </div>
@@ -322,7 +322,7 @@ export default function CoperturaValutaria() {
             {/* Results */}
             <div className="space-y-6">
               {/* Main Result */}
-              <div className={`rounded-card p-6 text-white ${risultati.convieneHedging ? 'bg-blue-600' : 'bg-green-600'}`}>
+              <div className={`rounded-card p-6 text-white ${risultati.convieneHedging ? 'bg-forest' : 'bg-green-600'}`}>
                 <p className="text-white/80 text-sm mb-1">In base ai tuoi parametri</p>
                 <p className="font-heading text-2xl mb-2">
                   {risultati.convieneHedging
@@ -337,9 +337,9 @@ export default function CoperturaValutaria() {
 
               {/* Comparison Cards */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white rounded-card p-5 shadow-sm border-2 border-blue-200">
+                <div className="bg-white rounded-card p-5 shadow-sm border-2 border-gray-200">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="w-3 h-3 bg-blue-500 rounded-full" />
+                    <span className="w-3 h-3 bg-gray-500 rounded-full" />
                     <p className="text-gray-500 text-sm">CON Hedging</p>
                   </div>
                   <p className="font-heading text-xl text-forest">{formatCurrency(risultati.valoreFinaleConHedging)}</p>
@@ -387,7 +387,7 @@ export default function CoperturaValutaria() {
                     <div key={dato.anno} className="flex-1 flex flex-col items-center">
                       <div className="w-full flex gap-0.5 items-end" style={{ height: '200px' }}>
                         <div
-                          className="flex-1 bg-blue-500 rounded-t"
+                          className="flex-1 bg-gray-500 rounded-t"
                           style={{ height: `${(dato.conHedging / maxValore) * 100}%`, minHeight: '4px' }}
                         />
                         <div
@@ -401,7 +401,7 @@ export default function CoperturaValutaria() {
                 </div>
                 <div className="flex justify-center gap-6 mt-4 text-xs">
                   <span className="flex items-center gap-1">
-                    <span className="w-3 h-3 bg-blue-500 rounded" /> Con Hedging
+                    <span className="w-3 h-3 bg-gray-500 rounded" /> Con Hedging
                   </span>
                   <span className="flex items-center gap-1">
                     <span className="w-3 h-3 bg-green-500 rounded" /> Senza Hedging
@@ -417,7 +417,7 @@ export default function CoperturaValutaria() {
                     <div key={scenario.nome} className="p-3 bg-gray-50 rounded-lg">
                       <div className="flex justify-between items-center">
                         <span className="text-sm font-medium text-gray-700">{scenario.nome}</span>
-                        <span className={`text-sm font-medium ${scenario.conviene === 'SI hedging' ? 'text-blue-600' : 'text-green-600'}`}>
+                        <span className={`text-sm font-medium ${scenario.conviene === 'SI hedging' ? 'text-forest' : 'text-green-600'}`}>
                           {scenario.conviene}
                         </span>
                       </div>
@@ -531,7 +531,7 @@ export default function CoperturaValutaria() {
                 </p>
               </div>
               <div>
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-3">
+                <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-forest mb-3">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>

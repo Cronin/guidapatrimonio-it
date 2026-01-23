@@ -136,7 +136,7 @@ export default function CalcolatoreBudget() {
                         max="70"
                         value={percentualeNecessita}
                         onChange={(e) => setPercentualeNecessita(Number(e.target.value))}
-                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-600"
                       />
                     </div>
                     <div>
@@ -167,7 +167,7 @@ export default function CalcolatoreBudget() {
               <div className="bg-white rounded-card p-6 shadow-sm">
                 <h3 className="font-heading text-lg text-forest mb-4">Divisione del budget</h3>
                 <div className="h-8 rounded-full overflow-hidden flex">
-                  <div className="bg-blue-500" style={{ width: `${risultati.percNecessita}%` }} />
+                  <div className="bg-gray-500" style={{ width: `${risultati.percNecessita}%` }} />
                   <div className="bg-amber-500" style={{ width: `${risultati.percDesideri}%` }} />
                   <div className="bg-green-500" style={{ width: `${risultati.percRisparmio}%` }} />
                 </div>
@@ -179,9 +179,9 @@ export default function CalcolatoreBudget() {
               </div>
 
               <div className="grid grid-cols-3 gap-4">
-                <div className="bg-blue-50 rounded-card p-4 border-2 border-blue-200">
-                  <p className="text-blue-700 text-xs font-medium mb-1">Necessità</p>
-                  <p className="font-heading text-xl text-blue-700">{formatCurrency(risultati.necessita)}</p>
+                <div className="bg-gray-50 rounded-card p-4 border-2 border-gray-200">
+                  <p className="text-gray-700 text-xs font-medium mb-1">Necessità</p>
+                  <p className="font-heading text-xl text-gray-700">{formatCurrency(risultati.necessita)}</p>
                 </div>
                 <div className="bg-amber-50 rounded-card p-4 border-2 border-amber-200">
                   <p className="text-amber-700 text-xs font-medium mb-1">Desideri</p>
@@ -200,7 +200,7 @@ export default function CalcolatoreBudget() {
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="bg-white rounded-card p-5 shadow-sm">
-                  <h4 className="font-medium text-blue-700 mb-3 text-sm">Necessità ({risultati.percNecessita}%)</h4>
+                  <h4 className="font-medium text-gray-700 mb-3 text-sm">Necessità ({risultati.percNecessita}%)</h4>
                   <ul className="space-y-2 text-sm">
                     {risultati.categorieNecessita.map((cat) => (
                       <li key={cat.nome} className="flex justify-between">

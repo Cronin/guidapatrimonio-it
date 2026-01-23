@@ -228,8 +228,8 @@ export default function CalcolatoreFondoEmergenza() {
                 </ul>
               </div>
 
-              <div className="bg-blue-50 border border-blue-200 rounded-card p-4">
-                <p className="text-sm text-blue-800">
+              <div className="bg-gray-50 border border-gray-200 rounded-card p-4">
+                <p className="text-sm text-gray-800">
                   <strong>Suggerimento:</strong> Il fondo emergenza va tenuto in strumenti liquidi
                   e sicuri (conto deposito, BOT), non investito in azioni o altri strumenti volatili.
                 </p>

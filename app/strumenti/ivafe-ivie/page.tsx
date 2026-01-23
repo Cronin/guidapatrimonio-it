@@ -260,7 +260,7 @@ export default function CalcolatoreIVAFEIVIE() {
         <div className="container-custom">
           {/* Risultato principale */}
           <div className="grid md:grid-cols-3 gap-4 mb-8">
-            <div className="bg-blue-600 rounded-card p-6 text-white">
+            <div className="bg-forest rounded-card p-6 text-white">
               <p className="text-white/80 text-sm mb-1">IVAFE (Asset Finanziari)</p>
               <p className="font-heading text-3xl">{formatCurrency(risultati.totaleIVAFE)}</p>
               <p className="text-white/60 text-xs mt-1">Aliquota: 0,2% oppure 34,20 EUR/anno per conti</p>
@@ -281,8 +281,8 @@ export default function CalcolatoreIVAFEIVIE() {
             {/* Asset Finanziari - IVAFE */}
             <div className="bg-white rounded-card p-6 shadow-sm">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
                 </div>
@@ -299,7 +299,7 @@ export default function CalcolatoreIVAFEIVIE() {
                       <div className="flex items-center gap-2">
                         <p className="font-medium text-sm">{asset.nome}</p>
                         <span className={`text-xs px-2 py-0.5 rounded-full ${
-                          asset.tipoPaese === 'ue' ? 'bg-blue-100 text-blue-700' :
+                          asset.tipoPaese === 'ue' ? 'bg-gray-100 text-gray-700' :
                           asset.tipoPaese === 'paradiso_fiscale' ? 'bg-red-100 text-red-700' :
                           'bg-gray-100 text-gray-700'
                         }`}>
@@ -310,7 +310,7 @@ export default function CalcolatoreIVAFEIVIE() {
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="text-right">
-                        <span className="font-medium text-blue-600 text-sm">{formatCurrency(asset.valoreFine)}</span>
+                        <span className="font-medium text-forest text-sm">{formatCurrency(asset.valoreFine)}</span>
                       </div>
                       <button
                         onClick={() => rimuoviAsset(asset.id)}
@@ -379,7 +379,7 @@ export default function CalcolatoreIVAFEIVIE() {
                   </div>
                   <button
                     onClick={aggiungiAsset}
-                    className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700"
+                    className="w-full px-4 py-2 bg-forest text-white rounded-lg text-sm hover:bg-green-700"
                   >
                     Aggiungi Asset
                   </button>
@@ -411,7 +411,7 @@ export default function CalcolatoreIVAFEIVIE() {
                         <div className="flex items-center gap-2">
                           <p className="font-medium text-sm">{immobile.nome}</p>
                           <span className={`text-xs px-2 py-0.5 rounded-full ${
-                            immobile.tipoPaese === 'ue' ? 'bg-blue-100 text-blue-700' :
+                            immobile.tipoPaese === 'ue' ? 'bg-gray-100 text-gray-700' :
                             immobile.tipoPaese === 'paradiso_fiscale' ? 'bg-red-100 text-red-700' :
                             'bg-gray-100 text-gray-700'
                           }`}>
@@ -515,14 +515,14 @@ export default function CalcolatoreIVAFEIVIE() {
                     <div key={i} className="border-b pb-2 last:border-0">
                       <div className="flex justify-between">
                         <span className="text-sm text-gray-600">{d.nome}</span>
-                        <span className="font-medium text-blue-600">{formatCurrency(d.imposta)}</span>
+                        <span className="font-medium text-forest">{formatCurrency(d.imposta)}</span>
                       </div>
                       <p className="text-xs text-gray-400">Valore: {formatCurrency(d.valore)}</p>
                     </div>
                   ))}
                   <div className="pt-2 border-t-2 flex justify-between font-medium">
                     <span>Totale IVAFE</span>
-                    <span className="text-blue-600">{formatCurrency(risultati.totaleIVAFE)}</span>
+                    <span className="text-forest">{formatCurrency(risultati.totaleIVAFE)}</span>
                   </div>
                 </div>
               )}
@@ -618,25 +618,25 @@ export default function CalcolatoreIVAFEIVIE() {
               <h3 className="font-heading text-lg text-forest mb-3">Cos&apos;e l&apos;IVAFE?</h3>
               <ul className="space-y-2 text-sm text-gray-600">
                 <li className="flex items-start gap-2">
-                  <svg className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   <span>Imposta sulle Attivita Finanziarie detenute all&apos;Estero</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <svg className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   <span>Aliquota: 0,2% del valore o EUR 34,20 per conti correnti</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <svg className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   <span>Si applica a: conti, depositi, azioni, ETF, fondi, obbligazioni</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <svg className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   <span>Calcolo pro-rata sui giorni di effettiva detenzione</span>

@@ -485,8 +485,8 @@ export default function CalcolatoreDividendi() {
                 </div>
               </div>
 
-              <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                <p className="text-sm text-blue-800 m-0">
+              <div className="mt-6 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                <p className="text-sm text-gray-800 m-0">
                   <strong>Nota importante:</strong> I dividendi non sono garantiti e possono essere ridotti o sospesi.
                   Il dividend yield varia nel tempo in base al prezzo dell&apos;azione. Diversifica sempre il tuo portafoglio.
                 </p>
