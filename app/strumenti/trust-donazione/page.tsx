@@ -470,10 +470,10 @@ export default function ConfrontoTrustDonazione() {
               {/* Raccomandazione */}
               <div className={`rounded-card p-6 ${
                 risultati.raccomandazione === 'trust'
-                  ? 'bg-blue-600'
+                  ? 'bg-forest'
                   : risultati.raccomandazione === 'donazione'
                     ? 'bg-green-600'
-                    : 'bg-purple-600'
+                    : 'bg-gray-700'
               } text-white`}>
                 <p className="text-white/80 text-sm mb-2">Raccomandazione</p>
                 <h3 className="font-heading text-3xl mb-3">
@@ -488,7 +488,7 @@ export default function ConfrontoTrustDonazione() {
                     <div className="flex-1">
                       <div className="h-3 bg-white/30 rounded-full overflow-hidden flex">
                         <div
-                          className="bg-blue-300 h-full"
+                          className="bg-gray-300 h-full"
                           style={{ width: `${risultati.percentualeTrust}%` }}
                         />
                         <div
@@ -507,14 +507,14 @@ export default function ConfrontoTrustDonazione() {
 
               {/* Confronto Costi */}
               <div className="grid md:grid-cols-2 gap-4">
-                <div className="bg-white rounded-card p-5 shadow-sm border-2 border-blue-200">
+                <div className="bg-white rounded-card p-5 shadow-sm border-2 border-gray-200">
                   <div className="flex items-center gap-2 mb-4">
-                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                      <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                      <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                       </svg>
                     </div>
-                    <h3 className="font-heading text-lg text-blue-700">Trust</h3>
+                    <h3 className="font-heading text-lg text-gray-700">Trust</h3>
                   </div>
 
                   <div className="space-y-2 text-sm mb-4">
@@ -541,7 +541,7 @@ export default function ConfrontoTrustDonazione() {
                   <div className="pt-3 border-t">
                     <div className="flex justify-between items-center">
                       <span className="font-medium text-gray-700">Costo totale stimato</span>
-                      <span className="font-heading text-xl text-blue-700">{formatCurrency(risultati.costoTotaleTrust)}</span>
+                      <span className="font-heading text-xl text-gray-700">{formatCurrency(risultati.costoTotaleTrust)}</span>
                     </div>
                   </div>
                 </div>
@@ -592,7 +592,7 @@ export default function ConfrontoTrustDonazione() {
 
               {/* Differenza costi */}
               <div className={`rounded-card p-4 ${
-                risultati.differenzaCosti > 0 ? 'bg-green-50 border border-green-200' : 'bg-blue-50 border border-blue-200'
+                risultati.differenzaCosti > 0 ? 'bg-green-50 border border-green-200' : 'bg-gray-50 border border-gray-200'
               }`}>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-700">
@@ -602,7 +602,7 @@ export default function ConfrontoTrustDonazione() {
                     }
                   </span>
                   <span className={`font-heading text-xl ${
-                    risultati.differenzaCosti > 0 ? 'text-green-700' : 'text-blue-700'
+                    risultati.differenzaCosti > 0 ? 'text-green-700' : 'text-gray-700'
                   }`}>
                     {formatCurrency(Math.abs(risultati.differenzaCosti))}
                   </span>
@@ -618,15 +618,15 @@ export default function ConfrontoTrustDonazione() {
                     <div key={i} className="border-b pb-4 last:border-0 last:pb-0">
                       <p className="font-medium text-gray-800 mb-2">{c.aspetto}</p>
                       <div className="grid md:grid-cols-2 gap-3">
-                        <div className="bg-blue-50 rounded-lg p-3">
+                        <div className="bg-gray-50 rounded-lg p-3">
                           <div className="flex items-center gap-2 mb-1">
-                            <span className="text-xs font-medium text-blue-600">Trust</span>
+                            <span className="text-xs font-medium text-gray-600">Trust</span>
                             <div className="flex gap-0.5">
                               {[...Array(5)].map((_, j) => (
                                 <div
                                   key={j}
                                   className={`w-2 h-2 rounded-full ${
-                                    j < c.trust.valore ? 'bg-blue-500' : 'bg-blue-200'
+                                    j < c.trust.valore ? 'bg-gray-500' : 'bg-gray-200'
                                   }`}
                                 />
                               ))}
@@ -658,35 +658,35 @@ export default function ConfrontoTrustDonazione() {
 
               {/* Info boxes */}
               <div className="grid md:grid-cols-2 gap-4">
-                <div className="bg-blue-50 rounded-card p-5 border border-blue-100">
-                  <h4 className="font-heading text-lg text-blue-800 mb-3">Quando scegliere il Trust</h4>
+                <div className="bg-gray-50 rounded-card p-5 border border-gray-100">
+                  <h4 className="font-heading text-lg text-gray-800 mb-3">Quando scegliere il Trust</h4>
                   <ul className="space-y-2 text-sm text-gray-700">
                     <li className="flex items-start gap-2">
-                      <svg className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-4 h-4 text-gray-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
                       <span>Patrimonio significativo (oltre 1-2M)</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <svg className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-4 h-4 text-gray-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
                       <span>Rischio di azioni legali o creditori</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <svg className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-4 h-4 text-gray-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
                       <span>Beneficiari minori o incapaci</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <svg className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-4 h-4 text-gray-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
                       <span>Esigenze di skip generation</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <svg className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-4 h-4 text-gray-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
                       <span>Controllo sulla distribuzione nel tempo</span>

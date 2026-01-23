@@ -1,38 +1,39 @@
 {
-  "lastUpdate": "2026-01-23T12:35:09.189Z",
+  "lastUpdate": "2026-01-23T12:39:22.379Z",
   "source": "fallback",
   "btp": {
     "2Y": {
       "yield": 2.85,
-      "change": 0
+      "change": -0.02
     },
     "5Y": {
       "yield": 3.15,
-      "change": 0
+      "change": -0.01
     },
     "10Y": {
       "yield": 3.52,
-      "change": 0
+      "change": -0.03
     },
     "30Y": {
       "yield": 4.1,
-      "change": 0
+      "change": 0.01
     }
   },
   "bund": {
     "10Y": {
       "yield": 2.3,
-      "change": 0
+      "change": -0.01
     }
   },
   "spread": {
     "value": 122,
-    "change": 0
+    "change": -2
   },
   "history": [
     {
       "date": "2026-01-23",
       "btp10Y": 3.52,
+      "bund10Y": 2.3,
       "spread": 122
     }
   ]
