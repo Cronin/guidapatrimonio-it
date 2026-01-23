@@ -36,9 +36,9 @@ const config: Config = {
         'gold': '#D4A373',        // Warm gold accent
       },
       fontFamily: {
-        // Reckless alternative → Crimson Text (Google Fonts, closest to Plantin)
-        'heading': ['Crimson Text', 'Georgia', 'Times New Roman', 'serif'],
-        // Matter alternative → DM Sans (Google Fonts, free)
+        // Playfair Display - elegant serif for wealth management
+        'heading': ['Playfair Display', 'Georgia', 'Times New Roman', 'serif'],
+        // DM Sans - clean modern sans-serif
         'body': ['DM Sans', 'Inter', 'system-ui', 'sans-serif'],
       },
       fontSize: {

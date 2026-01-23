@@ -31,9 +31,9 @@ export default function Footer() {
             {/* Brand Column */}
             <div className="lg:col-span-2">
               <Link href="/" className="inline-block mb-6">
-                <span className="text-white text-xl tracking-wide">
-                  <span className="font-heading font-semibold">Guida</span>
-                  <span className="font-heading font-normal">Patrimonio</span>
+                <span className="text-white text-2xl">
+                  <span className="font-heading font-medium">Guida</span>
+                  <span className="font-heading font-semibold">Patrimonio</span>
                 </span>
               </Link>
               <p className="text-body-md text-white/70 mb-6 max-w-sm">

@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import Google Fonts (Crimson Text = Reckless alternative - closest to Plantin, DM Sans = Matter alternative) */
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+/* Import Google Fonts - Playfair Display (elegant serif for wealth management), DM Sans (clean body) */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
 /* ============================================
    CSS CUSTOM PROPERTIES - GREEN PALETTE
@@ -41,7 +41,7 @@
   --text-light: rgba(247, 245, 240, 0.8);
 
   /* Typography */
-  --font-heading: 'Crimson Text', Georgia, 'Times New Roman', serif;
+  --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-body: 'DM Sans', Inter, system-ui, sans-serif;
 
   /* Transitions */
