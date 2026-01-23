@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 const footerLinks = {
   servizi: [
@@ -30,10 +31,18 @@ export default function Footer() {
           <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12">
             {/* Brand Column */}
             <div className="lg:col-span-2">
-              <Link href="/" className="inline-block mb-6">
+              <Link href="/" className="inline-flex items-center gap-3 mb-6">
+                <Image
+                  src="/logo-white.png"
+                  alt="Guida Patrimonio"
+                  width={40}
+                  height={40}
+                  className="w-10 h-10"
+                />
                 <span className="text-white text-2xl">
                   <span className="font-heading font-medium">Guida</span>
                   <span className="font-heading font-semibold">Patrimonio</span>
+                  <span className="font-heading font-light opacity-70">.it</span>
                 </span>
               </Link>
               <p className="text-body-md text-white/70 mb-6 max-w-sm">
