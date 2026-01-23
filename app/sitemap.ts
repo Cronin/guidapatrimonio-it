@@ -1,15 +1,24 @@
 import { MetadataRoute } from 'next'
 import { getAllPosts } from '@/content/blog/posts'
+import { getAllNews } from '@/content/news/articles'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://guidapatrimonio.it'
   const posts = getAllPosts()
+  const news = getAllNews()
 
   const blogUrls = posts.map(post => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: 'monthly' as const,
     priority: 0.6,
+  }))
+
+  const newsUrls = news.map(article => ({
+    url: `${baseUrl}/notizie/${article.slug}`,
+    lastModified: new Date(article.date),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
   }))
 
   const tools = [
@@ -66,5 +75,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     ...blogUrls,
+    {
+      url: `${baseUrl}/notizie`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.9,
+    },
+    ...newsUrls,
   ]
 }

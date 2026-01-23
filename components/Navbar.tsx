@@ -34,6 +34,9 @@ export default function Navbar() {
           <Link href="/strumenti" className="text-white text-body font-normal hover:opacity-80 transition-opacity">
             Strumenti
           </Link>
+          <Link href="/notizie" className="text-white text-body font-normal hover:opacity-80 transition-opacity">
+            Notizie
+          </Link>
           <Link href="/blog" className="text-white text-body font-normal hover:opacity-80 transition-opacity">
             Blog
           </Link>
@@ -67,6 +70,9 @@ export default function Navbar() {
             </Link>
             <Link href="/strumenti" className="text-white text-body-md py-2" onClick={() => setIsOpen(false)}>
               Strumenti
+            </Link>
+            <Link href="/notizie" className="text-white text-body-md py-2" onClick={() => setIsOpen(false)}>
+              Notizie
             </Link>
             <Link href="/blog" className="text-white text-body-md py-2" onClick={() => setIsOpen(false)}>
               Blog
