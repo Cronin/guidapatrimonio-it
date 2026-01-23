@@ -9,15 +9,11 @@ export default function Navbar() {
   return (
     <nav className="absolute top-0 left-0 right-0 z-50 h-navbar">
       <div className="container-custom h-full flex items-center justify-between">
-        {/* Logo - CWFG style: serif italic "guida" + "PATRIMONIO" */}
-        <Link href="/" className="flex items-center gap-3">
-          <span className="text-white text-xl">
-            <span className="font-heading italic font-normal">guida</span>
-            <span className="font-heading italic font-normal">PATRIMONIO</span>
-          </span>
-          <span className="text-white/50">|</span>
-          <span className="font-body text-[10px] text-white/80 uppercase tracking-wider leading-tight">
-            Consulenza<br />Patrimoniale
+        {/* Logo - Clean balanced design */}
+        <Link href="/" className="flex items-center">
+          <span className="text-white text-xl tracking-wide">
+            <span className="font-heading font-semibold">Guida</span>
+            <span className="font-heading font-normal">Patrimonio</span>
           </span>
         </Link>
 
@@ -35,8 +31,11 @@ export default function Navbar() {
           <Link href="#risorse" className="text-white text-body font-normal hover:opacity-80 transition-opacity">
             Risorse
           </Link>
-          <Link href="#contatti" className="btn-transparent">
+          <Link href="#contatti" className="text-white text-body font-normal hover:opacity-80 transition-opacity flex items-center gap-1">
             Contattaci
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
           </Link>
         </div>
 
@@ -72,8 +71,11 @@ export default function Navbar() {
             <Link href="#risorse" className="text-white text-body-md py-2" onClick={() => setIsOpen(false)}>
               Risorse
             </Link>
-            <Link href="#contatti" className="btn-transparent w-fit mt-2" onClick={() => setIsOpen(false)}>
+            <Link href="#contatti" className="text-white text-body-md py-2 flex items-center gap-1" onClick={() => setIsOpen(false)}>
               Contattaci
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </Link>
           </div>
         </div>
