@@ -19,19 +19,16 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center gap-8">
-          <Link href="#chi-siamo" className="text-white text-body font-normal hover:opacity-80 transition-opacity">
+          <Link href="/#chi-siamo" className="text-white text-body font-normal hover:opacity-80 transition-opacity">
             Chi Siamo
           </Link>
-          <Link href="#servizi" className="text-white text-body font-normal hover:opacity-80 transition-opacity">
-            Servizi
+          <Link href="/strumenti" className="text-white text-body font-normal hover:opacity-80 transition-opacity">
+            Strumenti
           </Link>
-          <Link href="#come-lavoriamo" className="text-white text-body font-normal hover:opacity-80 transition-opacity">
-            Come Lavoriamo
+          <Link href="/blog" className="text-white text-body font-normal hover:opacity-80 transition-opacity">
+            Blog
           </Link>
-          <Link href="#risorse" className="text-white text-body font-normal hover:opacity-80 transition-opacity">
-            Risorse
-          </Link>
-          <Link href="#contatti" className="text-white text-body font-medium hover:opacity-80 transition-opacity border-b border-white/40 hover:border-white pb-0.5">
+          <Link href="/#contatti" className="text-white text-body font-medium hover:opacity-80 transition-opacity border-b border-white/40 hover:border-white pb-0.5">
             Contattaci
           </Link>
         </div>
@@ -56,19 +53,16 @@ export default function Navbar() {
       {isOpen && (
         <div className="lg:hidden bg-forest/95 backdrop-blur-md">
           <div className="container-custom py-6 flex flex-col gap-4">
-            <Link href="#chi-siamo" className="text-white text-body-md py-2" onClick={() => setIsOpen(false)}>
+            <Link href="/#chi-siamo" className="text-white text-body-md py-2" onClick={() => setIsOpen(false)}>
               Chi Siamo
             </Link>
-            <Link href="#servizi" className="text-white text-body-md py-2" onClick={() => setIsOpen(false)}>
-              Servizi
+            <Link href="/strumenti" className="text-white text-body-md py-2" onClick={() => setIsOpen(false)}>
+              Strumenti
             </Link>
-            <Link href="#come-lavoriamo" className="text-white text-body-md py-2" onClick={() => setIsOpen(false)}>
-              Come Lavoriamo
+            <Link href="/blog" className="text-white text-body-md py-2" onClick={() => setIsOpen(false)}>
+              Blog
             </Link>
-            <Link href="#risorse" className="text-white text-body-md py-2" onClick={() => setIsOpen(false)}>
-              Risorse
-            </Link>
-            <Link href="#contatti" className="text-white text-body-md py-2 font-medium" onClick={() => setIsOpen(false)}>
+            <Link href="/#contatti" className="text-white text-body-md py-2 font-medium" onClick={() => setIsOpen(false)}>
               Contattaci
             </Link>
           </div>
