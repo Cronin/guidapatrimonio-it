@@ -13,20 +13,38 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
   const tools = [
+    // Investimenti
     'interesse-composto',
     'pac',
     'inflazione',
+    'dividendi',
+    // Pianificazione
+    'fire',
     'pensione',
-    'mutuo',
+    'fondo-emergenza',
+    'budget',
+    'patrimonio-netto',
+    // Lavoro e Reddito
     'stipendio-netto',
     'tfr',
+    // Prestiti e Debiti
+    'mutuo',
     'prestito',
-    'fire',
-    'budget',
-    'fondo-emergenza',
+    // Immobiliare
     'rendita-immobiliare',
-    'dividendi',
-    'patrimonio-netto',
+    'portafoglio-immobiliare',
+    // Passaggio Generazionale
+    'successione',
+    'trust-donazione',
+    // Ottimizzazione Fiscale
+    'holding',
+    'flat-tax-100k',
+    'exit-strategy',
+    'ivafe-ivie',
+    'proiezione-patrimoniale',
+    // Private Wealth
+    'costi-private-banking',
+    'family-office',
   ]
 
   const toolUrls = tools.map(tool => ({

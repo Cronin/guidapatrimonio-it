@@ -185,6 +185,76 @@ const toolCategories = [
       },
     ],
   },
+  {
+    title: 'Passaggio Generazionale',
+    tools: [
+      {
+        title: 'Calcolatore Successione e Donazioni',
+        description: 'Calcola le imposte di successione in Italia. Franchigie, aliquote e risparmio con polizze vita.',
+        href: '/strumenti/successione',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+        ),
+      },
+      {
+        title: 'Confronto Trust vs Donazione',
+        description: 'Quale strumento scegliere per il passaggio generazionale? Analizza costi, protezione e flessibilita.',
+        href: '/strumenti/trust-donazione',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+        ),
+      },
+    ],
+  },
+  {
+    title: 'Ottimizzazione Fiscale',
+    tools: [
+      {
+        title: 'Simulatore Holding Company',
+        description: 'Confronta persona fisica vs holding SRL. Regime PEX, break-even e proiezioni.',
+        href: '/strumenti/holding',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+        ),
+      },
+      {
+        title: 'Calcolatore Flat Tax 100k',
+        description: 'Regime forfettario per neo-residenti: confronta flat tax vs tassazione ordinaria.',
+        href: '/strumenti/flat-tax-100k',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+          </svg>
+        ),
+      },
+      {
+        title: 'Pianificatore Exit Strategy',
+        description: 'Vendita azienda: trade sale, MBO, IPO. Ottimizzazione fiscale con holding PEX.',
+        href: '/strumenti/exit-strategy',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+        ),
+      },
+      {
+        title: 'Calcolatore IVAFE e IVIE',
+        description: 'Calcola le imposte su investimenti e immobili all\'estero. Quadro RW incluso.',
+        href: '/strumenti/ivafe-ivie',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        ),
+      },
+    ],
+  },
 ]
 
 export default function Strumenti() {
@@ -201,7 +271,7 @@ export default function Strumenti() {
               Calcolatori Finanziari
             </h1>
             <p className="text-lg text-white/80">
-              14 strumenti gratuiti per pianificare il tuo futuro finanziario.
+              19 strumenti gratuiti per pianificare il tuo futuro finanziario.
               Nessuna registrazione richiesta.
             </p>
           </div>
