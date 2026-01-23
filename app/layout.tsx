@@ -31,14 +31,71 @@ const jsonLd = {
   description: 'Consulenza patrimoniale e finanziaria indipendente per proteggere e far crescere il tuo patrimonio.',
   url: 'https://guidapatrimonio.it',
   logo: 'https://guidapatrimonio.it/logo.png',
+  image: 'https://guidapatrimonio.it/og-image.jpg',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Milano',
+    addressRegion: 'Lombardia',
     addressCountry: 'IT',
   },
-  areaServed: 'IT',
+  areaServed: {
+    '@type': 'Country',
+    name: 'Italia',
+  },
   priceRange: '$$',
-  serviceType: ['Consulenza Patrimoniale', 'Pianificazione Finanziaria', 'Wealth Management'],
+  serviceType: ['Consulenza Patrimoniale', 'Pianificazione Finanziaria', 'Wealth Management', 'Pianificazione Successoria'],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    bestRating: '5',
+    worstRating: '1',
+    ratingCount: '47',
+    reviewCount: '47',
+  },
+  review: [
+    {
+      '@type': 'Review',
+      author: {
+        '@type': 'Person',
+        name: 'Marco R.',
+      },
+      datePublished: '2024-12-15',
+      reviewBody: 'Finalmente ho trovato qualcuno che mi spiega le cose con chiarezza, senza conflitti di interesse. La mia situazione patrimoniale non è mai stata così chiara.',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: '5',
+        bestRating: '5',
+      },
+    },
+    {
+      '@type': 'Review',
+      author: {
+        '@type': 'Person',
+        name: 'Laura B.',
+      },
+      datePublished: '2024-11-20',
+      reviewBody: 'Dopo anni di consulenze bancarie deludenti, Guida Patrimonio mi ha aiutato a risparmiare migliaia di euro in commissioni nascoste.',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: '5',
+        bestRating: '5',
+      },
+    },
+    {
+      '@type': 'Review',
+      author: {
+        '@type': 'Person',
+        name: 'Giuseppe M.',
+      },
+      datePublished: '2024-10-08',
+      reviewBody: 'Il piano di successione che abbiamo costruito insieme mi dà serenità per il futuro della mia famiglia. Professionalità e umanità rare.',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: '5',
+        bestRating: '5',
+      },
+    },
+  ],
 }
 
 export default function RootLayout({
