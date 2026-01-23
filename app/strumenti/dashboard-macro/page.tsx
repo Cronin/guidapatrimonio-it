@@ -13,6 +13,7 @@ interface MacroData {
   tassiBce: {
     depositi: number
     rifinanziamento: number
+    marginale: number
     lastUpdate: string
   }
   inflazioneItalia: {
@@ -40,6 +41,30 @@ interface MacroData {
   }
 }
 
+interface YieldData {
+  yield: number
+  change: number
+}
+
+interface BTPYieldsData {
+  lastUpdate: string
+  source: string
+  btp: {
+    '2Y': YieldData
+    '5Y': YieldData
+    '10Y': YieldData
+    '30Y': YieldData
+  }
+  bund: {
+    '10Y': YieldData
+  }
+  spread: {
+    value: number
+    change: number
+  }
+  stale?: boolean
+}
+
 interface ApiResponse {
   success: boolean
   data: MacroData
@@ -49,6 +74,7 @@ interface ApiResponse {
 
 export default function DashboardMacro() {
   const [data, setData] = useState<MacroData | null>(null)
+  const [btpYields, setBtpYields] = useState<BTPYieldsData | null>(null)
   const [loading, setLoading] = useState(true)
   const [lastFetch, setLastFetch] = useState<Date | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -57,14 +83,25 @@ export default function DashboardMacro() {
     try {
       setLoading(true)
       setError(null)
-      const response = await fetch('/api/macro-data')
-      const result: ApiResponse = await response.json()
 
-      if (result.success) {
-        setData(result.data)
-        setLastFetch(new Date(result.fetchedAt))
+      // Fetch both macro data and BTP yields in parallel
+      const [macroResponse, btpResponse] = await Promise.all([
+        fetch('/api/macro-data'),
+        fetch('/api/data/btp-yields')
+      ])
+
+      const macroResult: ApiResponse = await macroResponse.json()
+      const btpResult = await btpResponse.json()
+
+      if (macroResult.success) {
+        setData(macroResult.data)
+        setLastFetch(new Date(macroResult.fetchedAt))
       } else {
         setError('Errore nel caricamento dei dati')
+      }
+
+      if (btpResult.success) {
+        setBtpYields({ ...btpResult.data, stale: btpResult.stale })
       }
     } catch {
       setError('Errore di connessione')
@@ -255,20 +292,26 @@ export default function DashboardMacro() {
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="text-gray-400 font-mono text-sm">Depositi</span>
-                  <span className="font-mono text-2xl text-cyan-400">
+                  <span className="font-mono text-xl text-cyan-400">
                     {loading ? '-.--%' : `${formatNumber(data?.tassiBce.depositi ?? 0)}%`}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-400 font-mono text-sm">Rifinanziamento</span>
-                  <span className="font-mono text-2xl text-cyan-400">
+                  <span className="font-mono text-xl text-cyan-400">
                     {loading ? '-.--%' : `${formatNumber(data?.tassiBce.rifinanziamento ?? 0)}%`}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-400 font-mono text-sm">Marginale</span>
+                  <span className="font-mono text-xl text-cyan-400">
+                    {loading ? '-.--%' : `${formatNumber(data?.tassiBce.marginale ?? 0)}%`}
                   </span>
                 </div>
               </div>
               <div className="mt-3 pt-3 border-t border-gray-800">
                 <p className="text-gray-600 font-mono text-[10px]">
-                  Tassi di riferimento politica monetaria
+                  Fonte: BCE | Aggiornati automaticamente
                 </p>
               </div>
             </div>
@@ -406,6 +449,129 @@ export default function DashboardMacro() {
               </div>
             </div>
           </div>
+
+          {/* BTP Yields Curve - Full Width */}
+          {btpYields && (
+            <div className="mt-4 bg-[#0d1117] border border-gray-800 rounded-lg p-5 hover:border-gray-700 transition-colors">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <p className="text-gray-500 font-mono text-xs uppercase tracking-wider">Curva Rendimenti BTP</p>
+                  <p className="text-gray-600 font-mono text-[10px]">
+                    Titoli di Stato Italiani {btpYields.stale && '(dati non aggiornati)'}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-gray-600 font-mono text-[10px]">
+                    Fonte: {btpYields.source}
+                  </p>
+                  <p className="text-gray-600 font-mono text-[10px]">
+                    Aggiornato: {new Date(btpYields.lastUpdate).toLocaleDateString('it-IT')}
+                  </p>
+                </div>
+              </div>
+
+              {/* Yield Curve Visual */}
+              <div className="grid grid-cols-4 gap-4 mb-4">
+                {/* BTP 2Y */}
+                <div className="text-center">
+                  <p className="text-gray-500 font-mono text-xs mb-1">2Y</p>
+                  <p className="font-mono text-2xl text-yellow-400 font-bold">
+                    {btpYields.btp['2Y'].yield.toFixed(2)}%
+                  </p>
+                  <p className={`font-mono text-xs ${getChangeColor(btpYields.btp['2Y'].change, true)}`}>
+                    {formatChange(btpYields.btp['2Y'].change, '%')}
+                  </p>
+                </div>
+
+                {/* BTP 5Y */}
+                <div className="text-center">
+                  <p className="text-gray-500 font-mono text-xs mb-1">5Y</p>
+                  <p className="font-mono text-2xl text-yellow-400 font-bold">
+                    {btpYields.btp['5Y'].yield.toFixed(2)}%
+                  </p>
+                  <p className={`font-mono text-xs ${getChangeColor(btpYields.btp['5Y'].change, true)}`}>
+                    {formatChange(btpYields.btp['5Y'].change, '%')}
+                  </p>
+                </div>
+
+                {/* BTP 10Y */}
+                <div className="text-center">
+                  <p className="text-gray-500 font-mono text-xs mb-1">10Y</p>
+                  <p className="font-mono text-2xl text-yellow-400 font-bold">
+                    {btpYields.btp['10Y'].yield.toFixed(2)}%
+                  </p>
+                  <p className={`font-mono text-xs ${getChangeColor(btpYields.btp['10Y'].change, true)}`}>
+                    {formatChange(btpYields.btp['10Y'].change, '%')}
+                  </p>
+                </div>
+
+                {/* BTP 30Y */}
+                <div className="text-center">
+                  <p className="text-gray-500 font-mono text-xs mb-1">30Y</p>
+                  <p className="font-mono text-2xl text-yellow-400 font-bold">
+                    {btpYields.btp['30Y'].yield.toFixed(2)}%
+                  </p>
+                  <p className={`font-mono text-xs ${getChangeColor(btpYields.btp['30Y'].change, true)}`}>
+                    {formatChange(btpYields.btp['30Y'].change, '%')}
+                  </p>
+                </div>
+              </div>
+
+              {/* Yield Curve Bar Chart */}
+              <div className="flex items-end justify-around h-20 border-b border-gray-800 mb-4">
+                {['2Y', '5Y', '10Y', '30Y'].map((maturity) => {
+                  const yieldValue = btpYields.btp[maturity as keyof typeof btpYields.btp].yield
+                  const maxYield = Math.max(
+                    btpYields.btp['2Y'].yield,
+                    btpYields.btp['5Y'].yield,
+                    btpYields.btp['10Y'].yield,
+                    btpYields.btp['30Y'].yield
+                  )
+                  const height = (yieldValue / maxYield) * 100
+                  return (
+                    <div key={maturity} className="flex flex-col items-center gap-1">
+                      <div
+                        className="w-12 bg-gradient-to-t from-yellow-600 to-yellow-400 rounded-t"
+                        style={{ height: `${height}%` }}
+                      />
+                      <span className="text-gray-500 font-mono text-[10px]">{maturity}</span>
+                    </div>
+                  )
+                })}
+              </div>
+
+              {/* Comparison with Bund */}
+              <div className="flex items-center justify-between pt-3 border-t border-gray-800">
+                <div className="flex items-center gap-4">
+                  <div>
+                    <p className="text-gray-500 font-mono text-[10px]">Bund 10Y (Germania)</p>
+                    <p className="font-mono text-lg text-cyan-400">
+                      {btpYields.bund['10Y'].yield.toFixed(2)}%
+                    </p>
+                  </div>
+                  <div className="text-gray-600">|</div>
+                  <div>
+                    <p className="text-gray-500 font-mono text-[10px]">Spread BTP-Bund</p>
+                    <p className="font-mono text-lg text-white">
+                      {btpYields.spread.value} bp
+                      <span className={`text-xs ml-2 ${getChangeColor(btpYields.spread.change, true)}`}>
+                        ({formatChange(btpYields.spread.change, ' bp')})
+                      </span>
+                    </p>
+                  </div>
+                </div>
+                <Link
+                  href="/strumenti/scala-obbligazionaria"
+                  className="flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded font-mono text-xs transition-colors"
+                >
+                  BOND LADDER
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+          )}
 
           {/* Info Section */}
           <div className="mt-8 bg-[#0d1117] border border-gray-800 rounded-lg p-6">

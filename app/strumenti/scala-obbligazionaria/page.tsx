@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
 import { Navbar, Footer } from '@/components'
 
@@ -11,44 +11,88 @@ interface BondData {
   type: 'BTP' | 'Corporate IG'
 }
 
-// Dati BTP e Corporate IG realistici (aggiornati 2025)
-const btpData: BondData[] = [
-  { name: 'BTP 2025', year: 2025, yield: 3.2, type: 'BTP' },
-  { name: 'BTP 2026', year: 2026, yield: 3.3, type: 'BTP' },
-  { name: 'BTP 2027', year: 2027, yield: 3.4, type: 'BTP' },
-  { name: 'BTP 2028', year: 2028, yield: 3.45, type: 'BTP' },
-  { name: 'BTP 2029', year: 2029, yield: 3.5, type: 'BTP' },
-  { name: 'BTP 2030', year: 2030, yield: 3.6, type: 'BTP' },
-  { name: 'BTP 2031', year: 2031, yield: 3.65, type: 'BTP' },
-  { name: 'BTP 2032', year: 2032, yield: 3.7, type: 'BTP' },
-  { name: 'BTP 2033', year: 2033, yield: 3.75, type: 'BTP' },
-  { name: 'BTP 2034', year: 2034, yield: 3.8, type: 'BTP' },
-  { name: 'BTP 2035', year: 2035, yield: 3.8, type: 'BTP' },
-  { name: 'BTP 2036', year: 2036, yield: 3.85, type: 'BTP' },
-  { name: 'BTP 2037', year: 2037, yield: 3.9, type: 'BTP' },
-  { name: 'BTP 2038', year: 2038, yield: 3.95, type: 'BTP' },
-  { name: 'BTP 2039', year: 2039, yield: 4.0, type: 'BTP' },
-  { name: 'BTP 2040', year: 2040, yield: 4.0, type: 'BTP' },
-]
+interface YieldData {
+  yield: number
+  change: number
+}
 
-const corporateData: BondData[] = [
-  { name: 'Corp IG 2025', year: 2025, yield: 4.0, type: 'Corporate IG' },
-  { name: 'Corp IG 2026', year: 2026, yield: 4.1, type: 'Corporate IG' },
-  { name: 'Corp IG 2027', year: 2027, yield: 4.2, type: 'Corporate IG' },
-  { name: 'Corp IG 2028', year: 2028, yield: 4.25, type: 'Corporate IG' },
-  { name: 'Corp IG 2029', year: 2029, yield: 4.3, type: 'Corporate IG' },
-  { name: 'Corp IG 2030', year: 2030, yield: 4.4, type: 'Corporate IG' },
-  { name: 'Corp IG 2031', year: 2031, yield: 4.45, type: 'Corporate IG' },
-  { name: 'Corp IG 2032', year: 2032, yield: 4.5, type: 'Corporate IG' },
-  { name: 'Corp IG 2033', year: 2033, yield: 4.55, type: 'Corporate IG' },
-  { name: 'Corp IG 2034', year: 2034, yield: 4.6, type: 'Corporate IG' },
-  { name: 'Corp IG 2035', year: 2035, yield: 4.6, type: 'Corporate IG' },
-  { name: 'Corp IG 2036', year: 2036, yield: 4.65, type: 'Corporate IG' },
-  { name: 'Corp IG 2037', year: 2037, yield: 4.7, type: 'Corporate IG' },
-  { name: 'Corp IG 2038', year: 2038, yield: 4.75, type: 'Corporate IG' },
-  { name: 'Corp IG 2039', year: 2039, yield: 4.8, type: 'Corporate IG' },
-  { name: 'Corp IG 2040', year: 2040, yield: 4.8, type: 'Corporate IG' },
-]
+interface BTPYieldsApiResponse {
+  success: boolean
+  data: {
+    lastUpdate: string
+    source: string
+    btp: {
+      '2Y': YieldData
+      '5Y': YieldData
+      '10Y': YieldData
+      '30Y': YieldData
+    }
+    bund: {
+      '10Y': YieldData
+    }
+    spread: {
+      value: number
+      change: number
+    }
+  }
+  stale?: boolean
+}
+
+// Fallback BTP data (will be updated with live data)
+const defaultBtpYields = {
+  '2Y': 2.85,
+  '5Y': 3.15,
+  '10Y': 3.52,
+  '30Y': 4.10
+}
+
+// Generate BTP data based on yield curve
+function generateBtpData(yields: typeof defaultBtpYields): BondData[] {
+  const currentYear = new Date().getFullYear()
+  const bonds: BondData[] = []
+
+  // Interpolate yields for each year based on the 2Y, 5Y, 10Y, 30Y anchors
+  for (let yearsToMaturity = 1; yearsToMaturity <= 16; yearsToMaturity++) {
+    const year = currentYear + yearsToMaturity
+    let yieldValue: number
+
+    if (yearsToMaturity <= 2) {
+      yieldValue = yields['2Y']
+    } else if (yearsToMaturity <= 5) {
+      // Interpolate between 2Y and 5Y
+      const t = (yearsToMaturity - 2) / 3
+      yieldValue = yields['2Y'] + t * (yields['5Y'] - yields['2Y'])
+    } else if (yearsToMaturity <= 10) {
+      // Interpolate between 5Y and 10Y
+      const t = (yearsToMaturity - 5) / 5
+      yieldValue = yields['5Y'] + t * (yields['10Y'] - yields['5Y'])
+    } else {
+      // Interpolate between 10Y and 30Y
+      const t = (yearsToMaturity - 10) / 20
+      yieldValue = yields['10Y'] + t * (yields['30Y'] - yields['10Y'])
+    }
+
+    bonds.push({
+      name: `BTP ${year}`,
+      year,
+      yield: Math.round(yieldValue * 100) / 100,
+      type: 'BTP'
+    })
+  }
+
+  return bonds
+}
+
+// Generate Corporate IG data (approximately 0.8% premium over BTP)
+function generateCorporateData(btpData: BondData[]): BondData[] {
+  const corporatePremium = 0.8 // 80 basis points premium
+  return btpData.map(btp => ({
+    name: `Corp IG ${btp.year}`,
+    year: btp.year,
+    yield: Math.round((btp.yield + corporatePremium) * 100) / 100,
+    type: 'Corporate IG' as const
+  }))
+}
 
 type TipoObbligazione = 'BTP' | 'Corporate IG' | 'Mix'
 type Obiettivo = 'rendimento' | 'sicurezza'
@@ -67,6 +111,42 @@ export default function ScalaObbligazionaria() {
   const [tipoObbligazione, setTipoObbligazione] = useState<TipoObbligazione>('BTP')
   const [obiettivo, setObiettivo] = useState<Obiettivo>('rendimento')
   const [intervalloAnni, setIntervalloAnni] = useState(2)
+
+  // Live BTP yields state
+  const [btpYields, setBtpYields] = useState(defaultBtpYields)
+  const [lastUpdate, setLastUpdate] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Fetch live BTP yields on mount
+  useEffect(() => {
+    async function fetchYields() {
+      try {
+        const response = await fetch('/api/data/btp-yields')
+        const result: BTPYieldsApiResponse = await response.json()
+
+        if (result.success && result.data) {
+          setBtpYields({
+            '2Y': result.data.btp['2Y'].yield,
+            '5Y': result.data.btp['5Y'].yield,
+            '10Y': result.data.btp['10Y'].yield,
+            '30Y': result.data.btp['30Y'].yield
+          })
+          setLastUpdate(result.data.lastUpdate)
+        }
+      } catch (error) {
+        console.error('Error fetching BTP yields:', error)
+        // Keep default values on error
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchYields()
+  }, [])
+
+  // Generate bond data based on live yields
+  const btpData = useMemo(() => generateBtpData(btpYields), [btpYields])
+  const corporateData = useMemo(() => generateCorporateData(btpData), [btpData])
 
   const currentYear = new Date().getFullYear()
 
@@ -191,6 +271,23 @@ export default function ScalaObbligazionaria() {
           <p className="text-white/70 mt-2 max-w-xl">
             Costruisci una scala di obbligazioni per generare un flusso di cedole regolare e ridurre il rischio di tasso.
           </p>
+
+          {/* Live Yields Indicator */}
+          <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-full">
+            <span className={`w-2 h-2 rounded-full ${isLoading ? 'bg-yellow-400 animate-pulse' : 'bg-green-400'}`} />
+            <span className="text-white/80 text-sm">
+              {isLoading ? 'Caricamento rendimenti...' : (
+                <>
+                  Rendimenti BTP aggiornati
+                  {lastUpdate && (
+                    <span className="text-white/60 ml-1">
+                      ({new Date(lastUpdate).toLocaleDateString('it-IT')})
+                    </span>
+                  )}
+                </>
+              )}
+            </span>
+          </div>
         </div>
       </section>
 

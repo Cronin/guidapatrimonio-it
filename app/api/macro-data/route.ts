@@ -1,4 +1,6 @@
 import { NextResponse } from 'next/server'
+import { readFileSync, existsSync } from 'fs'
+import { join } from 'path'
 
 // Cache durata: 15 minuti
 export const revalidate = 900
@@ -12,6 +14,7 @@ interface MacroData {
   tassiBce: {
     depositi: number
     rifinanziamento: number
+    marginale: number
     lastUpdate: string
   }
   inflazioneItalia: {
@@ -39,6 +42,22 @@ interface MacroData {
   }
 }
 
+interface BceRatesData {
+  lastUpdate: string
+  source: string
+  rates: {
+    depositFacility: number
+    mainRefinancing: number
+    marginalLending: number
+  }
+  history: Array<{
+    date: string
+    depositFacility: number
+    mainRefinancing: number
+    marginalLending: number
+  }>
+}
+
 // Fallback data in caso di errori
 const fallbackData: MacroData = {
   spreadBtpBund: {
@@ -47,8 +66,9 @@ const fallbackData: MacroData = {
     lastUpdate: new Date().toISOString()
   },
   tassiBce: {
-    depositi: 3.00,
-    rifinanziamento: 3.40,
+    depositi: 2.00,
+    rifinanziamento: 2.15,
+    marginale: 2.40,
     lastUpdate: new Date().toISOString()
   },
   inflazioneItalia: {
@@ -106,17 +126,34 @@ async function fetchYahooFinanceQuote(symbol: string): Promise<{ price: number; 
   }
 }
 
-async function fetchBceRates(): Promise<{ depositi: number; rifinanziamento: number } | null> {
+async function fetchBceRates(): Promise<{ depositi: number; rifinanziamento: number; marginale: number } | null> {
   try {
-    // ECB SDW (Statistical Data Warehouse) API for interest rates
-    // Deposit facility rate
-    const depositUrl = 'https://data.ecb.europa.eu/data-detail-api/EXR.D.USD.EUR.SP00.A'
+    // Read from scraped BCE rates file
+    const dataPath = join(process.cwd(), 'data/scraped/bce-rates.json')
+
+    if (existsSync(dataPath)) {
+      const fileContent = readFileSync(dataPath, 'utf-8')
+      const data: BceRatesData = JSON.parse(fileContent)
+
+      // Check if data is not too stale (less than 7 days old)
+      const lastUpdate = new Date(data.lastUpdate)
+      const now = new Date()
+      const daysOld = (now.getTime() - lastUpdate.getTime()) / (1000 * 60 * 60 * 24)
+
+      if (daysOld < 7) {
+        return {
+          depositi: data.rates.depositFacility,
+          rifinanziamento: data.rates.mainRefinancing,
+          marginale: data.rates.marginalLending
+        }
+      }
+    }
 
     // Fallback to known recent rates (ECB updates infrequently)
-    // As of January 2026, these are approximate rates after recent cuts
     return {
-      depositi: 3.00,
-      rifinanziamento: 3.40
+      depositi: 2.00,
+      rifinanziamento: 2.15,
+      marginale: 2.40
     }
   } catch {
     return null
@@ -177,6 +214,7 @@ export async function GET() {
       tassiBce: {
         depositi: bceRates?.depositi ?? fallbackData.tassiBce.depositi,
         rifinanziamento: bceRates?.rifinanziamento ?? fallbackData.tassiBce.rifinanziamento,
+        marginale: bceRates?.marginale ?? fallbackData.tassiBce.marginale,
         lastUpdate: now
       },
       inflazioneItalia: {
