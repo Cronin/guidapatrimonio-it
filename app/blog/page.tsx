@@ -37,9 +37,19 @@ export default function BlogIndex() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {posts.map((post) => (
               <article key={post.slug} className="bg-white rounded-card overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
-                <div className="h-48 bg-gradient-to-br from-green-600 to-forest flex items-center justify-center">
-                  <span className="text-white/20 font-heading text-6xl">GP</span>
-                </div>
+                {post.image ? (
+                  <div className="h-48 overflow-hidden">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                    />
+                  </div>
+                ) : (
+                  <div className="h-48 bg-gradient-to-br from-green-600 to-forest flex items-center justify-center">
+                    <span className="text-white/20 font-heading text-6xl">GP</span>
+                  </div>
+                )}
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-3">
                     <span className="text-xs font-medium text-green-600 bg-green-100 px-2 py-1 rounded">

@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.excerpt,
       type: 'article',
       publishedTime: post.date,
+      images: post.image ? [{ url: post.image, width: 1200, height: 630 }] : undefined,
     },
   }
 }
@@ -191,8 +192,26 @@ export default async function BlogPost({ params }: Props) {
         </div>
       </section>
 
+      {/* Featured Image */}
+      {post.image && (
+        <section className="bg-cream pt-8">
+          <div className="container-custom">
+            <div className="max-w-4xl mx-auto">
+              <div className="rounded-card overflow-hidden shadow-lg">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full h-auto object-cover"
+                  style={{ maxHeight: '450px' }}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Content */}
-      <section className="section-md bg-cream">
+      <section className={`${post.image ? 'pt-8' : 'section-md'} pb-16 bg-cream`}>
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
             <article className="bg-white rounded-card p-8 md:p-12 shadow-sm">
