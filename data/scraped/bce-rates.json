@@ -1,12 +1,12 @@
 {
-  "lastUpdate": "2026-01-23T13:07:39.808Z",
-  "source": "fallback",
+  "lastUpdate": "2026-01-23T13:18:24.436Z",
+  "source": "ecb-html",
   "rates": {
-    "depositFacility": 3,
-    "mainRefinancing": 3.15,
-    "marginalLending": 3.4
+    "depositFacility": 2,
+    "mainRefinancing": 2.15,
+    "marginalLending": 2.4
   },
-  "effectiveDate": "2026-01-23",
+  "effectiveDate": "2025-06-11",
   "history": [
     {
       "date": "2025-06-11",
@@ -61,6 +61,12 @@
       "depositFacility": 3,
       "mainRefinancing": 3.15,
       "marginalLending": 3.4
+    },
+    {
+      "date": "2025-06-11",
+      "depositFacility": 2,
+      "mainRefinancing": 2.15,
+      "marginalLending": 2.4
     }
   ]
 }
