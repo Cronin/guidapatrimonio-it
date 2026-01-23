@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -9,8 +10,15 @@ export default function Navbar() {
   return (
     <nav className="absolute top-0 left-0 right-0 z-50 h-navbar">
       <div className="container-custom h-full flex items-center justify-between">
-        {/* Logo - Elegant serif, visible */}
-        <Link href="/" className="flex items-center">
+        {/* Logo - Icon + Text */}
+        <Link href="/" className="flex items-center gap-3">
+          <Image
+            src="/logo-white.png"
+            alt="Guida Patrimonio"
+            width={40}
+            height={40}
+            className="w-10 h-10"
+          />
           <span className="text-white text-2xl">
             <span className="font-heading font-medium">Guida</span>
             <span className="font-heading font-semibold">Patrimonio</span>
