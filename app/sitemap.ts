@@ -13,6 +13,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
   const tools = [
+    // Dashboard & Monitoraggio
+    'dashboard-macro',
     // Investimenti
     'interesse-composto',
     'pac',

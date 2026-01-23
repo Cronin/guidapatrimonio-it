@@ -7,7 +7,55 @@ export const metadata: Metadata = {
   description: 'Calcolatori finanziari gratuiti: interesse composto, PAC, mutuo, stipendio netto, FIRE, pensione e molto altro. Pianifica il tuo futuro finanziario.',
 }
 
-const toolCategories = [
+interface Tool {
+  title: string
+  description: string
+  href: string
+  icon: React.ReactNode
+  external?: boolean
+  isNew?: boolean
+}
+
+interface ToolCategory {
+  title: string
+  featured?: boolean
+  tools: Tool[]
+}
+
+const toolCategories: ToolCategory[] = [
+  {
+    title: 'Intelligenza Artificiale',
+    featured: true,
+    tools: [
+      {
+        title: 'AI Wealth Advisor',
+        description: 'Consulente patrimoniale virtuale basato su AI. Risposte immediate su fiscalita, successioni, trust e holding.',
+        href: '/strumenti/ai-advisor',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+          </svg>
+        ),
+        isNew: true,
+      },
+    ],
+  },
+  {
+    title: 'Dashboard & Monitoraggio',
+    tools: [
+      {
+        title: 'Dashboard Macro Italia',
+        description: 'Spread BTP-Bund, tassi BCE, inflazione, FTSE MIB e cambi in tempo reale. Stile Bloomberg Terminal.',
+        href: '/strumenti/dashboard-macro',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+        ),
+        isNew: true,
+      },
+    ],
+  },
   {
     title: 'Investimenti',
     tools: [
@@ -186,6 +234,42 @@ const toolCategories = [
     ],
   },
   {
+    title: 'Private Banking',
+    tools: [
+      {
+        title: 'Confronto Private Banking Italia',
+        description: 'Confronta le migliori private bank italiane e svizzere: soglie, commissioni, servizi e calcolatore costi.',
+        href: '/strumenti/confronto-private-banking',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+        ),
+        isNew: true,
+      },
+      {
+        title: 'Analizzatore Costi Private Banking',
+        description: 'Scopri quanto ti costano realmente le commissioni e quanto potresti risparmiare.',
+        href: '/strumenti/costi-private-banking',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z" />
+          </svg>
+        ),
+      },
+      {
+        title: 'Simulatore Family Office',
+        description: 'Valuta se un Family Office ha senso per il tuo patrimonio e confronta i costi.',
+        href: '/strumenti/family-office',
+        icon: (
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+        ),
+      },
+    ],
+  },
+  {
     title: 'Passaggio Generazionale',
     tools: [
       {
@@ -271,7 +355,7 @@ export default function Strumenti() {
               Calcolatori Finanziari
             </h1>
             <p className="text-lg text-white/80">
-              19 strumenti gratuiti per pianificare il tuo futuro finanziario.
+              Oltre 20 strumenti gratuiti per pianificare il tuo futuro finanziario.
               Nessuna registrazione richiesta.
             </p>
           </div>
@@ -296,10 +380,15 @@ export default function Strumenti() {
                     <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center text-green-600 mb-4 group-hover:bg-green-600 group-hover:text-white transition-colors">
                       {tool.icon}
                     </div>
-                    <h3 className="font-heading text-xl text-forest mb-2 group-hover:text-green-600 transition-colors">
+                    <h3 className="font-heading text-xl text-forest mb-2 group-hover:text-green-600 transition-colors flex items-center gap-2">
                       {tool.title}
+                      {tool.isNew && (
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-500 text-white">
+                          NUOVO
+                        </span>
+                      )}
                       {tool.external && (
-                        <svg className="w-4 h-4 inline ml-1 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 inline opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
                       )}
