@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, JsonLd, createCalculatorSchema, createBreadcrumbSchema, createFAQSchema , RatingWidget} from '@/components'
+import { Navbar, Footer, JsonLd, createCalculatorSchema, createBreadcrumbSchema, createFAQSchema , RatingWidget, ToolPageSchema} from '@/components'
 
 // Static schema data
 const calculatorSchema = createCalculatorSchema({
@@ -94,6 +94,7 @@ export default function InteresseComposto() {
 
   return (
     <main>
+      <ToolPageSchema slug="interesse-composto" />
       <JsonLd data={[calculatorSchema, breadcrumbSchema, faqSchema]} />
       <Navbar />
 

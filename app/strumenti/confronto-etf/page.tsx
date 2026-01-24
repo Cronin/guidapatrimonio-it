@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 // ETF Data Interface
 interface ETF {
@@ -380,6 +380,7 @@ export default function ConfrontoETF() {
 
   return (
     <main>
+      <ToolPageSchema slug="confronto-etf" />
       <Navbar />
 
       {/* Hero */}

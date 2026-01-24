@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget} from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, ToolPageSchema} from '@/components'
 
 // Define bank data interface
 interface PrivateBank {
@@ -237,6 +237,7 @@ export default function ConfrontoPrivateBanking() {
 
   return (
     <main>
+      <ToolPageSchema slug="confronto-private-banking" />
       <Navbar />
 
       {/* Hero Section */}

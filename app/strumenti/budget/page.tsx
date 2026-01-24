@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 export default function CalcolatoreBudget() {
   const [redditoNetto, setRedditoNetto] = useState(2500)
@@ -61,6 +61,7 @@ export default function CalcolatoreBudget() {
 
   return (
     <main>
+      <ToolPageSchema slug="budget" />
       <Navbar />
 
       <section className="bg-forest pt-navbar">

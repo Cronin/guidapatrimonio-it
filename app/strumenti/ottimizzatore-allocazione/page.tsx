@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 type Obiettivo = 'crescita' | 'reddito' | 'preservazione'
 
@@ -278,6 +278,7 @@ export default function OttimizzatoreAllocazione() {
 
   return (
     <main>
+      <ToolPageSchema slug="ottimizzatore-allocazione" />
       <Navbar />
 
       {/* Hero */}

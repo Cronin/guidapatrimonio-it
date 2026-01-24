@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 interface ETFExample {
   nome: string
@@ -138,6 +138,7 @@ export default function CalcolatoreDividendi() {
 
   return (
     <main>
+      <ToolPageSchema slug="calcolatore-dividendi" />
       <Navbar />
 
       {/* Hero */}

@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 interface Posizione {
   id: string
@@ -194,6 +194,7 @@ export default function TaxLossHarvestingCalculator() {
 
   return (
     <main>
+      <ToolPageSchema slug="tax-loss-harvesting" />
       <Navbar />
 
       <section className="bg-forest pt-navbar">

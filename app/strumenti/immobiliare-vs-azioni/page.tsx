@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 interface YearlyData {
   year: number
@@ -160,6 +160,7 @@ export default function ImmobiliareVsAzioni() {
 
   return (
     <main>
+      <ToolPageSchema slug="immobiliare-vs-azioni" />
       <Navbar />
 
       <section className="bg-forest pt-navbar">

@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 export default function CalcolatoreDividendi() {
   const [investimento, setInvestimento] = useState(50000)
@@ -74,6 +74,7 @@ export default function CalcolatoreDividendi() {
 
   return (
     <main>
+      <ToolPageSchema slug="dividendi" />
       <Navbar />
 
       <section className="bg-forest pt-navbar">

@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 export default function CalcolatorePrestito() {
   const [importo, setImporto] = useState(15000)
@@ -47,6 +47,7 @@ export default function CalcolatorePrestito() {
 
   return (
     <main>
+      <ToolPageSchema slug="prestito" />
       <Navbar />
 
       <section className="bg-forest pt-navbar">

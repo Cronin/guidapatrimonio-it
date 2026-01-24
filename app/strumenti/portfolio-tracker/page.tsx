@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 interface Posizione {
   id: string
@@ -532,6 +532,7 @@ export default function PortfolioTracker() {
   if (!mounted) {
     return (
       <main>
+      <ToolPageSchema slug="portfolio-tracker" />
         <Navbar />
         <section className="bg-forest pt-navbar">
           <div className="container-custom py-12">

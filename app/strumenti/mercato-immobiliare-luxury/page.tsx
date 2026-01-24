@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget} from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, ToolPageSchema} from '@/components'
 
 // Static data - imported directly for SSG compatibility
 const luxuryData = {
@@ -289,6 +289,7 @@ export default function MercatoImmobiliareLuxury() {
 
   return (
     <main className="bg-cream min-h-screen">
+      <ToolPageSchema slug="mercato-immobiliare-luxury" />
       <Navbar />
 
       {/* Hero - Luxury Style */}

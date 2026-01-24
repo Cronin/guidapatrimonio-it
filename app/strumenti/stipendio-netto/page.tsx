@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 export default function CalcolatoreStipendioNetto() {
   const [ral, setRal] = useState(35000)
@@ -84,6 +84,7 @@ export default function CalcolatoreStipendioNetto() {
 
   return (
     <main>
+      <ToolPageSchema slug="stipendio-netto" />
       <Navbar />
 
       <section className="bg-forest pt-navbar">

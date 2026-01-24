@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 interface Message {
   id: string
@@ -131,6 +131,7 @@ export default function AIAdvisor() {
 
   return (
     <main>
+      <ToolPageSchema slug="ai-advisor" />
       <Navbar />
 
       <section className="bg-forest pt-navbar">

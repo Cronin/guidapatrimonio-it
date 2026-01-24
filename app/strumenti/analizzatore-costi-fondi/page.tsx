@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget} from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, ToolPageSchema} from '@/components'
 
 interface FundInput {
   name: string
@@ -325,6 +325,7 @@ export default function AnalizzatoreCostiFondi() {
 
   return (
     <main className="min-h-screen bg-cream">
+      <ToolPageSchema slug="analizzatore-costi-fondi" />
       <Navbar />
 
       {/* Hero */}

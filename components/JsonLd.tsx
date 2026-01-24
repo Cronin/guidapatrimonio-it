@@ -89,13 +89,19 @@ export function createCalculatorSchema({
   description,
   url,
   category = 'FinanceApplication',
+  aggregateRating,
 }: {
   name: string
   description: string
   url: string
   category?: string
+  aggregateRating?: {
+    ratingValue: number
+    ratingCount: number
+    reviewCount?: number
+  }
 }) {
-  return {
+  const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name,
@@ -112,6 +118,18 @@ export function createCalculatorSchema({
       '@id': 'https://guidapatrimonio.it/#organization',
     },
   }
+
+  if (aggregateRating && aggregateRating.ratingCount > 0) {
+    schema.aggregateRating = {
+      '@type': 'AggregateRating',
+      ratingValue: aggregateRating.ratingValue,
+      ratingCount: aggregateRating.ratingCount,
+      bestRating: 5,
+      worstRating: 1,
+    }
+  }
+
+  return schema
 }
 
 // Article Schema for blog posts

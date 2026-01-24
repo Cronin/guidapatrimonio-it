@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 interface ScenarioData {
   name: string
@@ -128,6 +128,7 @@ export default function CostiPrivateBanking() {
 
   return (
     <main>
+      <ToolPageSchema slug="costi-private-banking" />
       <Navbar />
 
       <section className="bg-forest pt-navbar">

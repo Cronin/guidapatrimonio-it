@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 // =============================================================================
 // ASSET CLASS DATA - Rendimenti storici realistici basati su dati 1970-2024
@@ -574,6 +574,7 @@ export default function BacktestPortafoglio() {
 
   return (
     <main className="bg-gray-50 min-h-screen">
+      <ToolPageSchema slug="backtest-portafoglio" />
       <Navbar />
 
       {/* Hero Section - Bloomberg Style */}

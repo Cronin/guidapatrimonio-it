@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 interface SimulationResult {
   anno: number
@@ -206,6 +206,7 @@ export default function CalcolatoreTassoPrelievoSicuro() {
 
   return (
     <main>
+      <ToolPageSchema slug="tasso-prelievo-sicuro" />
       <Navbar />
 
       <section className="bg-forest pt-navbar">

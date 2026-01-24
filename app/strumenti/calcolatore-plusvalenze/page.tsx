@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useRef, useCallback } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 // ============================================================================
 // TYPES & INTERFACES
@@ -628,6 +628,7 @@ export default function CalcolatorePlusvalenze() {
 
   return (
     <main className="bg-cream min-h-screen">
+      <ToolPageSchema slug="calcolatore-plusvalenze" />
       <Navbar />
 
       {/* Hero Section */}

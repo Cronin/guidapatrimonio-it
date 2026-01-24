@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 interface Property {
   id: string
@@ -254,6 +254,7 @@ export default function OttimizzatorePortafoglio() {
 
   return (
     <main>
+      <ToolPageSchema slug="portafoglio-immobiliare" />
       <Navbar />
 
       <section className="bg-forest pt-navbar">

@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 interface AssetClass {
   name: string
@@ -167,6 +167,7 @@ export default function PortfolioRebalancer() {
 
   return (
     <main>
+      <ToolPageSchema slug="portfolio-rebalancer" />
       <Navbar />
 
       {/* Hero */}

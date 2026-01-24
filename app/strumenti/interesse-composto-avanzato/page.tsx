@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 import {
   AreaChart,
   Area,
@@ -218,6 +218,7 @@ export default function InteresseCompostoAvanzato() {
 
   return (
     <main>
+      <ToolPageSchema slug="interesse-composto-avanzato" />
       <Navbar />
 
       {/* Hero */}

@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 interface BondData {
   name: string
@@ -255,6 +255,7 @@ export default function ScalaObbligazionaria() {
 
   return (
     <main>
+      <ToolPageSchema slug="scala-obbligazionaria" />
       <Navbar />
 
       <section className="bg-forest pt-navbar">

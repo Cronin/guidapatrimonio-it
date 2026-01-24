@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback, useRef, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 // Box-Muller transform for generating normal distribution
 function randomNormal(): number {
@@ -360,6 +360,7 @@ export default function SimulatoreMonteCarloPage() {
 
   return (
     <main>
+      <ToolPageSchema slug="simulatore-monte-carlo" />
       <Navbar />
 
       {/* Hero */}

@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect, useCallback } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 // Tipi di asset secondo normativa italiana
 type TipoAsset = 'azioni' | 'etf' | 'etc' | 'obbligazioni' | 'certificati'
@@ -584,6 +584,7 @@ DISCLAIMER: Questo documento e solo a scopo informativo. Consulta un commerciali
   if (!isLoaded) {
     return (
       <main>
+      <ToolPageSchema slug="calcolatore-minusvalenze" />
         <Navbar />
         <div className="min-h-screen bg-[#fcfcfa] flex items-center justify-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1B4D3E]" />

@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 interface ScenarioData {
   anno: number
@@ -141,6 +141,7 @@ export default function CoperturaValutaria() {
 
   return (
     <main>
+      <ToolPageSchema slug="copertura-valutaria" />
       <Navbar />
 
       {/* Hero */}

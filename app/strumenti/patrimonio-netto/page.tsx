@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget} from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, ToolPageSchema} from '@/components'
 
 interface Asset {
   id: string
@@ -131,6 +131,7 @@ export default function CalcolatorePatrimonioNetto() {
 
   return (
     <main>
+      <ToolPageSchema slug="patrimonio-netto" />
       <Navbar />
 
       <section className="bg-forest pt-navbar">

@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
 
 export default function CalcolatoreTFR() {
   const [ralAttuale, setRalAttuale] = useState(35000)
@@ -82,6 +82,7 @@ export default function CalcolatoreTFR() {
 
   return (
     <main>
+      <ToolPageSchema slug="tfr" />
       <Navbar />
 
       <section className="bg-forest pt-navbar">

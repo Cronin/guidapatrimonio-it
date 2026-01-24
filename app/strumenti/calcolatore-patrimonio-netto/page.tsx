@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useRef } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, JsonLd, createCalculatorSchema, createBreadcrumbSchema, createFAQSchema , RatingWidget} from '@/components'
+import { Navbar, Footer, JsonLd, createCalculatorSchema, createBreadcrumbSchema, createFAQSchema , RatingWidget, ToolPageSchema} from '@/components'
 
 // JSON-LD Structured Data
 const calculatorSchema = createCalculatorSchema({
@@ -293,6 +293,7 @@ export default function CalcolatorePatrimonioNettoAvanzato() {
 
   return (
     <main>
+      <ToolPageSchema slug="calcolatore-patrimonio-netto" />
       <JsonLd data={[calculatorSchema, breadcrumbSchema, faqSchema]} />
       <Navbar />
 
