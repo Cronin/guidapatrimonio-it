@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, FreeToolBanner} from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget} from '@/components'
 
 type ExitOption = 'trade_sale' | 'mbo' | 'family' | 'ipo'
 type HoldingStructure = 'direct' | 'holding_pex' | 'reinvestment'
@@ -225,7 +225,6 @@ export default function ExitStrategyPlanner() {
   return (
     <main>
       <Navbar />
-      <FreeToolBanner />
 
       <section className="bg-forest pt-navbar">
         <div className="container-custom py-12">

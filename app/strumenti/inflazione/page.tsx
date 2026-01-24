@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, FreeToolBanner} from '@/components'
+import { Navbar, Footer , RatingWidget} from '@/components'
 
 export default function CalcolatoreInflazione() {
   const [importo, setImporto] = useState(100000)
@@ -75,7 +75,6 @@ export default function CalcolatoreInflazione() {
   return (
     <main>
       <Navbar />
-      <FreeToolBanner />
 
       {/* Hero */}
       <section className="bg-forest pt-navbar">

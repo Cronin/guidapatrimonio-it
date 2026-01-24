@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback, useRef, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, FreeToolBanner} from '@/components'
+import { Navbar, Footer , RatingWidget} from '@/components'
 
 // Box-Muller transform for generating normal distribution
 function randomNormal(): number {
@@ -361,7 +361,6 @@ export default function SimulatoreMonteCarloPage() {
   return (
     <main>
       <Navbar />
-      <FreeToolBanner />
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-forest via-green-800 to-green-900 pt-navbar relative overflow-hidden">

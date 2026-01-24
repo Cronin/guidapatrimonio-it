@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, FreeToolBanner} from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget} from '@/components'
 
 type TipoAsset = 'conto' | 'azioni' | 'obbligazioni' | 'etf' | 'fondi' | 'cripto' | 'altro_finanziario'
 type TipoImmobile = 'residenziale' | 'commerciale' | 'terreno'
@@ -237,7 +237,6 @@ export default function CalcolatoreIVAFEIVIE() {
   return (
     <main>
       <Navbar />
-      <FreeToolBanner />
 
       <section className="bg-forest pt-navbar">
         <div className="container-custom py-12">

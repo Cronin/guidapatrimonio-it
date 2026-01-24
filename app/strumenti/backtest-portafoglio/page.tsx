@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, FreeToolBanner} from '@/components'
+import { Navbar, Footer , RatingWidget} from '@/components'
 
 // =============================================================================
 // ASSET CLASS DATA - Rendimenti storici realistici basati su dati 1970-2024
@@ -575,7 +575,6 @@ export default function BacktestPortafoglio() {
   return (
     <main className="bg-gray-50 min-h-screen">
       <Navbar />
-      <FreeToolBanner />
 
       {/* Hero Section - Bloomberg Style */}
       <section className="bg-gradient-to-br from-forest via-green-800 to-green-900 pt-navbar relative overflow-hidden">

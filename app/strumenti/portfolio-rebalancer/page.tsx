@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, FreeToolBanner} from '@/components'
+import { Navbar, Footer , RatingWidget} from '@/components'
 
 interface AssetClass {
   name: string
@@ -168,7 +168,6 @@ export default function PortfolioRebalancer() {
   return (
     <main>
       <Navbar />
-      <FreeToolBanner />
 
       {/* Hero */}
       <section className="bg-forest pt-navbar">

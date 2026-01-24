@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, FreeToolBanner} from '@/components'
+import { Navbar, Footer , RatingWidget} from '@/components'
 
 interface Posizione {
   id: string
@@ -533,7 +533,6 @@ export default function PortfolioTracker() {
     return (
       <main>
         <Navbar />
-      <FreeToolBanner />
         <section className="bg-forest pt-navbar">
           <div className="container-custom py-12">
             <h1 className="font-heading text-[32px] md:text-[42px] text-white leading-tight">

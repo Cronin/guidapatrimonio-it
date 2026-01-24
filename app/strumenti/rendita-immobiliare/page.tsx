@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, FreeToolBanner} from '@/components'
+import { Navbar, Footer , RatingWidget} from '@/components'
 
 export default function CalcolatoreRenditaImmobiliare() {
   const [prezzoAcquisto, setPrezzoAcquisto] = useState(200000)
@@ -72,7 +72,6 @@ export default function CalcolatoreRenditaImmobiliare() {
   return (
     <main>
       <Navbar />
-      <FreeToolBanner />
 
       <section className="bg-forest pt-navbar">
         <div className="container-custom py-12">

@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, FreeToolBanner} from '@/components'
+import { Navbar, Footer , RatingWidget} from '@/components'
 
 type Obiettivo = 'crescita' | 'reddito' | 'preservazione'
 
@@ -279,7 +279,6 @@ export default function OttimizzatoreAllocazione() {
   return (
     <main>
       <Navbar />
-      <FreeToolBanner />
 
       {/* Hero */}
       <section className="bg-forest pt-navbar">

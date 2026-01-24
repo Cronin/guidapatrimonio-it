@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, FreeToolBanner} from '@/components'
+import { Navbar, Footer , RatingWidget} from '@/components'
 import {
   AreaChart,
   Area,
@@ -219,7 +219,6 @@ export default function InteresseCompostoAvanzato() {
   return (
     <main>
       <Navbar />
-      <FreeToolBanner />
 
       {/* Hero */}
       <section className="bg-forest pt-navbar">

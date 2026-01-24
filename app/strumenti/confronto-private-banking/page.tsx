@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, FreeToolBanner} from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget} from '@/components'
 
 // Define bank data interface
 interface PrivateBank {
@@ -238,7 +238,6 @@ export default function ConfrontoPrivateBanking() {
   return (
     <main>
       <Navbar />
-      <FreeToolBanner />
 
       {/* Hero Section */}
       <section className="bg-forest pt-navbar">
