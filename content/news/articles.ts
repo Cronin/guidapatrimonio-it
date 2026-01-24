@@ -682,6 +682,434 @@ Per chi vuole entrare nel mercato del fine wine:
 Il vino, come l'arte, richiede pazienza. Ma i rendimenti possono essere straordinari.
 `
   },
+  {
+    slug: 'sothebys-picasso-194-milioni-2026',
+    title: 'Sotheby\'s, un Picasso venduto a 194 milioni: terza opera piu cara della storia',
+    excerpt: 'Femme a la montre del 1932 battuto a New York. L\'acquirente e un collezionista asiatico. Il mercato dell\'arte contemporanea segna il passo, i blue chip tengono.',
+    date: '2026-01-11',
+    readTime: 6,
+    category: 'Lifestyle',
+    source: 'Artnet',
+    sourceUrl: 'https://www.artnet.com',
+    image: 'https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=1200&h=630&fit=crop',
+    content: `
+Centonovantaquattro milioni di dollari. E il prezzo raggiunto da **Femme a la montre** di Pablo Picasso, venduto all'asta serale di [Sotheby's](https://www.sothebys.com) a New York.
+
+L'opera del 1932, che ritrae l'amante Marie-Therese Walter, diventa la **terza piu costosa** mai battuta all'asta, dopo il Salvator Mundi di Leonardo (450 milioni) e Les Femmes d'Alger dello stesso Picasso (179 milioni nel 2015).
+
+## La battaglia in sala
+
+L'acquirente, rimasto anonimo, e un collezionista asiatico che ha battuto la concorrenza dopo dodici minuti di rilanci serrati. La stima pre-asta era di 120 milioni.
+
+![Sala d'aste Sotheby's durante una vendita serale](https://images.unsplash.com/photo-1577083552431-6e5fd01988ec?w=900&h=500&fit=crop)
+
+Il dipinto apparteneva alla collezione di Emily Fisher Landau, filantropa newyorkese scomparsa nel 2023. La sua raccolta, messa in vendita dagli eredi, ha totalizzato **406 milioni di dollari** in una sola serata.
+
+## I record di Picasso
+
+Picasso domina la classifica delle opere piu care mai vendute all'asta:
+
+| Opera | Anno | Prezzo | Asta |
+|-------|------|--------|------|
+| Les Femmes d'Alger | 1955 | $179M | Christie's 2015 |
+| Femme a la montre | 1932 | $194M | Sotheby's 2026 |
+| Nu couche | 1932 | $149M | Christie's 2015 |
+| Garcon a la pipe | 1905 | $104M | Sotheby's 2004 |
+
+## Il mercato dell'arte nel 2026
+
+Il segmento ultra-premium resiste alle turbolenze che hanno colpito il mercato dell'arte contemporanea. Mentre le opere sotto il milione di dollari soffrono, i capolavori storici mantengono il loro appeal.
+
+![Collezionista osserva un'opera d'arte moderna](https://images.unsplash.com/photo-1594794312433-05a0384a95c8?w=900&h=500&fit=crop)
+
+Le ragioni:
+- **Scarsita assoluta**: i capolavori storici non si producono piu
+- **Status symbol**: l'arte come marcatore sociale
+- **Diversificazione**: decorrelazione dai mercati finanziari
+- **Fisco**: vantaggi in alcune giurisdizioni
+
+## Consigli per il collezionista
+
+Per chi vuole entrare nel mercato dell'arte come investimento:
+
+- **Budget minimo**: €100.000 per opere significative
+- **Focus**: artisti affermati con mercato secondario liquido
+- **Due diligence**: provenienza, autenticita, condizioni
+- **Orizzonte**: 7-10 anni minimo
+- **Costi**: assicurazione 0.5%, storage, restauro
+
+L'arte non e un investimento finanziario. E un investimento di passione che, nei casi migliori, genera anche rendimenti.
+`
+  },
+  {
+    slug: 'private-jet-market-2026-netjets-vistajet',
+    title: 'Aviazione privata, il boom non si ferma: ordini record per Gulfstream e Bombardier',
+    excerpt: 'NetJets e VistaJet registrano liste d\'attesa di 18 mesi. Il G700 e il Global 8000 i modelli piu richiesti. Il fractional ownership conquista gli HNWI europei.',
+    date: '2026-01-10',
+    readTime: 6,
+    category: 'Lifestyle',
+    source: 'Business Jet Traveler',
+    sourceUrl: 'https://www.bjtonline.com',
+    image: 'https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=1200&h=630&fit=crop',
+    content: `
+Il mercato dell'aviazione privata non conosce crisi. Dopo il boom post-pandemia, le consegne di business jet hanno raggiunto il **livello piu alto** dalla crisi finanziaria del 2008.
+
+[Gulfstream](https://www.gulfstream.com) e [Bombardier](https://www.bombardier.com) dominano il segmento large cabin, con liste d'attesa che superano i diciotto mesi per i modelli di punta.
+
+## I numeri del settore
+
+Il 2025 ha visto la consegna di **723 business jet** a livello globale, con un valore complessivo di oltre 24 miliardi di dollari.
+
+| Costruttore | Consegne 2025 | Quota mercato |
+|-------------|---------------|---------------|
+| Bombardier | 138 | 19% |
+| Gulfstream | 152 | 21% |
+| Dassault | 42 | 6% |
+| Embraer | 125 | 17% |
+| Textron (Cessna) | 266 | 37% |
+
+![Gulfstream G700, il jet privato piu richiesto al mondo](https://images.unsplash.com/photo-1474302770737-173ee21bab63?w=900&h=500&fit=crop)
+
+## I modelli piu ambiti
+
+Il **Gulfstream G700** domina le classifiche. Con un'autonomia di 14.000 km e una cabina alta 1,91 metri, permette di volare da Milano a Tokyo senza scali.
+
+Prezzo di listino: **78 milioni di dollari**.
+
+Il concorrente diretto, il **Bombardier Global 8000**, offre prestazioni simili a 75 milioni. Le consegne inizieranno nel 2027.
+
+## Fractional ownership: la formula che cresce
+
+Per chi vola tra le 50 e le 200 ore l'anno, il possesso frazionato rappresenta l'alternativa piu razionale.
+
+![Interno lussuoso di un jet privato Bombardier](https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=900&h=500&fit=crop)
+
+| Formula | Ore/anno | Investimento | Costo/ora |
+|---------|----------|--------------|-----------|
+| Quota 1/16 | 50 | €500K-1M | €3.000-5.000 |
+| Quota 1/8 | 100 | €1M-2M | €2.500-4.000 |
+| Quota 1/4 | 200 | €2M-4M | €2.000-3.500 |
+| Proprieta | 400+ | €15M-80M | €1.500-3.000 |
+
+[NetJets](https://www.netjets.com), leader mondiale del fractional, ha visto crescere la clientela europea del 35 per cento nel 2025. [VistaJet](https://www.vistajet.com), con il suo modello di membership, ha superato i 2.500 clienti attivi.
+
+## Chi vola privato
+
+Il profilo del cliente tipo:
+- **Patrimonio**: oltre 30 milioni di euro
+- **Eta media**: 52 anni
+- **Motivo principale**: risparmio di tempo
+- **Ore medie**: 120/anno
+
+Per un imprenditore che fattura 500 euro l'ora, un volo privato che risparmia 4 ore di attesa aeroportuale si ripaga da solo.
+`
+  },
+  {
+    slug: 'svizzera-segreto-bancario-scambio-automatico-2026',
+    title: 'Svizzera, la fine del segreto bancario: cosa cambia per i patrimoni italiani',
+    excerpt: 'Lo scambio automatico di informazioni ora copre 113 Paesi. UBS e Credit Suisse spingono i clienti verso strutture compliant. Il ruolo delle trust company.',
+    date: '2026-01-09',
+    readTime: 7,
+    category: 'Fiscalita',
+    source: 'Sole 24 Ore',
+    sourceUrl: 'https://www.ilsole24ore.com',
+    image: 'https://images.unsplash.com/photo-1580706483913-b6ea7db483a0?w=1200&h=630&fit=crop',
+    content: `
+Il segreto bancario svizzero e morto. Non da oggi, ma il 2026 segna un punto di non ritorno: lo **scambio automatico di informazioni** fiscali copre ora 113 giurisdizioni, incluse tutte quelle rilevanti per i patrimoni italiani.
+
+Per chi ha ancora fondi non dichiarati oltreconfine, le opzioni si sono ridotte a una sola: regolarizzare.
+
+## Come funziona lo scambio
+
+Ogni anno, le banche svizzere trasmettono alle autorita federali i dati di tutti i conti intestati a non residenti. Le informazioni vengono poi inoltrate ai Paesi di residenza fiscale.
+
+![Zurigo, cuore della finanza svizzera](https://images.unsplash.com/photo-1515488764276-beab7607c1e6?w=900&h=500&fit=crop)
+
+**Dati scambiati:**
+- Saldo al 31 dicembre
+- Interessi e dividendi
+- Proventi da vendite
+- Identita del titolare effettivo
+
+## Le nuove strategie delle banche
+
+UBS e le altre banche svizzere hanno cambiato approccio. Non si limitano piu a chiedere la dichiarazione di compliance: la verificano attivamente.
+
+| Requisito | Prima | Ora |
+|-----------|-------|-----|
+| Dichiarazione fiscale | Autocertificazione | Documentazione |
+| Origine fondi | Non richiesta | Obbligatoria |
+| Strutture opache | Tollerate | Rifiutate |
+| Due diligence | Formale | Sostanziale |
+
+I clienti con strutture non trasparenti vengono progressivamente accompagnati verso l'uscita.
+
+![Banca svizzera tradizionale nel centro di Ginevra](https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=900&h=500&fit=crop)
+
+## Le alternative legittime
+
+Per chi ha un patrimonio significativo e vuole beneficiare dell'ecosistema svizzero in modo compliant, le strade sono diverse:
+
+**Trust neozelandesi o delle Isole del Canale:**
+- Asset protection legittima
+- Trasparenza fiscale verso l'Italia
+- Costi: 0.3-0.5% annuo
+
+**Holding lussemburghesi:**
+- Ottimizzazione fiscale sui capital gain
+- Direttiva madre-figlia
+- Costi: €10-20K setup, €5-10K/anno
+
+**Polizze vita lussemburghesi:**
+- Differimento imposte
+- Protezione da aggressioni creditorie
+- Costi: 0.5-1.5% annuo
+
+## I rischi di non agire
+
+Per chi sceglie di ignorare le nuove regole, i rischi sono concreti:
+
+- **Sanzioni amministrative**: 3-15% del valore non dichiarato
+- **Sanzioni penali**: in caso di importi rilevanti
+- **Conto chiuso**: le banche non vogliono clienti non compliant
+- **Lista nera**: difficolta ad aprire nuovi rapporti
+
+## Cosa fare
+
+Il consiglio e chiaro: affidarsi a professionisti specializzati in fiscalita internazionale. La regolarizzazione spontanea, prima di eventuali accertamenti, resta la strada meno costosa.
+
+Il segreto bancario e finito. La pianificazione fiscale intelligente no.
+`
+  },
+  {
+    slug: 'family-office-italia-crescita-2026',
+    title: 'Family office, boom in Italia: 350 strutture gestiscono 150 miliardi',
+    excerpt: 'Il numero e raddoppiato in dieci anni. Milano hub di riferimento. Dalla gestione patrimoniale alla filantropia, i servizi si moltiplicano.',
+    date: '2026-01-08',
+    readTime: 6,
+    category: 'Wealth',
+    source: 'AIFO',
+    sourceUrl: 'https://www.aifo.it',
+    image: 'https://images.unsplash.com/photo-1554774853-aae0a22c8aa4?w=1200&h=630&fit=crop',
+    content: `
+L'Italia scopre i family office. In dieci anni il numero di queste strutture dedicate alla gestione dei grandi patrimoni familiari e **raddoppiato**, passando da 180 a oltre 350 unita.
+
+Le masse gestite superano i **150 miliardi di euro**, secondo le stime dell'Associazione Italiana Family Office.
+
+## Cosa fa un family office
+
+Un family office e una societa privata che gestisce tutti gli aspetti finanziari e non di una o piu famiglie wealthy. Non solo investimenti, ma anche:
+
+- Pianificazione successoria
+- Fiscalita internazionale
+- Gestione immobiliare
+- Filantropia strutturata
+- Concierge e lifestyle
+- Governance familiare
+
+![Riunione di famiglia per la pianificazione patrimoniale](https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&h=500&fit=crop)
+
+## Single vs Multi Family Office
+
+La distinzione fondamentale e tra **single family office** (SFO), dedicato a una sola famiglia, e **multi family office** (MFO), che serve piu nuclei familiari.
+
+| Tipo | Patrimonio minimo | Costo annuo | Pro | Contro |
+|------|-------------------|-------------|-----|--------|
+| SFO | €50-100M | 0.5-1% | Controllo totale | Costi fissi alti |
+| MFO | €10-30M | 0.3-0.7% | Economie scala | Meno personalizzazione |
+
+## Milano capitale dei family office
+
+Il capoluogo lombardo ospita il 45 per cento dei family office italiani. Seguono Roma (18%), Torino (12%) e Bologna (8%).
+
+La concentrazione a Milano riflette la densita di HNWI e la presenza di professionisti specializzati: avvocati, commercialisti, asset manager.
+
+![Ufficio di family office moderno a Milano](https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&h=500&fit=crop)
+
+## I servizi piu richiesti
+
+**Investimenti alternativi:**
+- Private equity diretto
+- Co-investimenti
+- Real estate internazionale
+- Venture capital
+
+**Pianificazione:**
+- Trust e holding
+- Passaggio generazionale
+- Protezione patrimoniale
+
+**Lifestyle:**
+- Art advisory
+- Aviation management
+- Property management
+
+## Come scegliere un family office
+
+Per chi sta valutando di affidarsi a un family office:
+
+1. **Track record**: minimo 10 anni di storia
+2. **Indipendenza**: nessun conflitto da prodotti propri
+3. **Team**: competenze multidisciplinari
+4. **Trasparenza**: reporting chiaro su costi e performance
+5. **Valori**: allineamento con la filosofia della famiglia
+
+Il family office giusto diventa un partner per generazioni. La scelta merita tempo e attenzione.
+`
+  },
+  {
+    slug: 'bitcoin-etf-blackrock-50-miliardi-2026',
+    title: 'Bitcoin, gli ETF di BlackRock e Fidelity superano i 50 miliardi: le istituzioni sono entrate',
+    excerpt: 'A due anni dal lancio, i fondi quotati hanno raccolto piu di qualsiasi altro ETF nella storia. Il prezzo oscilla tra 80 e 100mila dollari. Cosa significa per i portafogli.',
+    date: '2026-01-07',
+    readTime: 7,
+    category: 'Mercati',
+    source: 'Bloomberg',
+    sourceUrl: 'https://www.bloomberg.com',
+    image: 'https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=1200&h=630&fit=crop',
+    content: `
+A due anni dal lancio, gli ETF su Bitcoin hanno superato ogni aspettativa. L'**iShares Bitcoin Trust** di [BlackRock](https://www.blackrock.com) e il **Wise Origin Bitcoin Fund** di [Fidelity](https://www.fidelity.com) gestiscono insieme oltre **50 miliardi di dollari**.
+
+Nessun ETF nella storia aveva raggiunto questa soglia cosi rapidamente.
+
+## I numeri della rivoluzione
+
+L'approvazione della SEC nel gennaio 2024 ha aperto le porte agli investitori istituzionali. I flussi non si sono mai fermati.
+
+| ETF | Ticker | AUM | Commissioni |
+|-----|--------|-----|-------------|
+| iShares Bitcoin Trust | IBIT | $28 mld | 0.25% |
+| Fidelity Wise Origin | FBTC | $15 mld | 0.25% |
+| ARK 21Shares | ARKB | $4 mld | 0.21% |
+| Grayscale BTC Mini | BTC | $3 mld | 0.15% |
+
+![Trading floor con schermi che mostrano quotazioni Bitcoin](https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=900&h=500&fit=crop)
+
+## Chi sta comprando
+
+La composizione degli investitori e cambiata radicalmente. Non piu solo retail e hedge fund speculativi, ma:
+
+- **Fondi pensione**: CalPERS, OTPP canadese
+- **Endowment universitari**: Yale, Harvard
+- **Family office**: 25% ha allocazione crypto
+- **Assicurazioni**: MassMutual, Prudential
+
+## La volatilita resta
+
+Bitcoin oscilla tra gli 80 e i 100mila dollari. La volatilita annualizzata resta al 50-60 per cento, cinque volte quella dell'azionario.
+
+![Grafico andamento Bitcoin con candele](https://images.unsplash.com/photo-1640340434855-6084b1f4901c?w=900&h=500&fit=crop)
+
+E un asset che puo perdere il 30 per cento in un mese. Ma anche guadagnare il 50.
+
+## Come allocare Bitcoin nel portafoglio
+
+Le principali banche d'investimento hanno pubblicato le loro raccomandazioni:
+
+| Banca | Allocazione suggerita | Target clientela |
+|-------|-----------------------|------------------|
+| BlackRock | 1-2% | Tutti |
+| Fidelity | 2-5% | Tolleranza rischio alta |
+| J.P. Morgan | 1% max | Diversificazione |
+| Goldman Sachs | 1-3% | Selezionati |
+
+L'idea e usare Bitcoin come **diversificatore**, non come scommessa. Un'allocazione dell'1-2 per cento, ribilanciata periodicamente, cattura il potenziale senza compromettere il portafoglio.
+
+## I rischi da considerare
+
+- **Regolamentazione**: sempre in evoluzione
+- **Custodia**: chi detiene le chiavi private?
+- **Volatilita**: non adatto a chi non tollera oscillazioni
+- **Correlazione**: in crisi tende a comportarsi come risk-on
+
+## La tesi di investimento
+
+Per i sostenitori, Bitcoin e oro digitale: riserva di valore in un mondo di debiti crescenti e politiche monetarie espansive.
+
+Per i critici, e un asset speculativo senza valore intrinseco.
+
+La verita probabilmente sta nel mezzo. Un'allocazione contenuta, in un portafoglio diversificato, ha senso. Scommettere tutto, no.
+`
+  },
+  {
+    slug: 'monaco-immobiliare-record-120000-mq-2026',
+    title: 'Monaco, il metro quadro piu caro del mondo: 120mila euro nel Carre d\'Or',
+    excerpt: 'Il Principato stabilisce nuovi record. Un attico venduto a 300 milioni. La domanda supera l\'offerta di 5 a 1. Chi compra e perche.',
+    date: '2026-01-06',
+    readTime: 6,
+    category: 'Immobiliare',
+    source: 'Knight Frank',
+    sourceUrl: 'https://www.knightfrank.com',
+    image: 'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1200&h=630&fit=crop',
+    content: `
+Centoventimila euro al metro quadro. E il prezzo raggiunto da un appartamento nel **Carre d'Or** di Monaco, il quartiere piu esclusivo del Principato. Un record mondiale assoluto per il mercato residenziale.
+
+Il dato emerge dal rapporto annuale di [Knight Frank](https://www.knightfrank.com) sul mercato immobiliare di lusso globale.
+
+## La vendita record
+
+L'operazione piu significativa dell'anno ha riguardato un attico di 2.500 metri quadri nel complesso residenziale One Monte Carlo, venduto per **300 milioni di euro**.
+
+![Vista panoramica di Monaco e Port Hercule](https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=900&h=500&fit=crop)
+
+L'acquirente, un imprenditore del tech mediorientale, ha battuto la concorrenza di altri tre pretendenti.
+
+## I numeri del mercato
+
+Monaco e un mercato unico. Due chilometri quadrati, 40mila residenti, nessuna imposta sul reddito.
+
+| Zona | Prezzo medio €/mq | Variazione annua |
+|------|-------------------|------------------|
+| Carre d'Or | 80.000-120.000 | +8% |
+| Monte Carlo | 60.000-90.000 | +6% |
+| Larvotto | 50.000-70.000 | +5% |
+| Fontvieille | 40.000-55.000 | +4% |
+
+## Perche Monaco
+
+Le ragioni dell'attrattivita sono note:
+
+- **Zero imposte** sul reddito personale
+- **Sicurezza**: tasso criminalita piu basso d'Europa
+- **Clima**: 300 giorni di sole l'anno
+- **Lifestyle**: yacht, casin, eventi
+- **Privacy**: discrezione garantita
+
+![Yacht ormeggiati nel porto di Monaco](https://images.unsplash.com/photo-1555992828-ca4dbe41d294?w=900&h=500&fit=crop)
+
+## Chi compra a Monaco
+
+Il profilo dell'acquirente tipo sta cambiando:
+
+| Nazionalita | Quota 2020 | Quota 2025 |
+|-------------|------------|------------|
+| Francia | 25% | 18% |
+| UK | 15% | 10% |
+| Italia | 12% | 14% |
+| Russia | 20% | 5% |
+| Middle East | 8% | 22% |
+| USA | 5% | 15% |
+
+Gli acquirenti russi, dominanti fino al 2022, sono stati sostituiti da mediorientali e americani.
+
+## Come acquistare
+
+Per ottenere la residenza monegasca servono:
+
+1. **Deposito bancario**: minimo €500.000 in banca locale
+2. **Contratto di locazione** o proprieta
+3. **Fedina penale** pulita
+4. **Colloquio** con le autorita
+
+L'affitto minimo nel Principato supera i 5.000 euro al mese per un monolocale. Per una proprieta, il budget parte da 3 milioni.
+
+## Le prospettive
+
+La domanda supera l'offerta di 5 a 1. I nuovi progetti, come Mareterra (estensione sul mare), saranno assorbiti istantaneamente.
+
+Per chi puo permetterselo, Monaco resta l'investimento immobiliare piu sicuro al mondo.
+`
+  },
 ]
 
 export function getAllNews(): NewsArticle[] {
