@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import Link from 'next/link'
 import { Navbar, Footer } from '@/components'
 
@@ -8,15 +8,24 @@ interface Posizione {
   id: string
   nome: string
   ticker: string
+  categoria: 'azioni' | 'etf' | 'obbligazioni' | 'fondi' | 'crypto' | 'immobili' | 'liquidita' | 'altro'
   quantita: number
   prezzoCarico: number
   prezzoAttuale: number
   dataAcquisto: string
+  sogliaAllocazione?: number
+  dividendoAnnuo?: number
 }
 
-const STORAGE_KEY = 'guidapatrimonio_portfolio'
+interface HistoricalPoint {
+  date: string
+  value: number
+}
 
-// Colori per il grafico a torta
+const STORAGE_KEY = 'guidapatrimonio_portfolio_v2'
+const HISTORY_KEY = 'guidapatrimonio_portfolio_history'
+
+// Colori per il grafico a torta - premium palette
 const COLORI_TORTA = [
   '#1B4D3E', // forest
   '#2D6A4F', // green-600
@@ -25,26 +34,58 @@ const COLORI_TORTA = [
   '#74C69D', // green-250
   '#95D5B2', // green-200
   '#D4A373', // gold
-  '#878d96', // gray-400
   '#5e646e', // gray-500
+  '#878d96', // gray-400
   '#b0b7c1', // gray-300
 ]
 
+// Colori per categorie
+const COLORI_CATEGORIE: Record<string, string> = {
+  azioni: '#1B4D3E',
+  etf: '#2D6A4F',
+  obbligazioni: '#40916C',
+  fondi: '#52B788',
+  crypto: '#D4A373',
+  immobili: '#74C69D',
+  liquidita: '#878d96',
+  altro: '#b0b7c1',
+}
+
+// Benchmark simulati (rendimenti medi annui)
+const BENCHMARKS = {
+  'MSCI World': 8.5,
+  'S&P 500': 10.2,
+  'FTSE MIB': 4.3,
+  'BTP Italia 10Y': 3.5,
+}
+
 export default function PortfolioTracker() {
   const [posizioni, setPosizioni] = useState<Posizione[]>([])
+  const [historicalData, setHistoricalData] = useState<HistoricalPoint[]>([])
   const [mounted, setMounted] = useState(false)
+  const [editingId, setEditingId] = useState<string | null>(null)
+  const [selectedBenchmark, setSelectedBenchmark] = useState<keyof typeof BENCHMARKS>('MSCI World')
+  const [showExportMenu, setShowExportMenu] = useState(false)
+  const [animatedValue, setAnimatedValue] = useState(0)
+  const exportRef = useRef<HTMLDivElement>(null)
 
   // Form state
   const [nome, setNome] = useState('')
   const [ticker, setTicker] = useState('')
+  const [categoria, setCategoria] = useState<Posizione['categoria']>('etf')
   const [quantita, setQuantita] = useState('')
   const [prezzoCarico, setPrezzoCarico] = useState('')
   const [prezzoAttuale, setPrezzoAttuale] = useState('')
   const [dataAcquisto, setDataAcquisto] = useState('')
+  const [sogliaAllocazione, setSogliaAllocazione] = useState('')
+  const [dividendoAnnuo, setDividendoAnnuo] = useState('')
 
   // Sort state
-  const [sortBy, setSortBy] = useState<'nome' | 'valore' | 'pl' | 'peso'>('valore')
+  const [sortBy, setSortBy] = useState<'nome' | 'valore' | 'pl' | 'peso' | 'categoria'>('valore')
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc')
+
+  // View state
+  const [viewMode, setViewMode] = useState<'assets' | 'categorie'>('assets')
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -57,14 +98,67 @@ export default function PortfolioTracker() {
         console.error('Errore nel caricamento del portfolio:', e)
       }
     }
+    const history = localStorage.getItem(HISTORY_KEY)
+    if (history) {
+      try {
+        setHistoricalData(JSON.parse(history))
+      } catch (e) {
+        console.error('Errore nel caricamento della cronologia:', e)
+      }
+    }
   }, [])
 
   // Save to localStorage when posizioni changes
   useEffect(() => {
     if (mounted) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(posizioni))
+
+      // Save historical snapshot once per day
+      const today = new Date().toISOString().split('T')[0]
+      const lastEntry = historicalData[historicalData.length - 1]
+
+      if (posizioni.length > 0 && (!lastEntry || lastEntry.date !== today)) {
+        const currentValue = posizioni.reduce((acc, p) => acc + p.quantita * p.prezzoAttuale, 0)
+        const newHistory = [...historicalData, { date: today, value: currentValue }].slice(-365) // Keep 1 year
+        setHistoricalData(newHistory)
+        localStorage.setItem(HISTORY_KEY, JSON.stringify(newHistory))
+      }
+    }
+  }, [posizioni, mounted, historicalData])
+
+  // Animate total value
+  useEffect(() => {
+    if (mounted && posizioni.length > 0) {
+      const targetValue = posizioni.reduce((acc, p) => acc + p.quantita * p.prezzoAttuale, 0)
+      const duration = 1000
+      const startTime = Date.now()
+      const startValue = animatedValue
+
+      const animate = () => {
+        const elapsed = Date.now() - startTime
+        const progress = Math.min(elapsed / duration, 1)
+        const easeOut = 1 - Math.pow(1 - progress, 3)
+        setAnimatedValue(startValue + (targetValue - startValue) * easeOut)
+
+        if (progress < 1) {
+          requestAnimationFrame(animate)
+        }
+      }
+
+      requestAnimationFrame(animate)
     }
   }, [posizioni, mounted])
+
+  // Click outside to close export menu
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (exportRef.current && !exportRef.current.contains(event.target as Node)) {
+        setShowExportMenu(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   // Calcoli portafoglio
   const stats = useMemo(() => {
@@ -75,6 +169,10 @@ export default function PortfolioTracker() {
         plTotale: 0,
         plPercentuale: 0,
         posizioniOrdinati: [],
+        categorieStats: {},
+        dividendiTotali: 0,
+        yieldMedio: 0,
+        alertRibilanciamento: [],
       }
     }
 
@@ -90,8 +188,34 @@ export default function PortfolioTracker() {
       const pl = valore - costo
       const plPercent = costo > 0 ? (pl / costo) * 100 : 0
       const peso = valoreAttuale > 0 ? (valore / valoreAttuale) * 100 : 0
-      return { ...p, valore, costo, pl, plPercent, peso }
+      const dividendiAnnui = (p.dividendoAnnuo || 0) * p.quantita
+      return { ...p, valore, costo, pl, plPercent, peso, dividendiAnnui }
     })
+
+    // Stats per categoria
+    const categorieStats: Record<string, { valore: number; peso: number; pl: number }> = {}
+    posizioniConCalcoli.forEach(p => {
+      if (!categorieStats[p.categoria]) {
+        categorieStats[p.categoria] = { valore: 0, peso: 0, pl: 0 }
+      }
+      categorieStats[p.categoria].valore += p.valore
+      categorieStats[p.categoria].peso += p.peso
+      categorieStats[p.categoria].pl += p.pl
+    })
+
+    // Dividendi totali e yield medio
+    const dividendiTotali = posizioniConCalcoli.reduce((acc, p) => acc + p.dividendiAnnui, 0)
+    const yieldMedio = valoreAttuale > 0 ? (dividendiTotali / valoreAttuale) * 100 : 0
+
+    // Alert ribilanciamento
+    const alertRibilanciamento = posizioniConCalcoli.filter(p =>
+      p.sogliaAllocazione && p.peso > p.sogliaAllocazione
+    ).map(p => ({
+      nome: p.nome,
+      pesoAttuale: p.peso,
+      soglia: p.sogliaAllocazione!,
+      eccesso: p.peso - p.sogliaAllocazione!,
+    }))
 
     // Ordina
     const posizioniOrdinati = [...posizioniConCalcoli].sort((a, b) => {
@@ -109,6 +233,9 @@ export default function PortfolioTracker() {
         case 'peso':
           comparison = a.peso - b.peso
           break
+        case 'categoria':
+          comparison = a.categoria.localeCompare(b.categoria)
+          break
       }
       return sortDir === 'asc' ? comparison : -comparison
     })
@@ -119,10 +246,55 @@ export default function PortfolioTracker() {
       plTotale,
       plPercentuale,
       posizioniOrdinati,
+      categorieStats,
+      dividendiTotali,
+      yieldMedio,
+      alertRibilanciamento,
     }
   }, [posizioni, sortBy, sortDir])
 
-  const handleSort = (column: 'nome' | 'valore' | 'pl' | 'peso') => {
+  // Performance temporali simulate (basate sulla data di acquisto)
+  const performanceTemporali = useMemo(() => {
+    if (historicalData.length === 0 || stats.valoreAttuale === 0) {
+      return { ytd: 0, m1: 0, m3: 0, y1: 0 }
+    }
+
+    const now = new Date()
+    const currentValue = stats.valoreAttuale
+
+    // Trova valori storici
+    const findValueAtDate = (daysAgo: number) => {
+      const targetDate = new Date(now)
+      targetDate.setDate(targetDate.getDate() - daysAgo)
+      const targetDateStr = targetDate.toISOString().split('T')[0]
+
+      // Find closest date
+      let closest = historicalData[0]
+      for (const point of historicalData) {
+        if (point.date <= targetDateStr) {
+          closest = point
+        }
+      }
+      return closest?.value || currentValue
+    }
+
+    const startOfYear = new Date(now.getFullYear(), 0, 1)
+    const daysFromYearStart = Math.floor((now.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24))
+
+    const ytdValue = findValueAtDate(daysFromYearStart)
+    const m1Value = findValueAtDate(30)
+    const m3Value = findValueAtDate(90)
+    const y1Value = findValueAtDate(365)
+
+    return {
+      ytd: ytdValue > 0 ? ((currentValue - ytdValue) / ytdValue) * 100 : 0,
+      m1: m1Value > 0 ? ((currentValue - m1Value) / m1Value) * 100 : 0,
+      m3: m3Value > 0 ? ((currentValue - m3Value) / m3Value) * 100 : 0,
+      y1: y1Value > 0 ? ((currentValue - y1Value) / y1Value) * 100 : 0,
+    }
+  }, [historicalData, stats.valoreAttuale])
+
+  const handleSort = (column: 'nome' | 'valore' | 'pl' | 'peso' | 'categoria') => {
     if (sortBy === column) {
       setSortDir(sortDir === 'asc' ? 'desc' : 'asc')
     } else {
@@ -140,24 +312,52 @@ export default function PortfolioTracker() {
     }
 
     const nuovaPosizione: Posizione = {
-      id: Date.now().toString(),
+      id: editingId || Date.now().toString(),
       nome,
       ticker: ticker || '',
+      categoria,
       quantita: parseFloat(quantita),
       prezzoCarico: parseFloat(prezzoCarico),
       prezzoAttuale: parseFloat(prezzoAttuale),
       dataAcquisto: dataAcquisto || new Date().toISOString().split('T')[0],
+      sogliaAllocazione: sogliaAllocazione ? parseFloat(sogliaAllocazione) : undefined,
+      dividendoAnnuo: dividendoAnnuo ? parseFloat(dividendoAnnuo) : undefined,
     }
 
-    setPosizioni([...posizioni, nuovaPosizione])
+    if (editingId) {
+      setPosizioni(posizioni.map(p => p.id === editingId ? nuovaPosizione : p))
+      setEditingId(null)
+    } else {
+      setPosizioni([...posizioni, nuovaPosizione])
+    }
 
-    // Reset form
+    resetForm()
+  }
+
+  const resetForm = () => {
     setNome('')
     setTicker('')
+    setCategoria('etf')
     setQuantita('')
     setPrezzoCarico('')
     setPrezzoAttuale('')
     setDataAcquisto('')
+    setSogliaAllocazione('')
+    setDividendoAnnuo('')
+    setEditingId(null)
+  }
+
+  const handleEdit = (p: Posizione) => {
+    setEditingId(p.id)
+    setNome(p.nome)
+    setTicker(p.ticker)
+    setCategoria(p.categoria)
+    setQuantita(p.quantita.toString())
+    setPrezzoCarico(p.prezzoCarico.toString())
+    setPrezzoAttuale(p.prezzoAttuale.toString())
+    setDataAcquisto(p.dataAcquisto)
+    setSogliaAllocazione(p.sogliaAllocazione?.toString() || '')
+    setDividendoAnnuo(p.dividendoAnnuo?.toString() || '')
   }
 
   const handleRemove = (id: string) => {
@@ -189,6 +389,145 @@ export default function PortfolioTracker() {
     return `${sign}${value.toFixed(2)}%`
   }
 
+  // Export functions
+  const exportToCSV = useCallback(() => {
+    const headers = ['Nome', 'Ticker', 'Categoria', 'Quantita', 'Prezzo Carico', 'Prezzo Attuale', 'Valore', 'P&L Euro', 'P&L %', 'Peso %', 'Data Acquisto']
+    const rows = stats.posizioniOrdinati.map(p => [
+      p.nome,
+      p.ticker,
+      p.categoria,
+      p.quantita,
+      p.prezzoCarico,
+      p.prezzoAttuale,
+      p.valore.toFixed(2),
+      p.pl.toFixed(2),
+      p.plPercent.toFixed(2),
+      p.peso.toFixed(2),
+      p.dataAcquisto,
+    ])
+
+    const csv = [headers.join(';'), ...rows.map(r => r.join(';'))].join('\n')
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = `portfolio_${new Date().toISOString().split('T')[0]}.csv`
+    link.click()
+    setShowExportMenu(false)
+  }, [stats.posizioniOrdinati])
+
+  const exportToJSON = useCallback(() => {
+    const data = {
+      exportDate: new Date().toISOString(),
+      summary: {
+        valoreAttuale: stats.valoreAttuale,
+        costoTotale: stats.costoTotale,
+        plTotale: stats.plTotale,
+        plPercentuale: stats.plPercentuale,
+        dividendiTotali: stats.dividendiTotali,
+        yieldMedio: stats.yieldMedio,
+      },
+      posizioni: stats.posizioniOrdinati,
+      categorieStats: stats.categorieStats,
+    }
+
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = `portfolio_${new Date().toISOString().split('T')[0]}.json`
+    link.click()
+    setShowExportMenu(false)
+  }, [stats])
+
+  // Doughnut chart component
+  const DoughnutChart = ({ data, size = 200 }: { data: { label: string; value: number; color: string }[]; size?: number }) => {
+    const total = data.reduce((acc, d) => acc + d.value, 0)
+    if (total === 0) return null
+
+    let cumulativePercent = 0
+    const paths = data.map((d, i) => {
+      const percent = (d.value / total) * 100
+      const startPercent = cumulativePercent
+      cumulativePercent += percent
+
+      const startAngle = (startPercent / 100) * 2 * Math.PI
+      const endAngle = (cumulativePercent / 100) * 2 * Math.PI
+
+      const innerRadius = 30
+      const outerRadius = 45
+
+      const x1Outer = 50 + outerRadius * Math.cos(startAngle - Math.PI / 2)
+      const y1Outer = 50 + outerRadius * Math.sin(startAngle - Math.PI / 2)
+      const x2Outer = 50 + outerRadius * Math.cos(endAngle - Math.PI / 2)
+      const y2Outer = 50 + outerRadius * Math.sin(endAngle - Math.PI / 2)
+      const x1Inner = 50 + innerRadius * Math.cos(endAngle - Math.PI / 2)
+      const y1Inner = 50 + innerRadius * Math.sin(endAngle - Math.PI / 2)
+      const x2Inner = 50 + innerRadius * Math.cos(startAngle - Math.PI / 2)
+      const y2Inner = 50 + innerRadius * Math.sin(startAngle - Math.PI / 2)
+
+      const largeArcFlag = percent > 50 ? 1 : 0
+
+      return (
+        <path
+          key={i}
+          d={`
+            M ${x1Outer} ${y1Outer}
+            A ${outerRadius} ${outerRadius} 0 ${largeArcFlag} 1 ${x2Outer} ${y2Outer}
+            L ${x1Inner} ${y1Inner}
+            A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${x2Inner} ${y2Inner}
+            Z
+          `}
+          fill={d.color}
+          className="transition-all duration-300 hover:opacity-80"
+          style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' }}
+        />
+      )
+    })
+
+    return (
+      <svg viewBox="0 0 100 100" style={{ width: size, height: size }}>
+        {paths}
+      </svg>
+    )
+  }
+
+  // Line chart component for historical performance
+  const LineChart = ({ data, width = 300, height = 100 }: { data: HistoricalPoint[]; width?: number; height?: number }) => {
+    if (data.length < 2) return null
+
+    const values = data.map(d => d.value)
+    const minValue = Math.min(...values) * 0.95
+    const maxValue = Math.max(...values) * 1.05
+    const range = maxValue - minValue
+
+    const points = data.map((d, i) => ({
+      x: (i / (data.length - 1)) * (width - 40) + 20,
+      y: height - 20 - ((d.value - minValue) / range) * (height - 40),
+    }))
+
+    const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ')
+
+    // Area fill
+    const areaD = `${pathD} L ${points[points.length - 1].x} ${height - 20} L ${points[0].x} ${height - 20} Z`
+
+    const isPositive = values[values.length - 1] >= values[0]
+
+    return (
+      <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto">
+        <defs>
+          <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor={isPositive ? '#2D6A4F' : '#dc2626'} stopOpacity="0.3" />
+            <stop offset="100%" stopColor={isPositive ? '#2D6A4F' : '#dc2626'} stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <path d={areaD} fill="url(#areaGradient)" />
+        <path d={pathD} fill="none" stroke={isPositive ? '#2D6A4F' : '#dc2626'} strokeWidth="2" strokeLinecap="round" />
+        {points.length > 0 && (
+          <circle cx={points[points.length - 1].x} cy={points[points.length - 1].y} r="4" fill={isPositive ? '#2D6A4F' : '#dc2626'} />
+        )}
+      </svg>
+    )
+  }
+
   // Non renderizzare nulla finche non siamo montati (per evitare hydration mismatch)
   if (!mounted) {
     return (
@@ -197,14 +536,20 @@ export default function PortfolioTracker() {
         <section className="bg-forest pt-navbar">
           <div className="container-custom py-12">
             <h1 className="font-heading text-[32px] md:text-[42px] text-white leading-tight">
-              Portfolio Tracker Gratuito
+              Portfolio Tracker Premium
             </h1>
           </div>
         </section>
         <section className="section-md bg-cream min-h-[60vh]">
           <div className="container-custom">
             <div className="text-center py-20">
-              <p className="text-gray-500">Caricamento...</p>
+              <div className="inline-flex items-center gap-2 text-gray-500">
+                <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+                Caricamento portfolio...
+              </div>
             </div>
           </div>
         </section>
@@ -217,59 +562,163 @@ export default function PortfolioTracker() {
     <main>
       <Navbar />
 
-      {/* Hero */}
+      {/* Hero Premium */}
       <section className="bg-forest pt-navbar">
-        <div className="container-custom py-12">
-          <Link href="/strumenti" className="inline-flex items-center text-green-300 hover:text-white mb-4 transition-colors">
-            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        <div className="container-custom py-10 md:py-14">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+              <Link href="/strumenti" className="inline-flex items-center text-green-300 hover:text-white mb-3 transition-colors text-sm">
+                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+                Tutti gli strumenti
+              </Link>
+              <h1 className="font-heading text-[28px] md:text-[38px] text-white leading-tight">
+                Portfolio Tracker Premium
+              </h1>
+              <p className="text-white/70 mt-2 max-w-xl text-sm md:text-base">
+                Traccia azioni, ETF, fondi, obbligazioni e crypto. Analisi performance, dividend yield, alert ribilanciamento.
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="inline-flex items-center gap-1.5 bg-green-400 text-forest px-4 py-2 rounded-full text-sm font-semibold">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                100% GRATIS
+              </span>
+            </div>
+          </div>
+
+          {/* Competitor comparison badge */}
+          <div className="mt-4 inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg text-white/80 text-sm">
+            <svg className="w-4 h-4 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
             </svg>
-            Tutti gli strumenti
-          </Link>
-          <h1 className="font-heading text-[32px] md:text-[42px] text-white leading-tight">
-            Portfolio Tracker Gratuito
-          </h1>
-          <p className="text-white/70 mt-2 max-w-xl">
-            Traccia i tuoi investimenti in azioni, ETF, fondi e obbligazioni. Calcola rendimento, P&amp;L e composizione del portafoglio. Alternativa gratuita a JustETF e Wallible.
-          </p>
+            Alternativa gratuita a JustETF Premium (€240/anno) e Sharesight (€180/anno)
+          </div>
         </div>
       </section>
 
       <section className="section-md bg-cream">
         <div className="container-custom">
-          {/* Summary Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div className="bg-green-600 rounded-card p-5 text-white">
-              <p className="text-green-100 text-sm mb-1">Valore Portafoglio</p>
-              <p className="font-heading text-xl md:text-2xl">{formatCurrency(stats.valoreAttuale)}</p>
-            </div>
-            <div className="bg-white rounded-card p-5 shadow-sm">
-              <p className="text-gray-500 text-sm mb-1">Costo Totale</p>
-              <p className="font-heading text-xl md:text-2xl text-forest">{formatCurrency(stats.costoTotale)}</p>
-            </div>
-            <div className="bg-white rounded-card p-5 shadow-sm">
-              <p className="text-gray-500 text-sm mb-1">P&amp;L Totale</p>
-              <p className={`font-heading text-xl md:text-2xl ${stats.plTotale >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                {stats.plTotale >= 0 ? '+' : ''}{formatCurrency(stats.plTotale)}
+          {/* Premium Dashboard Cards */}
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4 mb-8">
+            {/* Main Value Card */}
+            <div className="col-span-2 lg:col-span-2 bg-gradient-to-br from-forest to-green-600 rounded-xl p-6 text-white relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+              <p className="text-green-200 text-sm mb-1 font-medium">Valore Totale Portafoglio</p>
+              <p className="font-heading text-3xl md:text-4xl lg:text-5xl tracking-tight">
+                {formatCurrency(animatedValue)}
               </p>
+              <div className="flex items-center gap-4 mt-4">
+                <div>
+                  <p className="text-xs text-green-200">P&L Totale</p>
+                  <p className={`font-semibold ${stats.plTotale >= 0 ? 'text-green-300' : 'text-red-300'}`}>
+                    {stats.plTotale >= 0 ? '+' : ''}{formatCurrency(stats.plTotale)}
+                  </p>
+                </div>
+                <div className="w-px h-8 bg-white/20" />
+                <div>
+                  <p className="text-xs text-green-200">Rendimento</p>
+                  <p className={`font-semibold ${stats.plPercentuale >= 0 ? 'text-green-300' : 'text-red-300'}`}>
+                    {formatPercent(stats.plPercentuale)}
+                  </p>
+                </div>
+              </div>
+              {/* Mini line chart */}
+              {historicalData.length >= 2 && (
+                <div className="mt-4 -mx-2">
+                  <LineChart data={historicalData.slice(-30)} height={50} />
+                </div>
+              )}
             </div>
-            <div className="bg-white rounded-card p-5 shadow-sm">
-              <p className="text-gray-500 text-sm mb-1">Rendimento %</p>
-              <p className={`font-heading text-xl md:text-2xl ${stats.plPercentuale >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                {formatPercent(stats.plPercentuale)}
+
+            {/* Performance Cards */}
+            <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+              <p className="text-gray-500 text-xs mb-1">YTD</p>
+              <p className={`font-heading text-xl md:text-2xl ${performanceTemporali.ytd >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                {formatPercent(performanceTemporali.ytd)}
               </p>
+              <p className="text-xs text-gray-400 mt-1">Anno corrente</p>
+            </div>
+            <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+              <p className="text-gray-500 text-xs mb-1">1 Mese</p>
+              <p className={`font-heading text-xl md:text-2xl ${performanceTemporali.m1 >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                {formatPercent(performanceTemporali.m1)}
+              </p>
+              <p className="text-xs text-gray-400 mt-1">Ultimo mese</p>
+            </div>
+            <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+              <p className="text-gray-500 text-xs mb-1">1 Anno</p>
+              <p className={`font-heading text-xl md:text-2xl ${performanceTemporali.y1 >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                {formatPercent(performanceTemporali.y1)}
+              </p>
+              <p className="text-xs text-gray-400 mt-1">12 mesi</p>
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          {/* Secondary Stats Row */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8">
+            <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+              <p className="text-gray-500 text-xs mb-1">Costo Totale</p>
+              <p className="font-heading text-lg text-forest">{formatCurrency(stats.costoTotale)}</p>
+            </div>
+            <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+              <p className="text-gray-500 text-xs mb-1">Dividendi Annui</p>
+              <p className="font-heading text-lg text-forest">{formatCurrency(stats.dividendiTotali)}</p>
+            </div>
+            <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+              <p className="text-gray-500 text-xs mb-1">Dividend Yield</p>
+              <p className="font-heading text-lg text-forest">{stats.yieldMedio.toFixed(2)}%</p>
+            </div>
+            <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+              <p className="text-gray-500 text-xs mb-1">Numero Posizioni</p>
+              <p className="font-heading text-lg text-forest">{posizioni.length}</p>
+            </div>
+          </div>
+
+          {/* Alert Ribilanciamento */}
+          {stats.alertRibilanciamento.length > 0 && (
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-8">
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <svg className="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-amber-800 mb-1">Alert Ribilanciamento</h3>
+                  <div className="space-y-1">
+                    {stats.alertRibilanciamento.map((alert, i) => (
+                      <p key={i} className="text-sm text-amber-700">
+                        <span className="font-medium">{alert.nome}</span>: peso {alert.pesoAttuale.toFixed(1)}% supera soglia {alert.soglia}% (+{alert.eccesso.toFixed(1)}%)
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
             {/* Form Aggiungi Posizione */}
-            <div className="lg:col-span-1">
-              <div className="bg-white rounded-card p-6 shadow-sm sticky top-24">
-                <h2 className="font-heading text-xl text-forest mb-6">Aggiungi Posizione</h2>
+            <div className="lg:col-span-1 order-2 lg:order-1">
+              <div className="bg-white rounded-xl p-5 md:p-6 shadow-sm border border-gray-100 sticky top-24">
+                <div className="flex items-center justify-between mb-5">
+                  <h2 className="font-heading text-lg text-forest">
+                    {editingId ? 'Modifica Posizione' : 'Aggiungi Posizione'}
+                  </h2>
+                  {editingId && (
+                    <button onClick={resetForm} className="text-sm text-gray-500 hover:text-gray-700">
+                      Annulla
+                    </button>
+                  )}
+                </div>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-xs font-medium text-gray-600 mb-1.5">
                       Nome Asset *
                     </label>
                     <input
@@ -277,27 +726,48 @@ export default function PortfolioTracker() {
                       value={nome}
                       onChange={(e) => setNome(e.target.value)}
                       placeholder="es. Vanguard FTSE All-World"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                      className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 text-sm transition-colors"
                       required
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Ticker / ISIN
-                    </label>
-                    <input
-                      type="text"
-                      value={ticker}
-                      onChange={(e) => setTicker(e.target.value.toUpperCase())}
-                      placeholder="es. VWCE o IE00BK5BQT80"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-xs font-medium text-gray-600 mb-1.5">
+                        Ticker / ISIN
+                      </label>
+                      <input
+                        type="text"
+                        value={ticker}
+                        onChange={(e) => setTicker(e.target.value.toUpperCase())}
+                        placeholder="VWCE"
+                        className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 text-sm transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-gray-600 mb-1.5">
+                        Categoria
+                      </label>
+                      <select
+                        value={categoria}
+                        onChange={(e) => setCategoria(e.target.value as Posizione['categoria'])}
+                        className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 text-sm transition-colors bg-white"
+                      >
+                        <option value="etf">ETF</option>
+                        <option value="azioni">Azioni</option>
+                        <option value="obbligazioni">Obbligazioni</option>
+                        <option value="fondi">Fondi</option>
+                        <option value="crypto">Crypto</option>
+                        <option value="immobili">Immobili</option>
+                        <option value="liquidita">Liquidita</option>
+                        <option value="altro">Altro</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-medium text-gray-600 mb-1.5">
                         Quantita *
                       </label>
                       <input
@@ -307,13 +777,13 @@ export default function PortfolioTracker() {
                         placeholder="10"
                         step="0.0001"
                         min="0"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                        className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 text-sm transition-colors"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Prezzo Carico *
+                      <label className="block text-xs font-medium text-gray-600 mb-1.5">
+                        PMC (Prezzo Medio) *
                       </label>
                       <input
                         type="number"
@@ -322,7 +792,7 @@ export default function PortfolioTracker() {
                         placeholder="100.00"
                         step="0.01"
                         min="0"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                        className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 text-sm transition-colors"
                         required
                       />
                     </div>
@@ -330,7 +800,7 @@ export default function PortfolioTracker() {
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-xs font-medium text-gray-600 mb-1.5">
                         Prezzo Attuale *
                       </label>
                       <input
@@ -340,130 +810,313 @@ export default function PortfolioTracker() {
                         placeholder="105.50"
                         step="0.01"
                         min="0"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                        className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 text-sm transition-colors"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-xs font-medium text-gray-600 mb-1.5">
                         Data Acquisto
                       </label>
                       <input
                         type="date"
                         value={dataAcquisto}
                         onChange={(e) => setDataAcquisto(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                        className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 text-sm transition-colors"
                       />
                     </div>
                   </div>
 
+                  {/* Advanced options */}
+                  <details className="group">
+                    <summary className="text-xs font-medium text-gray-500 cursor-pointer hover:text-gray-700 flex items-center gap-1">
+                      <svg className="w-3 h-3 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                      Opzioni avanzate
+                    </summary>
+                    <div className="mt-3 pt-3 border-t border-gray-100 grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-xs font-medium text-gray-600 mb-1.5">
+                          Soglia Allocazione %
+                        </label>
+                        <input
+                          type="number"
+                          value={sogliaAllocazione}
+                          onChange={(e) => setSogliaAllocazione(e.target.value)}
+                          placeholder="25"
+                          step="1"
+                          min="0"
+                          max="100"
+                          className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 text-sm transition-colors"
+                        />
+                        <p className="text-xs text-gray-400 mt-1">Alert se superata</p>
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-gray-600 mb-1.5">
+                          Dividendo/Unita
+                        </label>
+                        <input
+                          type="number"
+                          value={dividendoAnnuo}
+                          onChange={(e) => setDividendoAnnuo(e.target.value)}
+                          placeholder="1.50"
+                          step="0.01"
+                          min="0"
+                          className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 text-sm transition-colors"
+                        />
+                        <p className="text-xs text-gray-400 mt-1">Annuale</p>
+                      </div>
+                    </div>
+                  </details>
+
                   <button
                     type="submit"
-                    className="w-full bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition-colors"
+                    className="w-full bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
                   >
-                    + Aggiungi Posizione
+                    {editingId ? (
+                      <>
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        Salva Modifiche
+                      </>
+                    ) : (
+                      <>
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                        </svg>
+                        Aggiungi Posizione
+                      </>
+                    )}
                   </button>
                 </form>
 
-                <p className="text-xs text-gray-400 mt-4">
-                  * I dati sono salvati solo nel tuo browser (localStorage). Non condividiamo nulla.
+                <p className="text-xs text-gray-400 mt-4 flex items-center gap-1.5">
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                  Dati salvati solo nel tuo browser
                 </p>
               </div>
             </div>
 
             {/* Lista Posizioni e Grafici */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="lg:col-span-2 space-y-6 order-1 lg:order-2">
               {posizioni.length === 0 ? (
-                <div className="bg-white rounded-card p-12 shadow-sm text-center">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="bg-white rounded-xl p-8 md:p-12 shadow-sm border border-gray-100 text-center">
+                  <div className="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
                     <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                     </svg>
                   </div>
-                  <h3 className="font-heading text-xl text-forest mb-2">Il tuo portafoglio e vuoto</h3>
-                  <p className="text-gray-500 max-w-md mx-auto">
-                    Aggiungi la tua prima posizione usando il form a sinistra. Puoi tracciare azioni, ETF, fondi, obbligazioni e qualsiasi altro strumento finanziario.
+                  <h3 className="font-heading text-xl text-forest mb-2">Inizia a tracciare il tuo patrimonio</h3>
+                  <p className="text-gray-500 max-w-md mx-auto mb-6">
+                    Aggiungi la tua prima posizione usando il form. Puoi tracciare azioni, ETF, fondi, obbligazioni, crypto e immobili.
                   </p>
+                  <div className="flex flex-wrap justify-center gap-2">
+                    {['ETF', 'Azioni', 'Obbligazioni', 'Crypto', 'Fondi'].map(cat => (
+                      <span key={cat} className="px-3 py-1.5 bg-gray-100 text-gray-600 rounded-full text-sm">
+                        {cat}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               ) : (
                 <>
-                  {/* Grafico a Torta Composizione */}
-                  <div className="bg-white rounded-card p-6 shadow-sm">
-                    <h3 className="font-heading text-lg text-forest mb-4">Composizione Portafoglio</h3>
-                    <div className="flex flex-col md:flex-row items-center gap-6">
-                      {/* Pie Chart */}
-                      <div className="relative w-48 h-48">
-                        <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
-                          {(() => {
-                            let cumulativePercent = 0
-                            return stats.posizioniOrdinati.map((p, i) => {
-                              const percent = p.peso
-                              const startPercent = cumulativePercent
-                              cumulativePercent += percent
-
-                              // Calcolo per arco SVG
-                              const startAngle = (startPercent / 100) * 2 * Math.PI
-                              const endAngle = (cumulativePercent / 100) * 2 * Math.PI
-
-                              const x1 = 50 + 40 * Math.cos(startAngle)
-                              const y1 = 50 + 40 * Math.sin(startAngle)
-                              const x2 = 50 + 40 * Math.cos(endAngle)
-                              const y2 = 50 + 40 * Math.sin(endAngle)
-
-                              const largeArcFlag = percent > 50 ? 1 : 0
-
-                              return (
-                                <path
-                                  key={p.id}
-                                  d={`M 50 50 L ${x1} ${y1} A 40 40 0 ${largeArcFlag} 1 ${x2} ${y2} Z`}
-                                  fill={COLORI_TORTA[i % COLORI_TORTA.length]}
-                                  className="transition-opacity hover:opacity-80"
-                                />
-                              )
-                            })
-                          })()}
-                        </svg>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="text-center">
-                            <p className="text-xs text-gray-500">Totale</p>
-                            <p className="font-heading text-sm text-forest">{posizioni.length}</p>
-                            <p className="text-xs text-gray-400">posizioni</p>
-                          </div>
+                  {/* Charts Row */}
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {/* Pie Chart Asset Allocation */}
+                    <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="font-heading text-base text-forest">Asset Allocation</h3>
+                        <div className="flex gap-1">
+                          <button
+                            onClick={() => setViewMode('assets')}
+                            className={`px-2.5 py-1 text-xs rounded-md transition-colors ${viewMode === 'assets' ? 'bg-forest text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                          >
+                            Asset
+                          </button>
+                          <button
+                            onClick={() => setViewMode('categorie')}
+                            className={`px-2.5 py-1 text-xs rounded-md transition-colors ${viewMode === 'categorie' ? 'bg-forest text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                          >
+                            Categorie
+                          </button>
                         </div>
                       </div>
-
-                      {/* Legenda */}
-                      <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        {stats.posizioniOrdinati.map((p, i) => (
-                          <div key={p.id} className="flex items-center gap-2">
-                            <div
-                              className="w-3 h-3 rounded-sm flex-shrink-0"
-                              style={{ backgroundColor: COLORI_TORTA[i % COLORI_TORTA.length] }}
+                      <div className="flex items-center gap-6">
+                        <div className="flex-shrink-0">
+                          {viewMode === 'assets' ? (
+                            <DoughnutChart
+                              data={stats.posizioniOrdinati.map((p, i) => ({
+                                label: p.nome,
+                                value: p.valore,
+                                color: COLORI_TORTA[i % COLORI_TORTA.length],
+                              }))}
+                              size={140}
                             />
-                            <span className="text-sm text-gray-700 truncate">{p.nome}</span>
-                            <span className="text-sm text-gray-400 ml-auto">{p.peso.toFixed(1)}%</span>
+                          ) : (
+                            <DoughnutChart
+                              data={Object.entries(stats.categorieStats).map(([cat, data]) => ({
+                                label: cat,
+                                value: data.valore,
+                                color: COLORI_CATEGORIE[cat] || '#b0b7c1',
+                              }))}
+                              size={140}
+                            />
+                          )}
+                        </div>
+                        <div className="flex-1 space-y-1.5 max-h-[140px] overflow-y-auto">
+                          {viewMode === 'assets' ? (
+                            stats.posizioniOrdinati.slice(0, 6).map((p, i) => (
+                              <div key={p.id} className="flex items-center gap-2 text-sm">
+                                <div
+                                  className="w-2.5 h-2.5 rounded-sm flex-shrink-0"
+                                  style={{ backgroundColor: COLORI_TORTA[i % COLORI_TORTA.length] }}
+                                />
+                                <span className="text-gray-700 truncate flex-1">{p.nome}</span>
+                                <span className="text-gray-500 font-medium">{p.peso.toFixed(1)}%</span>
+                              </div>
+                            ))
+                          ) : (
+                            Object.entries(stats.categorieStats).map(([cat, data]) => (
+                              <div key={cat} className="flex items-center gap-2 text-sm">
+                                <div
+                                  className="w-2.5 h-2.5 rounded-sm flex-shrink-0"
+                                  style={{ backgroundColor: COLORI_CATEGORIE[cat] }}
+                                />
+                                <span className="text-gray-700 capitalize flex-1">{cat}</span>
+                                <span className="text-gray-500 font-medium">{data.peso.toFixed(1)}%</span>
+                              </div>
+                            ))
+                          )}
+                          {viewMode === 'assets' && stats.posizioniOrdinati.length > 6 && (
+                            <p className="text-xs text-gray-400">+{stats.posizioniOrdinati.length - 6} altri</p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Benchmark Comparison */}
+                    <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="font-heading text-base text-forest">vs Benchmark</h3>
+                        <select
+                          value={selectedBenchmark}
+                          onChange={(e) => setSelectedBenchmark(e.target.value as keyof typeof BENCHMARKS)}
+                          className="text-xs border border-gray-200 rounded-md px-2 py-1 bg-white focus:ring-1 focus:ring-green-500"
+                        >
+                          {Object.keys(BENCHMARKS).map(b => (
+                            <option key={b} value={b}>{b}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="space-y-4">
+                        <div>
+                          <div className="flex items-center justify-between mb-1.5">
+                            <span className="text-sm text-gray-600">Il tuo portafoglio</span>
+                            <span className={`text-sm font-semibold ${stats.plPercentuale >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                              {formatPercent(stats.plPercentuale)}
+                            </span>
                           </div>
-                        ))}
+                          <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
+                            <div
+                              className={`h-full rounded-full transition-all duration-500 ${stats.plPercentuale >= 0 ? 'bg-green-500' : 'bg-red-500'}`}
+                              style={{ width: `${Math.min(Math.max(stats.plPercentuale + 50, 0), 100)}%` }}
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className="flex items-center justify-between mb-1.5">
+                            <span className="text-sm text-gray-600">{selectedBenchmark}</span>
+                            <span className="text-sm font-semibold text-gray-700">
+                              +{BENCHMARKS[selectedBenchmark].toFixed(1)}% (media annua)
+                            </span>
+                          </div>
+                          <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
+                            <div
+                              className="h-full bg-gray-400 rounded-full"
+                              style={{ width: `${Math.min(BENCHMARKS[selectedBenchmark] + 50, 100)}%` }}
+                            />
+                          </div>
+                        </div>
+                        <div className="pt-2 border-t border-gray-100">
+                          <p className={`text-sm font-medium ${stats.plPercentuale >= BENCHMARKS[selectedBenchmark] ? 'text-green-600' : 'text-amber-600'}`}>
+                            {stats.plPercentuale >= BENCHMARKS[selectedBenchmark]
+                              ? `Stai battendo il benchmark di ${(stats.plPercentuale - BENCHMARKS[selectedBenchmark]).toFixed(1)} punti`
+                              : `Sottoperformance di ${(BENCHMARKS[selectedBenchmark] - stats.plPercentuale).toFixed(1)} punti`
+                            }
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Lista Posizioni */}
-                  <div className="bg-white rounded-card p-6 shadow-sm">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="font-heading text-lg text-forest">Le tue posizioni</h3>
-                      <span className="text-sm text-gray-500">{posizioni.length} asset</span>
+                  {/* Action Bar */}
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-heading text-lg text-forest">
+                      Le tue posizioni <span className="text-gray-400 font-normal text-sm">({posizioni.length})</span>
+                    </h3>
+                    <div className="flex items-center gap-2" ref={exportRef}>
+                      <div className="relative">
+                        <button
+                          onClick={() => setShowExportMenu(!showExportMenu)}
+                          className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                          </svg>
+                          Esporta
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </button>
+                        {showExportMenu && (
+                          <div className="absolute right-0 mt-1 w-36 bg-white border border-gray-200 rounded-lg shadow-lg py-1 z-10">
+                            <button
+                              onClick={exportToCSV}
+                              className="w-full px-3 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                            >
+                              <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                              </svg>
+                              CSV (Excel)
+                            </button>
+                            <button
+                              onClick={exportToJSON}
+                              className="w-full px-3 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                            >
+                              <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                              </svg>
+                              JSON
+                            </button>
+                          </div>
+                        )}
+                      </div>
                     </div>
+                  </div>
 
-                    {/* Header ordinamento */}
-                    <div className="hidden md:grid grid-cols-12 gap-2 text-xs text-gray-500 font-medium pb-2 border-b mb-2">
+                  {/* Positions Table */}
+                  <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                    {/* Desktop Table Header */}
+                    <div className="hidden lg:grid grid-cols-12 gap-3 px-5 py-3 bg-gray-50 border-b border-gray-100 text-xs font-medium text-gray-500 uppercase tracking-wide">
                       <button
                         onClick={() => handleSort('nome')}
                         className="col-span-3 text-left hover:text-forest flex items-center gap-1"
                       >
                         Asset {sortBy === 'nome' && (sortDir === 'asc' ? '↑' : '↓')}
                       </button>
-                      <div className="col-span-2 text-right">Quantita</div>
+                      <button
+                        onClick={() => handleSort('categoria')}
+                        className="col-span-1 text-left hover:text-forest flex items-center gap-1"
+                      >
+                        Cat {sortBy === 'categoria' && (sortDir === 'asc' ? '↑' : '↓')}
+                      </button>
+                      <div className="col-span-1 text-right">Qty</div>
+                      <div className="col-span-1 text-right">PMC</div>
+                      <div className="col-span-1 text-right">Prezzo</div>
                       <button
                         onClick={() => handleSort('valore')}
                         className="col-span-2 text-right hover:text-forest flex items-center justify-end gap-1"
@@ -474,101 +1127,100 @@ export default function PortfolioTracker() {
                         onClick={() => handleSort('pl')}
                         className="col-span-2 text-right hover:text-forest flex items-center justify-end gap-1"
                       >
-                        P&amp;L {sortBy === 'pl' && (sortDir === 'asc' ? '↑' : '↓')}
+                        P&L {sortBy === 'pl' && (sortDir === 'asc' ? '↑' : '↓')}
                       </button>
-                      <button
-                        onClick={() => handleSort('peso')}
-                        className="col-span-2 text-right hover:text-forest flex items-center justify-end gap-1"
-                      >
-                        Peso {sortBy === 'peso' && (sortDir === 'asc' ? '↑' : '↓')}
-                      </button>
-                      <div className="col-span-1"></div>
+                      <div className="col-span-1 text-right">Peso</div>
                     </div>
 
-                    <div className="space-y-3">
+                    <div className="divide-y divide-gray-100">
                       {stats.posizioniOrdinati.map((p, i) => (
                         <div
                           key={p.id}
-                          className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors"
+                          className="px-4 py-4 hover:bg-gray-50 transition-colors"
                         >
                           {/* Mobile View */}
-                          <div className="md:hidden space-y-3">
+                          <div className="lg:hidden space-y-3">
                             <div className="flex items-start justify-between">
-                              <div>
-                                <div className="flex items-center gap-2">
-                                  <div
-                                    className="w-3 h-3 rounded-sm flex-shrink-0"
-                                    style={{ backgroundColor: COLORI_TORTA[i % COLORI_TORTA.length] }}
-                                  />
-                                  <span className="font-medium text-forest">{p.nome}</span>
+                              <div className="flex items-start gap-2">
+                                <div
+                                  className="w-3 h-3 rounded-sm flex-shrink-0 mt-1"
+                                  style={{ backgroundColor: COLORI_TORTA[i % COLORI_TORTA.length] }}
+                                />
+                                <div>
+                                  <p className="font-medium text-forest">{p.nome}</p>
+                                  <div className="flex items-center gap-2 mt-0.5">
+                                    {p.ticker && (
+                                      <span className="text-xs text-gray-400">{p.ticker}</span>
+                                    )}
+                                    <span className="text-xs px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded capitalize">
+                                      {p.categoria}
+                                    </span>
+                                  </div>
                                 </div>
-                                {p.ticker && (
-                                  <span className="text-xs text-gray-400 ml-5">{p.ticker}</span>
-                                )}
                               </div>
-                              <button
-                                onClick={() => handleRemove(p.id)}
-                                className="text-gray-400 hover:text-red-500 transition-colors p-1"
-                                title="Rimuovi"
-                              >
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                </svg>
-                              </button>
+                              <div className="flex items-center gap-1">
+                                <button
+                                  onClick={() => handleEdit(p)}
+                                  className="p-2 text-gray-400 hover:text-green-600 transition-colors"
+                                  title="Modifica"
+                                >
+                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                  </svg>
+                                </button>
+                                <button
+                                  onClick={() => handleRemove(p.id)}
+                                  className="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                                  title="Rimuovi"
+                                >
+                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                  </svg>
+                                </button>
+                              </div>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-3 text-sm">
+                            <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
                               <div>
-                                <p className="text-gray-500 text-xs">Quantita</p>
-                                <p className="font-medium">{p.quantita}</p>
+                                <p className="text-gray-400 text-xs">Quantita x Prezzo</p>
+                                <p className="font-medium">{p.quantita} x {formatCurrency(p.prezzoAttuale)}</p>
+                              </div>
+                              <div className="text-right">
+                                <p className="text-gray-400 text-xs">Valore</p>
+                                <p className="font-semibold text-forest">{formatCurrency(p.valore)}</p>
                               </div>
                               <div>
-                                <p className="text-gray-500 text-xs">Valore</p>
-                                <p className="font-medium">{formatCurrency(p.valore)}</p>
-                              </div>
-                              <div>
-                                <p className="text-gray-500 text-xs">P&amp;L</p>
+                                <p className="text-gray-400 text-xs">P&L</p>
                                 <p className={`font-medium ${p.pl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                                  {p.pl >= 0 ? '+' : ''}{formatCurrency(p.pl)} ({formatPercent(p.plPercent)})
+                                  {p.pl >= 0 ? '+' : ''}{formatCurrency(p.pl)}
                                 </p>
                               </div>
-                              <div>
-                                <p className="text-gray-500 text-xs">Peso</p>
-                                <p className="font-medium">{p.peso.toFixed(1)}%</p>
+                              <div className="text-right">
+                                <p className="text-gray-400 text-xs">Rendimento</p>
+                                <p className={`font-medium ${p.plPercent >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                  {formatPercent(p.plPercent)}
+                                </p>
                               </div>
                             </div>
 
-                            {/* Barra P&L */}
-                            <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-                              <div
-                                className={`h-full rounded-full ${p.pl >= 0 ? 'bg-green-500' : 'bg-red-500'}`}
-                                style={{
-                                  width: `${Math.min(Math.abs(p.plPercent), 100)}%`,
-                                  marginLeft: p.pl < 0 ? 'auto' : 0,
-                                }}
-                              />
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-gray-400">Peso nel portafoglio</span>
+                              <span className="font-medium text-gray-700">{p.peso.toFixed(1)}%</span>
                             </div>
-
-                            {/* Aggiorna prezzo */}
-                            <div className="flex items-center gap-2">
-                              <span className="text-xs text-gray-500">Prezzo attuale:</span>
-                              <input
-                                type="number"
-                                value={p.prezzoAttuale}
-                                onChange={(e) => handleUpdatePrezzo(p.id, e.target.value)}
-                                step="0.01"
-                                min="0"
-                                className="w-24 px-2 py-1 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-green-500"
+                            <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                              <div
+                                className="h-full bg-green-500 rounded-full transition-all duration-300"
+                                style={{ width: `${p.peso}%` }}
                               />
                             </div>
                           </div>
 
                           {/* Desktop View */}
-                          <div className="hidden md:grid grid-cols-12 gap-2 items-center">
+                          <div className="hidden lg:grid grid-cols-12 gap-3 items-center">
                             <div className="col-span-3">
-                              <div className="flex items-center gap-2">
+                              <div className="flex items-center gap-2.5">
                                 <div
-                                  className="w-3 h-3 rounded-sm flex-shrink-0"
+                                  className="w-2.5 h-2.5 rounded-sm flex-shrink-0"
                                   style={{ backgroundColor: COLORI_TORTA[i % COLORI_TORTA.length] }}
                                 />
                                 <div className="min-w-0">
@@ -579,53 +1231,60 @@ export default function PortfolioTracker() {
                                 </div>
                               </div>
                             </div>
-                            <div className="col-span-2 text-right">
-                              <p className="font-medium">{p.quantita}</p>
-                              <div className="flex items-center justify-end gap-1">
-                                <span className="text-xs text-gray-400">@</span>
-                                <input
-                                  type="number"
-                                  value={p.prezzoAttuale}
-                                  onChange={(e) => handleUpdatePrezzo(p.id, e.target.value)}
-                                  step="0.01"
-                                  min="0"
-                                  className="w-20 px-1 py-0.5 text-xs border border-gray-300 rounded text-right focus:ring-1 focus:ring-green-500"
-                                />
-                              </div>
+                            <div className="col-span-1">
+                              <span className="text-xs px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded capitalize">
+                                {p.categoria.slice(0, 3)}
+                              </span>
+                            </div>
+                            <div className="col-span-1 text-right">
+                              <p className="text-sm font-medium">{p.quantita}</p>
+                            </div>
+                            <div className="col-span-1 text-right">
+                              <p className="text-sm text-gray-600">{formatCurrency(p.prezzoCarico)}</p>
+                            </div>
+                            <div className="col-span-1 text-right">
+                              <input
+                                type="number"
+                                value={p.prezzoAttuale}
+                                onChange={(e) => handleUpdatePrezzo(p.id, e.target.value)}
+                                step="0.01"
+                                min="0"
+                                className="w-full px-1.5 py-1 text-sm text-right border border-gray-200 rounded focus:ring-1 focus:ring-green-500 focus:border-green-500"
+                              />
                             </div>
                             <div className="col-span-2 text-right">
-                              <p className="font-medium">{formatCurrency(p.valore)}</p>
-                              <p className="text-xs text-gray-400">costo: {formatCurrency(p.costo)}</p>
+                              <p className="text-sm font-semibold text-forest">{formatCurrency(p.valore)}</p>
                             </div>
                             <div className="col-span-2 text-right">
-                              <p className={`font-medium ${p.pl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                              <p className={`text-sm font-medium ${p.pl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                                 {p.pl >= 0 ? '+' : ''}{formatCurrency(p.pl)}
                               </p>
-                              <p className={`text-xs ${p.pl >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                              <p className={`text-xs ${p.plPercent >= 0 ? 'text-green-500' : 'text-red-500'}`}>
                                 {formatPercent(p.plPercent)}
                               </p>
                             </div>
-                            <div className="col-span-2">
-                              <div className="flex items-center gap-2">
-                                <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                  <div
-                                    className={`h-full rounded-full ${p.pl >= 0 ? 'bg-green-500' : 'bg-red-500'}`}
-                                    style={{ width: `${p.peso}%` }}
-                                  />
-                                </div>
-                                <span className="text-sm text-gray-600 w-12 text-right">{p.peso.toFixed(1)}%</span>
+                            <div className="col-span-1 flex items-center justify-end gap-2">
+                              <span className="text-sm font-medium text-gray-600">{p.peso.toFixed(1)}%</span>
+                              <div className="flex items-center gap-0.5">
+                                <button
+                                  onClick={() => handleEdit(p)}
+                                  className="p-1.5 text-gray-400 hover:text-green-600 transition-colors"
+                                  title="Modifica"
+                                >
+                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                  </svg>
+                                </button>
+                                <button
+                                  onClick={() => handleRemove(p.id)}
+                                  className="p-1.5 text-gray-400 hover:text-red-500 transition-colors"
+                                  title="Rimuovi"
+                                >
+                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                  </svg>
+                                </button>
                               </div>
-                            </div>
-                            <div className="col-span-1 text-right">
-                              <button
-                                onClick={() => handleRemove(p.id)}
-                                className="text-gray-400 hover:text-red-500 transition-colors p-1"
-                                title="Rimuovi"
-                              >
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                </svg>
-                              </button>
                             </div>
                           </div>
                         </div>
@@ -633,11 +1292,11 @@ export default function PortfolioTracker() {
                     </div>
                   </div>
 
-                  {/* Barra per ogni asset con P&L colorato */}
-                  <div className="bg-white rounded-card p-6 shadow-sm">
-                    <h3 className="font-heading text-lg text-forest mb-4">Performance per Asset</h3>
+                  {/* Performance per Asset */}
+                  <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+                    <h3 className="font-heading text-base text-forest mb-4">Performance per Asset</h3>
                     <div className="space-y-3">
-                      {stats.posizioniOrdinati.map((p) => (
+                      {stats.posizioniOrdinati.slice(0, 8).map((p) => (
                         <div key={p.id}>
                           <div className="flex items-center justify-between mb-1">
                             <span className="text-sm font-medium text-gray-700 truncate max-w-[60%]">{p.nome}</span>
@@ -645,12 +1304,11 @@ export default function PortfolioTracker() {
                               {formatPercent(p.plPercent)}
                             </span>
                           </div>
-                          <div className="relative h-4 bg-gray-100 rounded-full overflow-hidden">
-                            {/* Barra centrata a 50% come punto zero */}
+                          <div className="relative h-2 bg-gray-100 rounded-full overflow-hidden">
                             <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gray-300" />
                             {p.pl >= 0 ? (
                               <div
-                                className="absolute top-0 bottom-0 bg-green-500 rounded-r-full"
+                                className="absolute top-0 bottom-0 bg-green-500 rounded-r-full transition-all duration-500"
                                 style={{
                                   left: '50%',
                                   width: `${Math.min(p.plPercent / 2, 50)}%`,
@@ -658,7 +1316,7 @@ export default function PortfolioTracker() {
                               />
                             ) : (
                               <div
-                                className="absolute top-0 bottom-0 bg-red-500 rounded-l-full"
+                                className="absolute top-0 bottom-0 bg-red-500 rounded-l-full transition-all duration-500"
                                 style={{
                                   right: '50%',
                                   width: `${Math.min(Math.abs(p.plPercent) / 2, 50)}%`,
@@ -669,7 +1327,12 @@ export default function PortfolioTracker() {
                         </div>
                       ))}
                     </div>
-                    <div className="flex justify-between text-xs text-gray-400 mt-3">
+                    {stats.posizioniOrdinati.length > 8 && (
+                      <p className="text-xs text-gray-400 mt-3 text-center">
+                        Mostrando i primi 8 asset. Esporta per vedere tutti.
+                      </p>
+                    )}
+                    <div className="flex justify-between text-xs text-gray-400 mt-3 pt-2 border-t border-gray-100">
                       <span>-100%</span>
                       <span>0%</span>
                       <span>+100%</span>
@@ -680,40 +1343,54 @@ export default function PortfolioTracker() {
             </div>
           </div>
 
-          {/* Info */}
-          <div className="mt-12 bg-white rounded-card p-6 shadow-sm">
-            <h2 className="font-heading text-xl text-forest mb-4">Perche usare un Portfolio Tracker?</h2>
-            <div className="prose prose-sm text-gray-600 max-w-none">
-              <p>
-                Un <strong>portfolio tracker</strong> ti permette di avere sempre sotto controllo i tuoi investimenti,
-                monitorare le performance e capire come e composto il tuo patrimonio finanziario.
-              </p>
-
-              <div className="grid md:grid-cols-3 gap-6 mt-6">
-                <div className="p-4 bg-green-50 rounded-lg">
-                  <h3 className="font-heading text-lg text-forest mt-0 mb-2">Controllo Totale</h3>
-                  <p className="text-sm m-0">
-                    Visualizza il valore di tutti i tuoi investimenti in un unico posto, indipendentemente da dove li detieni.
-                  </p>
-                </div>
-                <div className="p-4 bg-green-50 rounded-lg">
-                  <h3 className="font-heading text-lg text-forest mt-0 mb-2">Performance Reali</h3>
-                  <p className="text-sm m-0">
-                    Calcola il rendimento effettivo considerando prezzo di carico e prezzo attuale. Conosci sempre il tuo P&amp;L.
-                  </p>
-                </div>
-                <div className="p-4 bg-green-50 rounded-lg">
-                  <h3 className="font-heading text-lg text-forest mt-0 mb-2">Diversificazione</h3>
-                  <p className="text-sm m-0">
-                    Analizza la composizione del portafoglio per verificare se la tua asset allocation e bilanciata.
-                  </p>
-                </div>
+          {/* Info Section */}
+          <div className="mt-12 grid md:grid-cols-3 gap-6">
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center mb-4">
+                <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
               </div>
+              <h3 className="font-heading text-lg text-forest mb-2">Tracking Completo</h3>
+              <p className="text-sm text-gray-600">
+                Monitora azioni, ETF, fondi, obbligazioni, crypto e immobili in un unico dashboard. Calcoli automatici di P&L e performance.
+              </p>
+            </div>
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center mb-4">
+                <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+              </div>
+              <h3 className="font-heading text-lg text-forest mb-2">Alert Intelligenti</h3>
+              <p className="text-sm text-gray-600">
+                Imposta soglie di allocazione per ogni asset. Ricevi alert quando un titolo supera il peso massimo desiderato.
+              </p>
+            </div>
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div className="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center mb-4">
+                <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <h3 className="font-heading text-lg text-forest mb-2">100% Privacy</h3>
+              <p className="text-sm text-gray-600">
+                I dati restano nel tuo browser (localStorage). Non vengono inviati a server. Nessuna registrazione richiesta.
+              </p>
+            </div>
+          </div>
 
-              <div className="mt-6 p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                <p className="text-sm text-gray-800 m-0">
-                  <strong>Privacy garantita:</strong> I dati del tuo portafoglio sono salvati solo nel tuo browser (localStorage).
-                  Non vengono inviati a nessun server e non condividiamo nulla con terze parti.
+          {/* Privacy Note */}
+          <div className="mt-8 bg-gray-50 rounded-xl p-5 border border-gray-200">
+            <div className="flex items-start gap-3">
+              <svg className="w-5 h-5 text-gray-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p className="text-sm text-gray-700 font-medium">Privacy garantita</p>
+                <p className="text-sm text-gray-500 mt-0.5">
+                  Tutti i dati del tuo portafoglio sono salvati esclusivamente nel tuo browser (localStorage).
+                  Non inviamo nulla ai nostri server e non condividiamo informazioni con terze parti.
                 </p>
               </div>
             </div>

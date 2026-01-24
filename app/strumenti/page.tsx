@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Navbar, Footer, JsonLd, createToolListSchema, createBreadcrumbSchema } from '@/components'
 import type { Metadata } from 'next'
 
@@ -41,36 +42,42 @@ interface ToolCategory {
 const paidAlternatives = [
   {
     name: 'JustETF Premium',
+    logo: '/competitors/justetf.png',
     cost: '€60-240/anno',
     ourTool: 'Portfolio Tracker + Confronto ETF',
     href: '/strumenti/portfolio-tracker'
   },
   {
     name: 'Wallible Pro',
+    logo: '/competitors/wallible.png',
     cost: '€59.90/anno',
     ourTool: 'Portfolio Tracker + Backtest',
     href: '/strumenti/portfolio-tracker'
   },
   {
     name: 'Sharesight',
+    logo: '/competitors/sharesight.png',
     cost: '$276/anno',
     ourTool: 'Portfolio Tracker + Calcolatore Plusvalenze',
     href: '/strumenti/calcolatore-plusvalenze'
   },
   {
     name: 'TasseTrading',
+    logo: '/competitors/tassetrading.png',
     cost: '€50-200/pratica',
     ourTool: 'Calcolatore Plusvalenze + Minusvalenze',
     href: '/strumenti/calcolatore-plusvalenze'
   },
   {
     name: 'Portfolio Visualizer',
+    logo: '/competitors/portfoliovisualizer.png',
     cost: '$360/anno',
     ourTool: 'Backtest + Monte Carlo',
     href: '/strumenti/backtest-portafoglio'
   },
   {
     name: 'Kubera',
+    logo: '/competitors/kubera.png',
     cost: '$249-360/anno',
     ourTool: 'Portfolio Tracker + Patrimonio Netto',
     href: '/strumenti/portfolio-tracker'
@@ -287,9 +294,18 @@ export default function Strumenti() {
                 {paidAlternatives.map((alt, i) => (
                   <tr key={i} className="border-b hover:bg-gray-50">
                     <td className="py-4 px-4">
-                      <span className="font-medium text-gray-800">{alt.name}</span>
+                      <div className="flex items-center gap-3">
+                        <Image
+                          src={alt.logo}
+                          alt={alt.name}
+                          width={24}
+                          height={24}
+                          className="rounded"
+                        />
+                        <span className="font-medium text-gray-800">{alt.name}</span>
+                      </div>
                     </td>
-                    <td className="py-4 px-4 text-red-600 font-medium">{alt.cost}</td>
+                    <td className="py-4 px-4 text-red-600 font-medium line-through">{alt.cost}</td>
                     <td className="py-4 px-4">
                       <Link href={alt.href} className="text-green-600 hover:text-green-700 font-medium">
                         {alt.ourTool} →
