@@ -125,79 +125,54 @@ Entro il 2048, si stima che **83,5 trilioni di dollari** saranno trasferiti alle
 `
   },
   {
-    slug: 'flat-tax-neo-residenti-300000-euro-2026',
-    title: 'Flat Tax Neo-Residenti Sale a €300.000: Cosa Cambia dal 2026',
-    excerpt: 'La Legge di Bilancio 2026 aumenta l\'imposta sostitutiva del 50%. I gia iscritti mantengono le vecchie condizioni.',
+    slug: 'ferrari-250-gto-38-milioni-mecum-2026',
+    title: 'Ferrari 250 GTO Venduta a $38.5 Milioni: Record a Mecum Kissimmee',
+    excerpt: 'La "Bianco Speciale" unica al mondo acquistata dal collezionista David Lee. Enzo triplica il record a $17.9M.',
     date: '2026-01-21',
-    readTime: 6,
-    category: 'Fiscalita',
-    source: 'We Wealth / Il Sole 24 Ore',
-    sourceUrl: 'https://www.we-wealth.com/news/flat-tax-nuovi-residenti-italia-2026-aumento-300mila-euro',
-    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop',
+    readTime: 5,
+    category: 'Lifestyle',
+    source: 'Hagerty / duPont Registry',
+    sourceUrl: 'https://news.dupontregistry.com/blogs/events/ferrari-dominates-mecum-kissimmee-2026',
+    image: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=1200&h=630&fit=crop',
     content: `
-## L'Aumento della Flat Tax
+## Record Assoluto per la 250 GTO Bianca
 
-L'articolo 1 della Legge di Bilancio 2026 modifica il regime dei neo-residenti:
+La **Ferrari 250 GTO "Bianco Speciale"** (telaio 3729GT), l'unica al mondo in questo colore, e stata venduta per **$38.500.000** all'asta Mecum Kissimmee 2026.
 
-| Voce | Prima | Dal 2026 |
-|------|-------|----------|
-| Imposta sostitutiva | €200.000/anno | **€300.000/anno** |
-| Per ogni familiare | €25.000/anno | **€50.000/anno** |
+L'acquirente e il noto collezionista **David Lee**, gia proprietario di diverse Ferrari iconiche.
 
-L'aumento e del **50%** sia per il contribuente principale che per i familiari.
+## L'Enzo Triplica il Record
 
-## Chi e Interessato
+Una Ferrari Enzo Giallo Modena della Bachman Collection ha raggiunto **$17.875.000**, triplicando il precedente record per il modello (circa $6M nel 2023).
 
-La modifica si applica solo a chi trasferisce la residenza fiscale in Italia **dal 1 gennaio 2026**.
+Un'altra Enzo in Rosso Dino - l'unica prodotta in questo colore - ha toccato $11.1 milioni.
 
-Chi ha gia aderito al regime mantiene le condizioni originarie (€200.000 o €100.000 se entrato prima del 2024) per tutta la durata residua del regime (fino a 15 anni).
+## I Numeri dell'Asta
 
-## Requisiti di Accesso
+| Modello | Prezzo | Note |
+|---------|--------|------|
+| 250 GTO Bianco | $38.500.000 | Unica al mondo |
+| Enzo Giallo | $17.875.000 | 3x record precedente |
+| F50 Rosso | $12.210.000 | Nuovo record modello |
+| LaFerrari Aperta | $11.000.000 | Hypercar moderna |
+| Enzo Rosso Dino | $11.110.000 | Colore unico |
 
-Per accedere al regime servono:
-- Non essere stati fiscalmente residenti in Italia per almeno **9 degli ultimi 10 anni**
-- Trasferire la residenza effettiva in Italia
+**Totale vendite Mecum:** $441 milioni - il doppio del record precedente.
 
-## Cosa Copre la Flat Tax
+## Cambio di Paradigma
 
-- Redditi di lavoro esteri
-- Dividendi da societa estere
-- Capital gain su asset esteri
-- Redditi immobiliari esteri
-- Interessi e royalties estere
+I risultati segnano un cambio nel mercato Ferrari:
 
-## Cosa Non Copre
+- Le **hypercar anni '80-2000** ora superano molte classiche degli anni '50-'60
+- L'Enzo, F40, F50 e LaFerrari sono diventati "classici moderni" da investimento
+- La provenienza e i bassi chilometraggi comandano premi enormi
 
-I redditi di fonte italiana restano soggetti a tassazione progressiva IRPEF (fino al 43%).
+## Per il Collezionista
 
-## Conviene Ancora?
-
-Per famiglie con redditi esteri superiori a **€1 milione**, il regime resta conveniente:
-
-| Reddito Estero | IRPEF Italia | Flat Tax |
-|----------------|--------------|----------|
-| €1.000.000 | ~€430.000 | €300.000 |
-| €2.000.000 | ~€860.000 | €300.000 |
-| €5.000.000 | ~€2.150.000 | €300.000 |
-
-## Confronto Europeo
-
-| Paese | Regime Speciale |
-|-------|-----------------|
-| Italia | €300.000 flat |
-| Portogallo | Abolito |
-| Grecia | 7% flat (pensionati) |
-| UK | Non-dom in fase out |
-
-L'Italia resta competitiva, anche se meno attraente rispetto al passato.
-
-## Esenzioni Aggiuntive
-
-I neo-residenti sono esenti da:
-- IVAFE (imposta su attivita estere)
-- IVIE (imposta su immobili esteri)
-- Monitoraggio fiscale (quadro RW) per asset esteri
-- Imposta di successione e donazione su beni esteri
+Cosa significa per chi investe in auto:
+- Le Ferrari moderne a tiratura limitata sono ormai asset class
+- La storia del veicolo conta quanto il modello
+- I colori unici o le prime produzioni valgono multipli
 `
   },
   {
@@ -418,7 +393,7 @@ La riforma chiarisce il trattamento dei trust:
     category: 'Immobiliare',
     source: 'Nomisma / Tailor Made Real Estate',
     sourceUrl: 'https://milano.notizie.it/cronaca-milano/2026/01/12/analisi-del-mercato-immobiliare-di-lusso-a-milano-nel-2026-4/',
-    image: 'https://images.unsplash.com/photo-1565958324485-a57ab09aeb70?w=1200&h=630&fit=crop',
+    image: 'https://images.unsplash.com/photo-1524230572899-a752b3835840?w=1200&h=630&fit=crop',
     content: `
 ## Il Mercato Prime di Milano
 
@@ -615,6 +590,181 @@ Le modifiche richiedono una revisione delle strutture patrimoniali esistenti. Co
 - Valutare l'impatto specifico
 - Identificare opportunita di ottimizzazione
 - Pianificare azioni correttive
+`
+  },
+  {
+    slug: 'monaco-yacht-show-2026-4-miliardi',
+    title: 'Monaco Yacht Show 2026: €4 Miliardi di Superyacht in Esposizione',
+    excerpt: 'Oltre 125 yacht, 560 espositori. Debutta Blue Wake per la sostenibilita. Pass da €690, ma il mercoledi e solo su invito.',
+    date: '2026-01-14',
+    readTime: 4,
+    category: 'Lifestyle',
+    source: 'Monaco Yacht Show / Boat International',
+    sourceUrl: 'https://www.monacoyachtshow.com/en',
+    image: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=1200&h=630&fit=crop',
+    content: `
+## Il Gioiello del Superyachting
+
+Il Monaco Yacht Show 2026 celebra il suo **35° anniversario** dal 23 al 26 settembre a Port Hercule.
+
+Con circa **4 miliardi di dollari** di yacht in esposizione, e l'evento di riferimento mondiale per UHNWI interessati al settore nautico.
+
+## I Numeri
+
+| Metrica | Valore |
+|---------|--------|
+| Yacht esposti | 125+ |
+| Valore totale | ~€4 miliardi |
+| Espositori | 560+ |
+| Visitatori attesi | 30.000+ |
+
+## Accesso Esclusivo
+
+- **Mercoledi 23:** Solo su invito o Sapphire Experience
+- **Giovedi-Sabato:** Pass generale da €690/giorno
+- **Orari:** 10:00-18:30 (sabato fino alle 18:00)
+
+## Novita 2026: Blue Wake
+
+L'evoluzione del Sustainability Hub introduce:
+- Sistemi di propulsione next-gen
+- Materiali di refit sostenibili
+- Tecnologie a basso impatto ambientale
+
+## Adventure Area
+
+Lanciata nel 2022, presenta:
+- Tender di lusso
+- Water toys high-tech
+- Veicoli esclusivi (auto, moto, elicotteri)
+
+## Design & Innovation Hub
+
+Presentazioni live di yacht designer e architetti navali. Esperienze immersive con le ultime innovazioni del settore.
+
+## Il Mercato Superyacht
+
+Il settore continua a crescere nonostante le incertezze macro:
+- Ordini in aumento per yacht 50m+
+- Tempi di consegna: 3-5 anni per nuove costruzioni
+- Charter: domanda record per Mediterraneo e Caraibi
+`
+  },
+  {
+    slug: 'patek-philippe-1518-record-178-milioni-2026',
+    title: 'Patek Philippe 1518: Venduto a $17.8 Milioni, Nuovo Record Mondiale',
+    excerpt: 'Il calendario perpetuo in oro rosa del 1950 batte ogni record. Rolex Daytona Paul Newman a $5.5M. Il mercato degli orologi esplode.',
+    date: '2026-01-13',
+    readTime: 5,
+    category: 'Lifestyle',
+    source: 'Phillips Watches / Hodinkee',
+    sourceUrl: 'https://www.phillips.com/auctions/auction/watches',
+    image: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=1200&h=630&fit=crop',
+    content: `
+## Record Assoluto per Patek Philippe
+
+Un **Patek Philippe 1518** in oro rosa del 1950 e stato venduto per **$17.800.000** all'asta Phillips di Ginevra, stabilendo il nuovo record mondiale per un orologio da polso.
+
+## I Top Lot dell'Asta
+
+| Orologio | Prezzo | Anno |
+|----------|--------|------|
+| Patek 1518 oro rosa | $17.800.000 | 1950 |
+| Rolex Daytona "Paul Newman" | $5.500.000 | 1969 |
+| Patek 2499 oro giallo | $4.200.000 | 1957 |
+| A. Lange & Sohne Grand Comp. | $2.800.000 | 2019 |
+
+## Perche il 1518 Vale Cosi Tanto
+
+Il Reference 1518 e il primo calendario perpetuo con cronografo prodotto in serie:
+- Solo **281 esemplari** prodotti (1941-1954)
+- Appena **58 in oro rosa**
+- Questo esemplare: condizioni eccezionali, provenienza impeccabile
+
+## Il Mercato degli Orologi di Lusso
+
+Dopo la correzione del 2023-2024, il mercato si e stabilizzato:
+- **Patek Philippe:** sempre forte, soprattutto complicazioni
+- **Rolex vintage:** Paul Newman e "Tropical" in ripresa
+- **Indipendenti:** F.P. Journe, MB&F in crescita
+
+## Orologi come Asset Class
+
+Per HNWI, gli orologi offrono:
+- Portabilita del valore
+- Nessuna tassazione patrimoniale
+- Piacere d'uso quotidiano
+- Potenziale apprezzamento
+
+## Consigli per Collezionisti
+
+1. **Condizioni:** Solo esemplari in condizioni eccellenti
+2. **Provenienza:** Documentazione completa e storico
+3. **Rarita:** Edizioni limitate o varianti rare
+4. **Pazienza:** I migliori affari si fanno aspettando
+`
+  },
+  {
+    slug: 'vino-borgogna-la-tache-1886-record-325000',
+    title: 'Vino Record: La Tache 1886 Venduta a £325.000 da Christie\'s',
+    excerpt: 'Asta storica Bouchard Pere & Fils: £2.38M totali. Borgogna in ripresa dopo -40%. DRC La Tache 2018 +37% in un anno.',
+    date: '2026-01-12',
+    readTime: 5,
+    category: 'Lifestyle',
+    source: 'Decanter / Christie\'s',
+    sourceUrl: 'https://www.decanter.com/premium/wine-investment-modest-growth-for-top-burgundies-573239/',
+    image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1200&h=630&fit=crop',
+    content: `
+## Asta Storica per Bouchard Pere & Fils
+
+Christie's ha battuto la cantina storica di Bouchard Pere & Fils, uno dei produttori piu prestigiosi della Borgogna.
+
+**Risultati:**
+- Totale vendite: **£2.38 milioni**
+- 100% dei lotti venduti
+- Star lot: **La Tache 1886** a £325.000 (stima: £19.000)
+
+## Il Mercato del Fine Wine
+
+Dopo una correzione del **25-40%** dal picco 2022, il mercato mostra segni di stabilizzazione:
+
+| Indice | Performance 2025 |
+|--------|------------------|
+| DRC La Tache 2018 | +37% |
+| Bordeaux Top Chateaux | +5-8% |
+| Champagne Prestige | +3-5% |
+| Burgundy Index (dal 2014) | +131% |
+
+## Fine Wine come Investimento
+
+Vantaggi per HNWI:
+- Correlazione bassa con mercati finanziari
+- Protezione dall'inflazione
+- Possibilita di consumo (godimento diretto)
+- Esenzione IVA per stoccaggio bonded
+
+## Dove Investire nel 2026
+
+### Borgogna
+- En Primeur 2024 in arrivo Q1
+- Focus su annate 2016-2020
+- DRC, Leroy, Roumier sempre ricercati
+
+### Bordeaux
+- Prezzi corretti, entry point interessante
+- First Growths: Lafite, Latour, Margaux
+- Annate 2015, 2016, 2019, 2020
+
+### Champagne
+- Dom Perignon, Krug in crescita
+- Salon, Jacques Selosse per collezionisti
+
+## Come Investire
+
+- **Piattaforme:** Liv-ex, Cult Wines, Berry Bros
+- **Stoccaggio:** Bonded warehouse per esenzione IVA
+- **Assicurazione:** 0.5-1% del valore annuo
+- **Orizzonte:** 5-10 anni per risultati ottimali
 `
   },
 ]
