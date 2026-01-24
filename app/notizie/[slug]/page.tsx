@@ -98,27 +98,55 @@ function parseContent(content: string) {
 
   const formatText = (text: string) => {
     return text
-      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-forest">$1</strong>')
       .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-green-600 hover:underline" target="_blank" rel="noopener noreferrer">$1</a>')
+  }
+
+  const slugify = (text: string) => {
+    return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
   }
 
   for (const line of lines) {
     const trimmed = line.trim()
 
-    if (trimmed.startsWith('## ')) {
+    // Image: ![alt](url)
+    const imageMatch = trimmed.match(/^!\[([^\]]*)\]\(([^)]+)\)$/)
+    if (imageMatch) {
       flushList()
       flushTable()
       elements.push(
-        <h2 key={key++} className="font-heading text-xl md:text-2xl text-forest mt-8 mb-4">
-          {trimmed.slice(3)}
+        <figure key={key++} className="my-8">
+          <img
+            src={imageMatch[2]}
+            alt={imageMatch[1]}
+            className="w-full rounded-lg shadow-md"
+          />
+          {imageMatch[1] && (
+            <figcaption className="text-sm text-gray-500 mt-2 text-center italic">
+              {imageMatch[1]}
+            </figcaption>
+          )}
+        </figure>
+      )
+    } else if (trimmed.startsWith('## ')) {
+      flushList()
+      flushTable()
+      const title = trimmed.slice(3)
+      const id = slugify(title)
+      elements.push(
+        <h2 key={key++} id={id} className="font-heading text-xl md:text-2xl text-forest mt-10 mb-4 scroll-mt-24">
+          {title}
         </h2>
       )
     } else if (trimmed.startsWith('### ')) {
       flushList()
       flushTable()
+      const title = trimmed.slice(4)
+      const id = slugify(title)
       elements.push(
-        <h3 key={key++} className="font-heading text-lg text-forest mt-6 mb-3">
-          {trimmed.slice(4)}
+        <h3 key={key++} id={id} className="font-heading text-lg text-forest mt-6 mb-3 scroll-mt-24">
+          {title}
         </h3>
       )
     } else if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
@@ -143,7 +171,7 @@ function parseContent(content: string) {
       flushList()
       flushTable()
       elements.push(
-        <p key={key++} className="text-gray-600 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: formatText(trimmed) }} />
+        <p key={key++} className="text-gray-700 leading-relaxed mb-5 text-[17px]" dangerouslySetInnerHTML={{ __html: formatText(trimmed) }} />
       )
     }
   }
@@ -248,6 +276,31 @@ export default async function NewsArticlePage({ params }: Props) {
               <p className="text-lg text-gray-700 font-medium mb-8 pb-8 border-b border-gray-100">
                 {article.excerpt}
               </p>
+
+              {/* Table of Contents */}
+              {(() => {
+                const headings = article.content.match(/^## .+$/gm) || []
+                if (headings.length < 2) return null
+                return (
+                  <nav className="bg-cream rounded-lg p-6 mb-10">
+                    <h2 className="text-base font-semibold text-forest mb-4">In questo articolo</h2>
+                    <ul className="space-y-2">
+                      {headings.map((h, i) => {
+                        const title = h.replace('## ', '')
+                        const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+                        return (
+                          <li key={i}>
+                            <a href={`#${slug}`} className="text-gray-600 hover:text-forest transition-colors text-sm flex items-center gap-2">
+                              <span className="text-green-600">{i + 1}.</span>
+                              {title}
+                            </a>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </nav>
+                )
+              })()}
 
               <div className="prose-custom">
                 {parseContent(article.content)}
