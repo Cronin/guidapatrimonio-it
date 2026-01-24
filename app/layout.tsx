@@ -4,10 +4,8 @@ import { Playfair_Display, DM_Sans } from 'next/font/google'
 import './globals.css'
 import { JsonLd, organizationSchema, websiteSchema } from '@/components'
 
-// TODO: Create GA4 property on analytics.google.com and update this ID
-const GA4_MEASUREMENT_ID = 'G-XXXXXXXXXX'
-// TODO: Create Clarity project on clarity.microsoft.com and update this ID
-const CLARITY_ID = 'XXXXXXXXXX'
+const GA4_MEASUREMENT_ID = 'G-GNL67KCFDQ'
+const CLARITY_ID = 'u1ur4kb2kq'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
