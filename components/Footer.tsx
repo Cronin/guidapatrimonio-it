@@ -117,9 +117,21 @@ export default function Footer() {
               © {new Date().getFullYear()} Guida Patrimonio. Tutti i diritti riservati.
             </p>
             <p className="text-body-sm text-white/50">
-              Consulenza patrimoniale indipendente | P.IVA: 00000000000
+              Consulenza patrimoniale indipendente | Ginevra, Svizzera
             </p>
           </div>
+        </div>
+      </div>
+
+      {/* GDPR Notice */}
+      <div className="border-t border-white/10">
+        <div className="container-custom py-4">
+          <p className="text-xs text-white/40 text-center leading-relaxed">
+            Questo sito utilizza cookie tecnici e di analisi (Google Analytics, Microsoft Clarity) per migliorare l&apos;esperienza utente.
+            Continuando la navigazione accetti l&apos;utilizzo dei cookie. I tuoi dati sono trattati nel rispetto della nLPD (Svizzera) e del GDPR (UE).
+            Non vendiamo né condividiamo i tuoi dati con terze parti per fini commerciali.
+            Per informazioni: <a href="mailto:info@guidapatrimonio.it" className="underline hover:text-white/60">info@guidapatrimonio.it</a>
+          </p>
         </div>
       </div>
     </footer>
