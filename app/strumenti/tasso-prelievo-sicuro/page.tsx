@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, FreeToolBanner} from '@/components'
 
 interface SimulationResult {
   anno: number
@@ -207,6 +207,7 @@ export default function CalcolatoreTassoPrelievoSicuro() {
   return (
     <main>
       <Navbar />
+      <FreeToolBanner />
 
       <section className="bg-forest pt-navbar">
         <div className="container-custom py-12">

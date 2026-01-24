@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useRef, useCallback } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, FreeToolBanner} from '@/components'
 
 // ============================================================================
 // TYPES & INTERFACES
@@ -629,6 +629,7 @@ export default function CalcolatorePlusvalenze() {
   return (
     <main className="bg-cream min-h-screen">
       <Navbar />
+      <FreeToolBanner />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-forest via-green-600 to-forest pt-navbar relative overflow-hidden">

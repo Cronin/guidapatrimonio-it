@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, FreeToolBanner} from '@/components'
 
 export default function CalcolatoreMutuo() {
   const [importo, setImporto] = useState(200000)
@@ -62,6 +62,7 @@ export default function CalcolatoreMutuo() {
   return (
     <main>
       <Navbar />
+      <FreeToolBanner />
 
       <section className="bg-forest pt-navbar">
         <div className="container-custom py-12">

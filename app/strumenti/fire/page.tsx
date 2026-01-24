@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget} from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, FreeToolBanner} from '@/components'
 
 export default function CalcolatoreFIRE() {
   const [speseAnnue, setSpeseAnnue] = useState(30000)
@@ -75,6 +75,7 @@ export default function CalcolatoreFIRE() {
   return (
     <main>
       <Navbar />
+      <FreeToolBanner />
 
       <section className="bg-forest pt-navbar">
         <div className="container-custom py-12">

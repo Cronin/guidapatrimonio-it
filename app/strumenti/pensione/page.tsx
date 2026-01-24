@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, FreeToolBanner} from '@/components'
 
 export default function CalcolatorePensione() {
   const [etaAttuale, setEtaAttuale] = useState(40)
@@ -71,6 +71,7 @@ export default function CalcolatorePensione() {
   return (
     <main>
       <Navbar />
+      <FreeToolBanner />
 
       {/* Hero */}
       <section className="bg-forest pt-navbar">

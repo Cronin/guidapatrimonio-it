@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget} from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, FreeToolBanner} from '@/components'
 
 interface MacroData {
   spreadBtpBund: {
@@ -202,6 +202,7 @@ export default function DashboardMacro() {
   return (
     <main className="min-h-screen bg-[#0a0e14]">
       <Navbar />
+      <FreeToolBanner />
 
       {/* Terminal Header */}
       <section className="pt-navbar border-b border-gray-800">

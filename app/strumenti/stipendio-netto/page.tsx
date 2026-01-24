@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, FreeToolBanner} from '@/components'
 
 export default function CalcolatoreStipendioNetto() {
   const [ral, setRal] = useState(35000)
@@ -85,6 +85,7 @@ export default function CalcolatoreStipendioNetto() {
   return (
     <main>
       <Navbar />
+      <FreeToolBanner />
 
       <section className="bg-forest pt-navbar">
         <div className="container-custom py-12">

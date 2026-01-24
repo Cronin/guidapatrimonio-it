@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useRef } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, JsonLd, createCalculatorSchema, createBreadcrumbSchema, createFAQSchema , RatingWidget} from '@/components'
+import { Navbar, Footer, JsonLd, createCalculatorSchema, createBreadcrumbSchema, createFAQSchema , RatingWidget, FreeToolBanner} from '@/components'
 
 // JSON-LD Structured Data
 const calculatorSchema = createCalculatorSchema({
@@ -295,6 +295,7 @@ export default function CalcolatorePatrimonioNettoAvanzato() {
     <main>
       <JsonLd data={[calculatorSchema, breadcrumbSchema, faqSchema]} />
       <Navbar />
+      <FreeToolBanner />
 
       <section className="bg-forest pt-navbar">
         <div className="container-custom py-12">

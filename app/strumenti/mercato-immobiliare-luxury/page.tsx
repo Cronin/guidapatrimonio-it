@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget} from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, FreeToolBanner} from '@/components'
 
 // Static data - imported directly for SSG compatibility
 const luxuryData = {
@@ -290,6 +290,7 @@ export default function MercatoImmobiliareLuxury() {
   return (
     <main className="bg-cream min-h-screen">
       <Navbar />
+      <FreeToolBanner />
 
       {/* Hero - Luxury Style */}
       <section className="relative bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 pt-navbar overflow-hidden">

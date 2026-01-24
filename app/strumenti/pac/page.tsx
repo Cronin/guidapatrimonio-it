@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget} from '@/components'
+import { Navbar, Footer , RatingWidget, FreeToolBanner} from '@/components'
 
 export default function SimulatorePAC() {
   const [versamentoMensile, setVersamentoMensile] = useState(300)
@@ -63,6 +63,7 @@ export default function SimulatorePAC() {
   return (
     <main>
       <Navbar />
+      <FreeToolBanner />
 
       {/* Hero */}
       <section className="bg-forest pt-navbar">
