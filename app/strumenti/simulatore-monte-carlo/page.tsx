@@ -1280,6 +1280,11 @@ export default function SimulatoreMonteCarloPage() {
         </div>
       </section>
 
+      {/* Rating Widget */}
+      <div className="container-custom py-8">
+        <RatingWidget toolSlug="simulatore-monte-carlo" toolName="Simulatore Monte Carlo" />
+      </div>
+
       {/* CTA */}
       <section className="section-sm bg-gradient-to-br from-forest to-green-700">
         <div className="container-custom text-center">

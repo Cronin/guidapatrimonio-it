@@ -1126,6 +1126,11 @@ export default function AnalizzatoreCostiFondi() {
       {/* Related Tools */}
       <RelatedTools tools={relatedTools} title="Strumenti correlati" />
 
+      {/* Rating Widget */}
+      <div className="container-custom py-8">
+        <RatingWidget toolSlug="analizzatore-costi-fondi" toolName="Analizzatore Costi Fondi" />
+      </div>
+
       <Footer />
     </main>
   )

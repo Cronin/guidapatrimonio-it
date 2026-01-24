@@ -633,6 +633,11 @@ export default function PortfolioRebalancer() {
         </div>
       </section>
 
+      {/* Rating Widget */}
+      <div className="container-custom py-8">
+        <RatingWidget toolSlug="portfolio-rebalancer" toolName="portfolio-rebalancer" />
+      </div>
+
       <Footer />
     </main>
   )

@@ -639,6 +639,11 @@ export default function OttimizzatoreAllocazione() {
         </div>
       </section>
 
+      {/* Rating Widget */}
+      <div className="container-custom py-8">
+        <RatingWidget toolSlug="ottimizzatore-allocazione" toolName="ottimizzatore-allocazione" />
+      </div>
+
       <Footer />
     </main>
   )

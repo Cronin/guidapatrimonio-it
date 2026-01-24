@@ -790,6 +790,11 @@ export default function DashboardMacro() {
         </div>
       </section>
 
+      {/* Rating Widget */}
+      <div className="container-custom py-8">
+        <RatingWidget toolSlug="dashboard-macro" toolName="dashboard-macro" />
+      </div>
+
       <Footer />
     </main>
   )

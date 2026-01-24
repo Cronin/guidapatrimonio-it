@@ -908,6 +908,11 @@ export default function ConfrontoETF() {
         </div>
       </section>
 
+      {/* Rating Widget */}
+      <div className="container-custom py-8">
+        <RatingWidget toolSlug="confronto-etf" toolName="confronto-etf" />
+      </div>
+
       <Footer />
     </main>
   )

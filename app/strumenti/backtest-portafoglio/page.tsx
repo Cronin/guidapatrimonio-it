@@ -1481,6 +1481,11 @@ export default function BacktestPortafoglio() {
         </div>
       </section>
 
+      {/* Rating Widget */}
+      <div className="container-custom py-8">
+        <RatingWidget toolSlug="backtest-portafoglio" toolName="backtest-portafoglio" />
+      </div>
+
       <Footer />
     </main>
   )

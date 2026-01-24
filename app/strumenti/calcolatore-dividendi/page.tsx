@@ -512,6 +512,11 @@ export default function CalcolatoreDividendi() {
         </div>
       </section>
 
+      {/* Rating Widget */}
+      <div className="container-custom py-8">
+        <RatingWidget toolSlug="calcolatore-dividendi" toolName="calcolatore-dividendi" />
+      </div>
+
       <Footer />
     </main>
   )

@@ -351,6 +351,11 @@ export default function AIAdvisor() {
         </div>
       </section>
 
+      {/* Rating Widget */}
+      <div className="container-custom py-8">
+        <RatingWidget toolSlug="ai-advisor" toolName="ai-advisor" />
+      </div>
+
       <Footer />
     </main>
   )

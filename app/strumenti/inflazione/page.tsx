@@ -284,6 +284,11 @@ export default function CalcolatoreInflazione() {
         </div>
       </section>
 
+      {/* Rating Widget */}
+      <div className="container-custom py-8">
+        <RatingWidget toolSlug="inflazione" toolName="inflazione" />
+      </div>
+
       <Footer />
     </main>
   )

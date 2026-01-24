@@ -1414,6 +1414,11 @@ export default function PortfolioTracker() {
         </div>
       </section>
 
+      {/* Rating Widget */}
+      <div className="container-custom py-8">
+        <RatingWidget toolSlug="portfolio-tracker" toolName="portfolio-tracker" />
+      </div>
+
       <Footer />
     </main>
   )

@@ -635,6 +635,11 @@ export default function CalcolatoreTassoPrelievoSicuro() {
         </div>
       </section>
 
+      {/* Rating Widget */}
+      <div className="container-custom py-8">
+        <RatingWidget toolSlug="tasso-prelievo-sicuro" toolName="tasso-prelievo-sicuro" />
+      </div>
+
       <Footer />
     </main>
   )

@@ -313,6 +313,11 @@ export default function InteresseComposto() {
         </div>
       </section>
 
+      {/* Rating Widget */}
+      <div className="container-custom py-8">
+        <RatingWidget toolSlug="interesse-composto" toolName="interesse-composto" />
+      </div>
+
       <Footer />
     </main>
   )

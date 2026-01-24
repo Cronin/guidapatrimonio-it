@@ -309,6 +309,11 @@ export default function CalcolatorePensione() {
         </div>
       </section>
 
+      {/* Rating Widget */}
+      <div className="container-custom py-8">
+        <RatingWidget toolSlug="pensione" toolName="pensione" />
+      </div>
+
       <Footer />
     </main>
   )

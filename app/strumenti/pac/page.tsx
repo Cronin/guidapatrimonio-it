@@ -270,6 +270,11 @@ export default function SimulatorePAC() {
         </div>
       </section>
 
+      {/* Rating Widget */}
+      <div className="container-custom py-8">
+        <RatingWidget toolSlug="pac" toolName="pac" />
+      </div>
+
       <Footer />
     </main>
   )

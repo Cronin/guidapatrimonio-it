@@ -1544,6 +1544,11 @@ DISCLAIMER: Questo documento e solo a scopo informativo. Consulta un commerciali
         </div>
       </section>
 
+      {/* Rating Widget */}
+      <div className="container-custom py-8">
+        <RatingWidget toolSlug="calcolatore-minusvalenze" toolName="calcolatore-minusvalenze" />
+      </div>
+
       <Footer />
     </main>
   )

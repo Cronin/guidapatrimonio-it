@@ -853,6 +853,11 @@ export default function InteresseCompostoAvanzato() {
         </div>
       </section>
 
+      {/* Rating Widget */}
+      <div className="container-custom py-8">
+        <RatingWidget toolSlug="interesse-composto-avanzato" toolName="interesse-composto-avanzato" />
+      </div>
+
       <Footer />
     </main>
   )
