@@ -2,35 +2,7 @@
 
 import { useState, useMemo, useRef } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, JsonLd, createCalculatorSchema, createBreadcrumbSchema, createFAQSchema , RatingWidget, ToolPageSchema} from '@/components'
-
-// JSON-LD Structured Data
-const calculatorSchema = createCalculatorSchema({
-  name: 'Calcolatore Patrimonio Netto Avanzato',
-  description: 'Calcola il tuo patrimonio netto con analisi dettagliata di attivita e passivita. Confronto con benchmark HNWI italiani, proiezioni di crescita e suggerimenti di allocazione.',
-  url: 'https://guidapatrimonio.it/strumenti/calcolatore-patrimonio-netto',
-})
-
-const breadcrumbSchema = createBreadcrumbSchema([
-  { name: 'Home', url: 'https://guidapatrimonio.it' },
-  { name: 'Strumenti', url: 'https://guidapatrimonio.it/strumenti' },
-  { name: 'Calcolatore Patrimonio Netto', url: 'https://guidapatrimonio.it/strumenti/calcolatore-patrimonio-netto' },
-])
-
-const faqSchema = createFAQSchema([
-  {
-    question: 'Come si calcola il patrimonio netto?',
-    answer: 'Il patrimonio netto si calcola sottraendo le passivita (debiti) dalle attivita (cio che si possiede). La formula e: Patrimonio Netto = Totale Attivita - Totale Passivita.',
-  },
-  {
-    question: 'Qual e un buon rapporto debito/patrimonio?',
-    answer: 'Un buon rapporto debito/attivita dovrebbe essere sotto il 30%. Oltre il 50% indica un livello di indebitamento elevato che richiede attenzione.',
-  },
-  {
-    question: 'Quanto patrimonio serve per essere nel top 1% in Italia?',
-    answer: 'Per essere nel top 1% della popolazione italiana per patrimonio netto serve un patrimonio di almeno 1,5 milioni di euro secondo le stime Banca d\'Italia.',
-  },
-])
+import { Navbar, Footer, RatingWidget, ToolPageSchema} from '@/components'
 
 // Asset categories with colors for pie chart
 const categorieAttivi = {
@@ -294,7 +266,6 @@ export default function CalcolatorePatrimonioNettoAvanzato() {
   return (
     <main>
       <ToolPageSchema slug="calcolatore-patrimonio-netto" />
-      <JsonLd data={[calculatorSchema, breadcrumbSchema, faqSchema]} />
       <Navbar />
 
       <section className="bg-forest pt-navbar">
