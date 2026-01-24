@@ -4,7 +4,6 @@ import {
   About,
   WhoWeHelp,
   HowWeHelp,
-  Testimonials,
   CTA,
   Contact,
   Footer,
@@ -18,7 +17,6 @@ export default function Home() {
       <About />
       <WhoWeHelp />
       <HowWeHelp />
-      <Testimonials />
       <CTA />
       <Contact />
       <Footer />

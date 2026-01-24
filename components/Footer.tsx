@@ -117,7 +117,7 @@ export default function Footer() {
               © {new Date().getFullYear()} Guida Patrimonio. Tutti i diritti riservati.
             </p>
             <p className="text-body-sm text-white/50">
-              Consulenza patrimoniale indipendente | Ginevra, Svizzera
+              Consulenza patrimoniale indipendente | Milano, Italia
             </p>
           </div>
         </div>

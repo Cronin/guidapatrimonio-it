@@ -37,6 +37,17 @@ export const organizationSchema = {
     addressRegion: 'Lombardia',
     addressCountry: 'IT',
   },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 45.4686,
+    longitude: 9.1954,
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '00:00',
+    closes: '23:59',
+  },
   areaServed: {
     '@type': 'Country',
     name: 'Italia',
