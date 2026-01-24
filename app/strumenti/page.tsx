@@ -3,12 +3,23 @@ import { Navbar, Footer, JsonLd, createToolListSchema, createBreadcrumbSchema } 
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Strumenti Gestione Patrimonio HNWI | Guida Patrimonio',
-  description: 'Simulatori per HNWI: holding, trust, family office, exit strategy, pianificazione successoria, ottimizzazione fiscale internazionale. Per patrimoni da €1M+.',
-  keywords: ['gestione patrimonio', 'HNWI', 'family office', 'holding familiare', 'trust italia', 'pianificazione successoria', 'private banking', 'flat tax italia'],
+  title: 'Strumenti Finanziari GRATIS | Alternativa JustETF, Wallible, Sharesight',
+  description: 'Alternative GRATUITE a JustETF, Wallible, Sharesight, TasseTrading. Portfolio tracker, calcolatore plusvalenze, Monte Carlo, backtest. Risparmia €60-360/anno.',
+  keywords: [
+    'alternativa justetf gratis',
+    'wallible gratis',
+    'sharesight alternativa',
+    'portfolio tracker gratis italia',
+    'calcolatore plusvalenze gratis',
+    'tassetrading alternativa gratis',
+    'backtest portafoglio gratis',
+    'simulatore monte carlo gratis',
+    'analizzatore costi fondi gratis',
+    'calcolatore minusvalenze gratis'
+  ],
   openGraph: {
-    title: 'Strumenti per Gestione Grandi Patrimoni',
-    description: 'Simulatori per holding, trust, family office, fiscalità internazionale. Per patrimoni oltre €1M.',
+    title: 'Strumenti Finanziari GRATIS | Alternative a Software a Pagamento',
+    description: 'Portfolio tracker, calcolatore plusvalenze, Monte Carlo e 40+ strumenti gratuiti. Risparmia €60-360/anno rispetto a JustETF, Wallible, Sharesight.',
     type: 'website',
   },
 }
@@ -17,6 +28,8 @@ interface Tool {
   title: string
   description: string
   href: string
+  alternativeTo?: string
+  savedCost?: string
 }
 
 interface ToolCategory {
@@ -24,7 +37,114 @@ interface ToolCategory {
   tools: Tool[]
 }
 
+// Software a pagamento che replichiamo
+const paidAlternatives = [
+  {
+    name: 'JustETF Premium',
+    cost: '€60-240/anno',
+    ourTool: 'Portfolio Tracker + Confronto ETF',
+    href: '/strumenti/portfolio-tracker'
+  },
+  {
+    name: 'Wallible Pro',
+    cost: '€59.90/anno',
+    ourTool: 'Portfolio Tracker + Backtest',
+    href: '/strumenti/portfolio-tracker'
+  },
+  {
+    name: 'Sharesight',
+    cost: '$276/anno',
+    ourTool: 'Portfolio Tracker + Calcolatore Plusvalenze',
+    href: '/strumenti/calcolatore-plusvalenze'
+  },
+  {
+    name: 'TasseTrading',
+    cost: '€50-200/pratica',
+    ourTool: 'Calcolatore Plusvalenze + Minusvalenze',
+    href: '/strumenti/calcolatore-plusvalenze'
+  },
+  {
+    name: 'Portfolio Visualizer',
+    cost: '$360/anno',
+    ourTool: 'Backtest + Monte Carlo',
+    href: '/strumenti/backtest-portafoglio'
+  },
+  {
+    name: 'Kubera',
+    cost: '$249-360/anno',
+    ourTool: 'Portfolio Tracker + Patrimonio Netto',
+    href: '/strumenti/portfolio-tracker'
+  },
+]
+
 const toolCategories: ToolCategory[] = [
+  {
+    title: 'Calcolatori Fiscali GRATIS',
+    tools: [
+      {
+        title: 'Calcolatore Plusvalenze GRATIS',
+        description: 'Calcola tasse su azioni, ETF, obbligazioni. Aliquote 26% e 12.5%. Alternativa a TasseTrading.',
+        href: '/strumenti/calcolatore-plusvalenze',
+        alternativeTo: 'TasseTrading',
+        savedCost: '€50-200'
+      },
+      {
+        title: 'Calcolatore Minusvalenze GRATIS',
+        description: 'Gestisci zainetto fiscale, scadenze 4 anni e compensazioni FIFO.',
+        href: '/strumenti/calcolatore-minusvalenze',
+        alternativeTo: 'TasseTrading',
+        savedCost: '€50-200'
+      },
+      {
+        title: 'Tax Loss Harvesting',
+        description: 'Ottimizza la compensazione tra plus e minusvalenze.',
+        href: '/strumenti/tax-loss-harvesting'
+      },
+    ],
+  },
+  {
+    title: 'Portfolio & Investimenti GRATIS',
+    tools: [
+      {
+        title: 'Portfolio Tracker GRATIS',
+        description: 'Traccia azioni, ETF, fondi. Calcola P&L. Alternativa a JustETF, Wallible, Sharesight.',
+        href: '/strumenti/portfolio-tracker',
+        alternativeTo: 'JustETF/Wallible',
+        savedCost: '€60-276'
+      },
+      {
+        title: 'Backtest Portafoglio GRATIS',
+        description: 'Rendimenti storici, CAGR, Sharpe ratio. Alternativa a Portfolio Visualizer.',
+        href: '/strumenti/backtest-portafoglio',
+        alternativeTo: 'Portfolio Visualizer',
+        savedCost: '$360'
+      },
+      {
+        title: 'Simulatore Monte Carlo GRATIS',
+        description: 'Simula 1000+ scenari probabilistici. Alternativa a Portfolio Visualizer.',
+        href: '/strumenti/simulatore-monte-carlo',
+        alternativeTo: 'Portfolio Visualizer',
+        savedCost: '$360'
+      },
+      {
+        title: 'Analizzatore Costi Fondi GRATIS',
+        description: 'Calcola TER, commissioni nascoste. Confronta fino a 3 fondi.',
+        href: '/strumenti/analizzatore-costi-fondi'
+      },
+      {
+        title: 'Confronto ETF',
+        description: 'Confronta ETF per TER, AUM, replica. Come JustETF ma gratis.',
+        href: '/strumenti/confronto-etf',
+        alternativeTo: 'JustETF Premium',
+        savedCost: '€60-240'
+      },
+      {
+        title: 'Simulatore PAC',
+        description: 'Piano di Accumulo con interesse composto e tassazione italiana.',
+        href: '/strumenti/pac'
+      },
+    ],
+  },
   {
     title: 'Strutture Societarie',
     tools: [
@@ -136,13 +256,57 @@ export default function Strumenti() {
       <section className="bg-forest pt-navbar">
         <div className="container-custom py-20 md:py-28">
           <p className="text-green-300/60 text-sm font-medium tracking-wider uppercase mb-4">
-            Per patrimoni oltre €1M
+            100% Gratuiti - Risparmia fino a €360/anno
           </p>
           <h1 className="font-heading text-[40px] md:text-[56px] text-white leading-tight max-w-2xl">
-            Strumenti per wealth management
+            Alternative gratuite a JustETF, Wallible e Sharesight
           </h1>
           <p className="text-lg text-white/50 mt-6 max-w-lg">
-            Holding, trust, family office, exit strategy, fiscalità internazionale.
+            Portfolio tracker, calcolatore plusvalenze, simulatore Monte Carlo e 40+ strumenti professionali. Gratis.
+          </p>
+        </div>
+      </section>
+
+      {/* Tabella confronto software a pagamento */}
+      <section className="bg-amber-50 py-12 border-b border-amber-200">
+        <div className="container-custom">
+          <h2 className="font-heading text-2xl text-forest mb-6 text-center">
+            Quanto risparmi con i nostri strumenti gratuiti?
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="w-full bg-white rounded-lg shadow-sm">
+              <thead>
+                <tr className="border-b bg-gray-50">
+                  <th className="text-left py-4 px-4 font-medium text-gray-600">Software a Pagamento</th>
+                  <th className="text-left py-4 px-4 font-medium text-gray-600">Costo</th>
+                  <th className="text-left py-4 px-4 font-medium text-gray-600">Nostra Alternativa Gratis</th>
+                  <th className="text-center py-4 px-4 font-medium text-gray-600">Risparmio</th>
+                </tr>
+              </thead>
+              <tbody>
+                {paidAlternatives.map((alt, i) => (
+                  <tr key={i} className="border-b hover:bg-gray-50">
+                    <td className="py-4 px-4">
+                      <span className="font-medium text-gray-800">{alt.name}</span>
+                    </td>
+                    <td className="py-4 px-4 text-red-600 font-medium">{alt.cost}</td>
+                    <td className="py-4 px-4">
+                      <Link href={alt.href} className="text-green-600 hover:text-green-700 font-medium">
+                        {alt.ourTool} →
+                      </Link>
+                    </td>
+                    <td className="py-4 px-4 text-center">
+                      <span className="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
+                        GRATIS
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-center text-gray-500 text-sm mt-4">
+            I prezzi indicati sono quelli pubblicati sui siti ufficiali dei rispettivi software (gennaio 2026)
           </p>
         </div>
       </section>
@@ -163,15 +327,48 @@ export default function Strumenti() {
                         <span className="font-heading text-lg text-forest group-hover:text-green-600 transition-colors">
                           {tool.title}
                         </span>
+                        {tool.alternativeTo && (
+                          <span className="ml-2 text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">
+                            vs {tool.alternativeTo}
+                          </span>
+                        )}
                         <p className="text-sm text-gray-400 mt-0.5">
                           {tool.description}
                         </p>
+                        {tool.savedCost && (
+                          <p className="text-xs text-green-600 mt-1">
+                            Risparmia {tool.savedCost}/anno
+                          </p>
+                        )}
                       </Link>
                     </li>
                   ))}
                 </ul>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SEO Text Section */}
+      <section className="bg-gray-50 py-12">
+        <div className="container-custom">
+          <div className="max-w-3xl mx-auto prose prose-sm">
+            <h2 className="font-heading text-xl text-forest">Perché offriamo questi strumenti gratis?</h2>
+            <p className="text-gray-600">
+              Crediamo che gli strumenti finanziari di base debbano essere accessibili a tutti gli investitori italiani,
+              non solo a chi può permettersi abbonamenti da €60-360 all&apos;anno. I nostri calcolatori sono progettati
+              specificamente per la <strong>fiscalità italiana</strong> (aliquote 26% e 12.5%, regime amministrato vs dichiarativo,
+              compensazione minusvalenze).
+            </p>
+            <h3 className="font-heading text-lg text-forest mt-6">Alternative gratuite ai software più popolari</h3>
+            <ul className="text-gray-600 space-y-2">
+              <li><strong>Alternativa a JustETF Premium:</strong> Il nostro Portfolio Tracker e Confronto ETF offrono funzionalità simili senza abbonamento.</li>
+              <li><strong>Alternativa a Wallible Pro:</strong> Portfolio Tracker con import posizioni e calcolo P&L in tempo reale.</li>
+              <li><strong>Alternativa a Sharesight:</strong> Calcolatore Plusvalenze ottimizzato per la fiscalità italiana, non australiana.</li>
+              <li><strong>Alternativa a TasseTrading:</strong> Calcola plusvalenze e minusvalenze senza pagare €50-200 per pratica.</li>
+              <li><strong>Alternativa a Portfolio Visualizer:</strong> Backtest e Monte Carlo con 1000+ simulazioni.</li>
+            </ul>
           </div>
         </div>
       </section>
