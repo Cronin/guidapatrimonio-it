@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget} from '@/components'
 
 export default function SimulatoreHolding() {
   // Input values
@@ -518,6 +518,11 @@ export default function SimulatoreHolding() {
           </div>
         </div>
       </section>
+
+      {/* Rating Widget */}
+      <div className="container-custom pb-8">
+        <RatingWidget toolSlug="holding" toolName="holding" />
+      </div>
 
       <RelatedTools tools={toolCorrelations.holding} />
 

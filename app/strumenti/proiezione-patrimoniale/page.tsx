@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer , RatingWidget} from '@/components'
 
 interface ProiezioneAnno {
   anno: number
@@ -855,6 +855,11 @@ export default function ProiezionePatrimoniale() {
           </div>
         </div>
       </section>
+
+      {/* Rating Widget */}
+      <div className="container-custom pb-8">
+        <RatingWidget toolSlug="proiezione-patrimoniale" toolName="proiezione-patrimoniale" />
+      </div>
 
       <section className="section-sm bg-green-600">
         <div className="container-custom text-center">

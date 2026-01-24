@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer , RatingWidget} from '@/components'
 
 export default function CalcolatoreBudget() {
   const [redditoNetto, setRedditoNetto] = useState(2500)
@@ -226,6 +226,11 @@ export default function CalcolatoreBudget() {
           </div>
         </div>
       </section>
+
+      {/* Rating Widget */}
+      <div className="container-custom pb-8">
+        <RatingWidget toolSlug="budget" toolName="budget" />
+      </div>
 
       <section className="section-sm bg-green-600">
         <div className="container-custom text-center">

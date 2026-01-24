@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget} from '@/components'
 
 // IRPEF brackets 2024
 const IRPEF_BRACKETS = [
@@ -449,6 +449,11 @@ export default function CalcolatoreFlatTax() {
           </Link>
         </div>
       </section>
+
+      {/* Rating Widget */}
+      <div className="container-custom pb-8">
+        <RatingWidget toolSlug="flat-tax-100k" toolName="flat-tax-100k" />
+      </div>
 
       <RelatedTools tools={toolCorrelations['flat-tax-100k']} />
 

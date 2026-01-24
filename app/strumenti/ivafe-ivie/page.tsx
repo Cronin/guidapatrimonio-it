@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget} from '@/components'
 
 type TipoAsset = 'conto' | 'azioni' | 'obbligazioni' | 'etf' | 'fondi' | 'cripto' | 'altro_finanziario'
 type TipoImmobile = 'residenziale' | 'commerciale' | 'terreno'
@@ -691,6 +691,11 @@ export default function CalcolatoreIVAFEIVIE() {
           </Link>
         </div>
       </section>
+
+      {/* Rating Widget */}
+      <div className="container-custom pb-8">
+        <RatingWidget toolSlug="ivafe-ivie" toolName="ivafe-ivie" />
+      </div>
 
       <RelatedTools tools={toolCorrelations['ivafe-ivie']} />
 

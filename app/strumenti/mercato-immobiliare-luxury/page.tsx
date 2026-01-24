@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget} from '@/components'
 
 // Static data - imported directly for SSG compatibility
 const luxuryData = {
@@ -768,6 +768,11 @@ export default function MercatoImmobiliareLuxury() {
           </p>
         </div>
       </section>
+
+      {/* Rating Widget */}
+      <div className="container-custom pb-8">
+        <RatingWidget toolSlug="mercato-immobiliare-luxury" toolName="mercato-immobiliare-luxury" />
+      </div>
 
       <RelatedTools tools={toolCorrelations['mercato-immobiliare-luxury']} />
 

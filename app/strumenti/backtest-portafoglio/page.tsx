@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer , RatingWidget} from '@/components'
 
 // =============================================================================
 // ASSET CLASS DATA - Rendimenti storici realistici basati su dati 1970-2024

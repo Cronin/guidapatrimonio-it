@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer , RatingWidget} from '@/components'
 
 interface AssetClass {
   name: string

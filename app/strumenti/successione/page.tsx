@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget} from '@/components'
 
 interface Erede {
   id: string
@@ -539,6 +539,11 @@ export default function CalcolatoreSuccessione() {
           </div>
         </div>
       </section>
+
+      {/* Rating Widget */}
+      <div className="container-custom pb-8">
+        <RatingWidget toolSlug="successione" toolName="successione" />
+      </div>
 
       <RelatedTools tools={toolCorrelations.successione} />
 

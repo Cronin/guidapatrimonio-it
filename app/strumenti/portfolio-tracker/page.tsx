@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer , RatingWidget} from '@/components'
 
 interface Posizione {
   id: string

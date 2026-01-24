@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer , RatingWidget} from '@/components'
 
 interface BondData {
   name: string
@@ -557,6 +557,11 @@ export default function ScalaObbligazionaria() {
           </div>
         </div>
       </section>
+
+      {/* Rating Widget */}
+      <div className="container-custom pb-8">
+        <RatingWidget toolSlug="scala-obbligazionaria" toolName="scala-obbligazionaria" />
+      </div>
 
       <section className="section-sm bg-green-600">
         <div className="container-custom text-center">

@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer , RatingWidget} from '@/components'
 
 export default function CalcolatoreMutuo() {
   const [importo, setImporto] = useState(200000)
@@ -214,6 +214,11 @@ export default function CalcolatoreMutuo() {
           </div>
         </div>
       </section>
+
+      {/* Rating Widget */}
+      <div className="container-custom pb-8">
+        <RatingWidget toolSlug="mutuo" toolName="mutuo" />
+      </div>
 
       <section className="section-sm bg-green-600">
         <div className="container-custom text-center">

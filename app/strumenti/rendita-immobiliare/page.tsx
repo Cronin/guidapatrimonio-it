@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer , RatingWidget} from '@/components'
 
 export default function CalcolatoreRenditaImmobiliare() {
   const [prezzoAcquisto, setPrezzoAcquisto] = useState(200000)
@@ -264,6 +264,11 @@ export default function CalcolatoreRenditaImmobiliare() {
           </div>
         </div>
       </section>
+
+      {/* Rating Widget */}
+      <div className="container-custom pb-8">
+        <RatingWidget toolSlug="rendita-immobiliare" toolName="rendita-immobiliare" />
+      </div>
 
       <section className="section-sm bg-green-600">
         <div className="container-custom text-center">

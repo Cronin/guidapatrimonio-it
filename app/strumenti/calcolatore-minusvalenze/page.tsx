@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect, useCallback } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer , RatingWidget} from '@/components'
 
 // Tipi di asset secondo normativa italiana
 type TipoAsset = 'azioni' | 'etf' | 'etc' | 'obbligazioni' | 'certificati'

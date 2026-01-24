@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget} from '@/components'
 
 type Relazione = 'coniuge' | 'figlio' | 'fratello' | 'altro'
 type Priorita = 'protezione' | 'controllo' | 'fiscale' | 'flessibilita'
@@ -751,6 +751,11 @@ export default function ConfrontoTrustDonazione() {
           </div>
         </div>
       </section>
+
+      {/* Rating Widget */}
+      <div className="container-custom pb-8">
+        <RatingWidget toolSlug="trust-donazione" toolName="trust-donazione" />
+      </div>
 
       <RelatedTools tools={toolCorrelations['trust-donazione']} />
 

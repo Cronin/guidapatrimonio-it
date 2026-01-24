@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget} from '@/components'
 
 interface Auction {
   id: string
@@ -687,6 +687,11 @@ export default function AsteImmobiliariLuxury() {
           </Link>
         </div>
       </section>
+
+      {/* Rating Widget */}
+      <div className="container-custom pb-8">
+        <RatingWidget toolSlug="aste-immobiliari-luxury" toolName="aste-immobiliari-luxury" />
+      </div>
 
       <RelatedTools tools={toolCorrelations['aste-immobiliari-luxury']} />
 

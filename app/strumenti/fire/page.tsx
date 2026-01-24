@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget} from '@/components'
 
 export default function CalcolatoreFIRE() {
   const [speseAnnue, setSpeseAnnue] = useState(30000)
@@ -260,6 +260,11 @@ export default function CalcolatoreFIRE() {
           </Link>
         </div>
       </section>
+
+      {/* Rating Widget */}
+      <div className="container-custom pb-8">
+        <RatingWidget toolSlug="fire" toolName="fire" />
+      </div>
 
       <RelatedTools tools={toolCorrelations.fire} />
 

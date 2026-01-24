@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer } from '@/components'
+import { Navbar, Footer , RatingWidget} from '@/components'
 
 export default function CalcolatoreFondoEmergenza() {
   const [speseMensili, setSpeseMensili] = useState(2000)
@@ -240,6 +240,11 @@ export default function CalcolatoreFondoEmergenza() {
           </div>
         </div>
       </section>
+
+      {/* Rating Widget */}
+      <div className="container-custom pb-8">
+        <RatingWidget toolSlug="fondo-emergenza" toolName="fondo-emergenza" />
+      </div>
 
       <section className="section-sm bg-green-600">
         <div className="container-custom text-center">
