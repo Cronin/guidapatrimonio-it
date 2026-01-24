@@ -1,7 +1,13 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import { Playfair_Display, DM_Sans } from 'next/font/google'
 import './globals.css'
 import { JsonLd, organizationSchema, websiteSchema } from '@/components'
+
+// TODO: Create GA4 property on analytics.google.com and update this ID
+const GA4_MEASUREMENT_ID = 'G-XXXXXXXXXX'
+// TODO: Create Clarity project on clarity.microsoft.com and update this ID
+const CLARITY_ID = 'XXXXXXXXXX'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -60,6 +66,31 @@ export default function RootLayout({
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <JsonLd data={[organizationSchema, websiteSchema]} />
+
+        {/* Google Analytics 4 */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-config" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA4_MEASUREMENT_ID}');
+          `}
+        </Script>
+
+        {/* Microsoft Clarity */}
+        <Script id="clarity-script" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "${CLARITY_ID}");
+          `}
+        </Script>
       </head>
       <body className="font-body antialiased">
         {children}

@@ -2,6 +2,12 @@
 
 import { useState } from 'react'
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void
+  }
+}
+
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     nome: '',
@@ -17,14 +23,24 @@ export default function ContactForm() {
     setStatus('loading')
 
     try {
-      // Per ora salviamo in localStorage come backup e mostriamo successo
-      // In produzione collegare a Mailgun/email service
-      const submissions = JSON.parse(localStorage.getItem('contact_submissions') || '[]')
-      submissions.push({
-        ...formData,
-        timestamp: new Date().toISOString(),
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
       })
-      localStorage.setItem('contact_submissions', JSON.stringify(submissions))
+
+      if (!response.ok) {
+        throw new Error('Failed to submit')
+      }
+
+      // Track conversion in GA4
+      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+        window.gtag('event', 'generate_lead', {
+          event_category: 'form',
+          event_label: 'contact_form_submission',
+          value: formData.patrimonio || 'non_specificato',
+        })
+      }
 
       setStatus('success')
       setFormData({ nome: '', email: '', telefono: '', patrimonio: '', messaggio: '' })
