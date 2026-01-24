@@ -39,11 +39,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const categoryColors: Record<string, { bg: string; text: string }> = {
-  'Mercati': { bg: 'bg-amber-100', text: 'text-amber-700' },
-  'Fiscalita': { bg: 'bg-red-100', text: 'text-red-700' },
-  'Immobiliare': { bg: 'bg-blue-100', text: 'text-blue-700' },
+  'Mercati': { bg: 'bg-green-100', text: 'text-green-700' },
+  'Fiscalita': { bg: 'bg-green-100', text: 'text-green-700' },
+  'Immobiliare': { bg: 'bg-green-100', text: 'text-green-700' },
   'Wealth': { bg: 'bg-green-100', text: 'text-green-700' },
-  'Lifestyle': { bg: 'bg-purple-100', text: 'text-purple-700' },
+  'Lifestyle': { bg: 'bg-green-100', text: 'text-green-700' },
 }
 
 function parseContent(content: string) {
