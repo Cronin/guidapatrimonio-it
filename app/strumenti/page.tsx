@@ -26,7 +26,7 @@ interface Tool {
   title: string
   description: string
   href: string
-  price?: string
+  price: number
   featured?: boolean
 }
 
@@ -35,12 +35,8 @@ interface ToolCategory {
   tools: Tool[]
 }
 
-// Prezzi degli strumenti (valore singolo)
-const toolPricing = {
-  total: '€890',
-  monthly: '€74',
-  perTool: '€19-89',
-}
+// Mese corrente per offerta dinamica
+const currentMonth = new Date().toLocaleDateString('it-IT', { month: 'long' })
 
 const toolCategories: ToolCategory[] = [
   {
@@ -50,20 +46,20 @@ const toolCategories: ToolCategory[] = [
         title: 'Calcolatore Plusvalenze',
         description: 'Calcola tasse su azioni, ETF, obbligazioni. Aliquote 26% e 12.5%. Fiscalità italiana.',
         href: '/strumenti/calcolatore-plusvalenze',
-        price: '€49',
+        price: 49,
         featured: true
       },
       {
         title: 'Calcolatore Minusvalenze',
         description: 'Gestisci zainetto fiscale, scadenze 4 anni e compensazioni FIFO.',
         href: '/strumenti/calcolatore-minusvalenze',
-        price: '€39'
+        price: 39
       },
       {
         title: 'Tax Loss Harvesting',
         description: 'Ottimizza la compensazione tra plus e minusvalenze.',
         href: '/strumenti/tax-loss-harvesting',
-        price: '€29'
+        price: 29
       },
     ],
   },
@@ -74,40 +70,40 @@ const toolCategories: ToolCategory[] = [
         title: 'Portfolio Tracker Pro',
         description: 'Traccia azioni, ETF, fondi. Calcola P&L, allocazione, performance vs benchmark.',
         href: '/strumenti/portfolio-tracker',
-        price: '€89',
+        price: 89,
         featured: true
       },
       {
         title: 'Backtest Portafoglio',
         description: 'Rendimenti storici, CAGR, Sharpe ratio, drawdown analysis.',
         href: '/strumenti/backtest-portafoglio',
-        price: '€69',
+        price: 69,
         featured: true
       },
       {
         title: 'Simulatore Monte Carlo',
         description: 'Simula 10.000+ scenari probabilistici per proiezioni realistiche.',
         href: '/strumenti/simulatore-monte-carlo',
-        price: '€59',
+        price: 59,
         featured: true
       },
       {
         title: 'Analizzatore Costi Fondi',
         description: 'Calcola TER, commissioni nascoste. Confronta fino a 3 fondi.',
         href: '/strumenti/analizzatore-costi-fondi',
-        price: '€29'
+        price: 29
       },
       {
         title: 'Confronto ETF',
         description: 'Confronta ETF per TER, AUM, replica, tracking difference.',
         href: '/strumenti/confronto-etf',
-        price: '€39'
+        price: 39
       },
       {
         title: 'Simulatore PAC',
         description: 'Piano di Accumulo con interesse composto e tassazione italiana.',
         href: '/strumenti/pac',
-        price: '€19'
+        price: 19
       },
     ],
   },
@@ -118,20 +114,20 @@ const toolCategories: ToolCategory[] = [
         title: 'Simulatore Holding',
         description: 'Confronto persona fisica vs holding. Regime PEX, dividendi, exit.',
         href: '/strumenti/holding',
-        price: '€79',
+        price: 79,
         featured: true
       },
       {
         title: 'Family Office Calculator',
         description: 'Analisi costi-benefici per patrimoni da €5M+.',
         href: '/strumenti/family-office',
-        price: '€89'
+        price: 89
       },
       {
         title: 'Exit Strategy Planner',
         description: 'Trade sale, MBO, IPO. Ottimizzazione fiscale con PEX.',
         href: '/strumenti/exit-strategy',
-        price: '€69'
+        price: 69
       },
     ],
   },
@@ -142,13 +138,13 @@ const toolCategories: ToolCategory[] = [
         title: 'Trust vs Donazione',
         description: 'Protezione, controllo, fiscalità a confronto.',
         href: '/strumenti/trust-donazione',
-        price: '€59'
+        price: 59
       },
       {
         title: 'Pianificatore Successione',
         description: 'Imposte, franchigie, strategie di ottimizzazione.',
         href: '/strumenti/successione',
-        price: '€69',
+        price: 69,
         featured: true
       },
     ],
@@ -160,13 +156,13 @@ const toolCategories: ToolCategory[] = [
         title: 'Flat Tax Neo-Residenti',
         description: 'Regime €100k per redditi esteri. Simulazione risparmio.',
         href: '/strumenti/flat-tax-100k',
-        price: '€49'
+        price: 49
       },
       {
         title: 'IVAFE / IVIE Calculator',
         description: 'Imposte su asset esteri. Calcolo e ottimizzazione.',
         href: '/strumenti/ivafe-ivie',
-        price: '€39'
+        price: 39
       },
     ],
   },
@@ -177,13 +173,13 @@ const toolCategories: ToolCategory[] = [
         title: 'Confronto Private Bank',
         description: 'Top private bank italiane e svizzere. Soglie, servizi, costi.',
         href: '/strumenti/confronto-private-banking',
-        price: '€49'
+        price: 49
       },
       {
         title: 'Fee Analyzer',
         description: 'Management fee, performance fee, costi nascosti.',
         href: '/strumenti/costi-private-banking',
-        price: '€29'
+        price: 29
       },
     ],
   },
@@ -194,26 +190,29 @@ const toolCategories: ToolCategory[] = [
         title: 'Aste Immobiliari Luxury',
         description: 'Ville, attici e immobili di pregio alle aste giudiziarie.',
         href: '/strumenti/aste-immobiliari-luxury',
-        price: '€39'
+        price: 39
       },
       {
         title: 'Mercato Immobiliare Luxury',
         description: 'Prezzi al mq nelle zone premium italiane. Trend e analisi.',
         href: '/strumenti/mercato-immobiliare-luxury',
-        price: '€49'
+        price: 49
       },
       {
         title: 'Portafoglio Immobiliare',
         description: 'Ottimizzazione fiscale. Persona fisica vs società.',
         href: '/strumenti/portafoglio-immobiliare',
-        price: '€59'
+        price: 59
       },
     ],
   },
 ]
 
-// Mese corrente per offerta
-const currentMonth = new Date().toLocaleDateString('it-IT', { month: 'long' })
+// Calcola valore totale e prezzo abbonamento
+const totalValue = toolCategories.reduce((sum, cat) =>
+  sum + cat.tools.reduce((catSum, tool) => catSum + tool.price, 0), 0
+)
+const subscriptionPrice = Math.round(totalValue / 3)
 
 export default function Strumenti() {
   const allTools = toolCategories.flatMap(cat =>
@@ -247,14 +246,29 @@ export default function Strumenti() {
           </h1>
           <p className="text-lg text-white/70 mt-6 max-w-lg">
             Portfolio tracker, simulatori fiscali, pianificazione successoria.
-            Strumenti da {toolPricing.total}/anno, gratuiti per chi si registra.
+            Una suite completa per chi gestisce patrimoni importanti.
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-4">
+
+          {/* Pricing */}
+          <div className="mt-8 bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-md">
+            <div className="flex items-baseline gap-3 mb-2">
+              <span className="text-white/50 line-through text-2xl">€{totalValue}</span>
+              <span className="font-heading text-4xl text-white">€{subscriptionPrice}</span>
+              <span className="text-white/70">/anno</span>
+            </div>
+            <p className="text-white/50 text-sm mb-4">
+              Abbonamento annuale per tutti gli strumenti
+            </p>
+            <div className="bg-gold/20 rounded px-3 py-2 mb-4">
+              <p className="text-gold text-sm font-medium">
+                🎁 Solo per {currentMonth}: registrati e ottieni accesso gratuito per sempre
+              </p>
+            </div>
             <Link
               href="/#contatti"
-              className="inline-flex items-center justify-center gap-2 bg-white text-forest px-6 py-3 rounded font-semibold hover:bg-gray-100 transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-white text-forest px-6 py-3 rounded font-semibold hover:bg-gray-100 transition-colors w-full"
             >
-              Registrati per accesso gratuito
+              Registrati Gratis
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -268,22 +282,18 @@ export default function Strumenti() {
         <div className="container-custom">
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
-              <p className="font-heading text-3xl text-forest">{toolPricing.total}</p>
+              <p className="font-heading text-3xl text-forest">€{totalValue}</p>
               <p className="text-gray-500 text-sm mt-1">Valore totale della suite</p>
             </div>
             <div>
-              <p className="font-heading text-3xl text-forest">40+</p>
+              <p className="font-heading text-3xl text-forest">{toolCategories.reduce((sum, cat) => sum + cat.tools.length, 0)}</p>
               <p className="text-gray-500 text-sm mt-1">Strumenti professionali</p>
             </div>
             <div>
               <p className="font-heading text-3xl text-green-600">€0</p>
-              <p className="text-gray-500 text-sm mt-1">Per sempre se ti registri ora</p>
+              <p className="text-gray-500 text-sm mt-1">Per sempre se ti registri in {currentMonth}</p>
             </div>
           </div>
-          <p className="text-center text-gray-400 text-sm mt-8 max-w-2xl mx-auto">
-            Offriamo questi strumenti gratuitamente per dimostrare la nostra competenza.
-            Chi si registra entro {currentMonth} mantiene l&apos;accesso gratuito per sempre.
-          </p>
         </div>
       </section>
 
@@ -304,11 +314,9 @@ export default function Strumenti() {
                           <span className="font-heading text-lg text-forest group-hover:text-green-600 transition-colors">
                             {tool.title}
                           </span>
-                          {tool.price && (
-                            <span className="text-xs text-gray-400 line-through">
-                              {tool.price}
-                            </span>
-                          )}
+                          <span className="text-xs text-gray-400 line-through">
+                            €{tool.price}
+                          </span>
                           {tool.featured && (
                             <span className="text-xs bg-gold/20 text-gold px-2 py-0.5 rounded">
                               Pro
@@ -332,7 +340,7 @@ export default function Strumenti() {
       <section className="bg-gray-50 py-12">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
-            <h2 className="font-heading text-xl text-forest mb-4">Perché strumenti da {toolPricing.total} sono gratuiti?</h2>
+            <h2 className="font-heading text-xl text-forest mb-4">Perché strumenti da €{totalValue} sono gratuiti?</h2>
             <p className="text-gray-600 mb-4">
               Gestiamo patrimoni significativi e crediamo che la fiducia si costruisca con i fatti, non con le promesse.
               Questi strumenti professionali sono il nostro biglietto da visita: <strong>prima dimostriamo competenza,
