@@ -30,6 +30,7 @@ interface Tool {
   description: string
   href: string
   alternativeTo?: string
+  alternativeLogo?: string
   savedCost?: string
 }
 
@@ -93,6 +94,7 @@ const toolCategories: ToolCategory[] = [
         description: 'Calcola tasse su azioni, ETF, obbligazioni. Aliquote 26% e 12.5%. Alternativa a TasseTrading.',
         href: '/strumenti/calcolatore-plusvalenze',
         alternativeTo: 'TasseTrading',
+        alternativeLogo: '/competitors/tassetrading.png',
         savedCost: '€50-200'
       },
       {
@@ -100,6 +102,7 @@ const toolCategories: ToolCategory[] = [
         description: 'Gestisci zainetto fiscale, scadenze 4 anni e compensazioni FIFO.',
         href: '/strumenti/calcolatore-minusvalenze',
         alternativeTo: 'TasseTrading',
+        alternativeLogo: '/competitors/tassetrading.png',
         savedCost: '€50-200'
       },
       {
@@ -117,6 +120,7 @@ const toolCategories: ToolCategory[] = [
         description: 'Traccia azioni, ETF, fondi. Calcola P&L. Alternativa a JustETF, Wallible, Sharesight.',
         href: '/strumenti/portfolio-tracker',
         alternativeTo: 'JustETF/Wallible',
+        alternativeLogo: '/competitors/justetf.png',
         savedCost: '€60-276'
       },
       {
@@ -124,6 +128,7 @@ const toolCategories: ToolCategory[] = [
         description: 'Rendimenti storici, CAGR, Sharpe ratio. Alternativa a Portfolio Visualizer.',
         href: '/strumenti/backtest-portafoglio',
         alternativeTo: 'Portfolio Visualizer',
+        alternativeLogo: '/competitors/portfoliovisualizer.png',
         savedCost: '$360'
       },
       {
@@ -131,6 +136,7 @@ const toolCategories: ToolCategory[] = [
         description: 'Simula 1000+ scenari probabilistici. Alternativa a Portfolio Visualizer.',
         href: '/strumenti/simulatore-monte-carlo',
         alternativeTo: 'Portfolio Visualizer',
+        alternativeLogo: '/competitors/portfoliovisualizer.png',
         savedCost: '$360'
       },
       {
@@ -143,6 +149,7 @@ const toolCategories: ToolCategory[] = [
         description: 'Confronta ETF per TER, AUM, replica. Come JustETF ma gratis.',
         href: '/strumenti/confronto-etf',
         alternativeTo: 'JustETF Premium',
+        alternativeLogo: '/competitors/justetf.png',
         savedCost: '€60-240'
       },
       {
@@ -340,14 +347,26 @@ export default function Strumenti() {
                   {category.tools.map((tool) => (
                     <li key={tool.title}>
                       <Link href={tool.href} className="group block">
-                        <span className="font-heading text-lg text-forest group-hover:text-green-600 transition-colors">
-                          {tool.title}
-                        </span>
-                        {tool.alternativeTo && (
-                          <span className="ml-2 text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">
-                            vs {tool.alternativeTo}
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="font-heading text-lg text-forest group-hover:text-green-600 transition-colors">
+                            {tool.title}
                           </span>
-                        )}
+                          {tool.alternativeTo && (
+                            <span className="inline-flex items-center gap-1.5 text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">
+                              <span>vs</span>
+                              {tool.alternativeLogo && (
+                                <Image
+                                  src={tool.alternativeLogo}
+                                  alt={tool.alternativeTo}
+                                  width={16}
+                                  height={16}
+                                  className="rounded-sm"
+                                />
+                              )}
+                              <span>{tool.alternativeTo}</span>
+                            </span>
+                          )}
+                        </div>
                         <p className="text-sm text-gray-400 mt-0.5">
                           {tool.description}
                         </p>
