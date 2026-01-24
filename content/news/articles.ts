@@ -21,7 +21,7 @@ export const newsArticles: NewsArticle[] = [
     category: 'Wealth',
     source: 'Henley & Partners',
     sourceUrl: 'https://www.henleyglobal.com/publications/henley-private-wealth-migration-report',
-    image: 'https://images.unsplash.com/photo-1513581166391-887a96ddeafd?w=1200&h=630&fit=crop',
+    image: '/images/news/milano-skyline.jpg',
     content: `
 Milano si conferma capitale mondiale della ricchezza. Non in termini assoluti, ma per concentrazione: **un milionario ogni dodici abitanti** iscritti all'anagrafe. E il dato piu alto mai registrato per una grande metropoli, secondo l'ultimo rapporto [Henley & Partners](https://www.henleyglobal.com) sulla migrazione dei patrimoni privati.
 
@@ -31,7 +31,7 @@ Il confronto con le altre capitali finanziarie e impietoso. New York si ferma a 
 
 La classifica stilata dalla societa di consulenza londinese fotografa un cambiamento epocale. Le citta europee, e Milano in particolare, stanno attirando capitali che un tempo fluivano esclusivamente verso i centri finanziari anglosassoni.
 
-![Skyline di Milano con le torri di Porta Nuova](https://images.unsplash.com/photo-1610016302534-6f67f1c968d8?w=900&h=500&fit=crop)
+![Skyline di Milano con le torri di Porta Nuova](/images/news/milano-skyline.jpg)
 
 A pesare su questa dinamica, secondo gli analisti, e un mix di fattori difficilmente replicabile: il regime fiscale per i neo-residenti, l'ecosistema del lusso e della moda, la posizione geografica nel cuore dell'Europa, un sistema bancario privato tra i piu sviluppati del continente.
 
@@ -53,7 +53,7 @@ Questo posiziona Milano come hub finanziario di riferimento per l'Europa meridio
 
 L'appuntamento con i Giochi Invernali 2026 sta accelerando ulteriormente l'afflusso di capitali. Gli investitori stranieri guardano a Milano come hub per l'Europa meridionale, una citta con infrastrutture moderne e un mercato del lusso consolidato.
 
-![CityLife Milano, il nuovo quartiere residenziale di lusso](https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=900&h=500&fit=crop)
+![CityLife Milano, il nuovo quartiere residenziale di lusso](/images/news/milano-citylife.jpg)
 
 Il mercato immobiliare di lusso ne e la cartina tornasole: nelle zone prime i prezzi hanno superato i **ventimila euro al metro quadro**, con punte nel Quadrilatero della Moda che toccano i venticinquemila. CityLife registra incrementi a doppia cifra anno su anno.
 
@@ -73,7 +73,7 @@ Le banche specializzate stanno investendo in tecnologia, consulenza personalizza
     category: 'Wealth',
     source: 'Henley Private Wealth Migration Report',
     sourceUrl: 'https://www.henleyglobal.com/publications/henley-private-wealth-migration-report',
-    image: 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=1200&h=630&fit=crop',
+    image: '/images/news/amalfi-coast.jpg',
     content: `
 L'Italia si e trasformata in una calamita per i grandi patrimoni. Con un saldo positivo di **3.600 milionari** nel 2025, il Paese si posiziona al terzo posto mondiale nella classifica delle destinazioni preferite dagli high net worth individuals, preceduta solo dagli Emirati Arabi Uniti e dagli Stati Uniti.
 
@@ -91,7 +91,7 @@ Gli Emirati guidano la classifica con 9.800 nuovi arrivi, seguiti dagli Stati Un
 | Svizzera | +2.900 |
 | Singapore | +2.500 |
 
-![Costa Amalfitana, una delle destinazioni preferite dai nuovi residenti](https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?w=900&h=500&fit=crop)
+![Costa Amalfitana, una delle destinazioni preferite dai nuovi residenti](/images/news/amalfi-coast.jpg)
 
 ## Chi sono i nuovi arrivati
 
@@ -113,7 +113,7 @@ L'Italia conta oggi **470mila individui** con patrimonio superiore al milione di
 
 Un patrimonio complessivo che si avvia a superare i quattromila miliardi di euro, di cui oltre un terzo affidato al private banking.
 
-![Lago di Como, meta prediletta degli HNWI internazionali](https://images.unsplash.com/photo-1540575861501-7cf05a4b125a?w=900&h=500&fit=crop)
+![Lago di Como, meta prediletta degli HNWI internazionali](/images/news/lago-como.jpg)
 
 ## Il grande passaggio generazionale
 
@@ -131,7 +131,7 @@ L'Italia, con la sua crescente attrattivita per gli HNWI, potrebbe intercettare 
     category: 'Lifestyle',
     source: 'duPont Registry',
     sourceUrl: 'https://news.dupontregistry.com/blogs/events/ferrari-dominates-mecum-kissimmee-2026',
-    image: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=1200&h=630&fit=crop',
+    image: '/images/news/ferrari-250-gto.jpg',
     content: `
 Trentotto milioni e mezzo di dollari per un'automobile. E il nuovo record mondiale per una Ferrari venduta all'asta, stabilito a Kissimmee, Florida, durante l'edizione 2026 della [Mecum](https://www.mecum.com), la piu grande casa d'aste americana per auto da collezione.
 
@@ -141,7 +141,7 @@ Protagonista, una **250 GTO del 1962**, telaio 3729GT, l'unico esemplare mai pro
 
 Ad aggiudicarsela, dopo una battaglia che ha tenuto col fiato sospeso la sala, e stato **David Lee**, imprenditore e collezionista di Los Angeles gia proprietario di alcune delle Ferrari piu iconiche al mondo.
 
-![Ferrari 250 GTO, considerata la piu bella automobile mai costruita](https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&h=500&fit=crop)
+![Ferrari 250 GTO, considerata la piu bella automobile mai costruita](/images/news/ferrari-250-gto.jpg)
 
 Lee, fondatore della catena di ristoranti Roscoe's House of Chicken and Waffles, possiede gia una collezione che include una LaFerrari Aperta, una F40 e diverse classiche degli anni Cinquanta. Ma la 250 GTO rappresenta il Santo Graal per ogni collezionista.
 
@@ -158,7 +158,7 @@ Ma la 250 GTO non e stata l'unica sorpresa della serata. Una Ferrari Enzo in Gia
 
 Un'altra Enzo, l'unica mai verniciata in Rosso Dino, e stata battuta a 11,1 milioni. La F50 ha toccato i 12,2 milioni, stabilendo a sua volta un nuovo record.
 
-![Ferrari Enzo, l'hypercar che ha rivoluzionato il mercato del collezionismo](https://images.unsplash.com/photo-1592198084033-aade902d1aae?w=900&h=500&fit=crop)
+![Ferrari Enzo, l'hypercar che ha rivoluzionato il mercato del collezionismo](/images/news/ferrari-enzo.jpg)
 
 ## I numeri dell'asta
 
@@ -191,7 +191,7 @@ E i colori unici, come quel Bianco Speciale, non hanno prezzo.
     category: 'Mercati',
     source: 'Milano Finanza',
     sourceUrl: 'https://www.milanofinanza.it/news/oro',
-    image: 'https://images.unsplash.com/photo-1610375461246-83df859d849d?w=1200&h=630&fit=crop',
+    image: '/images/news/oro-lingotti.jpg',
     content: `
 L'oro non smette di correre. Dopo aver chiuso il 2025 con un rialzo del **67 per cento**, il migliore risultato dal 1979, il metallo giallo si appresta a varcare la soglia psicologica dei cinquemila dollari l'oncia.
 
@@ -208,7 +208,7 @@ A crederci sono le principali banche d'investimento del pianeta.
 | Citigroup | $5.000 | 3 mesi |
 | Vontobel | $4.800 | Fine anno |
 
-![Lingotti d'oro, il bene rifugio per eccellenza](https://images.unsplash.com/photo-1624365168968-f283d506c6b6?w=900&h=500&fit=crop)
+![Lingotti d'oro, il bene rifugio per eccellenza](/images/news/oro-lingotti.jpg)
 
 ## Le banche centrali cambiano strategia
 
@@ -227,7 +227,7 @@ A sostenere le quotazioni contribuiscono diversi fattori:
 - **Inflazione**: L'oro protegge il potere d'acquisto nel lungo periodo
 - **De-dollarizzazione**: Crescente sfiducia verso il biglietto verde
 
-![Trading floor, dove si decidono le quotazioni dell'oro](https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=900&h=500&fit=crop)
+![Trading floor, dove si decidono le quotazioni dell'oro](/images/news/trading-floor.jpg)
 
 ## Come posizionarsi
 
@@ -253,7 +253,7 @@ Per chi cerca liquidita, gli ETC come Invesco Physical Gold o iShares Physical G
     category: 'Wealth',
     source: 'AIPB',
     sourceUrl: 'https://www.aipb.it/ricerche',
-    image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1200&h=630&fit=crop',
+    image: '/images/news/private-banking.jpg',
     content: `
 Il private banking italiano punta ai **1.400 miliardi di euro** di masse gestite entro la fine del 2026. Un traguardo che, se raggiunto, porterebbe il settore a controllare il 36 per cento della ricchezza investibile delle famiglie italiane.
 
@@ -269,7 +269,7 @@ La crescita attesa e del **6,6 per cento** medio annuo, trainata per il 4,2 per 
 | Quota ricchezza famiglie | 30% | 36% |
 | Crescita media annua | - | 6,6% |
 
-![Private banker in consulenza con un cliente](https://images.unsplash.com/photo-1560472355-536de3962603?w=900&h=500&fit=crop)
+![Private banker in consulenza con un cliente](/images/news/private-banking.jpg)
 
 ## Il consolidamento del settore
 
@@ -286,7 +286,7 @@ Nei portafogli piu sofisticati, gli investimenti alternativi hanno raggiunto il 
 - Infrastrutture: 2-4%
 - Criptovalute: 1-3%
 
-![Ufficio di private banking moderno](https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&h=500&fit=crop)
+![Ufficio di private banking moderno](/images/news/family-office.jpg)
 
 ## Le prospettive del settore
 
@@ -306,7 +306,7 @@ Per i clienti con patrimoni superiori al milione di euro, il passaggio a un priv
     category: 'Fiscalita',
     source: 'Fiscomania',
     sourceUrl: 'https://fiscomania.com/riforma-successioni',
-    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop',
+    image: '/images/news/documenti-legali.jpg',
     content: `
 Dal primo gennaio 2026 cambia tutto, o quasi, nella tassazione dei passaggi generazionali. Il decreto legislativo 139/2024 elimina il **coacervo**, la regola che obbligava a sommare le donazioni effettuate in vita all'eredita per calcolare l'imposta di successione.
 
@@ -323,7 +323,7 @@ Se un genitore aveva donato 800mila euro al figlio in vita, e poi lasciava 500mi
 - Imponibile: €300.000
 - Imposta (4%): **€12.000**
 
-![Famiglia in consulenza con un notaio](https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&h=500&fit=crop)
+![Famiglia in consulenza con un notaio](/images/news/documenti-legali.jpg)
 
 ## Come funziona dal 2026
 
@@ -353,8 +353,6 @@ In pratica, ogni figlio puo ricevere fino a **due milioni di euro** senza impost
 | Successione a figli | €1.000.000 | 4% |
 | Totale esentasse | €2.000.000 | - |
 
-![Documenti notarili per successione](https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&h=500&fit=crop)
-
 ## Chi ne beneficia di piu
 
 Le categorie che traggono maggior vantaggio dalla riforma:
@@ -380,7 +378,7 @@ Per le aziende di famiglia, restano confermate le agevolazioni: esenzione totale
     category: 'Immobiliare',
     source: 'Nomisma',
     sourceUrl: 'https://www.nomisma.it/osservatorio-immobiliare',
-    image: 'https://images.unsplash.com/photo-1524230572899-a752b3835840?w=1200&h=630&fit=crop',
+    image: '/images/news/milano-citylife.jpg',
     content: `
 Il mercato immobiliare di lusso milanese non conosce soste. Nel primo trimestre del 2026, i valori medi al metro quadro nel segmento prime hanno registrato un incremento del **5 per cento** rispetto allo stesso periodo dell'anno precedente.
 
@@ -390,7 +388,7 @@ Le previsioni parlano di un rialzo complessivo del **7 per cento** entro dicembr
 
 A trainare la corsa e CityLife, il quartiere nato sulle ceneri della vecchia Fiera. Qui i prezzi sono saliti del **10 per cento** in dodici mesi, con punte che sfiorano i 18mila euro al metro quadro per gli appartamenti nelle torri residenziali.
 
-![Le torri di CityLife dominano lo skyline milanese](https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=900&h=500&fit=crop)
+![Le torri di CityLife dominano lo skyline milanese](/images/news/milano-citylife.jpg)
 
 ## La mappa dei prezzi
 
@@ -408,7 +406,7 @@ Il Quadrilatero della Moda resta il quartiere piu caro: tra i 18mila e i 25mila 
 
 I Giochi Invernali del 2026 stanno funzionando da acceleratore. L'esposizione mediatica internazionale ha attirato l'attenzione di investitori stranieri che vedono in Milano un hub per l'Europa meridionale.
 
-![Appartamento di lusso con vista su Milano](https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&h=500&fit=crop)
+![Appartamento di lusso con vista su Milano](/images/news/appartamento-lusso.jpg)
 
 La domanda supera strutturalmente l'offerta, soprattutto nel centro storico dove le nuove costruzioni sono rare e gli immobili storici richiedono ristrutturazioni complete.
 
@@ -437,7 +435,7 @@ Per chi vuole entrare nel mercato del lusso milanese:
     category: 'Mercati',
     source: 'J.P. Morgan Private Bank',
     sourceUrl: 'https://privatebank.jpmorgan.com/insights/outlook',
-    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&h=630&fit=crop',
+    image: '/images/news/wall-street.jpg',
     content: `
 Tre forze plasmeranno i mercati finanziari nel prossimo decennio. A individuarle e [J.P. Morgan Private Bank](https://privatebank.jpmorgan.com), nel suo outlook annuale riservato alla clientela di alto profilo.
 
@@ -447,7 +445,7 @@ Le stesse conclusioni emergono, con sfumature diverse, dall'analisi di [Goldman 
 
 La prima forza e l'**intelligenza artificiale**. Non come moda passeggera, ma come trasformazione strutturale che ridisegnera produttivita, modelli di business e margini aziendali.
 
-![Data center, il cuore dell'economia dell'AI](https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&h=500&fit=crop)
+![Wall Street, il cuore della finanza mondiale](/images/news/wall-street.jpg)
 
 I benefici, avvertono gli analisti, non saranno immediati ne distribuiti uniformemente. Distinguere i vincitori dai perdenti sara la sfida dei prossimi anni.
 
@@ -468,7 +466,7 @@ La terza forza e l'**inflazione persistente**. I livelli resteranno strutturalme
 | Inflazione Eurozona | 2,2-2,5% |
 | Tassi BCE | 2,5% (in calo) |
 
-![Trading floor di Wall Street](https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=900&h=500&fit=crop)
+![Trading floor di Wall Street](/images/news/trading-floor.jpg)
 
 ## Europa in ripresa
 
@@ -498,7 +496,7 @@ Costruire portafogli capaci di resistere a scenari diversi, diversificare geogra
     category: 'Lifestyle',
     source: 'Monaco Yacht Show',
     sourceUrl: 'https://www.monacoyachtshow.com',
-    image: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=1200&h=630&fit=crop',
+    image: '/images/news/superyacht.jpg',
     content: `
 Porto Hercule si prepara a ospitare la piu grande concentrazione di ricchezza galleggiante del pianeta. Dal 23 al 26 settembre 2026, il [Monaco Yacht Show](https://www.monacoyachtshow.com) celebrera il suo **trentacinquesimo anniversario**.
 
@@ -515,7 +513,7 @@ L'evento, nato nel 1991, si e trasformato nel corso dei decenni nel punto di rif
 | Espositori | 560+ |
 | Visitatori attesi | 30.000+ |
 
-![Superyacht ormeggiati a Port Hercule, Monaco](https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?w=900&h=500&fit=crop)
+![Superyacht ormeggiati a Port Hercule, Monaco](/images/news/superyacht.jpg)
 
 ## Accesso e biglietti
 
@@ -531,7 +529,7 @@ Non e un evento per curiosi. E un marketplace dove si concludono trattative da d
 
 La novita del 2026 si chiama **Blue Wake**, evoluzione del Sustainability Hub lanciato nelle edizioni precedenti.
 
-![Yacht a propulsione ibrida, il futuro del superyachting](https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=900&h=500&fit=crop)
+![Porto di Monaco con superyacht](/images/news/monaco-port.jpg)
 
 Uno spazio dedicato alle tecnologie per ridurre l'impatto ambientale del superyachting:
 - Sistemi di propulsione next-gen
@@ -558,7 +556,7 @@ Per chi puo permetterselo, il superyacht resta l'ultima frontiera del lusso.
     category: 'Lifestyle',
     source: 'Phillips Watches',
     sourceUrl: 'https://www.phillips.com/watches',
-    image: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=1200&h=630&fit=crop',
+    image: '/images/news/patek-philippe.jpg',
     content: `
 Diciassette milioni e ottocentomila dollari per un orologio da polso. E il nuovo record mondiale, stabilito all'asta [Phillips](https://www.phillips.com) di Ginevra per un **Patek Philippe Reference 1518** in oro rosa del 1950.
 
@@ -568,7 +566,7 @@ Il pezzo, un calendario perpetuo con cronografo, apparteneva a una collezione pr
 
 Il Reference 1518 occupa un posto speciale nella storia dell'orologeria. E il **primo calendario perpetuo con cronografo** prodotto in serie, realizzato da Patek Philippe tra il 1941 e il 1954.
 
-![Patek Philippe, la manifattura piu prestigiosa al mondo](https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=900&h=500&fit=crop)
+![Patek Philippe, la manifattura piu prestigiosa al mondo](/images/news/patek-philippe.jpg)
 
 I numeri parlano chiaro:
 - Solo **281 esemplari** prodotti
@@ -587,7 +585,7 @@ Ma il 1518 non e stato l'unico protagonista della serata ginevrina.
 | Patek 2499 oro giallo | $4.200.000 | 1957 |
 | A. Lange Grand Complication | $2.800.000 | 2019 |
 
-![Rolex Daytona Paul Newman, icona del collezionismo](https://images.unsplash.com/photo-1548171915-e79a380a2a4b?w=900&h=500&fit=crop)
+![Rolex Daytona Paul Newman, icona del collezionismo](/images/news/rolex-daytona.jpg)
 
 ## Orologi come asset class
 
@@ -620,7 +618,7 @@ Nel mondo degli orologi, come in quello dell'arte, la fretta e cattiva consiglie
     category: 'Lifestyle',
     source: 'Decanter',
     sourceUrl: 'https://www.decanter.com',
-    image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1200&h=630&fit=crop',
+    image: '/images/news/cantina-vino.jpg',
     content: `
 Trecentoventicinquemila sterline per una singola bottiglia di vino. E il prezzo raggiunto da una **La Tache 1886** all'asta [Christie's](https://www.christies.com) dedicata alla cantina storica di Bouchard Pere & Fils.
 
@@ -630,7 +628,7 @@ La stima iniziale era di 19mila sterline. Il risultato finale l'ha superata di *
 
 Bouchard Pere & Fils e uno dei produttori piu prestigiosi della Borgogna, con una storia che risale al 1731. La vendita della sua cantina storica ha rappresentato un evento irripetibile per i collezionisti.
 
-![Cantina storica con bottiglie di Borgogna d'annata](https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=900&h=500&fit=crop)
+![Cantina storica con bottiglie di Borgogna d'annata](/images/news/cantina-vino.jpg)
 
 **Risultati:**
 - Totale vendite: **£2,38 milioni**
@@ -648,7 +646,7 @@ Tra il 2022 e il 2025, i vini di Borgogna avevano perso tra il 25 e il 40 per ce
 | Champagne Prestige | +3-5% |
 | Burgundy Index (dal 2014) | +131% |
 
-![Degustazione di Borgogna Grand Cru](https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=900&h=500&fit=crop)
+![Vigneti della Borgogna](/images/news/borgogna-vigneto.jpg)
 
 ## Dove investire nel 2026
 
@@ -691,7 +689,7 @@ Il vino, come l'arte, richiede pazienza. Ma i rendimenti possono essere straordi
     category: 'Lifestyle',
     source: 'Artnet',
     sourceUrl: 'https://www.artnet.com',
-    image: 'https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=1200&h=630&fit=crop',
+    image: '/images/news/asta-arte.jpg',
     content: `
 Centonovantaquattro milioni di dollari. E il prezzo raggiunto da **Femme a la montre** di Pablo Picasso, venduto all'asta serale di [Sotheby's](https://www.sothebys.com) a New York.
 
@@ -701,7 +699,7 @@ L'opera del 1932, che ritrae l'amante Marie-Therese Walter, diventa la **terza p
 
 L'acquirente, rimasto anonimo, e un collezionista asiatico che ha battuto la concorrenza dopo dodici minuti di rilanci serrati. La stima pre-asta era di 120 milioni.
 
-![Sala d'aste Sotheby's durante una vendita serale](https://images.unsplash.com/photo-1577083552431-6e5fd01988ec?w=900&h=500&fit=crop)
+![Sala d'aste durante una vendita serale](/images/news/asta-arte.jpg)
 
 Il dipinto apparteneva alla collezione di Emily Fisher Landau, filantropa newyorkese scomparsa nel 2023. La sua raccolta, messa in vendita dagli eredi, ha totalizzato **406 milioni di dollari** in una sola serata.
 
@@ -720,7 +718,7 @@ Picasso domina la classifica delle opere piu care mai vendute all'asta:
 
 Il segmento ultra-premium resiste alle turbolenze che hanno colpito il mercato dell'arte contemporanea. Mentre le opere sotto il milione di dollari soffrono, i capolavori storici mantengono il loro appeal.
 
-![Collezionista osserva un'opera d'arte moderna](https://images.unsplash.com/photo-1594794312433-05a0384a95c8?w=900&h=500&fit=crop)
+![Collezionista osserva un'opera d'arte moderna](/images/news/galleria-arte.jpg)
 
 Le ragioni:
 - **Scarsita assoluta**: i capolavori storici non si producono piu
@@ -750,7 +748,7 @@ L'arte non e un investimento finanziario. E un investimento di passione che, nei
     category: 'Lifestyle',
     source: 'Business Jet Traveler',
     sourceUrl: 'https://www.bjtonline.com',
-    image: 'https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=1200&h=630&fit=crop',
+    image: '/images/news/jet-privato.jpg',
     content: `
 Il mercato dell'aviazione privata non conosce crisi. Dopo il boom post-pandemia, le consegne di business jet hanno raggiunto il **livello piu alto** dalla crisi finanziaria del 2008.
 
@@ -768,7 +766,7 @@ Il 2025 ha visto la consegna di **723 business jet** a livello globale, con un v
 | Embraer | 125 | 17% |
 | Textron (Cessna) | 266 | 37% |
 
-![Gulfstream G700, il jet privato piu richiesto al mondo](https://images.unsplash.com/photo-1474302770737-173ee21bab63?w=900&h=500&fit=crop)
+![Interno lussuoso di un jet privato](/images/news/jet-privato.jpg)
 
 ## I modelli piu ambiti
 
@@ -781,8 +779,6 @@ Il concorrente diretto, il **Bombardier Global 8000**, offre prestazioni simili 
 ## Fractional ownership: la formula che cresce
 
 Per chi vola tra le 50 e le 200 ore l'anno, il possesso frazionato rappresenta l'alternativa piu razionale.
-
-![Interno lussuoso di un jet privato Bombardier](https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=900&h=500&fit=crop)
 
 | Formula | Ore/anno | Investimento | Costo/ora |
 |---------|----------|--------------|-----------|
@@ -813,7 +809,7 @@ Per un imprenditore che fattura 500 euro l'ora, un volo privato che risparmia 4 
     category: 'Fiscalita',
     source: 'Sole 24 Ore',
     sourceUrl: 'https://www.ilsole24ore.com',
-    image: 'https://images.unsplash.com/photo-1580706483913-b6ea7db483a0?w=1200&h=630&fit=crop',
+    image: '/images/news/zurigo.jpg',
     content: `
 Il segreto bancario svizzero e morto. Non da oggi, ma il 2026 segna un punto di non ritorno: lo **scambio automatico di informazioni** fiscali copre ora 113 giurisdizioni, incluse tutte quelle rilevanti per i patrimoni italiani.
 
@@ -823,7 +819,7 @@ Per chi ha ancora fondi non dichiarati oltreconfine, le opzioni si sono ridotte 
 
 Ogni anno, le banche svizzere trasmettono alle autorita federali i dati di tutti i conti intestati a non residenti. Le informazioni vengono poi inoltrate ai Paesi di residenza fiscale.
 
-![Zurigo, cuore della finanza svizzera](https://images.unsplash.com/photo-1515488764276-beab7607c1e6?w=900&h=500&fit=crop)
+![Zurigo, cuore della finanza svizzera](/images/news/zurigo.jpg)
 
 **Dati scambiati:**
 - Saldo al 31 dicembre
@@ -844,7 +840,7 @@ UBS e le altre banche svizzere hanno cambiato approccio. Non si limitano piu a c
 
 I clienti con strutture non trasparenti vengono progressivamente accompagnati verso l'uscita.
 
-![Banca svizzera tradizionale nel centro di Ginevra](https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=900&h=500&fit=crop)
+![Banca svizzera tradizionale](/images/news/banca-svizzera.jpg)
 
 ## Le alternative legittime
 
@@ -890,7 +886,7 @@ Il segreto bancario e finito. La pianificazione fiscale intelligente no.
     category: 'Wealth',
     source: 'AIFO',
     sourceUrl: 'https://www.aifo.it',
-    image: 'https://images.unsplash.com/photo-1554774853-aae0a22c8aa4?w=1200&h=630&fit=crop',
+    image: '/images/news/family-office.jpg',
     content: `
 L'Italia scopre i family office. In dieci anni il numero di queste strutture dedicate alla gestione dei grandi patrimoni familiari e **raddoppiato**, passando da 180 a oltre 350 unita.
 
@@ -907,7 +903,7 @@ Un family office e una societa privata che gestisce tutti gli aspetti finanziari
 - Concierge e lifestyle
 - Governance familiare
 
-![Riunione di famiglia per la pianificazione patrimoniale](https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&h=500&fit=crop)
+![Riunione di famiglia per la pianificazione patrimoniale](/images/news/family-office.jpg)
 
 ## Single vs Multi Family Office
 
@@ -923,8 +919,6 @@ La distinzione fondamentale e tra **single family office** (SFO), dedicato a una
 Il capoluogo lombardo ospita il 45 per cento dei family office italiani. Seguono Roma (18%), Torino (12%) e Bologna (8%).
 
 La concentrazione a Milano riflette la densita di HNWI e la presenza di professionisti specializzati: avvocati, commercialisti, asset manager.
-
-![Ufficio di family office moderno a Milano](https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&h=500&fit=crop)
 
 ## I servizi piu richiesti
 
@@ -966,7 +960,7 @@ Il family office giusto diventa un partner per generazioni. La scelta merita tem
     category: 'Mercati',
     source: 'Bloomberg',
     sourceUrl: 'https://www.bloomberg.com',
-    image: 'https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=1200&h=630&fit=crop',
+    image: '/images/news/bitcoin.jpg',
     content: `
 A due anni dal lancio, gli ETF su Bitcoin hanno superato ogni aspettativa. L'**iShares Bitcoin Trust** di [BlackRock](https://www.blackrock.com) e il **Wise Origin Bitcoin Fund** di [Fidelity](https://www.fidelity.com) gestiscono insieme oltre **50 miliardi di dollari**.
 
@@ -983,7 +977,7 @@ L'approvazione della SEC nel gennaio 2024 ha aperto le porte agli investitori is
 | ARK 21Shares | ARKB | $4 mld | 0.21% |
 | Grayscale BTC Mini | BTC | $3 mld | 0.15% |
 
-![Trading floor con schermi che mostrano quotazioni Bitcoin](https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=900&h=500&fit=crop)
+![Bitcoin, la criptovaluta che ha conquistato le istituzioni](/images/news/bitcoin.jpg)
 
 ## Chi sta comprando
 
@@ -998,7 +992,7 @@ La composizione degli investitori e cambiata radicalmente. Non piu solo retail e
 
 Bitcoin oscilla tra gli 80 e i 100mila dollari. La volatilita annualizzata resta al 50-60 per cento, cinque volte quella dell'azionario.
 
-![Grafico andamento Bitcoin con candele](https://images.unsplash.com/photo-1640340434855-6084b1f4901c?w=900&h=500&fit=crop)
+![Trading floor con schermi finanziari](/images/news/trading-floor.jpg)
 
 E un asset che puo perdere il 30 per cento in un mese. Ma anche guadagnare il 50.
 
@@ -1040,7 +1034,7 @@ La verita probabilmente sta nel mezzo. Un'allocazione contenuta, in un portafogl
     category: 'Immobiliare',
     source: 'Knight Frank',
     sourceUrl: 'https://www.knightfrank.com',
-    image: 'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1200&h=630&fit=crop',
+    image: '/images/news/monaco-port.jpg',
     content: `
 Centoventimila euro al metro quadro. E il prezzo raggiunto da un appartamento nel **Carre d'Or** di Monaco, il quartiere piu esclusivo del Principato. Un record mondiale assoluto per il mercato residenziale.
 
@@ -1050,7 +1044,7 @@ Il dato emerge dal rapporto annuale di [Knight Frank](https://www.knightfrank.co
 
 L'operazione piu significativa dell'anno ha riguardato un attico di 2.500 metri quadri nel complesso residenziale One Monte Carlo, venduto per **300 milioni di euro**.
 
-![Vista panoramica di Monaco e Port Hercule](https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=900&h=500&fit=crop)
+![Vista panoramica di Monaco e Port Hercule](/images/news/monaco-port.jpg)
 
 L'acquirente, un imprenditore del tech mediorientale, ha battuto la concorrenza di altri tre pretendenti.
 
@@ -1072,10 +1066,10 @@ Le ragioni dell'attrattivita sono note:
 - **Zero imposte** sul reddito personale
 - **Sicurezza**: tasso criminalita piu basso d'Europa
 - **Clima**: 300 giorni di sole l'anno
-- **Lifestyle**: yacht, casin, eventi
+- **Lifestyle**: yacht, casino, eventi
 - **Privacy**: discrezione garantita
 
-![Yacht ormeggiati nel porto di Monaco](https://images.unsplash.com/photo-1555992828-ca4dbe41d294?w=900&h=500&fit=crop)
+![Superyacht nel porto di Monaco](/images/news/superyacht.jpg)
 
 ## Chi compra a Monaco
 
