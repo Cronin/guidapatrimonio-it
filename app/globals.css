@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import Google Fonts - Playfair Display (elegant serif for wealth management), DM Sans (clean body) */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
-
 /* ============================================
    CSS CUSTOM PROPERTIES - GREEN PALETTE
    ============================================ */
@@ -39,10 +36,6 @@
   --text-secondary: rgba(51, 52, 56, 0.6);
   --text-tertiary: rgba(51, 52, 56, 0.4);
   --text-light: rgba(247, 245, 240, 0.8);
-
-  /* Typography */
-  --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-body: 'DM Sans', Inter, system-ui, sans-serif;
 
   /* Transitions */
   --transition-standard: 0.25s cubic-bezier(0.215, 0.61, 0.355, 1);

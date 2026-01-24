@@ -1,6 +1,21 @@
 import type { Metadata } from 'next'
+import { Playfair_Display, DM_Sans } from 'next/font/google'
 import './globals.css'
 import { JsonLd, organizationSchema, websiteSchema } from '@/components'
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-heading',
+  weight: ['400', '500', '600', '700'],
+})
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-body',
+  weight: ['300', '400', '500', '600', '700'],
+})
 
 export const metadata: Metadata = {
   title: 'Guida Patrimonio | Consulenza Patrimoniale Indipendente',
@@ -25,6 +40,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Guida Patrimonio | Consulenza Patrimoniale Indipendente',
     description: 'Pianificazione patrimoniale e consulenza finanziaria indipendente.',
+    images: ['https://guidapatrimonio.it/og-default.png'],
   },
   alternates: {
     canonical: 'https://guidapatrimonio.it',
@@ -37,12 +53,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="it">
+    <html lang="it" className={`${playfair.variable} ${dmSans.variable}`}>
       <head>
         <link rel="icon" href="/favicon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/favicon.png" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <JsonLd data={[organizationSchema, websiteSchema]} />
       </head>
       <body className="font-body antialiased">
