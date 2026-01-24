@@ -27,14 +27,14 @@ const assetClassData = {
     volatilita: 22.5,
     label: 'Azioni Emergenti',
     color: '#52B788',
-    icon: '🌍'
+    icon: ''
   },
   obbligazioniGov: {
     rendimento: 3.2,
     volatilita: 5.5,
     label: 'Bond Governativi',
     color: '#1B4D3E',
-    icon: '🏛️'
+    icon: ''
   },
   obbligazioniCorp: {
     rendimento: 4.5,
@@ -48,7 +48,7 @@ const assetClassData = {
     volatilita: 14.5,
     label: 'Oro',
     color: '#D4A373',
-    icon: '🥇'
+    icon: ''
   },
   reit: {
     rendimento: 7.8,
@@ -62,7 +62,7 @@ const assetClassData = {
     volatilita: 18.0,
     label: 'Commodities',
     color: '#8B7355',
-    icon: '🛢️'
+    icon: ''
   },
 }
 
@@ -942,8 +942,8 @@ export default function BacktestPortafoglio() {
                       <div className="flex">
                         {[
                           { id: 'crescita', label: 'Crescita Capitale', icon: '' },
-                          { id: 'drawdown', label: 'Drawdown', icon: '📉' },
-                          { id: 'rolling', label: 'Rolling Returns', icon: '🔄' },
+                          { id: 'drawdown', label: 'Drawdown', icon: '' },
+                          { id: 'rolling', label: 'Rolling Returns', icon: '' },
                         ].map((tab) => (
                           <button
                             key={tab.id}
