@@ -31,7 +31,7 @@ export const organizationSchema = {
   image: 'https://guidapatrimonio.it/og-image.png',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Via Monte Napoleone 8',
+    streetAddress: 'Via Monte Napoleone 28',
     postalCode: '20121',
     addressLocality: 'Milano',
     addressRegion: 'Lombardia',
