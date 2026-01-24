@@ -58,7 +58,7 @@ export default function Contact() {
                 <div>
                   <p className="font-medium text-forest">Sede</p>
                   <p className="text-gray-500">
-                    Milano, Italia<br />
+                    Ginevra, Svizzera<br />
                     <span className="text-sm">Consulenze anche in videochiamata</span>
                   </p>
                 </div>
