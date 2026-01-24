@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Navbar, Footer, ContactForm, JsonLd } from '@/components'
 
 export const metadata: Metadata = {
@@ -96,8 +97,20 @@ export default function ConsulenzaPatrimonialeSvizzera() {
       <JsonLd data={[localBusinessSchema, faqSchema]} />
 
       {/* Hero Section */}
-      <section className="bg-forest pt-navbar">
-        <div className="container-custom py-16 md:py-24">
+      <section className="relative pt-navbar overflow-hidden">
+        {/* Background Image - Lugano Svizzera */}
+        <Image
+          src="/images/finance/svizzera-lugano.webp"
+          alt="Panorama di Lugano in Svizzera, destinazione per la gestione patrimoniale cross-border"
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-forest/80" />
+
+        <div className="container-custom py-16 md:py-24 relative z-10">
           <div className="max-w-3xl">
             <p className="text-green-300 text-sm font-medium mb-4 tracking-wider uppercase">
               Consulenza Cross-Border

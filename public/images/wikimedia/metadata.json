@@ -1,0 +1,26 @@
+{
+  "hero-milano-skyline": {
+    "error": "Failed to download: 404 Not Found",
+    "attempted_at": "2026-01-24T03:29:55.597Z"
+  },
+  "milano-piazza-affari": {
+    "error": "Failed to download: 404 Not Found",
+    "attempted_at": "2026-01-24T03:29:58.917Z"
+  },
+  "roma-palazzo-finanze": {
+    "error": "Failed to download: 404 Not Found",
+    "attempted_at": "2026-01-24T03:30:02.244Z"
+  },
+  "svizzera-lugano": {
+    "error": "Failed to download: 404 Not Found",
+    "attempted_at": "2026-01-24T03:30:05.560Z"
+  },
+  "como-villa-carlotta": {
+    "error": "Failed to download: 404 Not Found",
+    "attempted_at": "2026-01-24T03:30:08.885Z"
+  },
+  "bce-francoforte": {
+    "error": "Failed to download: 404 Not Found",
+    "attempted_at": "2026-01-24T03:30:12.251Z"
+  }
+}

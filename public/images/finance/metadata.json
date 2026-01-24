@@ -1,0 +1,98 @@
+{
+  "hero-milano-skyline": {
+    "name": "Milano Skyline",
+    "description": "Skyline di Milano con Porta Nuova e grattacieli moderni",
+    "source": "Unsplash",
+    "sourceUrl": "https://images.unsplash.com/photo-1513581166391-887a96ddeafd",
+    "downloaded_at": "2026-01-24T03:33:47.186Z",
+    "sizes": [
+      "hero-milano-skyline.webp",
+      "hero-milano-skyline-1920w.webp",
+      "hero-milano-skyline-1280w.webp",
+      "hero-milano-skyline-640w.webp",
+      "hero-milano-skyline-400w.webp"
+    ],
+    "license": "Unsplash License (free for commercial use)",
+    "attribution": "Photo from Unsplash"
+  },
+  "milano-piazza-affari": {
+    "name": "Piazza Affari Milano",
+    "description": "Centro finanziario di Milano",
+    "source": "Unsplash",
+    "sourceUrl": "https://images.unsplash.com/photo-1583422409516-2895a77efded",
+    "downloaded_at": "2026-01-24T03:33:47.187Z",
+    "sizes": [
+      "milano-piazza-affari.webp",
+      "milano-piazza-affari-1920w.webp",
+      "milano-piazza-affari-1280w.webp",
+      "milano-piazza-affari-640w.webp",
+      "milano-piazza-affari-400w.webp"
+    ],
+    "license": "Unsplash License (free for commercial use)",
+    "attribution": "Photo from Unsplash"
+  },
+  "roma-palazzo-finanze": {
+    "name": "Roma EUR",
+    "description": "Architettura moderna a Roma",
+    "source": "Unsplash",
+    "sourceUrl": "https://images.unsplash.com/photo-1552832230-c0197dd311b5",
+    "downloaded_at": "2026-01-24T03:33:47.187Z",
+    "sizes": [
+      "roma-palazzo-finanze.webp",
+      "roma-palazzo-finanze-1920w.webp",
+      "roma-palazzo-finanze-1280w.webp",
+      "roma-palazzo-finanze-640w.webp",
+      "roma-palazzo-finanze-400w.webp"
+    ],
+    "license": "Unsplash License (free for commercial use)",
+    "attribution": "Photo from Unsplash"
+  },
+  "svizzera-lugano": {
+    "name": "Lugano Lago",
+    "description": "Vista panoramica di Lugano e il suo lago",
+    "source": "Unsplash",
+    "sourceUrl": "https://images.unsplash.com/photo-1568849676085-51415703900f",
+    "downloaded_at": "2026-01-24T03:33:47.187Z",
+    "sizes": [
+      "svizzera-lugano.webp",
+      "svizzera-lugano-1920w.webp",
+      "svizzera-lugano-1280w.webp",
+      "svizzera-lugano-640w.webp",
+      "svizzera-lugano-400w.webp"
+    ],
+    "license": "Unsplash License (free for commercial use)",
+    "attribution": "Photo from Unsplash"
+  },
+  "como-villa-carlotta": {
+    "name": "Lago di Como Villa",
+    "description": "Villa storica sul Lago di Como",
+    "source": "Unsplash",
+    "sourceUrl": "https://images.unsplash.com/photo-1527004013197-933c4bb611b3",
+    "downloaded_at": "2026-01-24T03:33:47.187Z",
+    "sizes": [
+      "como-villa-carlotta.webp",
+      "como-villa-carlotta-1920w.webp",
+      "como-villa-carlotta-1280w.webp",
+      "como-villa-carlotta-640w.webp",
+      "como-villa-carlotta-400w.webp"
+    ],
+    "license": "Unsplash License (free for commercial use)",
+    "attribution": "Photo from Unsplash"
+  },
+  "bce-francoforte": {
+    "name": "BCE Francoforte",
+    "description": "Skyline finanziario di Francoforte con grattacieli",
+    "source": "Unsplash",
+    "sourceUrl": "https://images.unsplash.com/photo-1603974372039-adc49044b6bd",
+    "downloaded_at": "2026-01-24T03:33:47.187Z",
+    "sizes": [
+      "bce-francoforte.webp",
+      "bce-francoforte-1920w.webp",
+      "bce-francoforte-1280w.webp",
+      "bce-francoforte-640w.webp",
+      "bce-francoforte-400w.webp"
+    ],
+    "license": "Unsplash License (free for commercial use)",
+    "attribution": "Photo from Unsplash"
+  }
+}

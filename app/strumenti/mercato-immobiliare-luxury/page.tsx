@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Navbar, Footer, RelatedTools, toolCorrelations } from '@/components'
 
 // Static data - imported directly for SSG compatibility
@@ -292,6 +293,15 @@ export default function MercatoImmobiliareLuxury() {
 
       {/* Hero - Luxury Style */}
       <section className="relative bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 pt-navbar overflow-hidden">
+        {/* Background Image - Villa Carlotta Como */}
+        <Image
+          src="/images/finance/como-villa-carlotta.webp"
+          alt="Villa storica sul Lago di Como, simbolo del mercato immobiliare di lusso italiano"
+          fill
+          priority
+          className="object-cover opacity-20"
+          sizes="100vw"
+        />
         {/* Subtle pattern overlay */}
         <div className="absolute inset-0 opacity-10" style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4A373' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
