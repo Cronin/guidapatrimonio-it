@@ -13,7 +13,7 @@ const assetClassData = {
     volatilita: 15.3,
     label: 'Azioni USA (S&P 500)',
     color: '#2D6A4F',
-    icon: '📈'
+    icon: ''
   },
   azioniEuropa: {
     rendimento: 7.5,
@@ -41,7 +41,7 @@ const assetClassData = {
     volatilita: 7.2,
     label: 'Bond Corporate',
     color: '#2D5E4C',
-    icon: '🏢'
+    icon: ''
   },
   oro: {
     rendimento: 4.8,
@@ -55,7 +55,7 @@ const assetClassData = {
     volatilita: 18.2,
     label: 'Immobiliare/REIT',
     color: '#B08968',
-    icon: '🏠'
+    icon: ''
   },
   commodities: {
     rendimento: 3.5,
@@ -941,7 +941,7 @@ export default function BacktestPortafoglio() {
                     <div className="border-b border-gray-100">
                       <div className="flex">
                         {[
-                          { id: 'crescita', label: 'Crescita Capitale', icon: '📈' },
+                          { id: 'crescita', label: 'Crescita Capitale', icon: '' },
                           { id: 'drawdown', label: 'Drawdown', icon: '📉' },
                           { id: 'rolling', label: 'Rolling Returns', icon: '🔄' },
                         ].map((tab) => (

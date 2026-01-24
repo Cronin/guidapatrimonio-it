@@ -261,7 +261,7 @@ export default function Strumenti() {
             </p>
             <div className="bg-gold/20 rounded px-3 py-2 mb-4">
               <p className="text-gold text-sm font-medium">
-                🎁 Solo per {currentMonth}: registrati e ottieni accesso gratuito per sempre
+                Solo per {currentMonth}: registrati e ottieni accesso gratuito per sempre
               </p>
             </div>
             <Link
