@@ -388,22 +388,46 @@ export default function Strumenti() {
       {/* SEO Text Section */}
       <section className="bg-gray-50 py-12">
         <div className="container-custom">
-          <div className="max-w-3xl mx-auto prose prose-sm">
-            <h2 className="font-heading text-xl text-forest">Perché offriamo questi strumenti gratis?</h2>
-            <p className="text-gray-600">
-              Crediamo che gli strumenti finanziari di base debbano essere accessibili a tutti gli investitori italiani,
-              non solo a chi può permettersi abbonamenti da €60-360 all&apos;anno. I nostri calcolatori sono progettati
-              specificamente per la <strong>fiscalità italiana</strong> (aliquote 26% e 12.5%, regime amministrato vs dichiarativo,
-              compensazione minusvalenze).
+          <div className="max-w-3xl mx-auto">
+            <h2 className="font-heading text-xl text-forest mb-4">Perché offriamo questi strumenti gratuitamente?</h2>
+            <p className="text-gray-600 mb-4">
+              Gestiamo patrimoni significativi e crediamo che la fiducia si costruisca con i fatti, non con le promesse.
+              Questi strumenti professionali sono il nostro biglietto da visita: <strong>prima dimostriamo competenza,
+              poi parliamo di collaborazione</strong>.
             </p>
-            <h3 className="font-heading text-lg text-forest mt-6">Alternative gratuite ai software più popolari</h3>
-            <ul className="text-gray-600 space-y-2">
-              <li><strong>Alternativa a JustETF Premium:</strong> Il nostro Portfolio Tracker e Confronto ETF offrono funzionalità simili senza abbonamento.</li>
-              <li><strong>Alternativa a Wallible Pro:</strong> Portfolio Tracker con import posizioni e calcolo P&L in tempo reale.</li>
-              <li><strong>Alternativa a Sharesight:</strong> Calcolatore Plusvalenze ottimizzato per la fiscalità italiana, non australiana.</li>
-              <li><strong>Alternativa a TasseTrading:</strong> Calcola plusvalenze e minusvalenze senza pagare €50-200 per pratica.</li>
-              <li><strong>Alternativa a Portfolio Visualizer:</strong> Backtest e Monte Carlo con 1000+ simulazioni.</li>
-            </ul>
+            <p className="text-gray-600 mb-6">
+              I nostri calcolatori sono progettati specificamente per la <strong>fiscalità italiana</strong> e per le
+              esigenze di chi gestisce patrimoni importanti. Aliquote 26% e 12.5%, regime amministrato vs dichiarativo,
+              compensazione minusvalenze, holding, trust, successioni: ogni strumento riflette la complessità che
+              affrontiamo quotidianamente con i nostri clienti.
+            </p>
+            <h3 className="font-heading text-lg text-forest mt-6 mb-3">Strumenti di livello professionale</h3>
+            <div className="grid md:grid-cols-2 gap-4 text-sm text-gray-600">
+              <div className="flex items-start gap-2">
+                <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                <span><strong>Portfolio Tracker</strong> con allocazione, benchmark e export professionale</span>
+              </div>
+              <div className="flex items-start gap-2">
+                <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                <span><strong>Calcolatore Plusvalenze</strong> ottimizzato per fiscalità italiana, non australiana</span>
+              </div>
+              <div className="flex items-start gap-2">
+                <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                <span><strong>Simulatore Monte Carlo</strong> con 10.000 scenari e analisi FIRE</span>
+              </div>
+              <div className="flex items-start gap-2">
+                <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                <span><strong>Backtest Portafoglio</strong> con Sharpe, Sortino, VaR e drawdown analysis</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
