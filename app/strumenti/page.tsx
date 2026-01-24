@@ -1,26 +1,23 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { Navbar, Footer, JsonLd, createToolListSchema, createBreadcrumbSchema } from '@/components'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Strumenti Finanziari GRATIS | Alternativa JustETF, Wallible, Sharesight',
-  description: 'Alternative GRATUITE a JustETF, Wallible, Sharesight, TasseTrading. Portfolio tracker, calcolatore plusvalenze, Monte Carlo, backtest. Risparmia €60-360/anno.',
+  title: 'Strumenti Patrimoniali Professionali | Guida Patrimonio',
+  description: 'Suite completa di 40+ strumenti per la gestione patrimoniale: portfolio tracker, calcolatore plusvalenze, simulatore Monte Carlo, pianificazione successoria. Valore €890/anno.',
   keywords: [
-    'alternativa justetf gratis',
-    'wallible gratis',
-    'sharesight alternativa',
-    'portfolio tracker gratis italia',
-    'calcolatore plusvalenze gratis',
-    'tassetrading alternativa gratis',
-    'backtest portafoglio gratis',
-    'simulatore monte carlo gratis',
-    'analizzatore costi fondi gratis',
-    'calcolatore minusvalenze gratis'
+    'strumenti gestione patrimonio',
+    'portfolio tracker professionale',
+    'calcolatore plusvalenze italia',
+    'simulatore monte carlo portafoglio',
+    'pianificazione successoria',
+    'holding familiare simulatore',
+    'trust donazione confronto',
+    'private banking confronto'
   ],
   openGraph: {
-    title: 'Strumenti Finanziari GRATIS | Alternative a Software a Pagamento',
-    description: 'Portfolio tracker, calcolatore plusvalenze, Monte Carlo e 40+ strumenti gratuiti. Risparmia €60-360/anno rispetto a JustETF, Wallible, Sharesight.',
+    title: 'Suite Strumenti Patrimoniali | Valore €890/anno',
+    description: 'Portfolio tracker, calcolatore fiscale, Monte Carlo e 40+ strumenti professionali. Accesso gratuito per gli utenti registrati.',
     type: 'website',
   },
 }
@@ -29,9 +26,8 @@ interface Tool {
   title: string
   description: string
   href: string
-  alternativeTo?: string
-  alternativeLogo?: string
-  savedCost?: string
+  price?: string
+  featured?: boolean
 }
 
 interface ToolCategory {
@@ -39,123 +35,79 @@ interface ToolCategory {
   tools: Tool[]
 }
 
-// Software a pagamento che replichiamo
-const paidAlternatives = [
-  {
-    name: 'JustETF Premium',
-    logo: '/competitors/justetf.png',
-    cost: '€60-240/anno',
-    ourTool: 'Portfolio Tracker + Confronto ETF',
-    href: '/strumenti/portfolio-tracker'
-  },
-  {
-    name: 'Wallible Pro',
-    logo: '/competitors/wallible.png',
-    cost: '€59.90/anno',
-    ourTool: 'Portfolio Tracker + Backtest',
-    href: '/strumenti/portfolio-tracker'
-  },
-  {
-    name: 'Sharesight',
-    logo: '/competitors/sharesight.png',
-    cost: '$276/anno',
-    ourTool: 'Portfolio Tracker + Calcolatore Plusvalenze',
-    href: '/strumenti/calcolatore-plusvalenze'
-  },
-  {
-    name: 'TasseTrading',
-    logo: '/competitors/tassetrading.png',
-    cost: '€50-200/pratica',
-    ourTool: 'Calcolatore Plusvalenze + Minusvalenze',
-    href: '/strumenti/calcolatore-plusvalenze'
-  },
-  {
-    name: 'Portfolio Visualizer',
-    logo: '/competitors/portfoliovisualizer.png',
-    cost: '$360/anno',
-    ourTool: 'Backtest + Monte Carlo',
-    href: '/strumenti/backtest-portafoglio'
-  },
-  {
-    name: 'Kubera',
-    logo: '/competitors/kubera.png',
-    cost: '$249-360/anno',
-    ourTool: 'Portfolio Tracker + Patrimonio Netto',
-    href: '/strumenti/portfolio-tracker'
-  },
-]
+// Prezzi degli strumenti (valore singolo)
+const toolPricing = {
+  total: '€890',
+  monthly: '€74',
+  perTool: '€19-89',
+}
 
 const toolCategories: ToolCategory[] = [
   {
-    title: 'Calcolatori Fiscali GRATIS',
+    title: 'Calcolatori Fiscali',
     tools: [
       {
-        title: 'Calcolatore Plusvalenze GRATIS',
-        description: 'Calcola tasse su azioni, ETF, obbligazioni. Aliquote 26% e 12.5%. Alternativa a TasseTrading.',
+        title: 'Calcolatore Plusvalenze',
+        description: 'Calcola tasse su azioni, ETF, obbligazioni. Aliquote 26% e 12.5%. Fiscalità italiana.',
         href: '/strumenti/calcolatore-plusvalenze',
-        alternativeTo: 'TasseTrading',
-        alternativeLogo: '/competitors/tassetrading.png',
-        savedCost: '€50-200'
+        price: '€49',
+        featured: true
       },
       {
-        title: 'Calcolatore Minusvalenze GRATIS',
+        title: 'Calcolatore Minusvalenze',
         description: 'Gestisci zainetto fiscale, scadenze 4 anni e compensazioni FIFO.',
         href: '/strumenti/calcolatore-minusvalenze',
-        alternativeTo: 'TasseTrading',
-        alternativeLogo: '/competitors/tassetrading.png',
-        savedCost: '€50-200'
+        price: '€39'
       },
       {
         title: 'Tax Loss Harvesting',
         description: 'Ottimizza la compensazione tra plus e minusvalenze.',
-        href: '/strumenti/tax-loss-harvesting'
+        href: '/strumenti/tax-loss-harvesting',
+        price: '€29'
       },
     ],
   },
   {
-    title: 'Portfolio & Investimenti GRATIS',
+    title: 'Portfolio & Investimenti',
     tools: [
       {
-        title: 'Portfolio Tracker GRATIS',
-        description: 'Traccia azioni, ETF, fondi. Calcola P&L. Alternativa a JustETF, Wallible, Sharesight.',
+        title: 'Portfolio Tracker Pro',
+        description: 'Traccia azioni, ETF, fondi. Calcola P&L, allocazione, performance vs benchmark.',
         href: '/strumenti/portfolio-tracker',
-        alternativeTo: 'JustETF/Wallible',
-        alternativeLogo: '/competitors/justetf.png',
-        savedCost: '€60-276'
+        price: '€89',
+        featured: true
       },
       {
-        title: 'Backtest Portafoglio GRATIS',
-        description: 'Rendimenti storici, CAGR, Sharpe ratio. Alternativa a Portfolio Visualizer.',
+        title: 'Backtest Portafoglio',
+        description: 'Rendimenti storici, CAGR, Sharpe ratio, drawdown analysis.',
         href: '/strumenti/backtest-portafoglio',
-        alternativeTo: 'Portfolio Visualizer',
-        alternativeLogo: '/competitors/portfoliovisualizer.png',
-        savedCost: '$360'
+        price: '€69',
+        featured: true
       },
       {
-        title: 'Simulatore Monte Carlo GRATIS',
-        description: 'Simula 1000+ scenari probabilistici. Alternativa a Portfolio Visualizer.',
+        title: 'Simulatore Monte Carlo',
+        description: 'Simula 10.000+ scenari probabilistici per proiezioni realistiche.',
         href: '/strumenti/simulatore-monte-carlo',
-        alternativeTo: 'Portfolio Visualizer',
-        alternativeLogo: '/competitors/portfoliovisualizer.png',
-        savedCost: '$360'
+        price: '€59',
+        featured: true
       },
       {
-        title: 'Analizzatore Costi Fondi GRATIS',
+        title: 'Analizzatore Costi Fondi',
         description: 'Calcola TER, commissioni nascoste. Confronta fino a 3 fondi.',
-        href: '/strumenti/analizzatore-costi-fondi'
+        href: '/strumenti/analizzatore-costi-fondi',
+        price: '€29'
       },
       {
         title: 'Confronto ETF',
-        description: 'Confronta ETF per TER, AUM, replica. Come JustETF ma gratis.',
+        description: 'Confronta ETF per TER, AUM, replica, tracking difference.',
         href: '/strumenti/confronto-etf',
-        alternativeTo: 'JustETF Premium',
-        alternativeLogo: '/competitors/justetf.png',
-        savedCost: '€60-240'
+        price: '€39'
       },
       {
         title: 'Simulatore PAC',
         description: 'Piano di Accumulo con interesse composto e tassazione italiana.',
-        href: '/strumenti/pac'
+        href: '/strumenti/pac',
+        price: '€19'
       },
     ],
   },
@@ -165,17 +117,21 @@ const toolCategories: ToolCategory[] = [
       {
         title: 'Simulatore Holding',
         description: 'Confronto persona fisica vs holding. Regime PEX, dividendi, exit.',
-        href: '/strumenti/holding'
+        href: '/strumenti/holding',
+        price: '€79',
+        featured: true
       },
       {
         title: 'Family Office Calculator',
         description: 'Analisi costi-benefici per patrimoni da €5M+.',
-        href: '/strumenti/family-office'
+        href: '/strumenti/family-office',
+        price: '€89'
       },
       {
         title: 'Exit Strategy Planner',
         description: 'Trade sale, MBO, IPO. Ottimizzazione fiscale con PEX.',
-        href: '/strumenti/exit-strategy'
+        href: '/strumenti/exit-strategy',
+        price: '€69'
       },
     ],
   },
@@ -185,12 +141,15 @@ const toolCategories: ToolCategory[] = [
       {
         title: 'Trust vs Donazione',
         description: 'Protezione, controllo, fiscalità a confronto.',
-        href: '/strumenti/trust-donazione'
+        href: '/strumenti/trust-donazione',
+        price: '€59'
       },
       {
         title: 'Pianificatore Successione',
         description: 'Imposte, franchigie, strategie di ottimizzazione.',
-        href: '/strumenti/successione'
+        href: '/strumenti/successione',
+        price: '€69',
+        featured: true
       },
     ],
   },
@@ -200,12 +159,14 @@ const toolCategories: ToolCategory[] = [
       {
         title: 'Flat Tax Neo-Residenti',
         description: 'Regime €100k per redditi esteri. Simulazione risparmio.',
-        href: '/strumenti/flat-tax-100k'
+        href: '/strumenti/flat-tax-100k',
+        price: '€49'
       },
       {
         title: 'IVAFE / IVIE Calculator',
         description: 'Imposte su asset esteri. Calcolo e ottimizzazione.',
-        href: '/strumenti/ivafe-ivie'
+        href: '/strumenti/ivafe-ivie',
+        price: '€39'
       },
     ],
   },
@@ -215,12 +176,14 @@ const toolCategories: ToolCategory[] = [
       {
         title: 'Confronto Private Bank',
         description: 'Top private bank italiane e svizzere. Soglie, servizi, costi.',
-        href: '/strumenti/confronto-private-banking'
+        href: '/strumenti/confronto-private-banking',
+        price: '€49'
       },
       {
         title: 'Fee Analyzer',
         description: 'Management fee, performance fee, costi nascosti.',
-        href: '/strumenti/costi-private-banking'
+        href: '/strumenti/costi-private-banking',
+        price: '€29'
       },
     ],
   },
@@ -230,21 +193,27 @@ const toolCategories: ToolCategory[] = [
       {
         title: 'Aste Immobiliari Luxury',
         description: 'Ville, attici e immobili di pregio alle aste giudiziarie.',
-        href: '/strumenti/aste-immobiliari-luxury'
+        href: '/strumenti/aste-immobiliari-luxury',
+        price: '€39'
       },
       {
         title: 'Mercato Immobiliare Luxury',
         description: 'Prezzi al mq nelle zone premium italiane. Trend e analisi.',
-        href: '/strumenti/mercato-immobiliare-luxury'
+        href: '/strumenti/mercato-immobiliare-luxury',
+        price: '€49'
       },
       {
         title: 'Portafoglio Immobiliare',
         description: 'Ottimizzazione fiscale. Persona fisica vs società.',
-        href: '/strumenti/portafoglio-immobiliare'
+        href: '/strumenti/portafoglio-immobiliare',
+        price: '€59'
       },
     ],
   },
 ]
+
+// Mese corrente per offerta
+const currentMonth = new Date().toLocaleDateString('it-IT', { month: 'long' })
 
 export default function Strumenti() {
   const allTools = toolCategories.flatMap(cat =>
@@ -269,67 +238,51 @@ export default function Strumenti() {
       {/* Hero */}
       <section className="bg-forest pt-navbar">
         <div className="container-custom py-20 md:py-28">
-          <p className="text-green-300/60 text-sm font-medium tracking-wider uppercase mb-4">
-            100% Gratuiti - Risparmia fino a €360/anno
-          </p>
+          <div className="inline-flex items-center gap-2 bg-gold/20 text-gold px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <span className="w-2 h-2 bg-gold rounded-full animate-pulse" />
+            Solo per {currentMonth}: accesso completo gratuito
+          </div>
           <h1 className="font-heading text-[40px] md:text-[56px] text-white leading-tight max-w-2xl">
-            Alternative gratuite a JustETF, Wallible e Sharesight
+            40+ strumenti professionali per la gestione patrimoniale
           </h1>
-          <p className="text-lg text-white/50 mt-6 max-w-lg">
-            Portfolio tracker, calcolatore plusvalenze, simulatore Monte Carlo e 40+ strumenti professionali. Gratis.
+          <p className="text-lg text-white/70 mt-6 max-w-lg">
+            Portfolio tracker, simulatori fiscali, pianificazione successoria.
+            Strumenti da {toolPricing.total}/anno, gratuiti per chi si registra.
           </p>
+          <div className="mt-8 flex flex-col sm:flex-row gap-4">
+            <Link
+              href="/#contatti"
+              className="inline-flex items-center justify-center gap-2 bg-white text-forest px-6 py-3 rounded font-semibold hover:bg-gray-100 transition-colors"
+            >
+              Registrati per accesso gratuito
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Tabella confronto software a pagamento */}
-      <section className="bg-amber-50 py-12 border-b border-amber-200">
+      {/* Value Proposition */}
+      <section className="bg-cream py-12 border-b border-gray-200">
         <div className="container-custom">
-          <h2 className="font-heading text-2xl text-forest mb-6 text-center">
-            Quanto risparmi con i nostri strumenti gratuiti?
-          </h2>
-          <div className="overflow-x-auto">
-            <table className="w-full bg-white rounded-lg shadow-sm">
-              <thead>
-                <tr className="border-b bg-gray-50">
-                  <th className="text-left py-4 px-4 font-medium text-gray-600">Software a Pagamento</th>
-                  <th className="text-left py-4 px-4 font-medium text-gray-600">Costo</th>
-                  <th className="text-left py-4 px-4 font-medium text-gray-600">Nostra Alternativa Gratis</th>
-                  <th className="text-center py-4 px-4 font-medium text-gray-600">Risparmio</th>
-                </tr>
-              </thead>
-              <tbody>
-                {paidAlternatives.map((alt, i) => (
-                  <tr key={i} className="border-b hover:bg-gray-50">
-                    <td className="py-4 px-4">
-                      <div className="flex items-center gap-3">
-                        <Image
-                          src={alt.logo}
-                          alt={alt.name}
-                          width={24}
-                          height={24}
-                          className="rounded"
-                        />
-                        <span className="font-medium text-gray-800">{alt.name}</span>
-                      </div>
-                    </td>
-                    <td className="py-4 px-4 text-red-600 font-medium line-through">{alt.cost}</td>
-                    <td className="py-4 px-4">
-                      <Link href={alt.href} className="text-green-600 hover:text-green-700 font-medium">
-                        {alt.ourTool} →
-                      </Link>
-                    </td>
-                    <td className="py-4 px-4 text-center">
-                      <span className="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
-                        GRATIS
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="grid md:grid-cols-3 gap-8 text-center">
+            <div>
+              <p className="font-heading text-3xl text-forest">{toolPricing.total}</p>
+              <p className="text-gray-500 text-sm mt-1">Valore totale della suite</p>
+            </div>
+            <div>
+              <p className="font-heading text-3xl text-forest">40+</p>
+              <p className="text-gray-500 text-sm mt-1">Strumenti professionali</p>
+            </div>
+            <div>
+              <p className="font-heading text-3xl text-green-600">€0</p>
+              <p className="text-gray-500 text-sm mt-1">Per sempre se ti registri ora</p>
+            </div>
           </div>
-          <p className="text-center text-gray-500 text-sm mt-4">
-            I prezzi indicati sono quelli pubblicati sui siti ufficiali dei rispettivi software (gennaio 2026)
+          <p className="text-center text-gray-400 text-sm mt-8 max-w-2xl mx-auto">
+            Offriamo questi strumenti gratuitamente per dimostrare la nostra competenza.
+            Chi si registra entro {currentMonth} mantiene l&apos;accesso gratuito per sempre.
           </p>
         </div>
       </section>
@@ -351,30 +304,20 @@ export default function Strumenti() {
                           <span className="font-heading text-lg text-forest group-hover:text-green-600 transition-colors">
                             {tool.title}
                           </span>
-                          {tool.alternativeTo && (
-                            <span className="inline-flex items-center gap-1.5 text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">
-                              <span>vs</span>
-                              {tool.alternativeLogo && (
-                                <Image
-                                  src={tool.alternativeLogo}
-                                  alt={tool.alternativeTo}
-                                  width={16}
-                                  height={16}
-                                  className="rounded-sm"
-                                />
-                              )}
-                              <span>{tool.alternativeTo}</span>
+                          {tool.price && (
+                            <span className="text-xs text-gray-400 line-through">
+                              {tool.price}
+                            </span>
+                          )}
+                          {tool.featured && (
+                            <span className="text-xs bg-gold/20 text-gold px-2 py-0.5 rounded">
+                              Pro
                             </span>
                           )}
                         </div>
                         <p className="text-sm text-gray-400 mt-0.5">
                           {tool.description}
                         </p>
-                        {tool.savedCost && (
-                          <p className="text-xs text-green-600 mt-1">
-                            Risparmia {tool.savedCost}/anno
-                          </p>
-                        )}
                       </Link>
                     </li>
                   ))}
@@ -389,43 +332,42 @@ export default function Strumenti() {
       <section className="bg-gray-50 py-12">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
-            <h2 className="font-heading text-xl text-forest mb-4">Perché offriamo questi strumenti gratuitamente?</h2>
+            <h2 className="font-heading text-xl text-forest mb-4">Perché strumenti da {toolPricing.total} sono gratuiti?</h2>
             <p className="text-gray-600 mb-4">
               Gestiamo patrimoni significativi e crediamo che la fiducia si costruisca con i fatti, non con le promesse.
               Questi strumenti professionali sono il nostro biglietto da visita: <strong>prima dimostriamo competenza,
               poi parliamo di collaborazione</strong>.
             </p>
             <p className="text-gray-600 mb-6">
-              I nostri calcolatori sono progettati specificamente per la <strong>fiscalità italiana</strong> e per le
-              esigenze di chi gestisce patrimoni importanti. Aliquote 26% e 12.5%, regime amministrato vs dichiarativo,
-              compensazione minusvalenze, holding, trust, successioni: ogni strumento riflette la complessità che
-              affrontiamo quotidianamente con i nostri clienti.
+              I nostri calcolatori sono progettati specificamente per la <strong>fiscalità italiana e svizzera</strong> e per le
+              esigenze di chi gestisce patrimoni importanti. Holding, trust, successioni, fiscalità internazionale:
+              ogni strumento riflette la complessità che affrontiamo quotidianamente con i nostri clienti.
             </p>
-            <h3 className="font-heading text-lg text-forest mt-6 mb-3">Strumenti di livello professionale</h3>
+            <h3 className="font-heading text-lg text-forest mt-6 mb-3">Cosa include la suite completa</h3>
             <div className="grid md:grid-cols-2 gap-4 text-sm text-gray-600">
               <div className="flex items-start gap-2">
                 <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span><strong>Portfolio Tracker</strong> con allocazione, benchmark e export professionale</span>
+                <span><strong>Portfolio Tracker Pro</strong> — allocazione, benchmark, export (€89)</span>
               </div>
               <div className="flex items-start gap-2">
                 <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span><strong>Calcolatore Plusvalenze</strong> ottimizzato per fiscalità italiana, non australiana</span>
+                <span><strong>Simulatore Holding</strong> — confronto PF vs società (€79)</span>
               </div>
               <div className="flex items-start gap-2">
                 <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span><strong>Simulatore Monte Carlo</strong> con 10.000 scenari e analisi FIRE</span>
+                <span><strong>Simulatore Monte Carlo</strong> — 10.000 scenari (€59)</span>
               </div>
               <div className="flex items-start gap-2">
                 <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span><strong>Backtest Portafoglio</strong> con Sharpe, Sortino, VaR e drawdown analysis</span>
+                <span><strong>+ altri 37 strumenti</strong> — fiscalità, successioni, real estate</span>
               </div>
             </div>
           </div>
@@ -433,20 +375,22 @@ export default function Strumenti() {
       </section>
 
       {/* CTA */}
-      <section className="bg-cream py-16 md:py-20">
+      <section className="bg-forest py-16 md:py-20">
         <div className="container-custom">
           <div className="max-w-xl mx-auto text-center">
-            <h2 className="font-heading text-2xl md:text-3xl text-forest mb-4">
-              Situazione complessa?
+            <p className="text-gold text-sm font-medium mb-4">Offerta limitata</p>
+            <h2 className="font-heading text-2xl md:text-3xl text-white mb-4">
+              Registrati ora, accesso gratuito per sempre
             </h2>
-            <p className="text-gray-500 mb-8">
-              Ogni grande patrimonio ha esigenze uniche. Parliamone.
+            <p className="text-white/60 mb-8">
+              Chi si registra entro {currentMonth} mantiene l&apos;accesso a tutti gli strumenti
+              senza costi, anche quando introdurremo i piani a pagamento.
             </p>
             <Link
               href="/#contatti"
-              className="inline-flex items-center gap-2 bg-forest text-white px-6 py-3 rounded font-medium hover:bg-green-700 transition-colors"
+              className="inline-flex items-center gap-2 bg-white text-forest px-8 py-4 rounded font-semibold hover:bg-gray-100 transition-colors"
             >
-              Richiedi Consulenza Riservata
+              Registrati Gratuitamente
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
