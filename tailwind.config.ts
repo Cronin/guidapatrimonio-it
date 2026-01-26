@@ -9,31 +9,44 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Primary Green Palette (converted from CWFG blue)
-        'forest': '#1B4D3E',      // Navy equivalent
+        // Primary Navy Palette (Swiss/Premium style)
+        'navy': '#0d1b2a',           // Primary dark navy
+        'forest': '#0d1b2a',         // Alias for backwards compatibility
+        'navy-light': '#1b263b',     // Slightly lighter
+        'navy-50': '#f0f4f8',
+        'navy-100': '#d9e2ec',
+        'navy-200': '#bcccdc',
+        'navy-300': '#9fb3c8',
+        'navy-400': '#829ab1',
+        'navy-500': '#627d98',
+        'navy-600': '#486581',
+        'navy-700': '#334e68',
+        'navy-800': '#243b53',
+        'navy-900': '#102a43',
+        // Green for success states
         'green': {
-          600: '#2D6A4F',         // Blue-600 equivalent (buttons, backgrounds)
-          500: '#368859',         // Mid tone
-          400: '#40916C',         // Blue-400 equivalent (primary CTA)
-          300: '#52B788',         // Blue-300 equivalent
-          250: '#74C69D',         // Blue-250 equivalent
-          200: '#95D5B2',         // Light green
-          100: '#B7E4C7',         // Very light
-          50: '#D8F3DC',          // Lightest
+          600: '#16a34a',
+          500: '#22c55e',
+          400: '#4ade80',
+          300: '#86efac',
+          200: '#bbf7d0',
+          100: '#dcfce7',
+          50: '#f0fdf4',
         },
-        // Neutral Colors (same as CWFG)
-        'black': '#333438',
-        'cream': '#fcfcfa',
-        'cream-dark': '#f7f5f0',
+        // Neutral Colors
+        'black': '#1a1a2e',
+        'cream': '#fafafa',
+        'cream-dark': '#f5f5f5',
         // Gray Scale
         'gray': {
-          500: '#5e646e',
-          400: '#878d96',
-          300: '#b0b7c1',
-          200: '#d8dee7',
+          500: '#64748b',
+          400: '#94a3b8',
+          300: '#cbd5e1',
+          200: '#e2e8f0',
         },
-        // Accent
-        'gold': '#D4A373',        // Warm gold accent
+        // Accent - Gold (warm, premium)
+        'gold': '#C9A227',
+        'gold-light': '#D4A373',
       },
       fontFamily: {
         // Playfair Display - elegant serif for wealth management
@@ -42,7 +55,7 @@ const config: Config = {
         'body': ['DM Sans', 'Inter', 'system-ui', 'sans-serif'],
       },
       fontSize: {
-        // CWFG Typography Scale
+        // Typography Scale
         'h1': ['89.07px', { lineHeight: '1.1', fontWeight: '400' }],
         'h1-md': ['60px', { lineHeight: '1.1', fontWeight: '400' }],
         'h1-sm': ['48px', { lineHeight: '1.1', fontWeight: '400' }],
@@ -58,7 +71,7 @@ const config: Config = {
         'body-sm': ['11.13px', { lineHeight: '1.25', fontWeight: '300' }],
       },
       spacing: {
-        // CWFG Section padding
+        // Section padding
         'section-lg': '148.45px',
         'section-md': '118.76px',
         'section-sm': '74.23px',
@@ -70,10 +83,10 @@ const config: Config = {
         'card': '8px',
       },
       transitionTimingFunction: {
-        'cwfg': 'cubic-bezier(0.215, 0.61, 0.355, 1)',
+        'smooth': 'cubic-bezier(0.215, 0.61, 0.355, 1)',
       },
       transitionDuration: {
-        'cwfg': '250ms',
+        'smooth': '250ms',
       },
       animation: {
         'ken-burns': 'kenburns 10s ease-out infinite',

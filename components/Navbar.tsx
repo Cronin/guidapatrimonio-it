@@ -29,7 +29,7 @@ export default function Navbar() {
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center gap-8">
           <Link href="/#chi-siamo" className="text-white text-body font-normal hover:opacity-80 transition-opacity">
-            Chi Siamo
+            Partner
           </Link>
           <Link href="/strumenti" className="text-white text-body font-normal hover:opacity-80 transition-opacity">
             Strumenti
@@ -40,8 +40,8 @@ export default function Navbar() {
           <Link href="/blog" className="text-white text-body font-normal hover:opacity-80 transition-opacity">
             Blog
           </Link>
-          <Link href="/#contatti" className="text-white text-body font-medium hover:opacity-80 transition-opacity border-b border-white/40 hover:border-white pb-0.5">
-            Contattaci
+          <Link href="/#contatti" className="text-navy bg-gold px-4 py-2 rounded font-medium hover:bg-gold-light transition-colors">
+            Callback Gratuito
           </Link>
         </div>
 
@@ -63,10 +63,10 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="lg:hidden bg-forest/95 backdrop-blur-md">
+        <div className="lg:hidden bg-navy/95 backdrop-blur-md">
           <div className="container-custom py-6 flex flex-col gap-4">
             <Link href="/#chi-siamo" className="text-white text-body-md py-2" onClick={() => setIsOpen(false)}>
-              Chi Siamo
+              Partner
             </Link>
             <Link href="/strumenti" className="text-white text-body-md py-2" onClick={() => setIsOpen(false)}>
               Strumenti
@@ -77,8 +77,8 @@ export default function Navbar() {
             <Link href="/blog" className="text-white text-body-md py-2" onClick={() => setIsOpen(false)}>
               Blog
             </Link>
-            <Link href="/#contatti" className="text-white text-body-md py-2 font-medium" onClick={() => setIsOpen(false)}>
-              Contattaci
+            <Link href="/#contatti" className="text-navy bg-gold px-4 py-2 rounded font-medium text-center" onClick={() => setIsOpen(false)}>
+              Callback Gratuito
             </Link>
           </div>
         </div>

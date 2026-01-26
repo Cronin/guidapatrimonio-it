@@ -1,0 +1,16 @@
+{
+  "site": "guidapatrimonio.it",
+  "timestamp": "2026-01-24T23:54:49.252Z",
+  "status": "success",
+  "screenshots": {
+    "desktop": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/2026-01-24T23-54-38/desktop.png",
+    "mobile": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/2026-01-24T23-54-38/mobile.png"
+  },
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "metrics": {
+    "loadTimeMs": 4179,
+    "statusCode": 200,
+    "domContentLoadedMs": 2329
+  }
+}

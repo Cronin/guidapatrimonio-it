@@ -3,39 +3,55 @@
 @tailwind utilities;
 
 /* ============================================
-   CSS CUSTOM PROPERTIES - GREEN PALETTE
+   CSS CUSTOM PROPERTIES - NAVY PALETTE
    ============================================ */
 :root {
-  /* Primary Green Palette */
-  --forest: #1B4D3E;
-  --green-600: #2D6A4F;
-  --green-500: #368859;
-  --green-400: #40916C;
-  --green-300: #52B788;
-  --green-250: #74C69D;
-  --green-200: #95D5B2;
-  --green-100: #B7E4C7;
-  --green-50: #D8F3DC;
+  /* Primary Navy Palette (Swiss/Premium style) */
+  --navy: #0d1b2a;
+  --navy-light: #1b263b;
+  --navy-50: #f0f4f8;
+  --navy-100: #d9e2ec;
+  --navy-200: #bcccdc;
+  --navy-300: #9fb3c8;
+  --navy-400: #829ab1;
+  --navy-500: #627d98;
+  --navy-600: #486581;
+  --navy-700: #334e68;
+  --navy-800: #243b53;
+  --navy-900: #102a43;
+
+  /* Legacy alias */
+  --forest: #0d1b2a;
+
+  /* Green for success states */
+  --green-600: #16a34a;
+  --green-500: #22c55e;
+  --green-400: #4ade80;
+  --green-300: #86efac;
+  --green-200: #bbf7d0;
+  --green-100: #dcfce7;
+  --green-50: #f0fdf4;
 
   /* Neutral Colors */
-  --black: #333438;
-  --cream: #fcfcfa;
-  --cream-dark: #f7f5f0;
+  --black: #1a1a2e;
+  --cream: #fafafa;
+  --cream-dark: #f5f5f5;
   --white: #ffffff;
 
   /* Gray Scale */
-  --gray-500: #5e646e;
-  --gray-400: #878d96;
-  --gray-300: #b0b7c1;
-  --gray-200: #d8dee7;
+  --gray-500: #64748b;
+  --gray-400: #94a3b8;
+  --gray-300: #cbd5e1;
+  --gray-200: #e2e8f0;
 
-  /* Accent */
-  --gold: #D4A373;
+  /* Accent - Gold (warm, premium) */
+  --gold: #C9A227;
+  --gold-light: #D4A373;
 
   /* Opacity Variants */
-  --text-secondary: rgba(51, 52, 56, 0.6);
-  --text-tertiary: rgba(51, 52, 56, 0.4);
-  --text-light: rgba(247, 245, 240, 0.8);
+  --text-secondary: rgba(26, 26, 46, 0.6);
+  --text-tertiary: rgba(26, 26, 46, 0.4);
+  --text-light: rgba(250, 250, 250, 0.8);
 
   /* Transitions */
   --transition-standard: 0.25s cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -69,36 +85,45 @@ h1, h2, h3, h4, h5, h6 {
    COMPONENT CLASSES
    ============================================ */
 @layer components {
-  /* Primary Button */
+  /* Primary Button - Gold accent */
   .btn-primary {
     @apply inline-flex items-center justify-center;
-    @apply font-body font-semibold text-white;
-    @apply bg-green-400 border border-green-600;
+    @apply font-body font-semibold;
+    background-color: var(--gold);
+    color: var(--navy);
+    @apply border border-transparent;
     @apply rounded-button;
     @apply px-8 py-4;
-    @apply transition-all duration-cwfg ease-cwfg;
-    @apply hover:bg-green-500 hover:-translate-y-0.5;
+    @apply transition-all duration-smooth ease-smooth;
+  }
+  .btn-primary:hover {
+    background-color: var(--gold-light);
+    @apply -translate-y-0.5;
   }
 
-  /* Secondary Button */
+  /* Secondary Button - Navy */
   .btn-secondary {
     @apply inline-flex items-center justify-center;
     @apply font-body font-semibold text-white;
-    @apply bg-green-600 border border-green-600;
+    background-color: var(--navy);
+    @apply border border-transparent;
     @apply rounded-button;
     @apply px-6 py-3;
-    @apply transition-all duration-cwfg ease-cwfg;
-    @apply hover:bg-green-500;
+    @apply transition-all duration-smooth ease-smooth;
+  }
+  .btn-secondary:hover {
+    background-color: var(--navy-light);
   }
 
   /* Reverse Button (white) */
   .btn-reverse {
     @apply inline-flex items-center justify-center;
-    @apply font-body font-semibold text-green-600;
+    @apply font-body font-semibold;
+    color: var(--navy);
     @apply bg-white border border-white;
     @apply rounded-button;
     @apply px-6 py-3;
-    @apply transition-all duration-cwfg ease-cwfg;
+    @apply transition-all duration-smooth ease-smooth;
     @apply hover:bg-cream;
   }
 
@@ -109,18 +134,21 @@ h1, h2, h3, h4, h5, h6 {
     @apply bg-transparent border border-white;
     @apply rounded-button-sm;
     @apply px-6 py-3;
-    @apply transition-all duration-cwfg ease-cwfg;
+    @apply transition-all duration-smooth ease-smooth;
     @apply hover:bg-white/10;
   }
 
   /* Text Button */
   .btn-text {
     @apply inline-flex items-center;
-    @apply font-body font-semibold text-green-400;
+    @apply font-body font-semibold;
+    color: var(--gold);
     @apply bg-transparent border-2 border-transparent;
     @apply px-0 py-0;
-    @apply transition-all duration-cwfg ease-cwfg;
-    @apply hover:text-green-600;
+    @apply transition-all duration-smooth ease-smooth;
+  }
+  .btn-text:hover {
+    color: var(--gold-light);
   }
 
   /* Section Padding */
@@ -140,7 +168,7 @@ h1, h2, h3, h4, h5, h6 {
   .card {
     @apply bg-white rounded-card p-8;
     @apply shadow-sm;
-    @apply transition-all duration-cwfg ease-cwfg;
+    @apply transition-all duration-smooth ease-smooth;
     @apply hover:shadow-lg hover:-translate-y-1;
   }
 
@@ -152,13 +180,13 @@ h1, h2, h3, h4, h5, h6 {
   /* Label (H2 small uppercase) */
   .label {
     @apply font-body text-h2-label uppercase tracking-wide;
-    @apply text-green-400;
+    color: var(--gold);
   }
 
   /* Hero overlay */
   .hero-overlay {
     @apply absolute inset-0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+    background: linear-gradient(to bottom, rgba(13, 27, 42, 0.7), rgba(13, 27, 42, 0.85));
   }
 }
 
