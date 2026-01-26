@@ -274,16 +274,16 @@ export default function MercatoImmobiliareLuxury() {
     const minPrice = Math.min(...luxuryData.markets.map(m => m.pricePerSqm))
     const ratio = (price - minPrice) / (maxPrice - minPrice)
 
-    if (ratio > 0.75) return 'bg-amber-600'
-    if (ratio > 0.5) return 'bg-amber-500'
-    if (ratio > 0.25) return 'bg-amber-400'
-    return 'bg-amber-300'
+    if (ratio > 0.75) return 'bg-green-400'
+    if (ratio > 0.5) return 'bg-green-400'
+    if (ratio > 0.25) return 'bg-green-300'
+    return 'bg-green-200'
   }
 
   const getTrendColor = (trend: number) => {
     if (trend >= 5) return 'text-green-600'
     if (trend >= 3) return 'text-green-500'
-    if (trend >= 0) return 'text-amber-600'
+    if (trend >= 0) return 'text-green-400'
     return 'text-red-500'
   }
 
@@ -293,7 +293,7 @@ export default function MercatoImmobiliareLuxury() {
       <Navbar />
 
       {/* Hero - Luxury Style */}
-      <section className="relative bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 pt-navbar overflow-hidden">
+      <section className="relative bg-forest pt-navbar overflow-hidden">
         {/* Background Image - Villa Carlotta Como */}
         <Image
           src="/images/finance/como-villa-carlotta.webp"
@@ -309,7 +309,7 @@ export default function MercatoImmobiliareLuxury() {
         }} />
 
         <div className="container-custom py-16 md:py-24 relative">
-          <Link href="/strumenti" className="inline-flex items-center text-amber-300/80 hover:text-amber-200 mb-6 transition-colors">
+          <Link href="/strumenti" className="inline-flex items-center text-green-200/80 hover:text-green-100 mb-6 transition-colors">
             <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
@@ -317,56 +317,56 @@ export default function MercatoImmobiliareLuxury() {
           </Link>
 
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-1 h-12 bg-gradient-to-b from-amber-400 to-amber-600 rounded-full" />
-            <span className="text-amber-400 text-sm font-medium tracking-widest uppercase">Mercato Premium</span>
+            <div className="w-1 h-12 bg-gradient-to-b from-green-300 to-green-400 rounded-full" />
+            <span className="text-green-300 text-sm font-medium tracking-widest uppercase">Mercato Premium</span>
           </div>
 
           <h1 className="font-heading text-[36px] md:text-[52px] text-white leading-tight max-w-2xl">
             Immobiliare di Lusso
-            <span className="block text-amber-300">Italia</span>
+            <span className="block text-green-200">Italia</span>
           </h1>
-          <p className="text-stone-300 mt-4 max-w-xl text-lg">
+          <p className="text-gray-300 mt-4 max-w-xl text-lg">
             Prezzi al metro quadro, trend di mercato e analisi delle zone piu esclusive del Paese.
           </p>
 
           {/* Quick Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-4">
-              <p className="text-amber-400/80 text-xs uppercase tracking-wider mb-1">Prezzo Medio</p>
+              <p className="text-green-300/80 text-xs uppercase tracking-wider mb-1">Prezzo Medio</p>
               <p className="font-heading text-2xl text-white">{formatNumber(luxuryData.nationalStats.avgLuxuryPrice)}</p>
-              <p className="text-stone-400 text-sm">EUR/mq</p>
+              <p className="text-gray-400 text-sm">EUR/mq</p>
             </div>
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-4">
-              <p className="text-amber-400/80 text-xs uppercase tracking-wider mb-1">Crescita YoY</p>
+              <p className="text-green-300/80 text-xs uppercase tracking-wider mb-1">Crescita YoY</p>
               <p className="font-heading text-2xl text-white">+{luxuryData.nationalStats.yoyGrowth}%</p>
-              <p className="text-stone-400 text-sm">anno su anno</p>
+              <p className="text-gray-400 text-sm">anno su anno</p>
             </div>
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-4">
-              <p className="text-amber-400/80 text-xs uppercase tracking-wider mb-1">Volume</p>
+              <p className="text-green-300/80 text-xs uppercase tracking-wider mb-1">Volume</p>
               <p className="font-heading text-2xl text-white">{luxuryData.nationalStats.transactionVolume}</p>
-              <p className="text-stone-400 text-sm">transazioni/anno</p>
+              <p className="text-gray-400 text-sm">transazioni/anno</p>
             </div>
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-4">
-              <p className="text-amber-400/80 text-xs uppercase tracking-wider mb-1">Buyer Esteri</p>
+              <p className="text-green-300/80 text-xs uppercase tracking-wider mb-1">Buyer Esteri</p>
               <p className="font-heading text-2xl text-white">{luxuryData.nationalStats.foreignBuyerShare}%</p>
-              <p className="text-stone-400 text-sm">del mercato</p>
+              <p className="text-gray-400 text-sm">del mercato</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Calculator Section */}
-      <section className="bg-gradient-to-b from-stone-100 to-cream py-12 border-b border-stone-200">
+      <section className="bg-cream py-12 border-b border-gray-200">
         <div className="container-custom">
-          <div className="bg-white rounded-xl shadow-lg border border-stone-200 p-6 md:p-8">
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 md:p-8">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
               <div>
-                <h2 className="font-heading text-xl text-stone-800 mb-2">Calcolatore Prezzi</h2>
-                <p className="text-stone-500 text-sm">Quanto costa un appartamento di lusso nelle zone premium italiane?</p>
+                <h2 className="font-heading text-xl text-forest mb-2">Calcolatore Prezzi</h2>
+                <p className="text-gray-400 text-sm">Quanto costa un appartamento di lusso nelle zone premium italiane?</p>
               </div>
               <div className="flex-shrink-0 w-full md:w-auto">
-                <label className="block text-sm font-medium text-stone-600 mb-2">
-                  Superficie: <span className="text-amber-600 font-semibold">{sqm} mq</span>
+                <label className="block text-sm font-medium text-gray-500 mb-2">
+                  Superficie: <span className="text-green-400 font-semibold">{sqm} mq</span>
                 </label>
                 <input
                   type="range"
@@ -375,9 +375,9 @@ export default function MercatoImmobiliareLuxury() {
                   step="10"
                   value={sqm}
                   onChange={(e) => setSqm(Number(e.target.value))}
-                  className="w-full md:w-64 h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                  className="w-full md:w-64 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-400"
                 />
-                <div className="flex justify-between text-xs text-stone-400 mt-1">
+                <div className="flex justify-between text-xs text-gray-400 mt-1">
                   <span>50 mq</span>
                   <span>500 mq</span>
                 </div>
@@ -390,12 +390,12 @@ export default function MercatoImmobiliareLuxury() {
                 {sortedMarkets.slice(0, 6).map((market) => (
                   <div
                     key={market.id}
-                    className="bg-stone-50 rounded-lg p-4 min-w-[160px] border border-stone-100 hover:border-amber-300 transition-colors cursor-pointer"
+                    className="bg-cream rounded-lg p-4 min-w-[160px] border border-green-50 hover:border-green-200 transition-colors cursor-pointer"
                     onClick={() => setSelectedMarket(market.id)}
                   >
-                    <p className="text-stone-500 text-xs mb-1 truncate">{market.name}</p>
-                    <p className="font-heading text-lg text-stone-800">{formatCurrency(calculatePrice(market.pricePerSqm))}</p>
-                    <p className="text-amber-600 text-xs mt-1">{formatNumber(market.pricePerSqm)} EUR/mq</p>
+                    <p className="text-gray-400 text-xs mb-1 truncate">{market.name}</p>
+                    <p className="font-heading text-lg text-forest">{formatCurrency(calculatePrice(market.pricePerSqm))}</p>
+                    <p className="text-green-400 text-xs mt-1">{formatNumber(market.pricePerSqm)} EUR/mq</p>
                   </div>
                 ))}
               </div>
@@ -413,7 +413,7 @@ export default function MercatoImmobiliareLuxury() {
               <select
                 value={selectedZone}
                 onChange={(e) => setSelectedZone(e.target.value)}
-                className="px-4 py-2 bg-white border border-stone-200 rounded-lg text-sm text-stone-700 focus:border-amber-400 focus:outline-none"
+                className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm text-green-600 focus:border-green-300 focus:outline-none"
               >
                 <option value="all">Tutte le regioni</option>
                 {regions.map(region => (
@@ -426,8 +426,8 @@ export default function MercatoImmobiliareLuxury() {
                 onClick={() => setSortBy('price')}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   sortBy === 'price'
-                    ? 'bg-amber-500 text-white'
-                    : 'bg-white border border-stone-200 text-stone-600 hover:border-amber-300'
+                    ? 'bg-green-400 text-white'
+                    : 'bg-white border border-gray-200 text-gray-500 hover:border-green-200'
                 }`}
               >
                 Prezzo
@@ -436,8 +436,8 @@ export default function MercatoImmobiliareLuxury() {
                 onClick={() => setSortBy('growth')}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   sortBy === 'growth'
-                    ? 'bg-amber-500 text-white'
-                    : 'bg-white border border-stone-200 text-stone-600 hover:border-amber-300'
+                    ? 'bg-green-400 text-white'
+                    : 'bg-white border border-gray-200 text-gray-500 hover:border-green-200'
                 }`}
               >
                 Crescita
@@ -446,8 +446,8 @@ export default function MercatoImmobiliareLuxury() {
                 onClick={() => setSortBy('name')}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   sortBy === 'name'
-                    ? 'bg-amber-500 text-white'
-                    : 'bg-white border border-stone-200 text-stone-600 hover:border-amber-300'
+                    ? 'bg-green-400 text-white'
+                    : 'bg-white border border-gray-200 text-gray-500 hover:border-green-200'
                 }`}
               >
                 A-Z
@@ -465,14 +465,14 @@ export default function MercatoImmobiliareLuxury() {
                     onClick={() => setSelectedMarket(market.id === selectedMarket ? null : market.id)}
                     className={`bg-white rounded-xl p-5 cursor-pointer transition-all border-2 ${
                       selectedMarket === market.id
-                        ? 'border-amber-400 shadow-lg shadow-amber-100'
-                        : 'border-transparent shadow hover:shadow-md hover:border-stone-200'
+                        ? 'border-green-300 shadow-lg shadow-green-50'
+                        : 'border-transparent shadow hover:shadow-md hover:border-gray-200'
                     }`}
                   >
                     <div className="flex items-start justify-between mb-3">
                       <div>
-                        <h3 className="font-heading text-lg text-stone-800">{market.name}</h3>
-                        <p className="text-stone-500 text-sm">{market.zone}</p>
+                        <h3 className="font-heading text-lg text-forest">{market.name}</h3>
+                        <p className="text-gray-400 text-sm">{market.zone}</p>
                       </div>
                       <div className={`${getPriceColor(market.pricePerSqm)} text-white text-xs font-medium px-2 py-1 rounded`}>
                         {market.region}
@@ -481,39 +481,39 @@ export default function MercatoImmobiliareLuxury() {
 
                     <div className="flex items-end justify-between mt-4">
                       <div>
-                        <p className="text-stone-400 text-xs uppercase tracking-wider mb-1">Prezzo/mq</p>
-                        <p className="font-heading text-2xl text-stone-800">{formatNumber(market.pricePerSqm)}</p>
-                        <p className="text-stone-500 text-sm">EUR</p>
+                        <p className="text-gray-400 text-xs uppercase tracking-wider mb-1">Prezzo/mq</p>
+                        <p className="font-heading text-2xl text-forest">{formatNumber(market.pricePerSqm)}</p>
+                        <p className="text-gray-400 text-sm">EUR</p>
                       </div>
                       <div className="text-right">
                         <p className={`font-semibold ${getTrendColor(market.yoyChange)}`}>
                           +{market.yoyChange}%
                         </p>
-                        <p className="text-stone-400 text-xs">anno su anno</p>
+                        <p className="text-gray-400 text-xs">anno su anno</p>
                       </div>
                     </div>
 
                     {/* Price range bar */}
-                    <div className="mt-4 pt-4 border-t border-stone-100">
-                      <div className="flex justify-between text-xs text-stone-500 mb-1">
+                    <div className="mt-4 pt-4 border-t border-green-50">
+                      <div className="flex justify-between text-xs text-gray-400 mb-1">
                         <span>{formatNumber(market.priceRange.min)}</span>
                         <span>{formatNumber(market.priceRange.max)}</span>
                       </div>
-                      <div className="h-2 bg-stone-100 rounded-full overflow-hidden">
+                      <div className="h-2 bg-green-50 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-gradient-to-r from-amber-300 to-amber-500 rounded-full"
+                          className="h-full bg-gradient-to-r from-green-200 to-green-400 rounded-full"
                           style={{
                             width: `${((market.pricePerSqm - market.priceRange.min) / (market.priceRange.max - market.priceRange.min)) * 100}%`
                           }}
                         />
                       </div>
-                      <p className="text-xs text-stone-400 mt-1 text-center">Range EUR/mq</p>
+                      <p className="text-xs text-gray-400 mt-1 text-center">Range EUR/mq</p>
                     </div>
 
                     {/* Highlights */}
                     <div className="flex flex-wrap gap-1 mt-3">
                       {market.highlights.slice(0, 3).map((highlight, i) => (
-                        <span key={i} className="text-xs bg-stone-100 text-stone-600 px-2 py-0.5 rounded">
+                        <span key={i} className="text-xs bg-green-50 text-gray-500 px-2 py-0.5 rounded">
                           {highlight}
                         </span>
                       ))}
@@ -528,63 +528,63 @@ export default function MercatoImmobiliareLuxury() {
               <div className="sticky top-24 space-y-6">
                 {/* Selected Market Detail */}
                 {selectedMarketData ? (
-                  <div className="bg-gradient-to-br from-stone-800 to-stone-900 rounded-xl p-6 text-white">
+                  <div className="bg-gradient-to-br from-forest to-forest rounded-xl p-6 text-white">
                     <div className="flex items-center gap-2 mb-4">
-                      <div className="w-1 h-8 bg-amber-400 rounded-full" />
+                      <div className="w-1 h-8 bg-green-300 rounded-full" />
                       <div>
                         <h3 className="font-heading text-xl">{selectedMarketData.name}</h3>
-                        <p className="text-stone-400 text-sm">{selectedMarketData.city}, {selectedMarketData.region}</p>
+                        <p className="text-gray-400 text-sm">{selectedMarketData.city}, {selectedMarketData.region}</p>
                       </div>
                     </div>
 
-                    <p className="text-stone-300 text-sm mb-6">{selectedMarketData.description}</p>
+                    <p className="text-gray-300 text-sm mb-6">{selectedMarketData.description}</p>
 
                     <div className="grid grid-cols-2 gap-4 mb-6">
                       <div className="bg-white/10 rounded-lg p-3">
-                        <p className="text-amber-400/80 text-xs uppercase mb-1">Prezzo medio</p>
+                        <p className="text-green-300/80 text-xs uppercase mb-1">Prezzo medio</p>
                         <p className="font-heading text-xl">{formatNumber(selectedMarketData.pricePerSqm)}</p>
-                        <p className="text-stone-400 text-xs">EUR/mq</p>
+                        <p className="text-gray-400 text-xs">EUR/mq</p>
                       </div>
                       <div className="bg-white/10 rounded-lg p-3">
-                        <p className="text-amber-400/80 text-xs uppercase mb-1">Crescita</p>
+                        <p className="text-green-300/80 text-xs uppercase mb-1">Crescita</p>
                         <p className="font-heading text-xl text-green-400">+{selectedMarketData.yoyChange}%</p>
-                        <p className="text-stone-400 text-xs">anno su anno</p>
+                        <p className="text-gray-400 text-xs">anno su anno</p>
                       </div>
                     </div>
 
                     <div className="border-t border-white/10 pt-4 mb-4">
-                      <p className="text-amber-400/80 text-xs uppercase mb-2">Top Sales</p>
+                      <p className="text-green-300/80 text-xs uppercase mb-2">Top Sales</p>
                       <p className="text-white font-medium">{selectedMarketData.topSales}</p>
                     </div>
 
-                    <div className="bg-amber-500/20 rounded-lg p-4">
-                      <p className="text-amber-300 text-xs uppercase mb-2">Appartamento {sqm} mq</p>
+                    <div className="bg-green-400/20 rounded-lg p-4">
+                      <p className="text-green-200 text-xs uppercase mb-2">Appartamento {sqm} mq</p>
                       <p className="font-heading text-2xl">{formatCurrency(calculatePrice(selectedMarketData.pricePerSqm))}</p>
-                      <p className="text-stone-400 text-xs mt-1">stima indicativa</p>
+                      <p className="text-gray-400 text-xs mt-1">stima indicativa</p>
                     </div>
                   </div>
                 ) : (
-                  <div className="bg-stone-100 rounded-xl p-6 text-center">
-                    <svg className="w-12 h-12 text-stone-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="bg-green-50 rounded-xl p-6 text-center">
+                    <svg className="w-12 h-12 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                     </svg>
-                    <p className="text-stone-500">Seleziona una zona per vedere i dettagli</p>
+                    <p className="text-gray-400">Seleziona una zona per vedere i dettagli</p>
                   </div>
                 )}
 
                 {/* Market Insights */}
                 <div className="bg-white rounded-xl p-6 shadow">
-                  <h3 className="font-heading text-lg text-stone-800 mb-4 flex items-center gap-2">
-                    <svg className="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <h3 className="font-heading text-lg text-forest mb-4 flex items-center gap-2">
+                    <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                     Insight di Mercato
                   </h3>
                   <div className="space-y-4">
                     {luxuryData.marketInsights.map((insight, index) => (
-                      <div key={index} className="border-l-2 border-amber-400 pl-3">
-                        <p className="font-medium text-stone-800 text-sm">{insight.title}</p>
-                        <p className="text-stone-500 text-xs mt-1">{insight.text}</p>
+                      <div key={index} className="border-l-2 border-green-300 pl-3">
+                        <p className="font-medium text-forest text-sm">{insight.title}</p>
+                        <p className="text-gray-400 text-xs mt-1">{insight.text}</p>
                       </div>
                     ))}
                   </div>
@@ -592,20 +592,20 @@ export default function MercatoImmobiliareLuxury() {
 
                 {/* Top Nationalities */}
                 <div className="bg-white rounded-xl p-6 shadow">
-                  <h3 className="font-heading text-lg text-stone-800 mb-4">Buyer Internazionali</h3>
+                  <h3 className="font-heading text-lg text-forest mb-4">Buyer Internazionali</h3>
                   <div className="flex flex-wrap gap-2">
                     {luxuryData.nationalStats.topNationalities.map((nation, index) => (
                       <span
                         key={nation}
                         className={`px-3 py-1 rounded-full text-sm ${
-                          index === 0 ? 'bg-amber-100 text-amber-800' : 'bg-stone-100 text-stone-600'
+                          index === 0 ? 'bg-green-50 text-forest' : 'bg-green-50 text-gray-500'
                         }`}
                       >
                         {nation}
                       </span>
                     ))}
                   </div>
-                  <p className="text-stone-400 text-xs mt-3">
+                  <p className="text-gray-400 text-xs mt-3">
                     {luxuryData.nationalStats.foreignBuyerShare}% delle transazioni luxury coinvolge buyer esteri
                   </p>
                 </div>
@@ -616,9 +616,9 @@ export default function MercatoImmobiliareLuxury() {
       </section>
 
       {/* Price Comparison Chart */}
-      <section className="py-12 bg-white border-t border-stone-200">
+      <section className="py-12 bg-white border-t border-gray-200">
         <div className="container-custom">
-          <h2 className="font-heading text-2xl text-stone-800 mb-8 text-center">Confronto Prezzi per Zona</h2>
+          <h2 className="font-heading text-2xl text-forest mb-8 text-center">Confronto Prezzi per Zona</h2>
 
           <div className="max-w-4xl mx-auto">
             {/* Bar Chart */}
@@ -633,13 +633,13 @@ export default function MercatoImmobiliareLuxury() {
                     <div key={market.id} className="group">
                       <div className="flex items-center gap-4">
                         <div className="w-32 md:w-40 flex-shrink-0">
-                          <p className="font-medium text-stone-700 text-sm truncate">{market.name}</p>
-                          <p className="text-stone-400 text-xs">{market.zone}</p>
+                          <p className="font-medium text-green-600 text-sm truncate">{market.name}</p>
+                          <p className="text-gray-400 text-xs">{market.zone}</p>
                         </div>
                         <div className="flex-1">
-                          <div className="h-8 bg-stone-100 rounded-lg overflow-hidden relative">
+                          <div className="h-8 bg-green-50 rounded-lg overflow-hidden relative">
                             <div
-                              className="h-full bg-gradient-to-r from-amber-400 to-amber-600 rounded-lg transition-all duration-500 group-hover:from-amber-500 group-hover:to-amber-700 flex items-center justify-end pr-3"
+                              className="h-full bg-gradient-to-r from-green-300 to-green-400 rounded-lg transition-all duration-500 group-hover:from-green-400 group-hover:to-green-600 flex items-center justify-end pr-3"
                               style={{ width: `${widthPercent}%` }}
                             >
                               <span className="text-white text-xs font-medium whitespace-nowrap">
@@ -663,10 +663,10 @@ export default function MercatoImmobiliareLuxury() {
       </section>
 
       {/* Where to Invest */}
-      <section className="py-16 bg-gradient-to-br from-stone-900 to-stone-800">
+      <section className="py-16 bg-forest">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <span className="text-amber-400 text-sm font-medium tracking-widest uppercase">Analisi</span>
+            <span className="text-green-300 text-sm font-medium tracking-widest uppercase">Analisi</span>
             <h2 className="font-heading text-3xl md:text-4xl text-white mt-2">Dove Investire nel 2026</h2>
           </div>
 
@@ -679,14 +679,14 @@ export default function MercatoImmobiliareLuxury() {
                 </svg>
               </div>
               <h3 className="font-heading text-xl text-white mb-2">Alta Crescita</h3>
-              <p className="text-stone-400 text-sm mb-4">Zone con il maggiore apprezzamento atteso</p>
+              <p className="text-gray-400 text-sm mb-4">Zone con il maggiore apprezzamento atteso</p>
               <ul className="space-y-2">
                 {[...luxuryData.markets]
                   .sort((a, b) => b.yoyChange - a.yoyChange)
                   .slice(0, 3)
                   .map(m => (
                     <li key={m.id} className="flex justify-between text-sm">
-                      <span className="text-stone-300">{m.name}</span>
+                      <span className="text-gray-300">{m.name}</span>
                       <span className="text-green-400 font-medium">+{m.yoyChange}%</span>
                     </li>
                   ))}
@@ -695,21 +695,21 @@ export default function MercatoImmobiliareLuxury() {
 
             {/* Trophy Assets */}
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-              <div className="w-12 h-12 bg-amber-500/20 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 bg-green-400/20 rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                 </svg>
               </div>
               <h3 className="font-heading text-xl text-white mb-2">Trophy Assets</h3>
-              <p className="text-stone-400 text-sm mb-4">Le zone piu esclusive e prestigiose</p>
+              <p className="text-gray-400 text-sm mb-4">Le zone piu esclusive e prestigiose</p>
               <ul className="space-y-2">
                 {[...luxuryData.markets]
                   .sort((a, b) => b.pricePerSqm - a.pricePerSqm)
                   .slice(0, 3)
                   .map(m => (
                     <li key={m.id} className="flex justify-between text-sm">
-                      <span className="text-stone-300">{m.name}</span>
-                      <span className="text-amber-400 font-medium">{formatNumber(m.pricePerSqm)} EUR</span>
+                      <span className="text-gray-300">{m.name}</span>
+                      <span className="text-green-300 font-medium">{formatNumber(m.pricePerSqm)} EUR</span>
                     </li>
                   ))}
               </ul>
@@ -717,21 +717,21 @@ export default function MercatoImmobiliareLuxury() {
 
             {/* Value Opportunity */}
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-              <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
               <h3 className="font-heading text-xl text-white mb-2">Value Opportunity</h3>
-              <p className="text-stone-400 text-sm mb-4">Prestigio a prezzi piu accessibili</p>
+              <p className="text-gray-400 text-sm mb-4">Prestigio a prezzi piu accessibili</p>
               <ul className="space-y-2">
                 {[...luxuryData.markets]
                   .sort((a, b) => a.pricePerSqm - b.pricePerSqm)
                   .slice(0, 3)
                   .map(m => (
                     <li key={m.id} className="flex justify-between text-sm">
-                      <span className="text-stone-300">{m.name}</span>
-                      <span className="text-blue-400 font-medium">{formatNumber(m.pricePerSqm)} EUR</span>
+                      <span className="text-gray-300">{m.name}</span>
+                      <span className="text-green-400 font-medium">{formatNumber(m.pricePerSqm)} EUR</span>
                     </li>
                   ))}
               </ul>
@@ -741,17 +741,17 @@ export default function MercatoImmobiliareLuxury() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-gradient-to-br from-amber-500 to-amber-600">
+      <section className="py-16 bg-forest">
         <div className="container-custom text-center">
           <h2 className="font-heading text-2xl md:text-3xl text-white mb-4">
             Stai valutando un investimento immobiliare di pregio?
           </h2>
-          <p className="text-amber-100 mb-8 max-w-lg mx-auto">
+          <p className="text-green-50 mb-8 max-w-lg mx-auto">
             Un consulente patrimoniale indipendente puo aiutarti a valutare l&apos;opportunita nel contesto del tuo portafoglio complessivo.
           </p>
           <Link
             href="/#contatti"
-            className="inline-flex items-center gap-2 bg-white text-amber-600 font-semibold px-8 py-4 rounded-full hover:bg-stone-100 transition-colors"
+            className="inline-flex items-center gap-2 bg-white text-green-400 font-semibold px-8 py-4 rounded-full hover:bg-green-50 transition-colors"
           >
             Richiedi Consulenza Gratuita
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -762,9 +762,9 @@ export default function MercatoImmobiliareLuxury() {
       </section>
 
       {/* Disclaimer */}
-      <section className="py-8 bg-stone-100 border-t border-stone-200">
+      <section className="py-8 bg-green-50 border-t border-gray-200">
         <div className="container-custom">
-          <p className="text-stone-500 text-xs text-center max-w-2xl mx-auto">
+          <p className="text-gray-400 text-xs text-center max-w-2xl mx-auto">
             I dati presentati sono stime basate su ricerche di mercato e fonti pubbliche. I prezzi effettivi possono variare significativamente in base a posizione specifica, stato dell&apos;immobile, vista e altri fattori. Ultimo aggiornamento: {luxuryData.lastUpdate}. Questa pagina non costituisce consulenza finanziaria o immobiliare.
           </p>
         </div>

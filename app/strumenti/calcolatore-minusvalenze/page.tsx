@@ -47,7 +47,7 @@ const TIPO_ASSET_LABELS: Record<TipoAsset, string> = {
 }
 
 const TIPO_ASSET_COLORS: Record<TipoAsset, { bg: string; text: string }> = {
-  azioni: { bg: 'bg-blue-100', text: 'text-blue-700' },
+  azioni: { bg: 'bg-green-100', text: 'text-green-700' },
   etf: { bg: 'bg-purple-100', text: 'text-purple-700' },
   etc: { bg: 'bg-indigo-100', text: 'text-indigo-700' },
   obbligazioni: { bg: 'bg-cyan-100', text: 'text-cyan-700' },
@@ -1252,19 +1252,19 @@ DISCLAIMER: Questo documento e solo a scopo informativo. Consulta un commerciali
                     )}
 
                     {/* Suggerimento certificati */}
-                    <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-5">
+                    <div className="bg-green-50 border-2 border-green-200 rounded-xl p-5">
                       <div className="flex items-center gap-3 mb-4">
-                        <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                          <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                          <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                           </svg>
                         </div>
                         <div>
-                          <h4 className="font-heading text-lg text-blue-800">Certificati per Recupero</h4>
-                          <p className="text-xs text-blue-600">Strumento fiscalmente efficiente</p>
+                          <h4 className="font-heading text-lg text-green-800">Certificati per Recupero</h4>
+                          <p className="text-xs text-green-600">Strumento fiscalmente efficiente</p>
                         </div>
                       </div>
-                      <p className="text-sm text-blue-800 mb-3">
+                      <p className="text-sm text-green-800 mb-3">
                         I certificati (certificates) sono classificati come &quot;redditi diversi&quot; e le loro plusvalenze possono compensare
                         qualsiasi minusvalenza, incluse quelle da ETF.
                       </p>
@@ -1272,11 +1272,11 @@ DISCLAIMER: Questo documento e solo a scopo informativo. Consulta un commerciali
                         <p className="text-xs text-gray-700 font-medium mb-2">Vantaggi:</p>
                         <ul className="text-xs text-gray-600 space-y-1">
                           <li className="flex items-start gap-1">
-                            <span className="text-blue-500">+</span>
+                            <span className="text-green-500">+</span>
                             Plusvalenze compensano minusvalenze ETF
                           </li>
                           <li className="flex items-start gap-1">
-                            <span className="text-blue-500">+</span>
+                            <span className="text-green-500">+</span>
                             Possono offrire cedole periodiche (redditi diversi)
                           </li>
                           <li className="flex items-start gap-1">
@@ -1322,9 +1322,9 @@ DISCLAIMER: Questo documento e solo a scopo informativo. Consulta un commerciali
                           Sono &quot;redditi da capitale&quot;. Possono compensare <strong>SOLO</strong> plusvalenze da azioni, ETC, certificati (redditi diversi).
                         </p>
                       </div>
-                      <div className="p-4 bg-blue-50 rounded-lg">
-                        <p className="font-medium text-blue-800 text-sm mb-1">Minusvalenze da Azioni/ETC/Certificati</p>
-                        <p className="text-xs text-blue-700">
+                      <div className="p-4 bg-green-50 rounded-lg">
+                        <p className="font-medium text-green-800 text-sm mb-1">Minusvalenze da Azioni/ETC/Certificati</p>
+                        <p className="text-xs text-green-700">
                           Sono &quot;redditi diversi&quot;. Possono compensare <strong>QUALSIASI</strong> plusvalenza.
                         </p>
                       </div>
@@ -1422,7 +1422,7 @@ DISCLAIMER: Questo documento e solo a scopo informativo. Consulta un commerciali
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">GRATUITO</span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">NO REGISTRAZIONE</span>
+                  <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">NO REGISTRAZIONE</span>
                 </div>
                 <h3 className="font-heading text-xl text-[#1B4D3E] mb-2">Alternativa gratuita a TasseTrading</h3>
                 <p className="text-sm text-gray-600">

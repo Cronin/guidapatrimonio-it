@@ -739,8 +739,8 @@ export default function CalcolatorePlusvalenze() {
 
             <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                   </svg>
                 </div>
@@ -883,7 +883,7 @@ export default function CalcolatorePlusvalenze() {
                               <td className="py-3 px-4">
                                 <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
                                   op.tipo === 'acquisto'
-                                    ? 'bg-blue-100 text-blue-700'
+                                    ? 'bg-green-100 text-green-700'
                                     : 'bg-orange-100 text-orange-700'
                                 }`}>
                                   {op.tipo === 'acquisto' ? 'Acquisto' : 'Vendita'}
@@ -1189,7 +1189,7 @@ export default function CalcolatorePlusvalenze() {
                               <td className="py-3 px-4">
                                 <span className={`text-xs px-2 py-1 rounded-full ${
                                   config.categoria === 'redditi_diversi'
-                                    ? 'bg-blue-100 text-blue-700'
+                                    ? 'bg-green-100 text-green-700'
                                     : 'bg-purple-100 text-purple-700'
                                 }`}>
                                   {config.categoria === 'redditi_diversi' ? 'Redditi Diversi' : 'Redditi Capitale'}
@@ -1207,12 +1207,12 @@ export default function CalcolatorePlusvalenze() {
                   <div>
                     <h3 className="font-heading text-xl text-forest mb-4">Regole di Compensazione</h3>
                     <div className="grid md:grid-cols-3 gap-4">
-                      <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
-                        <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mb-3">
-                          <span className="text-blue-600 font-bold">RD</span>
+                      <div className="bg-green-50 border border-green-200 rounded-xl p-5">
+                        <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center mb-3">
+                          <span className="text-green-600 font-bold">RD</span>
                         </div>
-                        <h4 className="font-medium text-blue-800 mb-2">Redditi Diversi</h4>
-                        <p className="text-sm text-blue-700">
+                        <h4 className="font-medium text-green-800 mb-2">Redditi Diversi</h4>
+                        <p className="text-sm text-green-700">
                           Azioni, ETC, Certificati. Le minusvalenze compensano <strong>qualsiasi</strong> plusvalenza.
                         </p>
                       </div>
@@ -1343,7 +1343,7 @@ export default function CalcolatorePlusvalenze() {
                       onClick={() => setNuovaOperazione(prev => ({ ...prev, tipo: tipo as TipoOperazione }))}
                       className={`p-3 rounded-lg text-sm font-medium transition-colors ${
                         nuovaOperazione.tipo === tipo
-                          ? tipo === 'acquisto' ? 'bg-blue-600 text-white' : 'bg-orange-600 text-white'
+                          ? tipo === 'acquisto' ? 'bg-forest text-white' : 'bg-orange-600 text-white'
                           : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                       }`}
                     >

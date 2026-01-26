@@ -1004,7 +1004,7 @@ export default function BacktestPortafoglio() {
                                           <span>Tuo: {formatCurrencyFull(dato.valore)}</span>
                                         </div>
                                         <div className="flex items-center gap-2 mb-0.5">
-                                          <span className="w-2 h-2 rounded-full bg-blue-500" />
+                                          <span className="w-2 h-2 rounded-full bg-green-500" />
                                           <span>S&P500: {formatCurrencyFull(sp500Valore)}</span>
                                         </div>
                                         <div className="flex items-center gap-2">
@@ -1021,7 +1021,7 @@ export default function BacktestPortafoglio() {
                                           style={{ height: `${Math.max(4, (dato.valore / maxValoreGrafico) * 100)}%` }}
                                         />
                                         <div
-                                          className="flex-1 bg-gradient-to-t from-blue-600 to-blue-400 rounded-t transition-all duration-300"
+                                          className="flex-1 bg-gradient-to-t from-green-600 to-green-400 rounded-t transition-all duration-300"
                                           style={{ height: `${Math.max(4, (sp500Valore / maxValoreGrafico) * 100)}%` }}
                                         />
                                         <div
@@ -1043,7 +1043,7 @@ export default function BacktestPortafoglio() {
                               <span className="text-sm text-gray-600">Il Tuo Portafoglio</span>
                             </div>
                             <div className="flex items-center gap-2">
-                              <span className="w-3 h-3 rounded bg-gradient-to-t from-blue-600 to-blue-400" />
+                              <span className="w-3 h-3 rounded bg-gradient-to-t from-green-600 to-green-400" />
                               <span className="text-sm text-gray-600">100% S&P 500</span>
                             </div>
                             <div className="flex items-center gap-2">
@@ -1249,9 +1249,9 @@ export default function BacktestPortafoglio() {
                                 Tuo Portafoglio
                               </div>
                             </th>
-                            <th className="text-right py-3 px-5 text-xs font-semibold text-blue-600 uppercase tracking-wider">
+                            <th className="text-right py-3 px-5 text-xs font-semibold text-green-600 uppercase tracking-wider">
                               <div className="flex items-center justify-end gap-2">
-                                <span className="w-2 h-2 rounded-full bg-blue-500" />
+                                <span className="w-2 h-2 rounded-full bg-green-500" />
                                 S&P 500
                               </div>
                             </th>
@@ -1297,10 +1297,10 @@ export default function BacktestPortafoglio() {
                                   </div>
                                 </td>
                                 <td className={`py-3.5 px-5 text-right ${
-                                  bestIdx === 1 ? 'text-blue-600 font-medium' : 'text-gray-600'
+                                  bestIdx === 1 ? 'text-green-600 font-medium' : 'text-gray-600'
                                 }`}>
                                   <div className="flex items-center justify-end gap-2">
-                                    {bestIdx === 1 && <span className="text-blue-500">★</span>}
+                                    {bestIdx === 1 && <span className="text-green-500">★</span>}
                                     {row.format(values[1])}
                                   </div>
                                 </td>
@@ -1399,8 +1399,8 @@ export default function BacktestPortafoglio() {
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </div>
