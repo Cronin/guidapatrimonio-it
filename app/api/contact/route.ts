@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 const MAILGUN_API_KEY = process.env.MAILGUN_API_KEY;
 const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN || 'mg.bord.dev';
 const ADMIN_EMAIL = 'info@guidapatrimonio.it';
-const COPY_EMAIL = '24prontocom@gmail.com';
+// NO COPY EMAIL - only send to admin
 
 export async function POST(request: NextRequest) {
   try {
@@ -111,7 +111,6 @@ Inviato dal form di contatto su guidapatrimonio.it
     const formData = new FormData();
     formData.append('from', `Guida Patrimonio <noreply@${MAILGUN_DOMAIN}>`);
     formData.append('to', ADMIN_EMAIL);
-    formData.append('cc', COPY_EMAIL);
     formData.append('subject', emailSubject);
     formData.append('text', emailBody);
     formData.append('html', htmlBody);
