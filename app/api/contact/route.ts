@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const MAILGUN_API_KEY = process.env.MAILGUN_API_KEY;
-const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN || 'mg.bord.dev';
+const MAILGUN_DOMAIN = 'mg.guidapatrimonio.it';
 const ADMIN_EMAIL = 'info@guidapatrimonio.it';
-// NO COPY EMAIL - only send to admin
+// IMPORTANT: Only send to ADMIN_EMAIL - never add CC or other recipients
 
 export async function POST(request: NextRequest) {
   try {

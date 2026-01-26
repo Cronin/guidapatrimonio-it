@@ -106,6 +106,22 @@ Qualification threshold: **>= 150,000 EUR**
 
 ---
 
+## EMAIL - CRITICAL RULES
+
+**Mailgun domain**: `mg.guidapatrimonio.it`
+
+**Send emails ONLY to**: `info@guidapatrimonio.it`
+
+**NEVER EVER:**
+- Send to `24prontocom@gmail.com`
+- Use `mg.bord.dev` domain
+- Add CC or BCC to any other email
+- Hardcode external email addresses
+
+This site is SEPARATE from 24pronto/Bord. Never mix email configurations.
+
+---
+
 ## FILE STRUCTURE
 
 ```
