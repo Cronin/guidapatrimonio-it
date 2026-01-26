@@ -33,7 +33,7 @@ const COLORI_TORTA = [
   '#52B788', // green-300
   '#74C69D', // green-250
   '#95D5B2', // green-200
-  '#D4A373', // gold
+  '#368859', // green-500
   '#5e646e', // gray-500
   '#878d96', // gray-400
   '#b0b7c1', // gray-300
@@ -45,7 +45,7 @@ const COLORI_CATEGORIE: Record<string, string> = {
   etf: '#2D6A4F',
   obbligazioni: '#40916C',
   fondi: '#52B788',
-  crypto: '#D4A373',
+  crypto: '#368859',
   immobili: '#74C69D',
   liquidita: '#878d96',
   altro: '#b0b7c1',

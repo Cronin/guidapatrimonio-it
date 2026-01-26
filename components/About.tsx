@@ -73,7 +73,7 @@ export default function About() {
           <div className="relative">
             <div className="aspect-[4/3] rounded-xl overflow-hidden">
               <img
-                src="/images/about/zurich-skyline.jpg"
+                src="/images/about/zurich-skyline.webp"
                 alt="Zurich, Svizzera - sede del nostro partner"
                 className="w-full h-full object-cover"
               />

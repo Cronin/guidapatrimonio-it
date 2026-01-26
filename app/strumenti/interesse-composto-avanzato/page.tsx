@@ -680,7 +680,7 @@ export default function InteresseCompostoAvanzato() {
               )}
 
               {risultati.milestones.raggiungi_1M && (
-                <div className="p-4 bg-gold/20 rounded-lg border-l-4 border-gold">
+                <div className="p-4 bg-green-400/20 rounded-lg border-l-4 border-green-400">
                   <p className="text-forest font-medium">Anno {risultati.milestones.raggiungi_1M}</p>
                   <p className="text-sm text-gray-600 mt-1">Diventi milionario!</p>
                 </div>

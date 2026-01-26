@@ -205,10 +205,10 @@ export default function Strumenti() {
       <JsonLd data={[toolListSchema, breadcrumbSchema]} />
       <Navbar />
 
-      {/* Hero */}
-      <section className="bg-navy pt-navbar">
+      {/* Hero - GREEN not navy */}
+      <section className="bg-forest pt-navbar">
         <div className="container-custom py-20 md:py-28">
-          <p className="text-gold font-medium text-sm tracking-wider uppercase mb-4">
+          <p className="text-green-300 font-medium text-sm tracking-wider uppercase mb-4">
             {totalTools} Strumenti Professionali
           </p>
           <h1 className="font-heading text-[40px] md:text-[56px] text-white leading-tight max-w-2xl">
@@ -221,7 +221,7 @@ export default function Strumenti() {
           <div className="mt-8">
             <Link
               href="/#contatti"
-              className="inline-flex items-center justify-center gap-2 bg-gold text-navy px-6 py-3 rounded font-semibold hover:bg-gold-light transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-white text-forest px-6 py-3 rounded-button-sm font-semibold hover:bg-cream transition-colors"
             >
               Richiedi una Consulenza
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -238,7 +238,7 @@ export default function Strumenti() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-14">
             {toolCategories.map((category) => (
               <div key={category.title}>
-                <h2 className="text-xs font-medium text-navy/40 uppercase tracking-wider mb-6">
+                <h2 className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-6">
                   {category.title}
                 </h2>
                 <ul className="space-y-5">
@@ -246,11 +246,11 @@ export default function Strumenti() {
                     <li key={tool.title}>
                       <Link href={tool.href} className="group block">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="font-heading text-lg text-navy group-hover:text-gold transition-colors">
+                          <span className="font-heading text-lg text-forest group-hover:text-green-400 transition-colors">
                             {tool.title}
                           </span>
                           {tool.featured && (
-                            <span className="text-xs bg-gold/20 text-gold px-2 py-0.5 rounded">
+                            <span className="text-xs bg-green-50 text-green-600 px-2 py-0.5 rounded">
                               Pro
                             </span>
                           )}
@@ -269,10 +269,10 @@ export default function Strumenti() {
       </section>
 
       {/* SEO Text Section */}
-      <section className="bg-gray-50 py-12">
+      <section className="bg-cream py-12">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
-            <h2 className="font-heading text-xl text-navy mb-4">Perche offriamo questi strumenti</h2>
+            <h2 className="font-heading text-xl text-forest mb-4">Perche offriamo questi strumenti</h2>
             <p className="text-gray-600 mb-4">
               Gestiamo patrimoni significativi e crediamo che la fiducia si costruisca con i fatti, non con le promesse.
               Questi strumenti professionali sono il nostro biglietto da visita: <strong>prima dimostriamo competenza,
@@ -287,11 +287,11 @@ export default function Strumenti() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-navy py-16 md:py-20">
+      {/* CTA - GREEN not navy */}
+      <section className="bg-forest py-16 md:py-20">
         <div className="container-custom">
           <div className="max-w-xl mx-auto text-center">
-            <p className="text-gold text-sm font-medium mb-4">Patrimoni oltre 150K</p>
+            <p className="text-green-300 text-sm font-medium mb-4">Patrimoni oltre 150K</p>
             <h2 className="font-heading text-2xl md:text-3xl text-white mb-4">
               Vuoi una consulenza personalizzata?
             </h2>
@@ -301,7 +301,7 @@ export default function Strumenti() {
             </p>
             <Link
               href="/#contatti"
-              className="inline-flex items-center gap-2 bg-gold text-navy px-8 py-4 rounded font-semibold hover:bg-gold-light transition-colors"
+              className="inline-flex items-center gap-2 bg-white text-forest px-8 py-4 rounded-button font-semibold hover:bg-cream transition-colors"
             >
               Richiedi Callback Gratuito
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
