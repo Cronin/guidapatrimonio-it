@@ -59,14 +59,14 @@ Inviato dal form di contatto su guidapatrimonio.it
   <style>
     body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
     .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-    .header { background: #1a3c34; color: #fff; padding: 20px; text-align: center; }
-    .header h2 { margin: 0; color: #c9a227; }
+    .header { background: #1B4D3E; color: #fff; padding: 20px; text-align: center; }
+    .header h2 { margin: 0; color: #B7E4C7; }
     .content { padding: 20px; background: #f9f9f9; }
     .field { margin-bottom: 15px; }
-    .label { font-weight: bold; color: #1a3c34; }
+    .label { font-weight: bold; color: #1B4D3E; }
     .value { margin-top: 5px; }
-    .message { background: #fff; padding: 15px; border-left: 3px solid #c9a227; }
-    .patrimonio { background: #c9a227; color: #1a3c34; padding: 8px 15px; border-radius: 4px; display: inline-block; font-weight: bold; }
+    .message { background: #fff; padding: 15px; border-left: 3px solid #40916C; }
+    .patrimonio { background: #40916C; color: #fff; padding: 8px 15px; border-radius: 4px; display: inline-block; font-weight: bold; }
     .footer { padding: 15px; font-size: 12px; color: #999; text-align: center; }
   </style>
 </head>

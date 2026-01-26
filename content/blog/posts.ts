@@ -17,7 +17,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-01-24',
     readTime: 16,
     category: 'Asset Protection',
-    image: 'https://images.unsplash.com/photo-1565514020179-026b92b2d70b?w=1200&h=630&fit=crop',
+    image: '/blog/proteggere-patrimonio-5-milioni.webp',
     content: `
 ## Proteggere 5 Milioni: Una Necessita, Non un Lusso
 
@@ -257,7 +257,7 @@ Le strategie esistono, sono legali e funzionano. Ma devono essere implementate *
     date: '2025-01-24',
     readTime: 14,
     category: 'Wealth Management',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=630&fit=crop',
+    image: '/blog/family-office-costi-conviene.webp',
     content: `
 ## Family Office: La Gestione Patrimoniale dei Grandi Patrimoni
 
@@ -580,7 +580,7 @@ La scelta non dipende solo dal patrimonio, ma dalla **complessita**: una famigli
     date: '2025-01-24',
     readTime: 18,
     category: 'Successione',
-    image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&h=630&fit=crop',
+    image: '/blog/passaggio-generazionale-azienda-guida.webp',
     content: `
 ## Il Passaggio Generazionale: La Sfida delle Imprese Familiari
 
@@ -907,7 +907,7 @@ Chi lo rimanda, lascia in eredita conflitti, tasse evitabili e, spesso, la fine 
     date: '2025-01-24',
     readTime: 15,
     category: 'Fiscalita',
-    image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=1200&h=630&fit=crop',
+    image: '/blog/flat-tax-neo-residenti-conviene.webp',
     content: `
 ## La Flat Tax Italiana per i Neo-Residenti
 
@@ -1202,7 +1202,7 @@ E soprattutto: non improvvisare. La struttura fiscale richiede pianificazione pr
     date: '2025-01-24',
     readTime: 17,
     category: 'Investimenti',
-    image: 'https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=1200&h=630&fit=crop',
+    image: '/blog/investire-1-milione-strategie-2025.webp',
     content: `
 ## 1 Milione di Euro: Un Patrimonio da Gestire con Strategia
 
@@ -1529,7 +1529,7 @@ Non serve essere Warren Buffett. Serve essere disciplinati.
     date: '2025-01-23',
     readTime: 15,
     category: 'Lifestyle',
-    image: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=1200&h=630&fit=crop',
+    image: '/blog/yacht-costi-reali-proprieta.webp',
     content: `
 ## Il Vero Costo di Uno Yacht
 
@@ -1633,7 +1633,7 @@ Un yacht da 5 milioni costa davvero **700.000 - 900.000 euro l'anno** tutto comp
     date: '2025-01-22',
     readTime: 12,
     category: 'Lifestyle',
-    image: 'https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=1200&h=630&fit=crop',
+    image: '/blog/private-jet-fractional-ownership.webp',
     content: `
 ## Le Tre Vie del Volo Privato
 
@@ -1753,7 +1753,7 @@ Per chi vola 100 ore/anno, il **fractional** è spesso la soluzione ottimale: co
     date: '2025-01-21',
     readTime: 14,
     category: 'Investimenti Alternativi',
-    image: 'https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=1200&h=630&fit=crop',
+    image: '/blog/arte-come-investimento.webp',
     content: `
 ## L'Arte come Asset Class
 
@@ -1878,7 +1878,7 @@ L'arte è un investimento per chi ha già diversificato il patrimonio e cerca **
     date: '2025-01-20',
     readTime: 18,
     category: 'Fiscalità',
-    image: 'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1200&h=630&fit=crop',
+    image: '/blog/residenza-fiscale-monaco-svizzera.webp',
     content: `
 ## Il Trasferimento di Residenza Fiscale
 
@@ -2052,7 +2052,7 @@ Consulta un fiscalista internazionale prima di muoverti.
     date: '2025-01-19',
     readTime: 10,
     category: 'Wealth Management',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=630&fit=crop',
+    image: '/blog/family-office-quando-conviene.webp',
     content: `
 ## Cos'è un Family Office
 
@@ -2200,7 +2200,7 @@ Per patrimoni tra €5 e €30 milioni, un **multi family office indipendente** 
     date: '2025-01-18',
     readTime: 13,
     category: 'Investimenti Alternativi',
-    image: 'https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=1200&h=630&fit=crop',
+    image: '/blog/private-equity-accesso-investitori-privati.webp',
     content: `
 ## Perché il Private Equity
 
@@ -2348,7 +2348,7 @@ Ma ricorda: è un investimento **illiquido e a lungo termine**. Adatto solo a ch
     date: '2026-01-24',
     readTime: 18,
     category: 'Asset Protection',
-    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop',
+    image: '/blog/protezione-patrimonio-creditori.webp',
     content: `
 ## Proteggere il Patrimonio dai Creditori: Una Necessita Strategica
 
@@ -2649,7 +2649,7 @@ Non aspettare che sia troppo tardi. Ogni giorno senza protezione e un giorno di 
     date: '2026-01-23',
     readTime: 20,
     category: 'Real Estate',
-    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=630&fit=crop',
+    image: '/blog/gestione-patrimonio-immobiliare.webp',
     content: `
 ## Gestione del Patrimonio Immobiliare: Oltre la Proprieta Diretta
 
@@ -2916,7 +2916,7 @@ Non aspettare la prossima successione per scoprire quanto costa non aver pianifi
     date: '2026-01-22',
     readTime: 22,
     category: 'Investimenti',
-    image: 'https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=1200&h=630&fit=crop',
+    image: '/blog/investire-500000-euro.webp',
     content: `
 ## Investire 500.000 Euro: Un Punto di Svolta
 
@@ -3217,7 +3217,7 @@ Il peggior investimento? Lasciare 500.000 euro sul conto corrente mentre l'infla
     date: '2026-01-21',
     readTime: 17,
     category: 'Fiscalita Internazionale',
-    image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&h=630&fit=crop',
+    image: '/blog/conto-svizzera-conviene.webp',
     content: `
 ## Il Mito del Conto Svizzero: Cosa e Cambiato
 
@@ -3481,7 +3481,7 @@ Se decidi di aprire un conto, fallo alla luce del sole: dichiara tutto, paga le 
     date: '2026-01-20',
     readTime: 19,
     category: 'Pianificazione Successoria',
-    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop',
+    image: '/blog/polizza-vita-pianificazione-patrimoniale.webp',
     content: `
 ## La Polizza Vita: Molto Piu di un'Assicurazione
 
