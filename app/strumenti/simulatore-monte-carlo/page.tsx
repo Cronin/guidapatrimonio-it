@@ -364,7 +364,7 @@ export default function SimulatoreMonteCarloPage() {
       <Navbar />
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-forest via-green-800 to-green-900 pt-navbar relative overflow-hidden">
+      <section className="bg-forest pt-navbar relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-64 h-64 bg-white rounded-full blur-3xl"></div>
           <div className="absolute bottom-10 right-10 w-96 h-96 bg-green-400 rounded-full blur-3xl"></div>
@@ -975,7 +975,7 @@ export default function SimulatoreMonteCarloPage() {
 
               {/* Key Metrics Cards */}
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div className="bg-gradient-to-br from-forest to-green-700 rounded-2xl p-5 text-white shadow-lg">
+                <div className="bg-forest rounded-2xl p-5 text-white shadow-lg">
                   <div className="flex items-center gap-2 mb-2">
                     <svg className="w-5 h-5 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -1287,7 +1287,7 @@ export default function SimulatoreMonteCarloPage() {
       </div>
 
       {/* CTA */}
-      <section className="section-sm bg-gradient-to-br from-forest to-green-700">
+      <section className="section-sm bg-forest">
         <div className="container-custom text-center">
           <h2 className="font-heading text-3xl text-white mb-4">
             Vuoi una pianificazione finanziaria personalizzata?

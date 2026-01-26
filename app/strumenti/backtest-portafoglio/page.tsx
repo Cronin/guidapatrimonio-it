@@ -578,7 +578,7 @@ export default function BacktestPortafoglio() {
       <Navbar />
 
       {/* Hero Section - Bloomberg Style */}
-      <section className="bg-gradient-to-br from-forest via-green-800 to-green-900 pt-navbar relative overflow-hidden">
+      <section className="bg-forest pt-navbar relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
         <div className="container-custom py-10 md:py-14 relative">
           <Link href="/strumenti" className="inline-flex items-center text-green-300 hover:text-white mb-4 transition-colors text-sm">
@@ -1449,7 +1449,7 @@ export default function BacktestPortafoglio() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 bg-gradient-to-br from-forest via-green-800 to-green-900 relative overflow-hidden">
+      <section className="py-12 bg-forest relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
         <div className="container-custom text-center relative">
           <span className="inline-block bg-white/10 text-green-300 text-sm font-medium px-4 py-1.5 rounded-full mb-4">

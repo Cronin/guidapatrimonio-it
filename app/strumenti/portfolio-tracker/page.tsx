@@ -606,7 +606,7 @@ export default function PortfolioTracker() {
           {/* Premium Dashboard Cards */}
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4 mb-8">
             {/* Main Value Card */}
-            <div className="col-span-2 lg:col-span-2 bg-gradient-to-br from-forest to-green-600 rounded-xl p-6 text-white relative overflow-hidden">
+            <div className="col-span-2 lg:col-span-2 bg-forest rounded-xl p-6 text-white relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
               <p className="text-green-200 text-sm mb-1 font-medium">Valore Totale Portafoglio</p>
               <p className="font-heading text-3xl md:text-4xl lg:text-5xl tracking-tight">

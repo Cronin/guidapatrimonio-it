@@ -632,7 +632,7 @@ export default function CalcolatorePlusvalenze() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-forest via-green-600 to-forest pt-navbar relative overflow-hidden">
+      <section className="bg-forest pt-navbar relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
         <div className="container-custom py-12 md:py-16 relative">
           <Link href="/strumenti" className="inline-flex items-center text-green-200 hover:text-white mb-4 transition-colors">
@@ -749,7 +749,7 @@ export default function CalcolatorePlusvalenze() {
               <p className="font-heading text-2xl text-forest">{formatCurrency(risultatiFiscali.nettoTassabile)}</p>
             </div>
 
-            <div className="bg-gradient-to-br from-forest to-green-600 rounded-xl p-5 shadow-lg">
+            <div className="bg-forest rounded-xl p-5 shadow-lg">
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center">
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1252,7 +1252,7 @@ export default function CalcolatorePlusvalenze() {
                   </div>
 
                   {/* Link to Minusvalenze Calculator */}
-                  <div className="bg-gradient-to-r from-forest to-green-600 rounded-xl p-6 text-white">
+                  <div className="bg-forest rounded-xl p-6 text-white">
                     <div className="flex items-center justify-between">
                       <div>
                         <h4 className="font-heading text-lg mb-2">Hai minusvalenze in scadenza?</h4>
@@ -1300,7 +1300,7 @@ export default function CalcolatorePlusvalenze() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 bg-gradient-to-br from-forest to-green-600">
+      <section className="py-12 bg-forest">
         <div className="container-custom text-center">
           <h2 className="font-heading text-2xl md:text-3xl text-white mb-4">
             Vuoi ottimizzare la fiscalita dei tuoi investimenti?

@@ -1073,7 +1073,7 @@ export default function AnalizzatoreCostiFondi() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-forest to-green-800">
+      <section className="py-16 bg-forest">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-heading text-3xl md:text-4xl text-white mb-6">

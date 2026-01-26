@@ -436,7 +436,7 @@ export default function AsteImmobiliariLuxury() {
                   {/* Map Preview */}
                   <div className="bg-white rounded-card p-4 shadow-sm mb-6">
                     <h3 className="font-heading text-lg text-forest mb-3">Distribuzione geografica</h3>
-                    <div className="relative bg-gradient-to-b from-blue-50 to-green-50 rounded-lg overflow-hidden" style={{ height: '250px' }}>
+                    <div className="relative bg-gradient-to-b from-green-50 to-cream rounded-lg overflow-hidden" style={{ height: '250px' }}>
                       {/* Simplified Italy map representation */}
                       <svg viewBox="0 0 400 450" className="w-full h-full">
                         {/* Italy outline - simplified */}

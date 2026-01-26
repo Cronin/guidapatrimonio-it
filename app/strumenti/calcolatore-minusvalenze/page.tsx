@@ -688,7 +688,7 @@ DISCLAIMER: Questo documento e solo a scopo informativo. Consulta un commerciali
         <div className="container-custom">
           {/* Riepilogo principale con numeri animati */}
           <div className="grid md:grid-cols-4 gap-4 mb-8">
-            <div className="bg-gradient-to-br from-[#1B4D3E] to-[#2D6A4F] rounded-xl p-6 text-white shadow-lg">
+            <div className="bg-forest rounded-xl p-6 text-white shadow-lg">
               <div className="flex items-center justify-between mb-2">
                 <p className="text-white/80 text-sm">Zainetto Fiscale</p>
                 <svg className="w-5 h-5 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1082,7 +1082,7 @@ DISCLAIMER: Questo documento e solo a scopo informativo. Consulta un commerciali
               {/* TAB: Simulazione FIFO */}
               {activeTab === 'simulazione' && (
                 <div className="space-y-6">
-                  <div className="bg-gradient-to-r from-[#1B4D3E] to-[#2D6A4F] rounded-xl p-6 text-white">
+                  <div className="bg-forest rounded-xl p-6 text-white">
                     <h3 className="font-heading text-xl mb-2">Simulatore Compensazione FIFO</h3>
                     <p className="text-white/70 text-sm mb-4">
                       Inserisci una plusvalenza ipotetica per vedere come verrebbero utilizzate le tue minusvalenze

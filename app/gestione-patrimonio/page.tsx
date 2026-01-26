@@ -159,7 +159,7 @@ export default function GestionePatrimonio() {
 
       {/* Hero Section */}
       <section className="relative min-h-[70vh] flex items-center bg-forest pt-navbar">
-        <div className="absolute inset-0 bg-gradient-to-br from-forest via-green-600 to-forest opacity-90" />
+        <div className="absolute inset-0 bg-forest opacity-90" />
         <div className="container-custom relative z-10 py-16">
           <div className="max-w-3xl">
             <p className="label text-green-300 mb-4">Wealth Management Italia</p>

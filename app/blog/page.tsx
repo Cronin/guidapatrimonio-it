@@ -46,7 +46,7 @@ export default function BlogIndex() {
                     />
                   </div>
                 ) : (
-                  <div className="h-48 bg-gradient-to-br from-green-600 to-forest flex items-center justify-center">
+                  <div className="h-48 bg-forest flex items-center justify-center">
                     <span className="text-white/20 font-heading text-6xl">GP</span>
                   </div>
                 )}
@@ -93,7 +93,7 @@ export default function BlogIndex() {
       </section>
 
       {/* Newsletter CTA */}
-      <section className="section-md bg-green-600">
+      <section className="section-md bg-forest">
         <div className="container-custom text-center">
           <h2 className="font-heading text-h3-sm md:text-h3 text-white mb-4">
             Resta aggiornato
