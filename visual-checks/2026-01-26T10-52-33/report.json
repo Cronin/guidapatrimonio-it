@@ -1,0 +1,36 @@
+{
+  "timestamp": "2026-01-26T10:52:58.344Z",
+  "site": "guidapatrimonio.it",
+  "totalPages": 3,
+  "successful": 3,
+  "failed": 0,
+  "results": [
+    {
+      "url": "https://guidapatrimonio.it/",
+      "pageName": "homepage",
+      "status": "success",
+      "screenshot": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/2026-01-26T10-52-33/homepage.png",
+      "loadTimeMs": 3509,
+      "statusCode": 200,
+      "consoleErrors": []
+    },
+    {
+      "url": "https://guidapatrimonio.it/blog",
+      "pageName": "blog",
+      "status": "success",
+      "screenshot": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/2026-01-26T10-52-33/blog.png",
+      "loadTimeMs": 4640,
+      "statusCode": 200,
+      "consoleErrors": []
+    },
+    {
+      "url": "https://guidapatrimonio.it/notizie",
+      "pageName": "notizie",
+      "status": "success",
+      "screenshot": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/2026-01-26T10-52-33/notizie.png",
+      "loadTimeMs": 15168,
+      "statusCode": 200,
+      "consoleErrors": []
+    }
+  ]
+}

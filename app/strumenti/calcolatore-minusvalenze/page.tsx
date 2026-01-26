@@ -1180,7 +1180,7 @@ DISCLAIMER: Questo documento e solo a scopo informativo. Consulta un commerciali
               {/* TAB: Strategia */}
               {activeTab === 'strategia' && (
                 <div className="space-y-6">
-                  <div className="bg-gradient-to-r from-amber-500 to-amber-600 rounded-xl p-6 text-white">
+                  <div className="bg-amber-500 rounded-xl p-6 text-white">
                     <h3 className="font-heading text-xl mb-2">Strategia Tax Loss Harvesting</h3>
                     <p className="text-white/90 text-sm">
                       Suggerimenti personalizzati per ottimizzare il tuo zainetto fiscale

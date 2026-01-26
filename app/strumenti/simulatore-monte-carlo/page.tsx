@@ -80,7 +80,7 @@ export default function SimulatoreMonteCarloPage() {
   const chartRef = useRef<SVGSVGElement>(null)
 
   const presets = {
-    conservativo: { rendimento: 4, volatilita: 8, label: 'Conservativo', desc: '80% Bond, 20% Azioni', color: 'blue' },
+    conservativo: { rendimento: 4, volatilita: 8, label: 'Conservativo', desc: '80% Bond, 20% Azioni', color: 'green' },
     bilanciato: { rendimento: 7, volatilita: 15, label: 'Bilanciato', desc: '60% Azioni, 40% Bond', color: 'green' },
     aggressivo: { rendimento: 9, volatilita: 20, label: 'Aggressivo', desc: '100% Azioni Globali', color: 'orange' },
   }

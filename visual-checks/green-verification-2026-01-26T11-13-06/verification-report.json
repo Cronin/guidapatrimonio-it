@@ -1,0 +1,29 @@
+[
+  {
+    "url": "https://guidapatrimonio.it/strumenti/mercato-immobiliare-luxury",
+    "timestamp": "2026-01-26T11:13:22.205Z",
+    "screenshots": {
+      "desktop": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/green-verification-2026-01-26T11-13-06/mercato-luxury-desktop.png",
+      "mobile": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/green-verification-2026-01-26T11-13-06/mercato-luxury-mobile.png"
+    },
+    "status": "success"
+  },
+  {
+    "url": "https://guidapatrimonio.it/strumenti/calcolatore-plusvalenze",
+    "timestamp": "2026-01-26T11:13:32.695Z",
+    "screenshots": {
+      "desktop": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/green-verification-2026-01-26T11-13-06/calcolatore-plusvalenze-desktop.png",
+      "mobile": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/green-verification-2026-01-26T11-13-06/calcolatore-plusvalenze-mobile.png"
+    },
+    "status": "success"
+  },
+  {
+    "url": "https://guidapatrimonio.it/strumenti/backtest-portafoglio",
+    "timestamp": "2026-01-26T11:13:41.281Z",
+    "screenshots": {
+      "desktop": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/green-verification-2026-01-26T11-13-06/backtest-portafoglio-desktop.png",
+      "mobile": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/green-verification-2026-01-26T11-13-06/backtest-portafoglio-mobile.png"
+    },
+    "status": "success"
+  }
+]

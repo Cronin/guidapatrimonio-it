@@ -1,0 +1,67 @@
+[
+  {
+    "site": "guidapatrimonio.it",
+    "timestamp": "2026-01-26T10:41:08.910Z",
+    "status": "success",
+    "screenshots": {
+      "desktop": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/2026-01-26T10-40-58/strumenti-desktop.png",
+      "mobile": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/2026-01-26T10-40-58/strumenti-mobile.png"
+    },
+    "consoleErrors": [],
+    "metrics": {
+      "loadTimeMs": 5009,
+      "statusCode": 200
+    },
+    "pageUrl": "https://guidapatrimonio.it/strumenti"
+  },
+  {
+    "site": "guidapatrimonio.it",
+    "timestamp": "2026-01-26T10:41:39.056Z",
+    "status": "error",
+    "screenshots": {
+      "desktop": "",
+      "mobile": ""
+    },
+    "consoleErrors": [],
+    "metrics": {
+      "loadTimeMs": 30129,
+      "statusCode": 0
+    },
+    "pageUrl": "https://guidapatrimonio.it/",
+    "error": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://guidapatrimonio.it/\", waiting until \"networkidle\"\u001b[22m\n"
+  },
+  {
+    "site": "guidapatrimonio.it",
+    "timestamp": "2026-01-26T10:41:44.142Z",
+    "status": "success",
+    "screenshots": {
+      "desktop": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/2026-01-26T10-41-39/chi-sono-desktop.png",
+      "mobile": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/2026-01-26T10-41-39/chi-sono-mobile.png"
+    },
+    "consoleErrors": [
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "metrics": {
+      "loadTimeMs": 2883,
+      "statusCode": 404
+    },
+    "pageUrl": "https://guidapatrimonio.it/chi-sono"
+  },
+  {
+    "site": "guidapatrimonio.it",
+    "timestamp": "2026-01-26T10:41:49.733Z",
+    "status": "success",
+    "screenshots": {
+      "desktop": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/2026-01-26T10-41-44/contatti-desktop.png",
+      "mobile": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/2026-01-26T10-41-44/contatti-mobile.png"
+    },
+    "consoleErrors": [
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "metrics": {
+      "loadTimeMs": 2795,
+      "statusCode": 404
+    },
+    "pageUrl": "https://guidapatrimonio.it/contatti"
+  }
+]

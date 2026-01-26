@@ -32,8 +32,7 @@ const config: Config = {
           300: '#b0b7c1',
           200: '#d8dee7',
         },
-        // Accent
-        'gold': '#D4A373',
+        // NO GOLD - removed for color consistency
       },
       fontFamily: {
         'heading': ['Playfair Display', 'Georgia', 'Times New Roman', 'serif'],
