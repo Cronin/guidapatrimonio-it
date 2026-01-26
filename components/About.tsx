@@ -5,8 +5,8 @@ export default function About() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Text Content */}
           <div>
-            <p className="text-gold text-sm font-medium tracking-wider uppercase mb-4">Il Nostro Partner</p>
-            <h2 className="font-heading text-3xl md:text-4xl text-navy mb-6">
+            <p className="text-green-400 text-sm font-medium tracking-wider uppercase mb-4">Il Nostro Partner</p>
+            <h2 className="font-heading text-3xl md:text-4xl text-forest mb-6">
               Wealth Management svizzero per investitori italiani
             </h2>
             <p className="text-lg text-gray-700 mb-6">
@@ -23,63 +23,63 @@ export default function About() {
             {/* Key Points */}
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 bg-navy-100 rounded-full flex items-center justify-center shrink-0">
-                  <svg className="w-4 h-4 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-8 h-8 bg-green-50 rounded-full flex items-center justify-center shrink-0">
+                  <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
                 <div>
-                  <p className="font-medium text-navy">Regolamentazione CSSF</p>
+                  <p className="font-medium text-forest">Regolamentazione CSSF</p>
                   <p className="text-sm text-gray-500">Lussemburgo e Svizzera</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 bg-navy-100 rounded-full flex items-center justify-center shrink-0">
-                  <svg className="w-4 h-4 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-8 h-8 bg-green-50 rounded-full flex items-center justify-center shrink-0">
+                  <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
                 <div>
-                  <p className="font-medium text-navy">700+ Clienti</p>
+                  <p className="font-medium text-forest">700+ Clienti</p>
                   <p className="text-sm text-gray-500">In tutta Europa</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 bg-navy-100 rounded-full flex items-center justify-center shrink-0">
-                  <svg className="w-4 h-4 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-8 h-8 bg-green-50 rounded-full flex items-center justify-center shrink-0">
+                  <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
                 <div>
-                  <p className="font-medium text-navy">Corporate High-Yield</p>
+                  <p className="font-medium text-forest">Corporate High-Yield</p>
                   <p className="text-sm text-gray-500">Specializzazione bond</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 bg-navy-100 rounded-full flex items-center justify-center shrink-0">
-                  <svg className="w-4 h-4 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-8 h-8 bg-green-50 rounded-full flex items-center justify-center shrink-0">
+                  <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
                 <div>
-                  <p className="font-medium text-navy">20+ Anni</p>
+                  <p className="font-medium text-forest">20+ Anni</p>
                   <p className="text-sm text-gray-500">Di esperienza</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Image */}
+          {/* Image - Zurich from Wikipedia */}
           <div className="relative">
             <div className="aspect-[4/3] rounded-xl overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=2071&auto=format&fit=crop"
-                alt="Ufficio finanziario svizzero"
+                src="/images/about/zurich-skyline.jpg"
+                alt="Zurich, Svizzera - sede del nostro partner"
                 className="w-full h-full object-cover"
               />
             </div>
             {/* Decorative element */}
-            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-navy-100 rounded-xl -z-10" />
+            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-green-50 rounded-xl -z-10" />
           </div>
         </div>
       </div>

@@ -111,7 +111,7 @@ export default function ContactForm() {
   // Schermata "Analisi in corso"
   if (status === 'analyzing') {
     return (
-      <div className="bg-navy-50 border border-navy-200 rounded-card p-8 text-center">
+      <div className="bg-green-50 border border-green-200 rounded-card p-8 text-center">
         <div className="w-20 h-20 mx-auto mb-6 relative">
           {/* Cerchio animato */}
           <svg className="w-20 h-20 transform -rotate-90" viewBox="0 0 80 80">
@@ -127,7 +127,7 @@ export default function ContactForm() {
               cx="40"
               cy="40"
               r="36"
-              stroke="#22c55e"
+              stroke="#40916C"
               strokeWidth="6"
               fill="none"
               strokeDasharray={`${loadingProgress * 2.26} 226`}
@@ -136,10 +136,10 @@ export default function ContactForm() {
             />
           </svg>
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-lg font-semibold text-navy">{loadingProgress}%</span>
+            <span className="text-lg font-semibold text-forest">{loadingProgress}%</span>
           </div>
         </div>
-        <h3 className="font-heading text-xl text-navy mb-2">Analisi del tuo profilo in corso...</h3>
+        <h3 className="font-heading text-xl text-forest mb-2">Analisi del tuo profilo in corso...</h3>
         <p className="text-gray-500 text-sm">
           Stiamo verificando la compatibilità con i nostri partner
         </p>
@@ -156,7 +156,7 @@ export default function ContactForm() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="font-heading text-xl text-navy mb-3">Match Confermato!</h3>
+        <h3 className="font-heading text-xl text-forest mb-3">Match Confermato!</h3>
         <p className="text-gray-600 mb-2">
           Sei stato matchato con successo.
         </p>
@@ -171,7 +171,7 @@ export default function ContactForm() {
         </div>
         <button
           onClick={resetForm}
-          className="text-navy font-medium hover:underline"
+          className="text-forest font-medium hover:underline"
         >
           Invia un&apos;altra richiesta
         </button>
@@ -188,16 +188,16 @@ export default function ContactForm() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
-        <h3 className="font-heading text-xl text-navy mb-3">Grazie per l&apos;interesse!</h3>
+        <h3 className="font-heading text-xl text-forest mb-3">Grazie per l&apos;interesse!</h3>
         <p className="text-gray-600 mb-4">
           I servizi del nostro partner sono riservati a patrimoni superiori a <strong>€150.000</strong>.
         </p>
         <p className="text-gray-600 mb-6">
-          Nel frattempo, puoi utilizzare gratuitamente tutti i nostri <a href="/strumenti" className="text-navy font-medium hover:underline">strumenti professionali</a> per la gestione patrimoniale.
+          Nel frattempo, puoi utilizzare gratuitamente tutti i nostri <a href="/strumenti" className="text-forest font-medium hover:underline">strumenti professionali</a> per la gestione patrimoniale.
         </p>
         <button
           onClick={resetForm}
-          className="text-navy font-medium hover:underline"
+          className="text-forest font-medium hover:underline"
         >
           Torna al form
         </button>
@@ -219,7 +219,7 @@ export default function ContactForm() {
             required
             value={formData.nome}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-navy-400 focus:ring-2 focus:ring-navy-400/20 outline-none transition-all"
+            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-green-400 focus:ring-2 focus:ring-green-400/20 outline-none transition-all"
             placeholder="Mario"
           />
         </div>
@@ -234,7 +234,7 @@ export default function ContactForm() {
             required
             value={formData.cognome}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-navy-400 focus:ring-2 focus:ring-navy-400/20 outline-none transition-all"
+            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-green-400 focus:ring-2 focus:ring-green-400/20 outline-none transition-all"
             placeholder="Rossi"
           />
         </div>
@@ -252,7 +252,7 @@ export default function ContactForm() {
             required
             value={formData.telefono}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-navy-400 focus:ring-2 focus:ring-navy-400/20 outline-none transition-all"
+            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-green-400 focus:ring-2 focus:ring-green-400/20 outline-none transition-all"
             placeholder="+39 333 1234567"
           />
         </div>
@@ -267,7 +267,7 @@ export default function ContactForm() {
             required
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-navy-400 focus:ring-2 focus:ring-navy-400/20 outline-none transition-all"
+            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-green-400 focus:ring-2 focus:ring-green-400/20 outline-none transition-all"
             placeholder="mario@email.com"
           />
         </div>
@@ -283,7 +283,7 @@ export default function ContactForm() {
           required
           value={formData.patrimonio}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-navy-400 focus:ring-2 focus:ring-navy-400/20 outline-none transition-all bg-white"
+          className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-green-400 focus:ring-2 focus:ring-green-400/20 outline-none transition-all bg-white"
         >
           <option value="">Seleziona importo...</option>
           <option value="sotto-50k">Meno di €50.000</option>
@@ -306,7 +306,7 @@ export default function ContactForm() {
           rows={3}
           value={formData.messaggio}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-navy-400 focus:ring-2 focus:ring-navy-400/20 outline-none transition-all resize-none"
+          className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-green-400 focus:ring-2 focus:ring-green-400/20 outline-none transition-all resize-none"
           placeholder="Es: rendita passiva, pianificazione pensione, diversificazione..."
         />
       </div>

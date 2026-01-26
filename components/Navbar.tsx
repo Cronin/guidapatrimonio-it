@@ -40,7 +40,7 @@ export default function Navbar() {
           <Link href="/blog" className="text-white text-body font-normal hover:opacity-80 transition-opacity">
             Blog
           </Link>
-          <Link href="/#contatti" className="text-navy bg-gold px-4 py-2 rounded font-medium hover:bg-gold-light transition-colors">
+          <Link href="/#contatti" className="btn-reverse text-forest bg-white px-4 py-2 rounded-button-sm font-medium hover:bg-cream transition-colors">
             Callback Gratuito
           </Link>
         </div>
@@ -63,7 +63,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="lg:hidden bg-navy/95 backdrop-blur-md">
+        <div className="lg:hidden bg-forest/95 backdrop-blur-md">
           <div className="container-custom py-6 flex flex-col gap-4">
             <Link href="/#chi-siamo" className="text-white text-body-md py-2" onClick={() => setIsOpen(false)}>
               Partner
@@ -77,7 +77,7 @@ export default function Navbar() {
             <Link href="/blog" className="text-white text-body-md py-2" onClick={() => setIsOpen(false)}>
               Blog
             </Link>
-            <Link href="/#contatti" className="text-navy bg-gold px-4 py-2 rounded font-medium text-center" onClick={() => setIsOpen(false)}>
+            <Link href="/#contatti" className="text-forest bg-white px-4 py-2 rounded-button-sm font-medium text-center" onClick={() => setIsOpen(false)}>
               Callback Gratuito
             </Link>
           </div>

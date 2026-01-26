@@ -23,11 +23,11 @@ const services = [
 
 export default function HowWeHelp() {
   return (
-    <section id="come-lavoriamo" className="section-lg bg-navy text-white">
+    <section id="come-lavoriamo" className="section-lg bg-forest text-white">
       <div className="container-custom">
         {/* Header */}
         <div className="max-w-2xl mb-16">
-          <p className="text-gold text-sm font-medium tracking-wider uppercase mb-4">Come Funziona</p>
+          <p className="text-green-300 text-sm font-medium tracking-wider uppercase mb-4">Come Funziona</p>
           <h2 className="font-heading text-h3-sm md:text-h3 text-white mb-6">
             4 passi per iniziare
           </h2>
@@ -44,7 +44,7 @@ export default function HowWeHelp() {
               key={index}
               className="flex gap-6 p-8 rounded-card bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-colors"
             >
-              <span className="font-heading text-h4-lg text-gold opacity-70">
+              <span className="font-heading text-h4-lg text-green-300 opacity-70">
                 {service.number}
               </span>
               <div>

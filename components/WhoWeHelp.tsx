@@ -48,8 +48,8 @@ export default function WhoWeHelp() {
       <div className="container-custom">
         {/* Header */}
         <div className="max-w-2xl mb-16">
-          <p className="text-gold text-sm font-medium tracking-wider uppercase mb-4">Per Chi</p>
-          <h2 className="font-heading text-3xl md:text-4xl text-navy mb-4">
+          <p className="text-green-400 text-sm font-medium tracking-wider uppercase mb-4">Per Chi</p>
+          <h2 className="font-heading text-3xl md:text-4xl text-forest mb-4">
             Soluzioni per ogni profilo di investitore
           </h2>
           <p className="text-gray-600 text-lg">
@@ -66,14 +66,14 @@ export default function WhoWeHelp() {
               className="bg-cream rounded-xl p-8 hover:shadow-lg transition-shadow border border-gray-100"
             >
               <div className="flex items-start justify-between mb-4">
-                <div className="text-navy">
+                <div className="text-green-600">
                   {client.icon}
                 </div>
-                <span className="text-xs font-medium text-navy bg-navy-100 px-3 py-1 rounded-full">
+                <span className="text-xs font-medium text-forest bg-green-50 px-3 py-1 rounded-full">
                   {client.patrimony}
                 </span>
               </div>
-              <h3 className="font-heading text-xl text-navy mb-3">
+              <h3 className="font-heading text-xl text-forest mb-3">
                 {client.title}
               </h3>
               <p className="text-gray-600">
