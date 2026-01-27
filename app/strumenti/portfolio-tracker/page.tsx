@@ -1349,38 +1349,29 @@ export default function PortfolioTracker() {
                     </div>
                   </div>
 
-                  {/* Positions Table */}
+                  {/* Positions Table - MINIMAL VIEW */}
                   <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                    {/* Desktop Table Header */}
-                    <div className="hidden lg:grid grid-cols-12 gap-3 px-5 py-3 bg-gray-50 border-b border-gray-100 text-xs font-medium text-gray-500 uppercase tracking-wide">
+                    {/* Desktop Table Header - Simplified */}
+                    <div className="hidden lg:grid grid-cols-12 gap-4 px-5 py-3 bg-gray-50 border-b border-gray-100 text-xs font-medium text-gray-500 uppercase tracking-wide">
                       <button
                         onClick={() => handleSort('nome')}
-                        className="col-span-3 text-left hover:text-forest flex items-center gap-1"
+                        className="col-span-5 text-left hover:text-forest flex items-center gap-1"
                       >
                         Asset {sortBy === 'nome' && (sortDir === 'asc' ? '↑' : '↓')}
                       </button>
                       <button
-                        onClick={() => handleSort('categoria')}
-                        className="col-span-1 text-left hover:text-forest flex items-center gap-1"
-                      >
-                        Cat {sortBy === 'categoria' && (sortDir === 'asc' ? '↑' : '↓')}
-                      </button>
-                      <div className="col-span-1 text-right">Qty</div>
-                      <div className="col-span-1 text-right">PMC</div>
-                      <div className="col-span-1 text-right">Prezzo</div>
-                      <button
                         onClick={() => handleSort('valore')}
-                        className="col-span-2 text-right hover:text-forest flex items-center justify-end gap-1"
+                        className="col-span-3 text-right hover:text-forest flex items-center justify-end gap-1"
                       >
                         Valore {sortBy === 'valore' && (sortDir === 'asc' ? '↑' : '↓')}
                       </button>
                       <button
                         onClick={() => handleSort('pl')}
-                        className="col-span-2 text-right hover:text-forest flex items-center justify-end gap-1"
+                        className="col-span-3 text-right hover:text-forest flex items-center justify-end gap-1"
                       >
                         P&L {sortBy === 'pl' && (sortDir === 'asc' ? '↑' : '↓')}
                       </button>
-                      <div className="col-span-1 text-right">Peso</div>
+                      <div className="col-span-1"></div>
                     </div>
 
                     <div className="divide-y divide-gray-100">
@@ -1453,70 +1444,52 @@ export default function PortfolioTracker() {
                             </div>
                           </div>
 
-                          {/* Desktop View */}
-                          <div className="hidden lg:grid grid-cols-12 gap-3 items-center">
-                            <div className="col-span-3">
+                          {/* Desktop View - MINIMAL */}
+                          <div className="hidden lg:grid grid-cols-12 gap-4 items-center">
+                            <div className="col-span-5">
                               <div className="flex items-center gap-3">
                                 <TickerLogo ticker={p.ticker} name={p.nome} size="sm" />
                                 <div className="min-w-0">
                                   <p className="font-medium text-forest truncate">{p.nome}</p>
-                                  {p.ticker && (
-                                    <p className="text-xs text-gray-400 font-mono">{p.ticker}</p>
-                                  )}
+                                  <div className="flex items-center gap-2 text-xs text-gray-400">
+                                    {p.ticker && <span className="font-mono">{p.ticker}</span>}
+                                    <span className="capitalize">{p.categoria}</span>
+                                    <span>• {p.quantita} @ {formatCurrency(p.prezzoAttuale)}</span>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                            <div className="col-span-1">
-                              <span className="text-xs px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded capitalize">
-                                {p.categoria}
-                              </span>
+                            <div className="col-span-3 text-right">
+                              <p className="text-base font-semibold text-forest">{formatCurrency(p.valore)}</p>
+                              <p className="text-xs text-gray-400">{p.peso.toFixed(1)}% del totale</p>
                             </div>
-                            <div className="col-span-1 text-right">
-                              <p className="text-sm font-medium">{p.quantita}</p>
-                            </div>
-                            <div className="col-span-1 text-right">
-                              <p className="text-sm text-gray-600">{formatCurrency(p.prezzoCarico)}</p>
-                            </div>
-                            <div className="col-span-1 text-right">
-                              <input
-                                type="number"
-                                value={p.prezzoAttuale}
-                                onChange={(e) => handleUpdatePrezzo(p.id, e.target.value)}
-                                step="0.01"
-                                min="0"
-                                className="w-full px-1.5 py-1 text-sm text-right border border-gray-200 rounded focus:ring-1 focus:ring-green-500 focus:border-green-500"
-                              />
-                            </div>
-                            <div className="col-span-2 text-right">
-                              <p className="text-sm font-semibold text-forest">{formatCurrency(p.valore)}</p>
-                            </div>
-                            <div className="col-span-2 text-right">
-                              <p className={`text-sm font-semibold ${p.pl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                                {p.pl >= 0 ? '+' : ''}{formatCurrency(p.pl)} <span className="text-xs font-normal opacity-75">({Math.abs(p.plPercent) > 999 ? '>999%' : (p.plPercent >= 0 ? '+' : '') + p.plPercent.toFixed(1) + '%'})</span>
+                            <div className="col-span-3 text-right">
+                              <p className={`text-base font-semibold ${p.pl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                {p.pl >= 0 ? '+' : ''}{formatCurrency(p.pl)}
+                              </p>
+                              <p className={`text-xs ${p.plPercent >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                                {p.plPercent >= 0 ? '+' : ''}{Math.abs(p.plPercent) > 999 ? '>999' : p.plPercent.toFixed(1)}%
                               </p>
                             </div>
-                            <div className="col-span-1 flex items-center justify-end gap-2">
-                              <span className="text-sm font-medium text-gray-600">{p.peso.toFixed(1)}%</span>
-                              <div className="flex items-center gap-0.5">
-                                <button
-                                  onClick={() => handleEdit(p)}
-                                  className="p-1.5 text-gray-400 hover:text-green-600 transition-colors"
-                                  title="Modifica"
-                                >
-                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                  </svg>
-                                </button>
-                                <button
-                                  onClick={() => handleRemove(p.id)}
-                                  className="p-1.5 text-gray-400 hover:text-red-500 transition-colors"
-                                  title="Rimuovi"
-                                >
-                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                  </svg>
-                                </button>
-                              </div>
+                            <div className="col-span-1 flex items-center justify-end gap-1">
+                              <button
+                                onClick={() => handleEdit(p)}
+                                className="p-1.5 text-gray-400 hover:text-green-600 transition-colors"
+                                title="Modifica"
+                              >
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                </svg>
+                              </button>
+                              <button
+                                onClick={() => handleRemove(p.id)}
+                                className="p-1.5 text-gray-400 hover:text-red-500 transition-colors"
+                                title="Rimuovi"
+                              >
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                              </button>
                             </div>
                           </div>
                         </div>
