@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 export default function CalcolatoreTFR() {
   const [ralAttuale, setRalAttuale] = useState(35000)
@@ -11,6 +11,19 @@ export default function CalcolatoreTFR() {
   const [crescitaRal, setCrescitaRal] = useState(2)
   const [destinazione, setDestinazione] = useState<'azienda' | 'fondo'>('azienda')
   const [rendimentoFondo, setRendimentoFondo] = useState(3)
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  // Check for high value input
+  useEffect(() => {
+    if (ralAttuale >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(ralAttuale)
+      setShowPopup(true)
+    }
+  }, [ralAttuale, THRESHOLD, shouldShowPopup])
 
   const risultati = useMemo(() => {
     // TFR = RAL / 13.5 per ogni anno
@@ -82,6 +95,11 @@ export default function CalcolatoreTFR() {
 
   return (
     <main>
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
       <ToolPageSchema slug="tfr" />
       <Navbar />
 

@@ -1,14 +1,27 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 export default function SimulatorePAC() {
   const [versamentoMensile, setVersamentoMensile] = useState(300)
   const [tassoAnnuo, setTassoAnnuo] = useState(7)
   const [anni, setAnni] = useState(20)
   const [capitaleIniziale, setCapitaleIniziale] = useState(0)
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  // Check for high value input
+  useEffect(() => {
+    if (capitaleIniziale >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(capitaleIniziale)
+      setShowPopup(true)
+    }
+  }, [capitaleIniziale, THRESHOLD, shouldShowPopup])
 
   const risultati = useMemo(() => {
     const tassoMensile = tassoAnnuo / 100 / 12
@@ -62,6 +75,11 @@ export default function SimulatorePAC() {
 
   return (
     <main>
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
       <ToolPageSchema slug="pac" />
       <Navbar />
 

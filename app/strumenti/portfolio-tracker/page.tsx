@@ -1201,6 +1201,11 @@ export default function PortfolioTracker() {
                                 <p className={`font-medium ${p.plPercent >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                                   {formatPercent(p.plPercent)}
                                 </p>
+                                {Math.abs(p.plPercent) > 1000 && (
+                                  <p className="text-xs text-amber-600 mt-0.5">
+                                    Verifica i prezzi
+                                  </p>
+                                )}
                               </div>
                             </div>
 
@@ -1234,7 +1239,7 @@ export default function PortfolioTracker() {
                             </div>
                             <div className="col-span-1">
                               <span className="text-xs px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded capitalize">
-                                {p.categoria.slice(0, 3)}
+                                {p.categoria}
                               </span>
                             </div>
                             <div className="col-span-1 text-right">
@@ -1263,6 +1268,11 @@ export default function PortfolioTracker() {
                               <p className={`text-xs ${p.plPercent >= 0 ? 'text-green-500' : 'text-red-500'}`}>
                                 {formatPercent(p.plPercent)}
                               </p>
+                              {Math.abs(p.plPercent) > 1000 && (
+                                <p className="text-xs text-amber-600 mt-0.5">
+                                  Verifica i prezzi inseriti
+                                </p>
+                              )}
                             </div>
                             <div className="col-span-1 flex items-center justify-end gap-2">
                               <span className="text-sm font-medium text-gray-600">{p.peso.toFixed(1)}%</span>

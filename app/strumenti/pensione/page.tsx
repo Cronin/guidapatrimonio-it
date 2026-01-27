@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 export default function CalcolatorePensione() {
   const [etaAttuale, setEtaAttuale] = useState(40)
@@ -12,6 +12,19 @@ export default function CalcolatorePensione() {
   const [pensioneStatale, setPensioneStatale] = useState(60)
   const [capitaleAttuale, setCapitaleAttuale] = useState(50000)
   const [rendimentoAtteso, setRendimentoAtteso] = useState(5)
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  // Check for high value input
+  useEffect(() => {
+    if (capitaleAttuale >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(capitaleAttuale)
+      setShowPopup(true)
+    }
+  }, [capitaleAttuale, THRESHOLD, shouldShowPopup])
 
   const risultati = useMemo(() => {
     const anniAlPensionamento = etaPensione - etaAttuale
@@ -70,6 +83,11 @@ export default function CalcolatorePensione() {
 
   return (
     <main>
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
       <ToolPageSchema slug="pensione" />
       <Navbar />
 

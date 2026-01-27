@@ -112,6 +112,7 @@ const toolCategories: ToolCategory[] = [
         title: 'Exit Strategy Planner',
         description: 'Trade sale, MBO, IPO. Ottimizzazione fiscale con PEX.',
         href: '/strumenti/exit-strategy',
+        featured: true
       },
     ],
   },

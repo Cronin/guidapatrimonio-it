@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 // IRPEF brackets 2024
 const IRPEF_BRACKETS = [
@@ -18,6 +18,19 @@ export default function CalcolatoreFlatTax() {
   const [redditoEstero, setRedditoEstero] = useState(300000)
   const [anniPermanenza, setAnniPermanenza] = useState(10)
   const [familiari, setFamiliari] = useState(0)
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  // Check for high value input
+  useEffect(() => {
+    if (redditoEstero >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(redditoEstero)
+      setShowPopup(true)
+    }
+  }, [redditoEstero, THRESHOLD, shouldShowPopup])
   const [patrimonioEstero, setPatrimonioEstero] = useState(1000000)
   const [hasRequirements, setHasRequirements] = useState(true)
 
@@ -139,6 +152,11 @@ export default function CalcolatoreFlatTax() {
 
   return (
     <main>
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
       <ToolPageSchema slug="flat-tax-100k" />
       <Navbar />
 

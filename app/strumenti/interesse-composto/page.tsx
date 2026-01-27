@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer, RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 export default function InteresseComposto() {
   const [capitale, setCapitale] = useState(10000)
@@ -10,6 +10,19 @@ export default function InteresseComposto() {
   const [anni, setAnni] = useState(20)
   const [apporti, setApporti] = useState(0)
   const [frequenzaApporti, setFrequenzaApporti] = useState<'mensile' | 'annuale'>('mensile')
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  // Check for high value input
+  useEffect(() => {
+    if (capitale >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(capitale)
+      setShowPopup(true)
+    }
+  }, [capitale, THRESHOLD, shouldShowPopup])
 
   const risultati = useMemo(() => {
     const tassoPerPeriodo = frequenzaApporti === 'mensile'
@@ -66,6 +79,11 @@ export default function InteresseComposto() {
 
   return (
     <main>
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
       <ToolPageSchema slug="interesse-composto" />
       <Navbar />
 

@@ -1,14 +1,27 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 export default function CalcolatoreMutuo() {
   const [importo, setImporto] = useState(200000)
   const [durata, setDurata] = useState(25)
   const [tasso, setTasso] = useState(3.5)
   const [tipoTasso, setTipoTasso] = useState<'fisso' | 'variabile'>('fisso')
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  // Check for high value input
+  useEffect(() => {
+    if (importo >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(importo)
+      setShowPopup(true)
+    }
+  }, [importo, THRESHOLD, shouldShowPopup])
 
   const risultati = useMemo(() => {
     const tassoMensile = tasso / 100 / 12
@@ -61,6 +74,11 @@ export default function CalcolatoreMutuo() {
 
   return (
     <main>
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
       <ToolPageSchema slug="mutuo" />
       <Navbar />
 

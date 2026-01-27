@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 interface YearlyData {
   year: number
@@ -18,6 +18,19 @@ export default function ImmobiliareVsAzioni() {
   const [costiAcquisto, setCostiAcquisto] = useState(10)
   const [affittoMensile, setAffittoMensile] = useState(1200)
   const [speseAnnue, setSpeseAnnue] = useState(4000)
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  // Check for high value input
+  useEffect(() => {
+    if (prezzoImmobile >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(prezzoImmobile)
+      setShowPopup(true)
+    }
+  }, [prezzoImmobile, THRESHOLD, shouldShowPopup])
   const [tassazione, setTassazione] = useState<TassazioneType>('cedolare')
   const [rivalutazioneImmobile, setRivalutazioneImmobile] = useState(1)
   const [mesiSfitto, setMesiSfitto] = useState(1)
@@ -160,6 +173,11 @@ export default function ImmobiliareVsAzioni() {
 
   return (
     <main>
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
       <ToolPageSchema slug="immobiliare-vs-azioni" />
       <Navbar />
 

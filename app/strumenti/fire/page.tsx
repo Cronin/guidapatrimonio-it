@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 export default function CalcolatoreFIRE() {
   const [speseAnnue, setSpeseAnnue] = useState(30000)
@@ -10,6 +10,19 @@ export default function CalcolatoreFIRE() {
   const [risparmioMensile, setRisparmioMensile] = useState(1000)
   const [rendimentoAtteso, setRendimentoAtteso] = useState(6)
   const [tassoPrelievo, setTassoPrelievo] = useState(4)
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  // Check for high value input
+  useEffect(() => {
+    if (patrimonioAttuale >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(patrimonioAttuale)
+      setShowPopup(true)
+    }
+  }, [patrimonioAttuale, THRESHOLD, shouldShowPopup])
 
   const risultati = useMemo(() => {
     // Capitale necessario per FIRE (regola del 4% o personalizzata)
@@ -74,6 +87,11 @@ export default function CalcolatoreFIRE() {
 
   return (
     <main>
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
       <ToolPageSchema slug="fire" />
       <Navbar />
 

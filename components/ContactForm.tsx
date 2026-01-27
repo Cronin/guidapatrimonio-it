@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
 declare global {
   interface Window {
@@ -11,54 +11,59 @@ declare global {
 // Patrimonio minimo per qualificazione partner (in EUR)
 const MIN_PATRIMONIO_PARTNER = 150000
 
-// Mappa valori form a importi numerici per qualificazione
-const patrimonioValues: Record<string, number> = {
-  'sotto-50k': 25000,
-  '50-100k': 75000,
-  '100-150k': 125000,
-  '150-250k': 200000,
-  '250-500k': 375000,
-  '500k-1m': 750000,
-  '1m+': 1500000,
-}
+type Step = 'importo' | 'orizzonte' | 'obiettivo' | 'proiezione' | 'contatto'
+const TOTAL_STEPS = 5
 
-const patrimonioOptions = [
-  { value: 'sotto-50k', label: 'Meno di €50.000' },
-  { value: '50-100k', label: '€50.000 - €100.000' },
-  { value: '100-150k', label: '€100.000 - €150.000' },
-  { value: '150-250k', label: '€150.000 - €250.000' },
-  { value: '250-500k', label: '€250.000 - €500.000' },
-  { value: '500k-1m', label: '€500.000 - €1.000.000' },
-  { value: '1m+', label: 'Oltre €1.000.000' },
+const orizzonteOptions = [
+  { value: '1-5', label: '1-5 anni', description: 'Breve termine' },
+  { value: '5-10', label: '5-10 anni', description: 'Medio termine' },
+  { value: '10+', label: '10+ anni', description: 'Lungo termine' },
 ]
 
-type Step = 'nome' | 'cognome' | 'email' | 'telefono' | 'patrimonio' | 'messaggio'
+const obiettivoOptions = [
+  { value: 'crescita', label: 'Crescita del capitale', description: 'Massimizzare i rendimenti nel tempo', icon: 'chart' },
+  { value: 'rendita', label: 'Rendita passiva', description: 'Ottenere entrate periodiche', icon: 'cash' },
+  { value: 'protezione', label: 'Protezione patrimonio', description: 'Preservare il capitale', icon: 'shield' },
+]
 
-const steps: Step[] = ['nome', 'cognome', 'email', 'telefono', 'patrimonio', 'messaggio']
+// Rendimenti annui per profilo
+const PROFILI = {
+  conservativo: { rendimento: 0.06, label: 'Conservativo', color: '#74C69D' },
+  moderato: { rendimento: 0.10, label: 'Moderato', color: '#40916C' },
+  aggressivo: { rendimento: 0.15, label: 'Aggressivo', color: '#1B4D3E' },
+}
 
 export default function ContactForm() {
-  const [currentStep, setCurrentStep] = useState(0)
-  const [formData, setFormData] = useState({
-    nome: '',
-    cognome: '',
-    email: '',
-    telefono: '',
-    patrimonio: '',
-    messaggio: '',
-  })
+  const [currentStep, setCurrentStep] = useState<Step>('importo')
+  const [importo, setImporto] = useState(100000)
+  const [orizzonte, setOrizzonte] = useState('')
+  const [obiettivo, setObiettivo] = useState('')
+  const [nome, setNome] = useState('')
+  const [email, setEmail] = useState('')
+  const [telefono, setTelefono] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'analyzing' | 'success' | 'not-qualified' | 'error'>('idle')
   const [loadingProgress, setLoadingProgress] = useState(0)
-  const [direction, setDirection] = useState<'forward' | 'backward'>('forward')
-  const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null)
 
-  // Focus input when step changes
-  useEffect(() => {
-    if (status === 'idle' && inputRef.current) {
-      setTimeout(() => inputRef.current?.focus(), 100)
+  const stepIndex = ['importo', 'orizzonte', 'obiettivo', 'proiezione', 'contatto'].indexOf(currentStep)
+  const progress = ((stepIndex + 1) / TOTAL_STEPS) * 100
+
+  // Calcolo proiezioni
+  const proiezioni = useMemo(() => {
+    const anni = orizzonte === '1-5' ? 5 : orizzonte === '5-10' ? 10 : 20
+    const result: { anno: number; conservativo: number; moderato: number; aggressivo: number }[] = []
+
+    for (let i = 0; i <= anni; i++) {
+      result.push({
+        anno: i,
+        conservativo: importo * Math.pow(1 + PROFILI.conservativo.rendimento, i),
+        moderato: importo * Math.pow(1 + PROFILI.moderato.rendimento, i),
+        aggressivo: importo * Math.pow(1 + PROFILI.aggressivo.rendimento, i),
+      })
     }
-  }, [currentStep, status])
+    return result
+  }, [importo, orizzonte])
 
-  // Effetto per simulare analisi del profilo
+  // Animazione loading
   useEffect(() => {
     if (status === 'analyzing') {
       const interval = setInterval(() => {
@@ -75,76 +80,70 @@ export default function ContactForm() {
     }
   }, [status])
 
-  const validateCurrentStep = useCallback(() => {
-    const step = steps[currentStep]
-    const value = formData[step]
-
-    if (step === 'messaggio') return true // Optional
-    if (!value.trim()) return false
-
-    if (step === 'email') {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      return emailRegex.test(value)
+  const formatCurrency = (value: number) => {
+    if (value >= 1000000) {
+      return `${(value / 1000000).toFixed(1)}M`
     }
-
-    return true
-  }, [currentStep, formData])
-
-  const goToNextStep = useCallback(() => {
-    if (!validateCurrentStep()) return
-
-    if (currentStep < steps.length - 1) {
-      setDirection('forward')
-      setCurrentStep(prev => prev + 1)
-    } else {
-      handleSubmit()
-    }
-  }, [currentStep, validateCurrentStep])
-
-  const goToPrevStep = () => {
-    if (currentStep > 0) {
-      setDirection('backward')
-      setCurrentStep(prev => prev - 1)
-    }
+    return new Intl.NumberFormat('it-IT', {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(value)
   }
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault()
-      goToNextStep()
-    }
+  const goNext = () => {
+    if (currentStep === 'importo') setCurrentStep('orizzonte')
+    else if (currentStep === 'orizzonte' && orizzonte) setCurrentStep('obiettivo')
+    else if (currentStep === 'obiettivo' && obiettivo) setCurrentStep('proiezione')
+    else if (currentStep === 'proiezione') setCurrentStep('contatto')
+  }
+
+  const goBack = () => {
+    if (currentStep === 'orizzonte') setCurrentStep('importo')
+    else if (currentStep === 'obiettivo') setCurrentStep('orizzonte')
+    else if (currentStep === 'proiezione') setCurrentStep('obiettivo')
+    else if (currentStep === 'contatto') setCurrentStep('proiezione')
   }
 
   const handleSubmit = async () => {
+    if (!nome || !email) return
+
     setStatus('loading')
 
     try {
+      // Map importo to patrimonio value for backward compatibility
+      const patrimonioValue = importo < 50000 ? 'sotto-50k' :
+        importo < 100000 ? '50-100k' :
+        importo < 150000 ? '100-150k' :
+        importo < 250000 ? '150-250k' :
+        importo < 500000 ? '250-500k' :
+        importo < 1000000 ? '500k-1m' : '1m+'
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...formData,
-          nome: `${formData.nome} ${formData.cognome}`.trim(),
+          nome,
+          email,
+          telefono,
+          patrimonio: patrimonioValue,
+          messaggio: `Obiettivo: ${obiettivo}, Orizzonte: ${orizzonte}, Importo: ${formatCurrency(importo)}`,
         }),
       })
 
-      if (!response.ok) {
-        throw new Error('Failed to submit')
-      }
+      if (!response.ok) throw new Error('Failed to submit')
 
-      // Track conversion in GA4
+      // Track conversion
       if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
         window.gtag('event', 'generate_lead', {
           event_category: 'form',
-          event_label: 'contact_form_submission',
-          value: formData.patrimonio || 'non_specificato',
+          event_label: 'contact_form_pleo',
+          value: importo,
         })
       }
 
-      // Verifica qualificazione
-      const patrimonioValue = patrimonioValues[formData.patrimonio] || 0
-
-      if (patrimonioValue >= MIN_PATRIMONIO_PARTNER) {
+      if (importo >= MIN_PATRIMONIO_PARTNER) {
         setLoadingProgress(0)
         setStatus('analyzing')
       } else {
@@ -155,28 +154,22 @@ export default function ContactForm() {
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }))
-  }
-
-  const handlePatrimonioSelect = (value: string) => {
-    setFormData(prev => ({ ...prev, patrimonio: value }))
-    setTimeout(() => goToNextStep(), 300)
-  }
-
   const resetForm = () => {
-    setFormData({ nome: '', cognome: '', email: '', telefono: '', patrimonio: '', messaggio: '' })
+    setCurrentStep('importo')
+    setImporto(100000)
+    setOrizzonte('')
+    setObiettivo('')
+    setNome('')
+    setEmail('')
+    setTelefono('')
     setStatus('idle')
     setLoadingProgress(0)
-    setCurrentStep(0)
   }
 
-  const progress = ((currentStep + 1) / steps.length) * 100
+  // ============================================================================
+  // STATUS SCREENS
+  // ============================================================================
 
-  // Schermata "Analisi in corso"
   if (status === 'analyzing') {
     return (
       <div className="min-h-[400px] flex flex-col items-center justify-center text-center px-4">
@@ -184,12 +177,8 @@ export default function ContactForm() {
           <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 96 96">
             <circle cx="48" cy="48" r="44" stroke="#e5e7eb" strokeWidth="6" fill="none" />
             <circle
-              cx="48"
-              cy="48"
-              r="44"
-              stroke="#40916C"
-              strokeWidth="6"
-              fill="none"
+              cx="48" cy="48" r="44"
+              stroke="#40916C" strokeWidth="6" fill="none"
               strokeDasharray={`${loadingProgress * 2.76} 276`}
               strokeLinecap="round"
               className="transition-all duration-100"
@@ -200,12 +189,11 @@ export default function ContactForm() {
           </div>
         </div>
         <h3 className="font-heading text-2xl text-forest mb-3">Analisi del tuo profilo</h3>
-        <p className="text-gray-500">Stiamo verificando la compatibilità con i nostri partner...</p>
+        <p className="text-gray-500">Stiamo verificando la compatibilita con i nostri partner...</p>
       </div>
     )
   }
 
-  // Schermata "Matchato con successo"
   if (status === 'success') {
     return (
       <div className="min-h-[400px] flex flex-col items-center justify-center text-center px-4">
@@ -232,7 +220,6 @@ export default function ContactForm() {
     )
   }
 
-  // Schermata "Non qualificato"
   if (status === 'not-qualified') {
     return (
       <div className="min-h-[400px] flex flex-col items-center justify-center text-center px-4">
@@ -256,7 +243,6 @@ export default function ContactForm() {
     )
   }
 
-  // Loading state
   if (status === 'loading') {
     return (
       <div className="min-h-[400px] flex flex-col items-center justify-center">
@@ -269,7 +255,6 @@ export default function ContactForm() {
     )
   }
 
-  // Error state
   if (status === 'error') {
     return (
       <div className="min-h-[400px] flex flex-col items-center justify-center text-center px-4">
@@ -287,169 +272,317 @@ export default function ContactForm() {
     )
   }
 
+  // ============================================================================
+  // STEP CONTENT
+  // ============================================================================
+
   const renderStep = () => {
-    const step = steps[currentStep]
-    const stepNumber = currentStep + 1
-
-    const baseInputClass = "w-full bg-transparent border-b-2 border-gray-300 focus:border-forest outline-none py-3 text-xl md:text-2xl text-forest placeholder:text-gray-400 transition-colors"
-
-    switch (step) {
-      case 'nome':
+    switch (currentStep) {
+      case 'importo':
         return (
-          <div>
-            <label className="block text-sm text-gray-500 mb-2">{stepNumber} →</label>
-            <h3 className="font-heading text-2xl md:text-3xl text-forest mb-6">Come ti chiami?</h3>
-            <input
-              ref={inputRef as React.RefObject<HTMLInputElement>}
-              type="text"
-              name="nome"
-              value={formData.nome}
-              onChange={handleChange}
-              onKeyDown={handleKeyDown}
-              placeholder="Il tuo nome"
-              className={baseInputClass}
-              autoComplete="given-name"
-            />
-          </div>
-        )
-
-      case 'cognome':
-        return (
-          <div>
-            <label className="block text-sm text-gray-500 mb-2">{stepNumber} →</label>
-            <h3 className="font-heading text-2xl md:text-3xl text-forest mb-6">Qual è il tuo cognome?</h3>
-            <input
-              ref={inputRef as React.RefObject<HTMLInputElement>}
-              type="text"
-              name="cognome"
-              value={formData.cognome}
-              onChange={handleChange}
-              onKeyDown={handleKeyDown}
-              placeholder="Il tuo cognome"
-              className={baseInputClass}
-              autoComplete="family-name"
-            />
-          </div>
-        )
-
-      case 'email':
-        return (
-          <div>
-            <label className="block text-sm text-gray-500 mb-2">{stepNumber} →</label>
-            <h3 className="font-heading text-2xl md:text-3xl text-forest mb-6">Qual è la tua email?</h3>
-            <input
-              ref={inputRef as React.RefObject<HTMLInputElement>}
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              onKeyDown={handleKeyDown}
-              placeholder="nome@email.com"
-              className={baseInputClass}
-              autoComplete="email"
-            />
-          </div>
-        )
-
-      case 'telefono':
-        return (
-          <div>
-            <label className="block text-sm text-gray-500 mb-2">{stepNumber} →</label>
-            <h3 className="font-heading text-2xl md:text-3xl text-forest mb-6">Il tuo numero di telefono?</h3>
-            <input
-              ref={inputRef as React.RefObject<HTMLInputElement>}
-              type="tel"
-              name="telefono"
-              value={formData.telefono}
-              onChange={handleChange}
-              onKeyDown={handleKeyDown}
-              placeholder="+39 333 1234567"
-              className={baseInputClass}
-              autoComplete="tel"
-            />
-          </div>
-        )
-
-      case 'patrimonio':
-        return (
-          <div>
-            <label className="block text-sm text-gray-500 mb-2">{stepNumber} →</label>
-            <h3 className="font-heading text-2xl md:text-3xl text-forest mb-6">
+          <div className="text-center">
+            <h3 className="font-heading text-2xl md:text-3xl text-forest mb-2">
               Quanto vorresti investire?
             </h3>
-            <div className="grid gap-3">
-              {patrimonioOptions.map((option, index) => (
+            <p className="text-gray-500 mb-8">Usa lo slider per selezionare l&apos;importo</p>
+
+            <div className="mb-8">
+              <div className="text-5xl md:text-6xl font-heading text-forest mb-4">
+                {formatCurrency(importo)}
+              </div>
+              <input
+                type="range"
+                min="10000"
+                max="2000000"
+                step="10000"
+                value={importo}
+                onChange={(e) => setImporto(Number(e.target.value))}
+                className="w-full h-3 bg-gray-200 rounded-full appearance-none cursor-pointer accent-green-600"
+              />
+              <div className="flex justify-between text-xs text-gray-400 mt-2">
+                <span>€10k</span>
+                <span>€500k</span>
+                <span>€1M</span>
+                <span>€2M+</span>
+              </div>
+            </div>
+
+            {importo >= MIN_PATRIMONIO_PARTNER && (
+              <div className="bg-green-50 rounded-lg p-4 text-sm text-green-700 mb-4">
+                <span className="font-medium">Perfetto!</span> Con questo importo sei idoneo per i servizi dei nostri partner svizzeri.
+              </div>
+            )}
+          </div>
+        )
+
+      case 'orizzonte':
+        return (
+          <div className="text-center">
+            <h3 className="font-heading text-2xl md:text-3xl text-forest mb-2">
+              Qual è il tuo orizzonte temporale?
+            </h3>
+            <p className="text-gray-500 mb-8">Quanto tempo pensi di tenere investito il capitale</p>
+
+            <div className="grid gap-3 max-w-md mx-auto">
+              {orizzonteOptions.map((option) => (
                 <button
                   key={option.value}
-                  type="button"
-                  onClick={() => handlePatrimonioSelect(option.value)}
-                  className={`w-full text-left px-5 py-4 rounded-lg border-2 transition-all ${
-                    formData.patrimonio === option.value
-                      ? 'border-forest bg-green-50 text-forest'
-                      : 'border-gray-200 hover:border-gray-300 text-gray-700'
+                  onClick={() => {
+                    setOrizzonte(option.value)
+                    setTimeout(goNext, 300)
+                  }}
+                  className={`w-full text-left px-6 py-5 rounded-xl border-2 transition-all ${
+                    orizzonte === option.value
+                      ? 'border-forest bg-green-50'
+                      : 'border-gray-200 hover:border-gray-300'
                   }`}
                 >
-                  <span className="inline-block w-6 h-6 text-center text-sm border rounded mr-3 align-middle">
-                    {String.fromCharCode(65 + index)}
-                  </span>
-                  {option.label}
+                  <div className="font-heading text-lg text-forest">{option.label}</div>
+                  <div className="text-sm text-gray-500">{option.description}</div>
                 </button>
               ))}
             </div>
           </div>
         )
 
-      case 'messaggio':
+      case 'obiettivo':
         return (
-          <div>
-            <label className="block text-sm text-gray-500 mb-2">{stepNumber} →</label>
+          <div className="text-center">
             <h3 className="font-heading text-2xl md:text-3xl text-forest mb-2">
-              Obiettivi di investimento
+              Qual è il tuo obiettivo principale?
             </h3>
-            <p className="text-gray-500 mb-6 text-sm">Opzionale - premi Invio per saltare</p>
-            <textarea
-              ref={inputRef as React.RefObject<HTMLTextAreaElement>}
-              name="messaggio"
-              value={formData.messaggio}
-              onChange={handleChange}
-              onKeyDown={handleKeyDown}
-              placeholder="Es: rendita passiva, pianificazione pensione, diversificazione..."
-              rows={3}
-              className="w-full bg-transparent border-2 border-gray-200 focus:border-forest outline-none p-4 text-lg text-forest placeholder:text-gray-400 transition-colors rounded-lg resize-none"
-            />
+            <p className="text-gray-500 mb-8">Seleziona quello che meglio descrive le tue priorita</p>
+
+            <div className="grid gap-3 max-w-md mx-auto">
+              {obiettivoOptions.map((option) => (
+                <button
+                  key={option.value}
+                  onClick={() => {
+                    setObiettivo(option.value)
+                    setTimeout(goNext, 300)
+                  }}
+                  className={`w-full text-left px-6 py-5 rounded-xl border-2 transition-all ${
+                    obiettivo === option.value
+                      ? 'border-forest bg-green-50'
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center text-green-600">
+                      {option.icon === 'chart' && (
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                      )}
+                      {option.icon === 'cash' && (
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      )}
+                      {option.icon === 'shield' && (
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                      )}
+                    </div>
+                    <div>
+                      <div className="font-heading text-lg text-forest">{option.label}</div>
+                      <div className="text-sm text-gray-500">{option.description}</div>
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )
+
+      case 'proiezione':
+        const anni = orizzonte === '1-5' ? 5 : orizzonte === '5-10' ? 10 : 20
+        const maxValue = proiezioni[proiezioni.length - 1]?.aggressivo || importo * 2
+        const chartHeight = 180
+
+        return (
+          <div className="text-center">
+            <h3 className="font-heading text-2xl md:text-3xl text-forest mb-2">
+              Proiezione del tuo patrimonio
+            </h3>
+            <p className="text-gray-500 mb-6">Ecco come potrebbe crescere il tuo investimento in {anni} anni</p>
+
+            {/* Chart */}
+            <div className="bg-gray-50 rounded-xl p-4 mb-6">
+              <svg viewBox={`0 0 320 ${chartHeight + 40}`} className="w-full" preserveAspectRatio="xMidYMid meet">
+                {/* Grid lines */}
+                {[0, 0.25, 0.5, 0.75, 1].map((pct) => (
+                  <line
+                    key={pct}
+                    x1="40"
+                    y1={chartHeight - pct * chartHeight + 10}
+                    x2="310"
+                    y2={chartHeight - pct * chartHeight + 10}
+                    stroke="#e5e7eb"
+                    strokeWidth="1"
+                  />
+                ))}
+
+                {/* Aggressivo line */}
+                <polyline
+                  fill="none"
+                  stroke={PROFILI.aggressivo.color}
+                  strokeWidth="2.5"
+                  points={proiezioni.map((p, i) => {
+                    const x = 40 + (i / anni) * 270
+                    const y = chartHeight - ((p.aggressivo - importo) / (maxValue - importo)) * chartHeight + 10
+                    return `${x},${Math.max(10, y)}`
+                  }).join(' ')}
+                />
+
+                {/* Moderato line */}
+                <polyline
+                  fill="none"
+                  stroke={PROFILI.moderato.color}
+                  strokeWidth="2.5"
+                  points={proiezioni.map((p, i) => {
+                    const x = 40 + (i / anni) * 270
+                    const y = chartHeight - ((p.moderato - importo) / (maxValue - importo)) * chartHeight + 10
+                    return `${x},${Math.max(10, y)}`
+                  }).join(' ')}
+                />
+
+                {/* Conservativo line */}
+                <polyline
+                  fill="none"
+                  stroke={PROFILI.conservativo.color}
+                  strokeWidth="2.5"
+                  points={proiezioni.map((p, i) => {
+                    const x = 40 + (i / anni) * 270
+                    const y = chartHeight - ((p.conservativo - importo) / (maxValue - importo)) * chartHeight + 10
+                    return `${x},${Math.max(10, y)}`
+                  }).join(' ')}
+                />
+
+                {/* X axis labels */}
+                <text x="40" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">0</text>
+                <text x="175" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{Math.round(anni/2)} anni</text>
+                <text x="310" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{anni} anni</text>
+
+                {/* Y axis labels */}
+                <text x="35" y="15" fontSize="9" fill="#9ca3af" textAnchor="end">{formatCurrency(maxValue)}</text>
+                <text x="35" y={chartHeight + 10} fontSize="9" fill="#9ca3af" textAnchor="end">{formatCurrency(importo)}</text>
+              </svg>
+            </div>
+
+            {/* Legend */}
+            <div className="flex justify-center gap-6 mb-6 text-sm">
+              {Object.entries(PROFILI).map(([key, value]) => {
+                const finalValue = proiezioni[proiezioni.length - 1]?.[key as keyof typeof proiezioni[0]] || 0
+                return (
+                  <div key={key} className="text-center">
+                    <div className="flex items-center gap-2 justify-center mb-1">
+                      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: value.color }} />
+                      <span className="text-gray-600">{value.label}</span>
+                    </div>
+                    <div className="font-heading text-forest">{formatCurrency(finalValue as number)}</div>
+                  </div>
+                )
+              })}
+            </div>
+
+            {importo >= MIN_PATRIMONIO_PARTNER && (
+              <div className="bg-green-50 rounded-lg p-4 text-sm text-green-700">
+                <span className="font-semibold">Match perfetto!</span> Il tuo profilo è ideale per i nostri partner svizzeri specializzati in obbligazioni corporate ad alto rendimento.
+              </div>
+            )}
+          </div>
+        )
+
+      case 'contatto':
+        return (
+          <div className="text-center">
+            <h3 className="font-heading text-2xl md:text-3xl text-forest mb-2">
+              Lasciaci i tuoi dati
+            </h3>
+            <p className="text-gray-500 mb-8">Ti invieremo un report personalizzato gratuito</p>
+
+            <div className="max-w-sm mx-auto space-y-4">
+              <div>
+                <input
+                  type="text"
+                  value={nome}
+                  onChange={(e) => setNome(e.target.value)}
+                  placeholder="Nome e cognome"
+                  className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-forest focus:outline-none text-forest placeholder:text-gray-400"
+                  autoComplete="name"
+                />
+              </div>
+              <div>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Email"
+                  className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-forest focus:outline-none text-forest placeholder:text-gray-400"
+                  autoComplete="email"
+                />
+              </div>
+              <div>
+                <input
+                  type="tel"
+                  value={telefono}
+                  onChange={(e) => setTelefono(e.target.value)}
+                  placeholder="Telefono (opzionale)"
+                  className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-forest focus:outline-none text-forest placeholder:text-gray-400"
+                  autoComplete="tel"
+                />
+              </div>
+            </div>
+
+            <p className="text-xs text-gray-400 mt-4">
+              I tuoi dati sono al sicuro. Non li condivideremo mai con terzi.
+            </p>
           </div>
         )
     }
   }
 
+  // ============================================================================
+  // MAIN RENDER
+  // ============================================================================
+
   return (
-    <div className="min-h-[400px] flex flex-col">
+    <div className="min-h-[450px] flex flex-col">
       {/* Progress bar */}
-      <div className="h-1 bg-gray-200 rounded-full mb-8 overflow-hidden">
+      <div className="h-1.5 bg-gray-200 rounded-full mb-8 overflow-hidden">
         <div
           className="h-full bg-forest transition-all duration-500 ease-out rounded-full"
           style={{ width: `${progress}%` }}
         />
       </div>
 
-      {/* Step content with animation */}
-      <div className="flex-1 relative overflow-hidden">
-        <div
-          key={currentStep}
-          className={`animate-fade-in ${direction === 'forward' ? 'animate-slide-left' : 'animate-slide-right'}`}
-        >
-          {renderStep()}
-        </div>
+      {/* Step indicator */}
+      <div className="flex justify-center gap-2 mb-8">
+        {['importo', 'orizzonte', 'obiettivo', 'proiezione', 'contatto'].map((step, i) => (
+          <div
+            key={step}
+            className={`w-2 h-2 rounded-full transition-colors ${
+              i <= stepIndex ? 'bg-forest' : 'bg-gray-200'
+            }`}
+          />
+        ))}
+      </div>
+
+      {/* Step content */}
+      <div className="flex-1">
+        {renderStep()}
       </div>
 
       {/* Navigation */}
       <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-100">
         <button
           type="button"
-          onClick={goToPrevStep}
-          disabled={currentStep === 0}
+          onClick={goBack}
+          disabled={currentStep === 'importo'}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
-            currentStep === 0
+            currentStep === 'importo'
               ? 'text-gray-300 cursor-not-allowed'
               : 'text-gray-600 hover:text-forest hover:bg-gray-50'
           }`}
@@ -461,30 +594,40 @@ export default function ContactForm() {
         </button>
 
         <div className="text-sm text-gray-400">
-          {currentStep + 1} / {steps.length}
+          {stepIndex + 1} / {TOTAL_STEPS}
         </div>
 
-        <button
-          type="button"
-          onClick={goToNextStep}
-          disabled={!validateCurrentStep() && steps[currentStep] !== 'messaggio'}
-          className={`flex items-center gap-2 px-6 py-2 rounded-lg font-medium transition-all ${
-            validateCurrentStep() || steps[currentStep] === 'messaggio'
-              ? 'bg-forest text-white hover:bg-green-600'
-              : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-          }`}
-        >
-          {currentStep === steps.length - 1 ? 'Invia' : 'Continua'}
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
+        {currentStep === 'contatto' ? (
+          <button
+            type="button"
+            onClick={handleSubmit}
+            disabled={!nome || !email}
+            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+              nome && email
+                ? 'bg-forest text-white hover:bg-green-600'
+                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+            }`}
+          >
+            Invia richiesta
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        ) : currentStep !== 'orizzonte' && currentStep !== 'obiettivo' ? (
+          <button
+            type="button"
+            onClick={goNext}
+            className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold bg-forest text-white hover:bg-green-600 transition-all"
+          >
+            Continua
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        ) : (
+          <div className="w-24" /> // Spacer for alignment
+        )}
       </div>
-
-      {/* Keyboard hint */}
-      <p className="text-center text-xs text-gray-400 mt-4">
-        Premi <kbd className="px-2 py-0.5 bg-gray-100 rounded text-gray-500">Enter ↵</kbd> per continuare
-      </p>
     </div>
   )
 }

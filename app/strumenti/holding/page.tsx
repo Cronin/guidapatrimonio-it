@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 export default function SimulatoreHolding() {
   // Input values
@@ -12,6 +12,19 @@ export default function SimulatoreHolding() {
   const [redditoImmobiliare, setRedditoImmobiliare] = useState(0)
   const [costiGestioneHolding, setCostiGestioneHolding] = useState(4000)
   const [anniProiezione, setAnniProiezione] = useState(10)
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  // Check for high value input
+  useEffect(() => {
+    if (valorePortafoglio >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(valorePortafoglio)
+      setShowPopup(true)
+    }
+  }, [valorePortafoglio, THRESHOLD, shouldShowPopup])
 
   const risultati = useMemo(() => {
     // === TASSAZIONE PERSONA FISICA ===
@@ -147,6 +160,11 @@ export default function SimulatoreHolding() {
 
   return (
     <main>
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
       <ToolPageSchema slug="holding" />
       <Navbar />
 
