@@ -257,6 +257,8 @@ export default function ContactForm() {
   // ============================================================================
   const anni = orizzonte === '1-5' ? 5 : orizzonte === '5-10' ? 10 : orizzonte === '10-20' ? 20 : 30
   const maxValue = proiezioni[proiezioni.length - 1]?.aggressivo || importo * 2
+  // Y minimum = minimum della strategia conservativa (dinamico, non fisso)
+  const minValue = Math.min(...proiezioni.map(p => p.conservativo))
   const chartHeight = 140
 
   // Calculate percentage gains
@@ -400,7 +402,7 @@ export default function ContactForm() {
                 className="transition-all duration-500"
                 points={proiezioni.map((p, i) => {
                   const x = 40 + (i / anni) * 270
-                  const y = chartHeight - ((p.aggressivo - importo) / (maxValue - importo)) * chartHeight + 10
+                  const y = chartHeight - ((p.aggressivo - minValue) / (maxValue - minValue)) * chartHeight + 10
                   return `${x},${Math.max(10, y)}`
                 }).join(' ')}
               />
@@ -414,7 +416,7 @@ export default function ContactForm() {
                 className="transition-all duration-500"
                 points={proiezioni.map((p, i) => {
                   const x = 40 + (i / anni) * 270
-                  const y = chartHeight - ((p.moderato - importo) / (maxValue - importo)) * chartHeight + 10
+                  const y = chartHeight - ((p.moderato - minValue) / (maxValue - minValue)) * chartHeight + 10
                   return `${x},${Math.max(10, y)}`
                 }).join(' ')}
               />
@@ -428,7 +430,7 @@ export default function ContactForm() {
                 className="transition-all duration-500"
                 points={proiezioni.map((p, i) => {
                   const x = 40 + (i / anni) * 270
-                  const y = chartHeight - ((p.conservativo - importo) / (maxValue - importo)) * chartHeight + 10
+                  const y = chartHeight - ((p.conservativo - minValue) / (maxValue - minValue)) * chartHeight + 10
                   return `${x},${Math.max(10, y)}`
                 }).join(' ')}
               />
@@ -438,9 +440,9 @@ export default function ContactForm() {
               <text x="175" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{Math.round(anni/2)} anni</text>
               <text x="310" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{anni} anni</text>
 
-              {/* Y axis labels - LEFT SIDE with proper spacing */}
+              {/* Y axis labels - LEFT SIDE, dynamic values */}
               <text x="5" y="15" fontSize="10" fill="#6b7280" textAnchor="start" fontWeight="500">{formatCurrency(maxValue)}</text>
-              <text x="5" y={chartHeight + 10} fontSize="10" fill="#6b7280" textAnchor="start" fontWeight="500">{formatCurrency(importo)}</text>
+              <text x="5" y={chartHeight + 10} fontSize="10" fill="#6b7280" textAnchor="start" fontWeight="500">{formatCurrency(minValue)}</text>
             </svg>
           </div>
 
