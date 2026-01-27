@@ -261,6 +261,9 @@ export default function ContactForm() {
   const minValue = Math.min(...proiezioni.map(p => p.conservativo))
   const chartHeight = 140
 
+  // Hover state for interactive tooltip
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+
   // Calculate percentage gains
   const finalConservativo = proiezioni[proiezioni.length - 1]?.conservativo || importo
   const finalModerato = proiezioni[proiezioni.length - 1]?.moderato || importo
@@ -378,8 +381,22 @@ export default function ContactForm() {
           Proiezione in {anni} anni
           {!orizzonte && <span className="text-sm font-normal text-gray-400 ml-2">(seleziona orizzonte per personalizzare)</span>}
         </h3>
-          <div className="bg-gray-50 rounded-xl p-4">
-            <svg viewBox={`0 0 320 ${chartHeight + 40}`} className="w-full" preserveAspectRatio="xMidYMid meet">
+          <div className="bg-gray-50 rounded-xl p-4 relative">
+            <svg
+              viewBox={`0 0 320 ${chartHeight + 40}`}
+              className="w-full cursor-crosshair"
+              preserveAspectRatio="xMidYMid meet"
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect()
+                const x = (e.clientX - rect.left) / rect.width * 320
+                const chartX = x - 40
+                if (chartX >= 0 && chartX <= 270) {
+                  const index = Math.round((chartX / 270) * anni)
+                  setHoveredIndex(Math.min(index, proiezioni.length - 1))
+                }
+              }}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
               {/* Grid lines */}
               {[0, 0.25, 0.5, 0.75, 1].map((pct) => (
                 <line
@@ -393,7 +410,7 @@ export default function ContactForm() {
                 />
               ))}
 
-              {/* Aggressivo line - highlighted if obiettivo=crescita */}
+              {/* Aggressivo line */}
               <polyline
                 fill="none"
                 stroke={PROFILI.aggressivo.color}
@@ -407,7 +424,7 @@ export default function ContactForm() {
                 }).join(' ')}
               />
 
-              {/* Moderato line - highlighted if obiettivo=rendita */}
+              {/* Moderato line */}
               <polyline
                 fill="none"
                 stroke={PROFILI.moderato.color}
@@ -421,7 +438,7 @@ export default function ContactForm() {
                 }).join(' ')}
               />
 
-              {/* Conservativo line - highlighted if obiettivo=protezione */}
+              {/* Conservativo line */}
               <polyline
                 fill="none"
                 stroke={PROFILI.conservativo.color}
@@ -435,15 +452,42 @@ export default function ContactForm() {
                 }).join(' ')}
               />
 
+              {/* Hover vertical line and dots */}
+              {hoveredIndex !== null && proiezioni[hoveredIndex] && (() => {
+                const p = proiezioni[hoveredIndex]
+                const x = 40 + (hoveredIndex / anni) * 270
+                const yAgg = chartHeight - ((p.aggressivo - minValue) / (maxValue - minValue)) * chartHeight + 10
+                const yMod = chartHeight - ((p.moderato - minValue) / (maxValue - minValue)) * chartHeight + 10
+                const yCon = chartHeight - ((p.conservativo - minValue) / (maxValue - minValue)) * chartHeight + 10
+                return (
+                  <>
+                    <line x1={x} y1="10" x2={x} y2={chartHeight + 10} stroke="#9ca3af" strokeWidth="1" strokeDasharray="3,3" />
+                    <circle cx={x} cy={yAgg} r="5" fill={PROFILI.aggressivo.color} stroke="white" strokeWidth="2" />
+                    <circle cx={x} cy={yMod} r="5" fill={PROFILI.moderato.color} stroke="white" strokeWidth="2" />
+                    <circle cx={x} cy={yCon} r="5" fill={PROFILI.conservativo.color} stroke="white" strokeWidth="2" />
+                  </>
+                )
+              })()}
+
               {/* X axis labels */}
               <text x="40" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">0</text>
               <text x="175" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{Math.round(anni/2)} anni</text>
               <text x="310" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{anni} anni</text>
 
-              {/* Y axis labels - LEFT SIDE, dynamic values */}
+              {/* Y axis labels */}
               <text x="5" y="15" fontSize="10" fill="#6b7280" textAnchor="start" fontWeight="500">{formatCurrency(maxValue)}</text>
               <text x="5" y={chartHeight + 10} fontSize="10" fill="#6b7280" textAnchor="start" fontWeight="500">{formatCurrency(minValue)}</text>
             </svg>
+
+            {/* Hover tooltip */}
+            {hoveredIndex !== null && proiezioni[hoveredIndex] && (
+              <div className="absolute top-2 right-2 bg-white rounded-lg shadow-lg p-2 text-xs border border-gray-200 z-10">
+                <div className="font-semibold text-gray-700 mb-1">Anno {hoveredIndex}</div>
+                <div className="flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{backgroundColor: PROFILI.aggressivo.color}}></span> {formatCurrency(proiezioni[hoveredIndex].aggressivo)}</div>
+                <div className="flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{backgroundColor: PROFILI.moderato.color}}></span> {formatCurrency(proiezioni[hoveredIndex].moderato)}</div>
+                <div className="flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{backgroundColor: PROFILI.conservativo.color}}></span> {formatCurrency(proiezioni[hoveredIndex].conservativo)}</div>
+              </div>
+            )}
           </div>
 
           {/* Legend with values AND percentages - highlights based on obiettivo */}
