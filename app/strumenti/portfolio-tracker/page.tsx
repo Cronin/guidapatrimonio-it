@@ -39,6 +39,36 @@ const COLORI_TORTA = [
   '#b0b7c1', // gray-300
 ]
 
+// Genera colore deterministic dal ticker per badge
+const getTickerColor = (ticker: string): string => {
+  const colors = ['#1B4D3E', '#2D6A4F', '#40916C', '#52B788', '#368859', '#0ea5e9', '#8b5cf6', '#f59e0b', '#ef4444', '#06b6d4']
+  let hash = 0
+  for (let i = 0; i < ticker.length; i++) {
+    hash = ticker.charCodeAt(i) + ((hash << 5) - hash)
+  }
+  return colors[Math.abs(hash) % colors.length]
+}
+
+// Componente TickerBadge
+const TickerBadge = ({ ticker, size = 'md' }: { ticker: string; size?: 'sm' | 'md' | 'lg' }) => {
+  if (!ticker) return null
+  const color = getTickerColor(ticker)
+  const sizeClasses = {
+    sm: 'w-6 h-6 text-[9px]',
+    md: 'w-8 h-8 text-[10px]',
+    lg: 'w-10 h-10 text-xs'
+  }
+  return (
+    <div
+      className={`${sizeClasses[size]} rounded-lg flex items-center justify-center font-bold text-white flex-shrink-0 shadow-sm`}
+      style={{ backgroundColor: color }}
+      title={ticker}
+    >
+      {ticker.slice(0, 3)}
+    </div>
+  )
+}
+
 // Colori per categorie
 const COLORI_CATEGORIE: Record<string, string> = {
   azioni: '#1B4D3E',
@@ -899,6 +929,60 @@ export default function PortfolioTracker() {
                   </svg>
                   Dati salvati solo nel tuo browser
                 </p>
+
+                {/* Preview posizione in tempo reale */}
+                {(nome || ticker) && (
+                  <div className="mt-4 pt-4 border-t border-gray-100">
+                    <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-3">Anteprima Posizione</p>
+                    <div className="bg-gray-50 rounded-lg p-3">
+                      <div className="flex items-center gap-3">
+                        {ticker ? (
+                          <TickerBadge ticker={ticker} size="lg" />
+                        ) : (
+                          <div className="w-10 h-10 rounded-lg bg-gray-200 flex items-center justify-center">
+                            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                          </div>
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <p className="font-medium text-forest truncate">{nome || 'Nome asset'}</p>
+                          <div className="flex items-center gap-2 text-xs text-gray-500">
+                            {ticker && <span className="font-mono">{ticker}</span>}
+                            <span className="px-1.5 py-0.5 bg-gray-200 rounded capitalize text-gray-600">{categoria}</span>
+                          </div>
+                        </div>
+                      </div>
+                      {quantita && prezzoAttuale && (
+                        <div className="mt-3 pt-3 border-t border-gray-200 grid grid-cols-2 gap-2 text-sm">
+                          <div>
+                            <p className="text-gray-400 text-xs">Valore</p>
+                            <p className="font-semibold text-forest">
+                              {formatCurrency(parseFloat(quantita || '0') * parseFloat(prezzoAttuale || '0'))}
+                            </p>
+                          </div>
+                          {prezzoCarico && parseFloat(prezzoCarico) > 0 && (
+                            <div className="text-right">
+                              <p className="text-gray-400 text-xs">P&L</p>
+                              {(() => {
+                                const q = parseFloat(quantita || '0')
+                                const pa = parseFloat(prezzoAttuale || '0')
+                                const pc = parseFloat(prezzoCarico || '0')
+                                const pl = (pa - pc) * q
+                                const plPercent = pc > 0 ? ((pa - pc) / pc) * 100 : 0
+                                return (
+                                  <p className={`font-semibold ${pl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                    {pl >= 0 ? '+' : ''}{formatCurrency(pl)} ({pl >= 0 ? '+' : ''}{plPercent.toFixed(1)}%)
+                                  </p>
+                                )
+                              })()}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -925,6 +1009,80 @@ export default function PortfolioTracker() {
                 </div>
               ) : (
                 <>
+                  {/* Historical Performance Chart - Full Width */}
+                  {historicalData.length >= 2 && (
+                    <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+                      <div className="flex items-center justify-between mb-4">
+                        <div>
+                          <h3 className="font-heading text-base text-forest">Andamento Portafoglio</h3>
+                          <p className="text-xs text-gray-500 mt-0.5">Storico valore totale</p>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          {performanceTemporali.y1 !== 0 && (
+                            <div className={`text-right ${performanceTemporali.y1 >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                              <p className="text-xs text-gray-500">12 mesi</p>
+                              <p className="font-semibold">{formatPercent(performanceTemporali.y1)}</p>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="h-[200px]">
+                        <svg viewBox="0 0 800 200" className="w-full h-full" preserveAspectRatio="none">
+                          <defs>
+                            <linearGradient id="chartAreaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                              <stop offset="0%" stopColor={stats.plTotale >= 0 ? '#2D6A4F' : '#dc2626'} stopOpacity="0.2" />
+                              <stop offset="100%" stopColor={stats.plTotale >= 0 ? '#2D6A4F' : '#dc2626'} stopOpacity="0" />
+                            </linearGradient>
+                          </defs>
+                          {/* Grid lines */}
+                          {[0, 1, 2, 3, 4].map(i => (
+                            <line key={i} x1="40" y1={20 + i * 40} x2="780" y2={20 + i * 40} stroke="#e5e7eb" strokeDasharray="4" />
+                          ))}
+                          {/* Chart */}
+                          {(() => {
+                            const values = historicalData.map(d => d.value)
+                            const minVal = Math.min(...values) * 0.95
+                            const maxVal = Math.max(...values) * 1.05
+                            const range = maxVal - minVal || 1
+                            const points = historicalData.map((d, i) => ({
+                              x: 40 + (i / (historicalData.length - 1)) * 740,
+                              y: 180 - ((d.value - minVal) / range) * 160,
+                            }))
+                            const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ')
+                            const areaD = `${pathD} L ${points[points.length - 1].x} 180 L ${points[0].x} 180 Z`
+                            return (
+                              <>
+                                <path d={areaD} fill="url(#chartAreaGradient)" />
+                                <path d={pathD} fill="none" stroke={stats.plTotale >= 0 ? '#2D6A4F' : '#dc2626'} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                                <circle cx={points[points.length - 1].x} cy={points[points.length - 1].y} r="6" fill={stats.plTotale >= 0 ? '#2D6A4F' : '#dc2626'} />
+                                <circle cx={points[points.length - 1].x} cy={points[points.length - 1].y} r="3" fill="white" />
+                              </>
+                            )
+                          })()}
+                          {/* Y axis labels */}
+                          {(() => {
+                            const values = historicalData.map(d => d.value)
+                            const minVal = Math.min(...values) * 0.95
+                            const maxVal = Math.max(...values) * 1.05
+                            return [0, 1, 2, 3, 4].map(i => {
+                              const val = maxVal - (i / 4) * (maxVal - minVal)
+                              return (
+                                <text key={i} x="35" y={24 + i * 40} textAnchor="end" className="text-[10px] fill-gray-400">
+                                  {val >= 1000 ? `${(val / 1000).toFixed(0)}k` : val.toFixed(0)}
+                                </text>
+                              )
+                            })
+                          })()}
+                        </svg>
+                      </div>
+                      <div className="flex justify-between text-xs text-gray-400 mt-2 px-10">
+                        <span>{historicalData[0]?.date?.slice(5) || ''}</span>
+                        <span>{historicalData[Math.floor(historicalData.length / 2)]?.date?.slice(5) || ''}</span>
+                        <span>{historicalData[historicalData.length - 1]?.date?.slice(5) || ''}</span>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Charts Row */}
                   <div className="grid md:grid-cols-2 gap-4">
                     {/* Pie Chart Asset Allocation */}
@@ -1142,16 +1300,22 @@ export default function PortfolioTracker() {
                           {/* Mobile View */}
                           <div className="lg:hidden space-y-3">
                             <div className="flex items-start justify-between">
-                              <div className="flex items-start gap-2">
-                                <div
-                                  className="w-3 h-3 rounded-sm flex-shrink-0 mt-1"
-                                  style={{ backgroundColor: COLORI_TORTA[i % COLORI_TORTA.length] }}
-                                />
-                                <div>
-                                  <p className="font-medium text-forest">{p.nome}</p>
+                              <div className="flex items-start gap-3">
+                                {p.ticker ? (
+                                  <TickerBadge ticker={p.ticker} size="md" />
+                                ) : (
+                                  <div
+                                    className="w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center text-white font-bold text-xs"
+                                    style={{ backgroundColor: COLORI_TORTA[i % COLORI_TORTA.length] }}
+                                  >
+                                    {p.nome.slice(0, 2).toUpperCase()}
+                                  </div>
+                                )}
+                                <div className="min-w-0">
+                                  <p className="font-medium text-forest truncate">{p.nome}</p>
                                   <div className="flex items-center gap-2 mt-0.5">
                                     {p.ticker && (
-                                      <span className="text-xs text-gray-400">{p.ticker}</span>
+                                      <span className="text-xs text-gray-400 font-mono">{p.ticker}</span>
                                     )}
                                     <span className="text-xs px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded capitalize">
                                       {p.categoria}
@@ -1224,15 +1388,21 @@ export default function PortfolioTracker() {
                           {/* Desktop View */}
                           <div className="hidden lg:grid grid-cols-12 gap-3 items-center">
                             <div className="col-span-3">
-                              <div className="flex items-center gap-2.5">
-                                <div
-                                  className="w-2.5 h-2.5 rounded-sm flex-shrink-0"
-                                  style={{ backgroundColor: COLORI_TORTA[i % COLORI_TORTA.length] }}
-                                />
+                              <div className="flex items-center gap-3">
+                                {p.ticker ? (
+                                  <TickerBadge ticker={p.ticker} size="sm" />
+                                ) : (
+                                  <div
+                                    className="w-6 h-6 rounded-md flex-shrink-0 flex items-center justify-center text-white font-bold text-[8px]"
+                                    style={{ backgroundColor: COLORI_TORTA[i % COLORI_TORTA.length] }}
+                                  >
+                                    {p.nome.slice(0, 2).toUpperCase()}
+                                  </div>
+                                )}
                                 <div className="min-w-0">
                                   <p className="font-medium text-forest truncate">{p.nome}</p>
                                   {p.ticker && (
-                                    <p className="text-xs text-gray-400">{p.ticker}</p>
+                                    <p className="text-xs text-gray-400 font-mono">{p.ticker}</p>
                                   )}
                                 </div>
                               </div>

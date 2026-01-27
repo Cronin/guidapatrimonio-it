@@ -1,0 +1,104 @@
+{
+  "generated_at": "2026-01-26T11:27:06.885Z",
+  "total": 16,
+  "successful": 0,
+  "failed": 16,
+  "images": [
+    {
+      "slug": "proteggere-patrimonio-5-milioni",
+      "path": "/blog/proteggere-patrimonio-5-milioni.webp",
+      "success": false,
+      "error": "Failed to download: 404 Not Found"
+    },
+    {
+      "slug": "family-office-costi-conviene",
+      "path": "/blog/family-office-costi-conviene.webp",
+      "success": false,
+      "error": "Failed to download: 404 Not Found"
+    },
+    {
+      "slug": "passaggio-generazionale-azienda-guida",
+      "path": "/blog/passaggio-generazionale-azienda-guida.webp",
+      "success": false,
+      "error": "Failed to download: 404 Not Found"
+    },
+    {
+      "slug": "flat-tax-neo-residenti-conviene",
+      "path": "/blog/flat-tax-neo-residenti-conviene.webp",
+      "success": false,
+      "error": "Failed to download: 404 Not Found"
+    },
+    {
+      "slug": "investire-1-milione-strategie-2025",
+      "path": "/blog/investire-1-milione-strategie-2025.webp",
+      "success": false,
+      "error": "Failed to download: 404 Not Found"
+    },
+    {
+      "slug": "yacht-costi-reali-proprieta",
+      "path": "/blog/yacht-costi-reali-proprieta.webp",
+      "success": false,
+      "error": "Failed to download: 404 Not Found"
+    },
+    {
+      "slug": "private-jet-fractional-ownership",
+      "path": "/blog/private-jet-fractional-ownership.webp",
+      "success": false,
+      "error": "Failed to download: 404 Not Found"
+    },
+    {
+      "slug": "arte-come-investimento",
+      "path": "/blog/arte-come-investimento.webp",
+      "success": false,
+      "error": "Failed to download: 404 Not Found"
+    },
+    {
+      "slug": "residenza-fiscale-monaco-svizzera",
+      "path": "/blog/residenza-fiscale-monaco-svizzera.webp",
+      "success": false,
+      "error": "Failed to download: 404 Not Found"
+    },
+    {
+      "slug": "family-office-quando-conviene",
+      "path": "/blog/family-office-quando-conviene.webp",
+      "success": false,
+      "error": "Failed to download: 404 Not Found"
+    },
+    {
+      "slug": "private-equity-accesso-investitori-privati",
+      "path": "/blog/private-equity-accesso-investitori-privati.webp",
+      "success": false,
+      "error": "Failed to download: 429 Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1)"
+    },
+    {
+      "slug": "protezione-patrimonio-creditori",
+      "path": "/blog/protezione-patrimonio-creditori.webp",
+      "success": false,
+      "error": "Failed to download: 429 Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1)"
+    },
+    {
+      "slug": "gestione-patrimonio-immobiliare",
+      "path": "/blog/gestione-patrimonio-immobiliare.webp",
+      "success": false,
+      "error": "Failed to download: 429 Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1)"
+    },
+    {
+      "slug": "investire-500000-euro",
+      "path": "/blog/investire-500000-euro.webp",
+      "success": false,
+      "error": "Failed to download: 429 Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1)"
+    },
+    {
+      "slug": "conto-svizzera-conviene",
+      "path": "/blog/conto-svizzera-conviene.webp",
+      "success": false,
+      "error": "Failed to download: 429 Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1)"
+    },
+    {
+      "slug": "polizza-vita-pianificazione-patrimoniale",
+      "path": "/blog/polizza-vita-pianificazione-patrimoniale.webp",
+      "success": false,
+      "error": "Failed to download: 429 Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1)"
+    }
+  ]
+}

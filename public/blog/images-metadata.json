@@ -1,0 +1,122 @@
+{
+  "generated_at": "2026-01-26T11:30:42.117Z",
+  "total": 16,
+  "successful": 15,
+  "failed": 1,
+  "source": "Unsplash (free for commercial use)",
+  "license": "Unsplash License",
+  "images": [
+    {
+      "slug": "proteggere-patrimonio-5-milioni",
+      "topic": "Asset protection (Swiss bank vault)",
+      "description": "Bank vault, security, asset protection",
+      "path": "/blog/proteggere-patrimonio-5-milioni.webp",
+      "success": true
+    },
+    {
+      "slug": "family-office-costi-conviene",
+      "topic": "Family office costs (Geneva financial)",
+      "description": "Lake Geneva cityscape, Switzerland",
+      "path": "/blog/family-office-costi-conviene.webp",
+      "success": true
+    },
+    {
+      "slug": "passaggio-generazionale-azienda-guida",
+      "topic": "Business succession (corporate)",
+      "description": "Modern corporate office building",
+      "path": "/blog/passaggio-generazionale-azienda-guida.webp",
+      "success": true
+    },
+    {
+      "slug": "flat-tax-neo-residenti-conviene",
+      "topic": "Italian flat tax (Rome)",
+      "description": "Rome architecture, Italian government",
+      "path": "/blog/flat-tax-neo-residenti-conviene.webp",
+      "success": true
+    },
+    {
+      "slug": "investire-1-milione-strategie-2025",
+      "topic": "Investing 1M (stock market)",
+      "description": "Stock market trading, investment charts",
+      "path": "/blog/investire-1-milione-strategie-2025.webp",
+      "success": true
+    },
+    {
+      "slug": "yacht-costi-reali-proprieta",
+      "topic": "Yacht costs (luxury yacht Monaco)",
+      "description": "Luxury yacht in Mediterranean harbor",
+      "path": "/blog/yacht-costi-reali-proprieta.webp",
+      "success": true
+    },
+    {
+      "slug": "private-jet-fractional-ownership",
+      "topic": "Private jets (business jet)",
+      "description": "Private jet on tarmac, luxury aviation",
+      "path": "/blog/private-jet-fractional-ownership.webp",
+      "success": true
+    },
+    {
+      "slug": "arte-come-investimento",
+      "topic": "Art as investment (auction house)",
+      "description": "Art gallery, fine art investment",
+      "path": "/blog/arte-come-investimento.webp",
+      "success": true
+    },
+    {
+      "slug": "residenza-fiscale-monaco-svizzera",
+      "topic": "Monaco/Switzerland residence",
+      "description": "Monaco skyline, Monte Carlo luxury",
+      "path": "/blog/residenza-fiscale-monaco-svizzera.webp",
+      "success": true
+    },
+    {
+      "slug": "family-office-quando-conviene",
+      "topic": "Family office when (Zurich banking)",
+      "description": "Swiss banking district, Zurich cityscape",
+      "path": "/blog/family-office-quando-conviene.webp",
+      "success": false
+    },
+    {
+      "slug": "private-equity-accesso-investitori-privati",
+      "topic": "Private equity (London finance)",
+      "description": "London financial district, modern architecture",
+      "path": "/blog/private-equity-accesso-investitori-privati.webp",
+      "success": true
+    },
+    {
+      "slug": "protezione-patrimonio-creditori",
+      "topic": "Asset protection from creditors",
+      "description": "Legal documents, asset protection strategies",
+      "path": "/blog/protezione-patrimonio-creditori.webp",
+      "success": true
+    },
+    {
+      "slug": "gestione-patrimonio-immobiliare",
+      "topic": "Real estate management (Milan)",
+      "description": "Milan Porta Nuova skyline, luxury real estate",
+      "path": "/blog/gestione-patrimonio-immobiliare.webp",
+      "success": true
+    },
+    {
+      "slug": "investire-500000-euro",
+      "topic": "Investing 500K (ECB Frankfurt)",
+      "description": "Frankfurt financial district, European Central Bank",
+      "path": "/blog/investire-500000-euro.webp",
+      "success": true
+    },
+    {
+      "slug": "conto-svizzera-conviene",
+      "topic": "Swiss bank account (Lugano)",
+      "description": "Lugano lakefront, Swiss banking",
+      "path": "/blog/conto-svizzera-conviene.webp",
+      "success": true
+    },
+    {
+      "slug": "polizza-vita-pianificazione-patrimoniale",
+      "topic": "Life insurance planning",
+      "description": "Financial planning documents, life insurance",
+      "path": "/blog/polizza-vita-pianificazione-patrimoniale.webp",
+      "success": true
+    }
+  ]
+}

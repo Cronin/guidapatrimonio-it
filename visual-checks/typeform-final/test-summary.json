@@ -1,0 +1,135 @@
+{
+  "testDate": "2026-01-26",
+  "testUrl": "https://guidapatrimonio.it/#contatti",
+  "formType": "Typeform-style multi-step contact form",
+  "totalSteps": 6,
+  "screenshotsCaptured": 6,
+  "status": "PARTIAL_SUCCESS",
+  "viewport": {
+    "width": 1366,
+    "height": 768,
+    "device": "Desktop"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "question": "Come ti chiami?",
+      "fieldType": "text",
+      "progress": "1/6",
+      "screenshot": "01-step-nome.png",
+      "status": "✅ Working",
+      "notes": "Clean layout, proper progress tracking, keyboard navigation works"
+    },
+    {
+      "step": 2,
+      "question": "Qual è il tuo cognome?",
+      "fieldType": "text",
+      "progress": "2/6",
+      "screenshot": "02-step-cognome.png",
+      "status": "✅ Working",
+      "notes": "Smooth transition from step 1, back button now active"
+    },
+    {
+      "step": 3,
+      "question": "Qual è la tua email?",
+      "fieldType": "email",
+      "progress": "3/6",
+      "screenshot": "03-step-email.png",
+      "status": "✅ Working",
+      "notes": "Email validation placeholder hint shown"
+    },
+    {
+      "step": 4,
+      "question": "Il tuo numero di telefono?",
+      "fieldType": "tel",
+      "progress": "4/6",
+      "screenshot": "04-step-telefono.png",
+      "status": "✅ Working",
+      "notes": "Italian phone format placeholder (+39 333 1234567)"
+    },
+    {
+      "step": 5,
+      "question": "Quanto vorresti investire?",
+      "fieldType": "multiple-choice",
+      "progress": "5/6",
+      "screenshot": "05-step-patrimonio.png",
+      "status": "✅ Working",
+      "options": [
+        "A: Meno di €50.000",
+        "B: €50.000 - €100.000",
+        "C: €100.000 - €150.000",
+        "D: €150.000 - €250.000",
+        "E: €250.000 - €500.000",
+        "F: €500.000 - €1.000.000"
+      ],
+      "notes": "Clean button design with badge letters, good spacing"
+    },
+    {
+      "step": 6,
+      "question": "After patrimonio selection",
+      "fieldType": "selection-feedback",
+      "progress": "5/6",
+      "screenshot": "06-step-messaggio.png",
+      "status": "⚠️ Partial",
+      "notes": "Shows option E selected with green border. Transition to message step not fully captured."
+    }
+  ],
+  "missingScreenshots": [
+    {
+      "step": "6b",
+      "description": "Message field (optional textarea)",
+      "reason": "Network timeout during test"
+    },
+    {
+      "step": "7",
+      "description": "Loading state during submission",
+      "reason": "Network timeout during test"
+    },
+    {
+      "step": "8",
+      "description": "Final confirmation message",
+      "reason": "Network timeout during test"
+    },
+    {
+      "step": "Mobile",
+      "description": "Mobile view (390x844)",
+      "reason": "Network timeout during test"
+    }
+  ],
+  "workingFeatures": [
+    "Progressive disclosure (one question at a time)",
+    "Progress indicator (X / 6)",
+    "Keyboard navigation (Enter to continue)",
+    "Back button for navigation",
+    "Continua button alternative",
+    "Visual feedback for selected options",
+    "Consistent green brand colors",
+    "Proper field placeholders"
+  ],
+  "areasToVerify": [
+    "Form submission flow (loading state)",
+    "Final confirmation message",
+    "Email delivery to info@guidapatrimonio.it",
+    "Mobile responsive design",
+    "Qualification logic for >= €150K"
+  ],
+  "technicalObservations": {
+    "transitions": "Smooth and responsive",
+    "progressTracking": "Clear visual and numerical indicators",
+    "keyboardSupport": "Full Enter key navigation",
+    "colorScheme": "Correct green palette throughout",
+    "qualification": {
+      "threshold": "€150.000",
+      "testSelection": "E (€250.000 - €500.000)",
+      "expectedBehavior": "Should qualify for Geneva partner contact"
+    }
+  },
+  "recommendations": [
+    "Manually verify steps 6-8 completion",
+    "Test email delivery to info@guidapatrimonio.it",
+    "Verify mobile responsiveness",
+    "Consider adding subtle animations between steps",
+    "Add field validation error messages"
+  ],
+  "conclusion": "Form steps 1-5 work flawlessly with excellent UX. Steps 6-8 need manual verification due to network timeout during automated test."
+}
