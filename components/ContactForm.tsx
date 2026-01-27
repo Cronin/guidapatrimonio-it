@@ -14,7 +14,8 @@ const MIN_PATRIMONIO_PARTNER = 150000
 const orizzonteOptions = [
   { value: '1-5', label: '1-5 anni', description: 'Breve termine' },
   { value: '5-10', label: '5-10 anni', description: 'Medio termine' },
-  { value: '10+', label: '10+ anni', description: 'Lungo termine' },
+  { value: '10-20', label: '10-20 anni', description: 'Lungo termine' },
+  { value: '25-35', label: '25-35 anni', description: 'Molto lungo' },
 ]
 
 const obiettivoOptions = [
@@ -42,7 +43,7 @@ export default function ContactForm() {
 
   // Calcolo proiezioni
   const proiezioni = useMemo(() => {
-    const anni = orizzonte === '1-5' ? 5 : orizzonte === '5-10' ? 10 : 20
+    const anni = orizzonte === '1-5' ? 5 : orizzonte === '5-10' ? 10 : orizzonte === '10-20' ? 20 : 30
     const result: { anno: number; conservativo: number; moderato: number; aggressivo: number }[] = []
 
     for (let i = 0; i <= anni; i++) {
@@ -256,7 +257,7 @@ export default function ContactForm() {
   // ============================================================================
   // CHART COMPONENT
   // ============================================================================
-  const anni = orizzonte === '1-5' ? 5 : orizzonte === '5-10' ? 10 : 20
+  const anni = orizzonte === '1-5' ? 5 : orizzonte === '5-10' ? 10 : orizzonte === '10-20' ? 20 : 30
   const maxValue = proiezioni[proiezioni.length - 1]?.aggressivo || importo * 2
   const chartHeight = 140
 
@@ -309,12 +310,12 @@ export default function ContactForm() {
         <h3 className="font-heading text-xl text-forest mb-4">
           Orizzonte temporale
         </h3>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {orizzonteOptions.map((option) => (
             <button
               key={option.value}
               onClick={() => setOrizzonte(option.value)}
-              className={`text-center px-3 py-3 rounded-xl border-2 transition-all ${
+              className={`text-center px-2 py-3 rounded-xl border-2 transition-all ${
                 orizzonte === option.value
                   ? 'border-forest bg-green-50'
                   : 'border-gray-200 hover:border-gray-300'
