@@ -440,9 +440,9 @@ export default function ContactForm() {
               <text x="175" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{Math.round(anni/2)} anni</text>
               <text x="310" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{anni} anni</text>
 
-              {/* Y axis labels - MOVED TO RIGHT SIDE to avoid clipping and align with line endings */}
-              <text x="315" y="15" fontSize="10" fill="#6b7280" textAnchor="end" fontWeight="500">{formatCurrency(maxValue)}</text>
-              <text x="315" y={chartHeight + 10} fontSize="10" fill="#6b7280" textAnchor="end" fontWeight="500">{formatCurrency(importo)}</text>
+              {/* Y axis labels - LEFT SIDE with proper spacing */}
+              <text x="5" y="15" fontSize="10" fill="#6b7280" textAnchor="start" fontWeight="500">{formatCurrency(maxValue)}</text>
+              <text x="5" y={chartHeight + 10} fontSize="10" fill="#6b7280" textAnchor="start" fontWeight="500">{formatCurrency(importo)}</text>
             </svg>
           </div>
 
