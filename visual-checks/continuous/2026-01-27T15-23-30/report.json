@@ -1,0 +1,22 @@
+{
+  "timestamp": "2026-01-27T15:23:30.813Z",
+  "status": "success",
+  "screenshots": {
+    "homepage_desktop": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/continuous/2026-01-27T15-23-30/homepage-desktop.png",
+    "homepage_mobile": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/continuous/2026-01-27T15-23-30/homepage-mobile.png",
+    "tracker_desktop": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/continuous/2026-01-27T15-23-30/tracker-desktop.png",
+    "tracker_mobile": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/continuous/2026-01-27T15-23-30/tracker-mobile.png",
+    "contact_desktop": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/continuous/2026-01-27T15-23-30/contact-desktop.png",
+    "contact_mobile": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/continuous/2026-01-27T15-23-30/contact-mobile.png"
+  },
+  "consoleErrors": [
+    "[error] Failed to load resource: the server responded with a status of 404 ()"
+  ],
+  "metrics": {
+    "loadTimeMs": 6878,
+    "statusCode": 200
+  },
+  "visualIssues": [
+    "1 critical console errors detected"
+  ]
+}

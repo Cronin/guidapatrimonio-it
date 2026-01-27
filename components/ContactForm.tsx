@@ -78,12 +78,10 @@ export default function ContactForm() {
     if (value >= 1000000) {
       return `${(value / 1000000).toFixed(1)}M`
     }
-    return new Intl.NumberFormat('it-IT', {
-      style: 'currency',
-      currency: 'EUR',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(value)
+    if (value >= 1000) {
+      return `${Math.round(value / 1000)}k`
+    }
+    return `${value}€`
   }
 
   const handleSubmit = async () => {
