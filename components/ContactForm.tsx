@@ -371,12 +371,12 @@ export default function ContactForm() {
         </div>
       </div>
 
-      {/* SECTION 4: Proiezione (shown when orizzonte is selected) */}
-      {orizzonte && (
-        <div>
-          <h3 className="font-heading text-xl text-forest mb-4">
-            Proiezione in {anni} anni
-          </h3>
+      {/* SECTION 4: Proiezione (ALWAYS VISIBLE - updates live!) */}
+      <div>
+        <h3 className="font-heading text-xl text-forest mb-4">
+          Proiezione in {anni} anni
+          {!orizzonte && <span className="text-sm font-normal text-gray-400 ml-2">(seleziona orizzonte per personalizzare)</span>}
+        </h3>
           <div className="bg-gray-50 rounded-xl p-4">
             <svg viewBox={`0 0 320 ${chartHeight + 40}`} className="w-full" preserveAspectRatio="xMidYMid meet">
               {/* Grid lines */}
@@ -392,11 +392,13 @@ export default function ContactForm() {
                 />
               ))}
 
-              {/* Aggressivo line */}
+              {/* Aggressivo line - highlighted if obiettivo=crescita */}
               <polyline
                 fill="none"
                 stroke={PROFILI.aggressivo.color}
-                strokeWidth="2.5"
+                strokeWidth={obiettivo === 'crescita' ? '4' : '2'}
+                opacity={obiettivo && obiettivo !== 'crescita' ? 0.4 : 1}
+                className="transition-all duration-500"
                 points={proiezioni.map((p, i) => {
                   const x = 40 + (i / anni) * 270
                   const y = chartHeight - ((p.aggressivo - importo) / (maxValue - importo)) * chartHeight + 10
@@ -404,11 +406,13 @@ export default function ContactForm() {
                 }).join(' ')}
               />
 
-              {/* Moderato line */}
+              {/* Moderato line - highlighted if obiettivo=rendita */}
               <polyline
                 fill="none"
                 stroke={PROFILI.moderato.color}
-                strokeWidth="2.5"
+                strokeWidth={obiettivo === 'rendita' ? '4' : '2'}
+                opacity={obiettivo && obiettivo !== 'rendita' ? 0.4 : 1}
+                className="transition-all duration-500"
                 points={proiezioni.map((p, i) => {
                   const x = 40 + (i / anni) * 270
                   const y = chartHeight - ((p.moderato - importo) / (maxValue - importo)) * chartHeight + 10
@@ -416,11 +420,13 @@ export default function ContactForm() {
                 }).join(' ')}
               />
 
-              {/* Conservativo line */}
+              {/* Conservativo line - highlighted if obiettivo=protezione */}
               <polyline
                 fill="none"
                 stroke={PROFILI.conservativo.color}
-                strokeWidth="2.5"
+                strokeWidth={obiettivo === 'protezione' ? '4' : '2'}
+                opacity={obiettivo && obiettivo !== 'protezione' ? 0.4 : 1}
+                className="transition-all duration-500"
                 points={proiezioni.map((p, i) => {
                   const x = 40 + (i / anni) * 270
                   const y = chartHeight - ((p.conservativo - importo) / (maxValue - importo)) * chartHeight + 10
@@ -439,31 +445,46 @@ export default function ContactForm() {
             </svg>
           </div>
 
-          {/* Legend with values AND percentages */}
+          {/* Legend with values AND percentages - highlights based on obiettivo */}
           <div className="grid grid-cols-3 gap-3 mt-4 text-center">
-            <div className="bg-white rounded-lg p-3 border border-gray-100">
+            <div className={`rounded-lg p-3 border-2 transition-all duration-300 ${
+              obiettivo === 'protezione'
+                ? 'bg-green-50 border-green-400 scale-105'
+                : 'bg-white border-gray-100'
+            }`}>
               <div className="flex items-center gap-1 justify-center mb-1">
                 <div className="w-2 h-2 rounded-full" style={{ backgroundColor: PROFILI.conservativo.color }} />
                 <span className="text-xs text-gray-500">{PROFILI.conservativo.label}</span>
               </div>
               <div className="font-heading text-forest text-sm">{formatCurrency(finalConservativo)}</div>
               <div className="text-xs text-green-600 font-medium">+{pctConservativo}%</div>
+              {obiettivo === 'protezione' && <div className="text-xs text-forest font-semibold mt-1">Consigliato</div>}
             </div>
-            <div className="bg-white rounded-lg p-3 border border-gray-100">
+            <div className={`rounded-lg p-3 border-2 transition-all duration-300 ${
+              obiettivo === 'rendita'
+                ? 'bg-green-50 border-green-400 scale-105'
+                : 'bg-white border-gray-100'
+            }`}>
               <div className="flex items-center gap-1 justify-center mb-1">
                 <div className="w-2 h-2 rounded-full" style={{ backgroundColor: PROFILI.moderato.color }} />
                 <span className="text-xs text-gray-500">{PROFILI.moderato.label}</span>
               </div>
               <div className="font-heading text-forest text-sm">{formatCurrency(finalModerato)}</div>
               <div className="text-xs text-green-600 font-medium">+{pctModerato}%</div>
+              {obiettivo === 'rendita' && <div className="text-xs text-forest font-semibold mt-1">Consigliato</div>}
             </div>
-            <div className="bg-white rounded-lg p-3 border border-gray-100">
+            <div className={`rounded-lg p-3 border-2 transition-all duration-300 ${
+              obiettivo === 'crescita'
+                ? 'bg-green-50 border-green-400 scale-105'
+                : 'bg-white border-gray-100'
+            }`}>
               <div className="flex items-center gap-1 justify-center mb-1">
                 <div className="w-2 h-2 rounded-full" style={{ backgroundColor: PROFILI.aggressivo.color }} />
                 <span className="text-xs text-gray-500">{PROFILI.aggressivo.label}</span>
               </div>
               <div className="font-heading text-forest text-sm">{formatCurrency(finalAggressivo)}</div>
               <div className="text-xs text-green-600 font-medium">+{pctAggressivo}%</div>
+              {obiettivo === 'crescita' && <div className="text-xs text-forest font-semibold mt-1">Consigliato</div>}
             </div>
           </div>
 
@@ -473,7 +494,6 @@ export default function ContactForm() {
             </div>
           )}
         </div>
-      )}
 
       {/* SECTION 5: Contact Info */}
       <div>
