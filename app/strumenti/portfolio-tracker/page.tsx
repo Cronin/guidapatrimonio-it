@@ -39,7 +39,7 @@ const COLORI_TORTA = [
   '#b0b7c1', // gray-300
 ]
 
-// Genera colore deterministic dal ticker per badge
+// Genera colore deterministic dal ticker per badge (fallback)
 const getTickerColor = (ticker: string): string => {
   const colors = ['#1B4D3E', '#2D6A4F', '#40916C', '#52B788', '#368859', '#0ea5e9', '#8b5cf6', '#f59e0b', '#ef4444', '#06b6d4']
   let hash = 0
@@ -49,24 +49,124 @@ const getTickerColor = (ticker: string): string => {
   return colors[Math.abs(hash) % colors.length]
 }
 
-// Componente TickerBadge
-const TickerBadge = ({ ticker, size = 'md' }: { ticker: string; size?: 'sm' | 'md' | 'lg' }) => {
-  if (!ticker) return null
-  const color = getTickerColor(ticker)
+// Mappa ticker -> dominio azienda per logo (espandibile)
+const TICKER_DOMAINS: Record<string, string> = {
+  'TSLA': 'tesla.com',
+  'AAPL': 'apple.com',
+  'MSFT': 'microsoft.com',
+  'GOOGL': 'google.com',
+  'GOOG': 'google.com',
+  'AMZN': 'amazon.com',
+  'META': 'meta.com',
+  'NVDA': 'nvidia.com',
+  'JPM': 'jpmorganchase.com',
+  'V': 'visa.com',
+  'MA': 'mastercard.com',
+  'DIS': 'disney.com',
+  'NFLX': 'netflix.com',
+  'PYPL': 'paypal.com',
+  'INTC': 'intel.com',
+  'AMD': 'amd.com',
+  'CRM': 'salesforce.com',
+  'ORCL': 'oracle.com',
+  'IBM': 'ibm.com',
+  'CSCO': 'cisco.com',
+  'ADBE': 'adobe.com',
+  'QCOM': 'qualcomm.com',
+  'TXN': 'ti.com',
+  'AVGO': 'broadcom.com',
+  'COST': 'costco.com',
+  'WMT': 'walmart.com',
+  'HD': 'homedepot.com',
+  'MCD': 'mcdonalds.com',
+  'NKE': 'nike.com',
+  'SBUX': 'starbucks.com',
+  'KO': 'coca-cola.com',
+  'PEP': 'pepsi.com',
+  'PG': 'pg.com',
+  'JNJ': 'jnj.com',
+  'UNH': 'unitedhealthgroup.com',
+  'PFE': 'pfizer.com',
+  'ABBV': 'abbvie.com',
+  'MRK': 'merck.com',
+  'LLY': 'lilly.com',
+  'TMO': 'thermofisher.com',
+  'BA': 'boeing.com',
+  'CAT': 'caterpillar.com',
+  'GE': 'ge.com',
+  'MMM': '3m.com',
+  'HON': 'honeywell.com',
+  'UPS': 'ups.com',
+  'FDX': 'fedex.com',
+  'XOM': 'exxonmobil.com',
+  'CVX': 'chevron.com',
+  'COP': 'conocophillips.com',
+  // ETF comuni
+  'VWCE': 'vanguard.com',
+  'IWDA': 'ishares.com',
+  'EUNL': 'ishares.com',
+  'SWDA': 'ishares.com',
+  'CSPX': 'ishares.com',
+  'VUAA': 'vanguard.com',
+  'VUSA': 'vanguard.com',
+  'SPY': 'ssga.com',
+  'QQQ': 'invesco.com',
+  'VTI': 'vanguard.com',
+  'VOO': 'vanguard.com',
+  'IVV': 'ishares.com',
+}
+
+// Componente TickerLogo - mostra logo reale o fallback a badge colorato
+const TickerLogo = ({ ticker, name, size = 'md' }: { ticker: string; name: string; size?: 'sm' | 'md' | 'lg' }) => {
+  const [logoError, setLogoError] = useState(false)
+
   const sizeClasses = {
-    sm: 'w-6 h-6 text-[9px]',
-    md: 'w-8 h-8 text-[10px]',
-    lg: 'w-10 h-10 text-xs'
+    sm: 'w-6 h-6',
+    md: 'w-8 h-8',
+    lg: 'w-10 h-10'
   }
+
+  const textSizes = {
+    sm: 'text-[9px]',
+    md: 'text-[10px]',
+    lg: 'text-xs'
+  }
+
+  const domain = ticker ? TICKER_DOMAINS[ticker.toUpperCase()] : null
+  const logoUrl = domain ? `https://logo.clearbit.com/${domain}` : null
+
+  // Se abbiamo un logo e non c'è errore, mostralo
+  if (logoUrl && !logoError) {
+    return (
+      <div className={`${sizeClasses[size]} rounded-lg overflow-hidden flex-shrink-0 bg-white border border-gray-100`}>
+        <img
+          src={logoUrl}
+          alt={ticker}
+          className="w-full h-full object-contain p-0.5"
+          onError={() => setLogoError(true)}
+        />
+      </div>
+    )
+  }
+
+  // Fallback: badge colorato con iniziali
+  const color = getTickerColor(ticker || name)
+  const initials = ticker ? ticker.slice(0, 3) : name.slice(0, 2).toUpperCase()
+
   return (
     <div
-      className={`${sizeClasses[size]} rounded-lg flex items-center justify-center font-bold text-white flex-shrink-0 shadow-sm`}
+      className={`${sizeClasses[size]} rounded-lg flex items-center justify-center font-bold text-white flex-shrink-0 shadow-sm ${textSizes[size]}`}
       style={{ backgroundColor: color }}
-      title={ticker}
+      title={ticker || name}
     >
-      {ticker.slice(0, 3)}
+      {initials}
     </div>
   )
+}
+
+// Componente TickerBadge legacy (per retrocompatibilità)
+const TickerBadge = ({ ticker, size = 'md' }: { ticker: string; size?: 'sm' | 'md' | 'lg' }) => {
+  return <TickerLogo ticker={ticker} name={ticker} size={size} />
 }
 
 // Colori per categorie
@@ -936,15 +1036,7 @@ export default function PortfolioTracker() {
                     <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-3">Anteprima Posizione</p>
                     <div className="bg-gray-50 rounded-lg p-3">
                       <div className="flex items-center gap-3">
-                        {ticker ? (
-                          <TickerBadge ticker={ticker} size="lg" />
-                        ) : (
-                          <div className="w-10 h-10 rounded-lg bg-gray-200 flex items-center justify-center">
-                            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                            </svg>
-                          </div>
-                        )}
+                        <TickerLogo ticker={ticker} name={nome || 'Asset'} size="lg" />
                         <div className="flex-1 min-w-0">
                           <p className="font-medium text-forest truncate">{nome || 'Nome asset'}</p>
                           <div className="flex items-center gap-2 text-xs text-gray-500">
@@ -1301,17 +1393,8 @@ export default function PortfolioTracker() {
                           <div className="lg:hidden space-y-3">
                             <div className="flex items-start justify-between">
                               <div className="flex items-start gap-3">
-                                {p.ticker ? (
-                                  <TickerBadge ticker={p.ticker} size="md" />
-                                ) : (
-                                  <div
-                                    className="w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center text-white font-bold text-xs"
-                                    style={{ backgroundColor: COLORI_TORTA[i % COLORI_TORTA.length] }}
-                                  >
-                                    {p.nome.slice(0, 2).toUpperCase()}
-                                  </div>
-                                )}
-                                <div className="min-w-0">
+                                <TickerLogo ticker={p.ticker} name={p.nome} size="md" />
+                                <div className="min-w-0 flex-1">
                                   <p className="font-medium text-forest truncate">{p.nome}</p>
                                   <div className="flex items-center gap-2 mt-0.5">
                                     {p.ticker && (
@@ -1347,29 +1430,14 @@ export default function PortfolioTracker() {
 
                             <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
                               <div>
-                                <p className="text-gray-400 text-xs">Quantita x Prezzo</p>
-                                <p className="font-medium">{p.quantita} x {formatCurrency(p.prezzoAttuale)}</p>
-                              </div>
-                              <div className="text-right">
                                 <p className="text-gray-400 text-xs">Valore</p>
                                 <p className="font-semibold text-forest">{formatCurrency(p.valore)}</p>
                               </div>
-                              <div>
-                                <p className="text-gray-400 text-xs">P&L</p>
-                                <p className={`font-medium ${p.pl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                                  {p.pl >= 0 ? '+' : ''}{formatCurrency(p.pl)}
-                                </p>
-                              </div>
                               <div className="text-right">
-                                <p className="text-gray-400 text-xs">Rendimento</p>
-                                <p className={`font-medium ${p.plPercent >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                                  {p.pl >= 0 ? '+' : ''}{Math.abs(p.plPercent) > 9999 ? '>9999%' : formatPercent(p.plPercent)}
+                                <p className="text-gray-400 text-xs">P&L</p>
+                                <p className={`font-semibold ${p.pl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                  {p.pl >= 0 ? '+' : ''}{formatCurrency(p.pl)} ({Math.abs(p.plPercent) > 999 ? '>999%' : (p.plPercent >= 0 ? '+' : '') + p.plPercent.toFixed(1) + '%'})
                                 </p>
-                                {Math.abs(p.plPercent) > 1000 && (
-                                  <p className="text-xs text-amber-600 mt-0.5">
-                                    Verifica prezzi
-                                  </p>
-                                )}
                               </div>
                             </div>
 
@@ -1389,16 +1457,7 @@ export default function PortfolioTracker() {
                           <div className="hidden lg:grid grid-cols-12 gap-3 items-center">
                             <div className="col-span-3">
                               <div className="flex items-center gap-3">
-                                {p.ticker ? (
-                                  <TickerBadge ticker={p.ticker} size="sm" />
-                                ) : (
-                                  <div
-                                    className="w-6 h-6 rounded-md flex-shrink-0 flex items-center justify-center text-white font-bold text-[8px]"
-                                    style={{ backgroundColor: COLORI_TORTA[i % COLORI_TORTA.length] }}
-                                  >
-                                    {p.nome.slice(0, 2).toUpperCase()}
-                                  </div>
-                                )}
+                                <TickerLogo ticker={p.ticker} name={p.nome} size="sm" />
                                 <div className="min-w-0">
                                   <p className="font-medium text-forest truncate">{p.nome}</p>
                                   {p.ticker && (
@@ -1431,18 +1490,10 @@ export default function PortfolioTracker() {
                             <div className="col-span-2 text-right">
                               <p className="text-sm font-semibold text-forest">{formatCurrency(p.valore)}</p>
                             </div>
-                            <div className="col-span-2 text-right overflow-hidden">
-                              <p className={`text-sm font-medium truncate ${p.pl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                                {p.pl >= 0 ? '+' : ''}{formatCurrency(p.pl)}
+                            <div className="col-span-2 text-right">
+                              <p className={`text-sm font-semibold ${p.pl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                {p.pl >= 0 ? '+' : ''}{formatCurrency(p.pl)} <span className="text-xs font-normal opacity-75">({Math.abs(p.plPercent) > 999 ? '>999%' : (p.plPercent >= 0 ? '+' : '') + p.plPercent.toFixed(1) + '%'})</span>
                               </p>
-                              <p className={`text-xs truncate ${p.plPercent >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                                {p.pl >= 0 ? '+' : ''}{Math.abs(p.plPercent) > 9999 ? '>9999%' : formatPercent(p.plPercent)}
-                              </p>
-                              {Math.abs(p.plPercent) > 1000 && (
-                                <p className="text-xs text-amber-600 truncate" title="Verifica i prezzi inseriti">
-                                  Verifica prezzi
-                                </p>
-                              )}
                             </div>
                             <div className="col-span-1 flex items-center justify-end gap-2">
                               <span className="text-sm font-medium text-gray-600">{p.peso.toFixed(1)}%</span>

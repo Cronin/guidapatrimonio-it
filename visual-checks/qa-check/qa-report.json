@@ -1,0 +1,34 @@
+{
+  "site": "guidapatrimonio.it",
+  "timestamp": "2026-01-27T14:50:21.923Z",
+  "status": "success",
+  "screenshots": {
+    "homepage": {
+      "desktop": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/qa-check/homepage-desktop.png",
+      "mobile": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/qa-check/homepage-mobile.png"
+    },
+    "portfolio-tracker": {
+      "desktop": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/qa-check/portfolio-tracker-desktop.png",
+      "mobile": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/qa-check/portfolio-tracker-mobile.png"
+    },
+    "contact": {
+      "desktop": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/qa-check/contact-desktop.png",
+      "mobile": "/Users/claudiocronin/websites/sites/guidapatrimonio.it/visual-checks/qa-check/contact-mobile.png"
+    }
+  },
+  "consoleErrors": [],
+  "metrics": {
+    "homepage": {
+      "loadTimeMs": 7593,
+      "statusCode": 200
+    },
+    "portfolio-tracker": {
+      "loadTimeMs": 4783,
+      "statusCode": 200
+    },
+    "contact": {
+      "loadTimeMs": 26141,
+      "statusCode": 200
+    }
+  }
+}
