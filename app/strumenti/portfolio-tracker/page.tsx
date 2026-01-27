@@ -1199,11 +1199,11 @@ export default function PortfolioTracker() {
                               <div className="text-right">
                                 <p className="text-gray-400 text-xs">Rendimento</p>
                                 <p className={`font-medium ${p.plPercent >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                                  {formatPercent(p.plPercent)}
+                                  {p.pl >= 0 ? '+' : ''}{Math.abs(p.plPercent) > 9999 ? '>9999%' : formatPercent(p.plPercent)}
                                 </p>
                                 {Math.abs(p.plPercent) > 1000 && (
                                   <p className="text-xs text-amber-600 mt-0.5">
-                                    Verifica i prezzi
+                                    Verifica prezzi
                                   </p>
                                 )}
                               </div>
@@ -1261,16 +1261,16 @@ export default function PortfolioTracker() {
                             <div className="col-span-2 text-right">
                               <p className="text-sm font-semibold text-forest">{formatCurrency(p.valore)}</p>
                             </div>
-                            <div className="col-span-2 text-right">
-                              <p className={`text-sm font-medium ${p.pl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                            <div className="col-span-2 text-right overflow-hidden">
+                              <p className={`text-sm font-medium truncate ${p.pl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                                 {p.pl >= 0 ? '+' : ''}{formatCurrency(p.pl)}
                               </p>
-                              <p className={`text-xs ${p.plPercent >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                                {formatPercent(p.plPercent)}
+                              <p className={`text-xs truncate ${p.plPercent >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                                {p.pl >= 0 ? '+' : ''}{Math.abs(p.plPercent) > 9999 ? '>9999%' : formatPercent(p.plPercent)}
                               </p>
                               {Math.abs(p.plPercent) > 1000 && (
-                                <p className="text-xs text-amber-600 mt-0.5">
-                                  Verifica i prezzi inseriti
+                                <p className="text-xs text-amber-600 truncate" title="Verifica i prezzi inseriti">
+                                  Verifica prezzi
                                 </p>
                               )}
                             </div>
@@ -1312,7 +1312,7 @@ export default function PortfolioTracker() {
                           <div className="flex items-center justify-between mb-1">
                             <span className="text-sm font-medium text-gray-700 truncate max-w-[60%]">{p.nome}</span>
                             <span className={`text-sm font-semibold ${p.pl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                              {formatPercent(p.plPercent)}
+                              {p.pl >= 0 ? '+' : ''}{Math.abs(p.plPercent) > 9999 ? '>9999%' : formatPercent(p.plPercent)}
                             </span>
                           </div>
                           <div className="relative h-2 bg-gray-100 rounded-full overflow-hidden">

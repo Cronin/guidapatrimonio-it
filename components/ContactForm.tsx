@@ -11,9 +11,6 @@ declare global {
 // Patrimonio minimo per qualificazione partner (in EUR)
 const MIN_PATRIMONIO_PARTNER = 150000
 
-type Step = 'importo' | 'orizzonte' | 'obiettivo' | 'proiezione' | 'contatto'
-const TOTAL_STEPS = 5
-
 const orizzonteOptions = [
   { value: '1-5', label: '1-5 anni', description: 'Breve termine' },
   { value: '5-10', label: '5-10 anni', description: 'Medio termine' },
@@ -34,7 +31,6 @@ const PROFILI = {
 }
 
 export default function ContactForm() {
-  const [currentStep, setCurrentStep] = useState<Step>('importo')
   const [importo, setImporto] = useState(100000)
   const [orizzonte, setOrizzonte] = useState('')
   const [obiettivo, setObiettivo] = useState('')
@@ -43,9 +39,6 @@ export default function ContactForm() {
   const [telefono, setTelefono] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'analyzing' | 'success' | 'not-qualified' | 'error'>('idle')
   const [loadingProgress, setLoadingProgress] = useState(0)
-
-  const stepIndex = ['importo', 'orizzonte', 'obiettivo', 'proiezione', 'contatto'].indexOf(currentStep)
-  const progress = ((stepIndex + 1) / TOTAL_STEPS) * 100
 
   // Calcolo proiezioni
   const proiezioni = useMemo(() => {
@@ -92,22 +85,8 @@ export default function ContactForm() {
     }).format(value)
   }
 
-  const goNext = () => {
-    if (currentStep === 'importo') setCurrentStep('orizzonte')
-    else if (currentStep === 'orizzonte' && orizzonte) setCurrentStep('obiettivo')
-    else if (currentStep === 'obiettivo' && obiettivo) setCurrentStep('proiezione')
-    else if (currentStep === 'proiezione') setCurrentStep('contatto')
-  }
-
-  const goBack = () => {
-    if (currentStep === 'orizzonte') setCurrentStep('importo')
-    else if (currentStep === 'obiettivo') setCurrentStep('orizzonte')
-    else if (currentStep === 'proiezione') setCurrentStep('obiettivo')
-    else if (currentStep === 'contatto') setCurrentStep('proiezione')
-  }
-
   const handleSubmit = async () => {
-    if (!nome || !email) return
+    if (!nome || !email || !orizzonte || !obiettivo) return
 
     setStatus('loading')
 
@@ -155,7 +134,6 @@ export default function ContactForm() {
   }
 
   const resetForm = () => {
-    setCurrentStep('importo')
     setImporto(100000)
     setOrizzonte('')
     setObiettivo('')
@@ -165,6 +143,9 @@ export default function ContactForm() {
     setStatus('idle')
     setLoadingProgress(0)
   }
+
+  // Check if form is complete
+  const formComplete = nome && email && orizzonte && obiettivo
 
   // ============================================================================
   // STATUS SCREENS
@@ -273,361 +254,279 @@ export default function ContactForm() {
   }
 
   // ============================================================================
-  // STEP CONTENT
+  // CHART COMPONENT
   // ============================================================================
+  const anni = orizzonte === '1-5' ? 5 : orizzonte === '5-10' ? 10 : 20
+  const maxValue = proiezioni[proiezioni.length - 1]?.aggressivo || importo * 2
+  const chartHeight = 140
 
-  const renderStep = () => {
-    switch (currentStep) {
-      case 'importo':
-        return (
-          <div className="text-center">
-            <h3 className="font-heading text-2xl md:text-3xl text-forest mb-2">
-              Quanto vorresti investire?
-            </h3>
-            <p className="text-gray-500 mb-8">Usa lo slider per selezionare l&apos;importo</p>
-
-            <div className="mb-8">
-              <div className="text-5xl md:text-6xl font-heading text-forest mb-4">
-                {formatCurrency(importo)}
-              </div>
-              <input
-                type="range"
-                min="10000"
-                max="2000000"
-                step="10000"
-                value={importo}
-                onChange={(e) => setImporto(Number(e.target.value))}
-                className="w-full h-3 bg-gray-200 rounded-full appearance-none cursor-pointer accent-green-600"
-              />
-              <div className="flex justify-between text-xs text-gray-400 mt-2">
-                <span>€10k</span>
-                <span>€500k</span>
-                <span>€1M</span>
-                <span>€2M+</span>
-              </div>
-            </div>
-
-            {importo >= MIN_PATRIMONIO_PARTNER && (
-              <div className="bg-green-50 rounded-lg p-4 text-sm text-green-700 mb-4">
-                <span className="font-medium">Perfetto!</span> Con questo importo sei idoneo per i servizi dei nostri partner svizzeri.
-              </div>
-            )}
-          </div>
-        )
-
-      case 'orizzonte':
-        return (
-          <div className="text-center">
-            <h3 className="font-heading text-2xl md:text-3xl text-forest mb-2">
-              Qual è il tuo orizzonte temporale?
-            </h3>
-            <p className="text-gray-500 mb-8">Quanto tempo pensi di tenere investito il capitale</p>
-
-            <div className="grid gap-3 max-w-md mx-auto">
-              {orizzonteOptions.map((option) => (
-                <button
-                  key={option.value}
-                  onClick={() => {
-                    setOrizzonte(option.value)
-                    setTimeout(goNext, 300)
-                  }}
-                  className={`w-full text-left px-6 py-5 rounded-xl border-2 transition-all ${
-                    orizzonte === option.value
-                      ? 'border-forest bg-green-50'
-                      : 'border-gray-200 hover:border-gray-300'
-                  }`}
-                >
-                  <div className="font-heading text-lg text-forest">{option.label}</div>
-                  <div className="text-sm text-gray-500">{option.description}</div>
-                </button>
-              ))}
-            </div>
-          </div>
-        )
-
-      case 'obiettivo':
-        return (
-          <div className="text-center">
-            <h3 className="font-heading text-2xl md:text-3xl text-forest mb-2">
-              Qual è il tuo obiettivo principale?
-            </h3>
-            <p className="text-gray-500 mb-8">Seleziona quello che meglio descrive le tue priorita</p>
-
-            <div className="grid gap-3 max-w-md mx-auto">
-              {obiettivoOptions.map((option) => (
-                <button
-                  key={option.value}
-                  onClick={() => {
-                    setObiettivo(option.value)
-                    setTimeout(goNext, 300)
-                  }}
-                  className={`w-full text-left px-6 py-5 rounded-xl border-2 transition-all ${
-                    obiettivo === option.value
-                      ? 'border-forest bg-green-50'
-                      : 'border-gray-200 hover:border-gray-300'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center text-green-600">
-                      {option.icon === 'chart' && (
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                        </svg>
-                      )}
-                      {option.icon === 'cash' && (
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      )}
-                      {option.icon === 'shield' && (
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                      )}
-                    </div>
-                    <div>
-                      <div className="font-heading text-lg text-forest">{option.label}</div>
-                      <div className="text-sm text-gray-500">{option.description}</div>
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        )
-
-      case 'proiezione':
-        const anni = orizzonte === '1-5' ? 5 : orizzonte === '5-10' ? 10 : 20
-        const maxValue = proiezioni[proiezioni.length - 1]?.aggressivo || importo * 2
-        const chartHeight = 180
-
-        return (
-          <div className="text-center">
-            <h3 className="font-heading text-2xl md:text-3xl text-forest mb-2">
-              Proiezione del tuo patrimonio
-            </h3>
-            <p className="text-gray-500 mb-6">Ecco come potrebbe crescere il tuo investimento in {anni} anni</p>
-
-            {/* Chart */}
-            <div className="bg-gray-50 rounded-xl p-4 mb-6">
-              <svg viewBox={`0 0 320 ${chartHeight + 40}`} className="w-full" preserveAspectRatio="xMidYMid meet">
-                {/* Grid lines */}
-                {[0, 0.25, 0.5, 0.75, 1].map((pct) => (
-                  <line
-                    key={pct}
-                    x1="40"
-                    y1={chartHeight - pct * chartHeight + 10}
-                    x2="310"
-                    y2={chartHeight - pct * chartHeight + 10}
-                    stroke="#e5e7eb"
-                    strokeWidth="1"
-                  />
-                ))}
-
-                {/* Aggressivo line */}
-                <polyline
-                  fill="none"
-                  stroke={PROFILI.aggressivo.color}
-                  strokeWidth="2.5"
-                  points={proiezioni.map((p, i) => {
-                    const x = 40 + (i / anni) * 270
-                    const y = chartHeight - ((p.aggressivo - importo) / (maxValue - importo)) * chartHeight + 10
-                    return `${x},${Math.max(10, y)}`
-                  }).join(' ')}
-                />
-
-                {/* Moderato line */}
-                <polyline
-                  fill="none"
-                  stroke={PROFILI.moderato.color}
-                  strokeWidth="2.5"
-                  points={proiezioni.map((p, i) => {
-                    const x = 40 + (i / anni) * 270
-                    const y = chartHeight - ((p.moderato - importo) / (maxValue - importo)) * chartHeight + 10
-                    return `${x},${Math.max(10, y)}`
-                  }).join(' ')}
-                />
-
-                {/* Conservativo line */}
-                <polyline
-                  fill="none"
-                  stroke={PROFILI.conservativo.color}
-                  strokeWidth="2.5"
-                  points={proiezioni.map((p, i) => {
-                    const x = 40 + (i / anni) * 270
-                    const y = chartHeight - ((p.conservativo - importo) / (maxValue - importo)) * chartHeight + 10
-                    return `${x},${Math.max(10, y)}`
-                  }).join(' ')}
-                />
-
-                {/* X axis labels */}
-                <text x="40" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">0</text>
-                <text x="175" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{Math.round(anni/2)} anni</text>
-                <text x="310" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{anni} anni</text>
-
-                {/* Y axis labels */}
-                <text x="35" y="15" fontSize="9" fill="#9ca3af" textAnchor="end">{formatCurrency(maxValue)}</text>
-                <text x="35" y={chartHeight + 10} fontSize="9" fill="#9ca3af" textAnchor="end">{formatCurrency(importo)}</text>
-              </svg>
-            </div>
-
-            {/* Legend */}
-            <div className="flex justify-center gap-6 mb-6 text-sm">
-              {Object.entries(PROFILI).map(([key, value]) => {
-                const finalValue = proiezioni[proiezioni.length - 1]?.[key as keyof typeof proiezioni[0]] || 0
-                return (
-                  <div key={key} className="text-center">
-                    <div className="flex items-center gap-2 justify-center mb-1">
-                      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: value.color }} />
-                      <span className="text-gray-600">{value.label}</span>
-                    </div>
-                    <div className="font-heading text-forest">{formatCurrency(finalValue as number)}</div>
-                  </div>
-                )
-              })}
-            </div>
-
-            {importo >= MIN_PATRIMONIO_PARTNER && (
-              <div className="bg-green-50 rounded-lg p-4 text-sm text-green-700">
-                <span className="font-semibold">Match perfetto!</span> Il tuo profilo è ideale per i nostri partner svizzeri specializzati in obbligazioni corporate ad alto rendimento.
-              </div>
-            )}
-          </div>
-        )
-
-      case 'contatto':
-        return (
-          <div className="text-center">
-            <h3 className="font-heading text-2xl md:text-3xl text-forest mb-2">
-              Lasciaci i tuoi dati
-            </h3>
-            <p className="text-gray-500 mb-8">Ti invieremo un report personalizzato gratuito</p>
-
-            <div className="max-w-sm mx-auto space-y-4">
-              <div>
-                <input
-                  type="text"
-                  value={nome}
-                  onChange={(e) => setNome(e.target.value)}
-                  placeholder="Nome e cognome"
-                  className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-forest focus:outline-none text-forest placeholder:text-gray-400"
-                  autoComplete="name"
-                />
-              </div>
-              <div>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Email"
-                  className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-forest focus:outline-none text-forest placeholder:text-gray-400"
-                  autoComplete="email"
-                />
-              </div>
-              <div>
-                <input
-                  type="tel"
-                  value={telefono}
-                  onChange={(e) => setTelefono(e.target.value)}
-                  placeholder="Telefono (opzionale)"
-                  className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-forest focus:outline-none text-forest placeholder:text-gray-400"
-                  autoComplete="tel"
-                />
-              </div>
-            </div>
-
-            <p className="text-xs text-gray-400 mt-4">
-              I tuoi dati sono al sicuro. Non li condivideremo mai con terzi.
-            </p>
-          </div>
-        )
-    }
-  }
+  // Calculate percentage gains
+  const finalConservativo = proiezioni[proiezioni.length - 1]?.conservativo || importo
+  const finalModerato = proiezioni[proiezioni.length - 1]?.moderato || importo
+  const finalAggressivo = proiezioni[proiezioni.length - 1]?.aggressivo || importo
+  const pctConservativo = ((finalConservativo - importo) / importo * 100).toFixed(0)
+  const pctModerato = ((finalModerato - importo) / importo * 100).toFixed(0)
+  const pctAggressivo = ((finalAggressivo - importo) / importo * 100).toFixed(0)
 
   // ============================================================================
-  // MAIN RENDER
+  // MAIN RENDER - ALL IN ONE PAGE
   // ============================================================================
 
   return (
-    <div className="min-h-[450px] flex flex-col">
-      {/* Progress bar */}
-      <div className="h-1.5 bg-gray-200 rounded-full mb-8 overflow-hidden">
-        <div
-          className="h-full bg-forest transition-all duration-500 ease-out rounded-full"
-          style={{ width: `${progress}%` }}
-        />
-      </div>
-
-      {/* Step indicator */}
-      <div className="flex justify-center gap-2 mb-8">
-        {['importo', 'orizzonte', 'obiettivo', 'proiezione', 'contatto'].map((step, i) => (
-          <div
-            key={step}
-            className={`w-2 h-2 rounded-full transition-colors ${
-              i <= stepIndex ? 'bg-forest' : 'bg-gray-200'
-            }`}
-          />
-        ))}
-      </div>
-
-      {/* Step content */}
-      <div className="flex-1">
-        {renderStep()}
-      </div>
-
-      {/* Navigation */}
-      <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-100">
-        <button
-          type="button"
-          onClick={goBack}
-          disabled={currentStep === 'importo'}
-          className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
-            currentStep === 'importo'
-              ? 'text-gray-300 cursor-not-allowed'
-              : 'text-gray-600 hover:text-forest hover:bg-gray-50'
-          }`}
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          Indietro
-        </button>
-
-        <div className="text-sm text-gray-400">
-          {stepIndex + 1} / {TOTAL_STEPS}
+    <div className="space-y-8">
+      {/* SECTION 1: Importo */}
+      <div>
+        <h3 className="font-heading text-xl text-forest mb-4">
+          Quanto vorresti investire?
+        </h3>
+        <div className="text-4xl font-heading text-forest mb-4 text-center">
+          {formatCurrency(importo)}
         </div>
-
-        {currentStep === 'contatto' ? (
-          <button
-            type="button"
-            onClick={handleSubmit}
-            disabled={!nome || !email}
-            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
-              nome && email
-                ? 'bg-forest text-white hover:bg-green-600'
-                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-            }`}
-          >
-            Invia richiesta
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        ) : currentStep !== 'orizzonte' && currentStep !== 'obiettivo' ? (
-          <button
-            type="button"
-            onClick={goNext}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold bg-forest text-white hover:bg-green-600 transition-all"
-          >
-            Continua
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        ) : (
-          <div className="w-24" /> // Spacer for alignment
+        <input
+          type="range"
+          min="10000"
+          max="2000000"
+          step="10000"
+          value={importo}
+          onChange={(e) => setImporto(Number(e.target.value))}
+          className="w-full h-3 bg-gray-200 rounded-full appearance-none cursor-pointer accent-green-600"
+        />
+        <div className="flex justify-between text-xs text-gray-400 mt-2">
+          <span>€10k</span>
+          <span>€500k</span>
+          <span>€1M</span>
+          <span>€2M+</span>
+        </div>
+        {importo >= MIN_PATRIMONIO_PARTNER && (
+          <div className="bg-green-50 rounded-lg p-3 text-sm text-green-700 mt-4">
+            <span className="font-medium">Perfetto!</span> Con questo importo sei idoneo per i servizi dei nostri partner svizzeri.
+          </div>
         )}
       </div>
+
+      {/* SECTION 2: Orizzonte temporale */}
+      <div>
+        <h3 className="font-heading text-xl text-forest mb-4">
+          Orizzonte temporale
+        </h3>
+        <div className="grid grid-cols-3 gap-2">
+          {orizzonteOptions.map((option) => (
+            <button
+              key={option.value}
+              onClick={() => setOrizzonte(option.value)}
+              className={`text-center px-3 py-3 rounded-xl border-2 transition-all ${
+                orizzonte === option.value
+                  ? 'border-forest bg-green-50'
+                  : 'border-gray-200 hover:border-gray-300'
+              }`}
+            >
+              <div className="font-heading text-sm text-forest">{option.label}</div>
+              <div className="text-xs text-gray-500">{option.description}</div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* SECTION 3: Obiettivo */}
+      <div>
+        <h3 className="font-heading text-xl text-forest mb-4">
+          Obiettivo principale
+        </h3>
+        <div className="grid gap-2">
+          {obiettivoOptions.map((option) => (
+            <button
+              key={option.value}
+              onClick={() => setObiettivo(option.value)}
+              className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all ${
+                obiettivo === option.value
+                  ? 'border-forest bg-green-50'
+                  : 'border-gray-200 hover:border-gray-300'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center text-green-600 flex-shrink-0">
+                  {option.icon === 'chart' && (
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                  )}
+                  {option.icon === 'cash' && (
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  )}
+                  {option.icon === 'shield' && (
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  )}
+                </div>
+                <div>
+                  <div className="font-heading text-forest">{option.label}</div>
+                  <div className="text-xs text-gray-500">{option.description}</div>
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* SECTION 4: Proiezione (shown when orizzonte is selected) */}
+      {orizzonte && (
+        <div>
+          <h3 className="font-heading text-xl text-forest mb-4">
+            Proiezione in {anni} anni
+          </h3>
+          <div className="bg-gray-50 rounded-xl p-4">
+            <svg viewBox={`0 0 320 ${chartHeight + 40}`} className="w-full" preserveAspectRatio="xMidYMid meet">
+              {/* Grid lines */}
+              {[0, 0.25, 0.5, 0.75, 1].map((pct) => (
+                <line
+                  key={pct}
+                  x1="40"
+                  y1={chartHeight - pct * chartHeight + 10}
+                  x2="310"
+                  y2={chartHeight - pct * chartHeight + 10}
+                  stroke="#e5e7eb"
+                  strokeWidth="1"
+                />
+              ))}
+
+              {/* Aggressivo line */}
+              <polyline
+                fill="none"
+                stroke={PROFILI.aggressivo.color}
+                strokeWidth="2.5"
+                points={proiezioni.map((p, i) => {
+                  const x = 40 + (i / anni) * 270
+                  const y = chartHeight - ((p.aggressivo - importo) / (maxValue - importo)) * chartHeight + 10
+                  return `${x},${Math.max(10, y)}`
+                }).join(' ')}
+              />
+
+              {/* Moderato line */}
+              <polyline
+                fill="none"
+                stroke={PROFILI.moderato.color}
+                strokeWidth="2.5"
+                points={proiezioni.map((p, i) => {
+                  const x = 40 + (i / anni) * 270
+                  const y = chartHeight - ((p.moderato - importo) / (maxValue - importo)) * chartHeight + 10
+                  return `${x},${Math.max(10, y)}`
+                }).join(' ')}
+              />
+
+              {/* Conservativo line */}
+              <polyline
+                fill="none"
+                stroke={PROFILI.conservativo.color}
+                strokeWidth="2.5"
+                points={proiezioni.map((p, i) => {
+                  const x = 40 + (i / anni) * 270
+                  const y = chartHeight - ((p.conservativo - importo) / (maxValue - importo)) * chartHeight + 10
+                  return `${x},${Math.max(10, y)}`
+                }).join(' ')}
+              />
+
+              {/* X axis labels */}
+              <text x="40" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">0</text>
+              <text x="175" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{Math.round(anni/2)} anni</text>
+              <text x="310" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{anni} anni</text>
+
+              {/* Y axis labels */}
+              <text x="35" y="15" fontSize="9" fill="#9ca3af" textAnchor="end">{formatCurrency(maxValue)}</text>
+              <text x="35" y={chartHeight + 10} fontSize="9" fill="#9ca3af" textAnchor="end">{formatCurrency(importo)}</text>
+            </svg>
+          </div>
+
+          {/* Legend with values AND percentages */}
+          <div className="grid grid-cols-3 gap-3 mt-4 text-center">
+            <div className="bg-white rounded-lg p-3 border border-gray-100">
+              <div className="flex items-center gap-1 justify-center mb-1">
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: PROFILI.conservativo.color }} />
+                <span className="text-xs text-gray-500">{PROFILI.conservativo.label}</span>
+              </div>
+              <div className="font-heading text-forest text-sm">{formatCurrency(finalConservativo)}</div>
+              <div className="text-xs text-green-600 font-medium">+{pctConservativo}%</div>
+            </div>
+            <div className="bg-white rounded-lg p-3 border border-gray-100">
+              <div className="flex items-center gap-1 justify-center mb-1">
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: PROFILI.moderato.color }} />
+                <span className="text-xs text-gray-500">{PROFILI.moderato.label}</span>
+              </div>
+              <div className="font-heading text-forest text-sm">{formatCurrency(finalModerato)}</div>
+              <div className="text-xs text-green-600 font-medium">+{pctModerato}%</div>
+            </div>
+            <div className="bg-white rounded-lg p-3 border border-gray-100">
+              <div className="flex items-center gap-1 justify-center mb-1">
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: PROFILI.aggressivo.color }} />
+                <span className="text-xs text-gray-500">{PROFILI.aggressivo.label}</span>
+              </div>
+              <div className="font-heading text-forest text-sm">{formatCurrency(finalAggressivo)}</div>
+              <div className="text-xs text-green-600 font-medium">+{pctAggressivo}%</div>
+            </div>
+          </div>
+
+          {importo >= MIN_PATRIMONIO_PARTNER && (
+            <div className="bg-green-50 rounded-lg p-3 text-sm text-green-700 mt-4 text-center">
+              <span className="font-semibold">Match perfetto!</span> Il tuo profilo è ideale per i nostri partner svizzeri.
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* SECTION 5: Contact Info */}
+      <div>
+        <h3 className="font-heading text-xl text-forest mb-4">
+          I tuoi dati
+        </h3>
+        <div className="space-y-3">
+          <input
+            type="text"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            placeholder="Nome e cognome *"
+            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-forest focus:outline-none text-forest placeholder:text-gray-400"
+            autoComplete="name"
+          />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email *"
+            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-forest focus:outline-none text-forest placeholder:text-gray-400"
+            autoComplete="email"
+          />
+          <input
+            type="tel"
+            value={telefono}
+            onChange={(e) => setTelefono(e.target.value)}
+            placeholder="Telefono (opzionale)"
+            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-forest focus:outline-none text-forest placeholder:text-gray-400"
+            autoComplete="tel"
+          />
+        </div>
+        <p className="text-xs text-gray-400 mt-3">
+          * Campi obbligatori. I tuoi dati sono al sicuro.
+        </p>
+      </div>
+
+      {/* SUBMIT BUTTON */}
+      <button
+        type="button"
+        onClick={handleSubmit}
+        disabled={!formComplete}
+        className={`w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-lg transition-all ${
+          formComplete
+            ? 'bg-forest text-white hover:bg-green-600'
+            : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+        }`}
+      >
+        Richiedi consulenza gratuita
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
     </div>
   )
 }
