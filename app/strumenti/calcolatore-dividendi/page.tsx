@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 interface ETFExample {
   nome: string
@@ -35,6 +35,18 @@ export default function CalcolatoreDividendi() {
   const [regimeFiscale, setRegimeFiscale] = useState<RegimeFiscale>('standard')
   const [reinvesti, setReinvesti] = useState(true)
   const [anni, setAnni] = useState(20)
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  useEffect(() => {
+    if (capitale >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(capitale)
+      setShowPopup(true)
+    }
+  }, [capitale, THRESHOLD, shouldShowPopup])
 
   const aliquotaFiscale = regimeFiscale === 'standard' ? 26 : 1.2
 
@@ -138,6 +150,11 @@ export default function CalcolatoreDividendi() {
 
   return (
     <main>
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
       <ToolPageSchema slug="calcolatore-dividendi" />
       <Navbar />
 

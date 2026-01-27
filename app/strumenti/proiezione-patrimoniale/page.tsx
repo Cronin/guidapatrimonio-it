@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 interface ProiezioneAnno {
   anno: number
@@ -27,6 +27,20 @@ export default function ProiezionePatrimoniale() {
   const [immobili, setImmobili] = useState(500000)
   const [aziendale, setAziendale] = useState(300000)
   const [altriAsset, setAltriAsset] = useState(100000)
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  const patrimonioTotale = useMemo(() => liquidita + immobili + aziendale + altriAsset, [liquidita, immobili, aziendale, altriAsset])
+
+  useEffect(() => {
+    if (patrimonioTotale >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(patrimonioTotale)
+      setShowPopup(true)
+    }
+  }, [patrimonioTotale, THRESHOLD, shouldShowPopup])
 
   // Flussi annuali
   const [risparmioAnnuo, setRisparmioAnnuo] = useState(50000)
@@ -876,6 +890,12 @@ export default function ProiezionePatrimoniale() {
           </Link>
         </div>
       </section>
+
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
 
       <Footer />
     </main>

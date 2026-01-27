@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 type ExitOption = 'trade_sale' | 'mbo' | 'family' | 'ipo'
 type HoldingStructure = 'direct' | 'holding_pex' | 'reinvestment'
@@ -130,6 +130,21 @@ export default function ExitStrategyPlanner() {
   const [valoreManuale, setValoreManuale] = useState<number | null>(null)
   const [useManuale, setUseManuale] = useState(false)
 
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  // Valore azienda calcolato
+  const valoreAzienda = useManuale && valoreManuale ? valoreManuale : ebitda * multiplo
+
+  useEffect(() => {
+    if (valoreAzienda >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(valoreAzienda)
+      setShowPopup(true)
+    }
+  }, [valoreAzienda, THRESHOLD, shouldShowPopup])
+
   // Exit preferences
   const [exitOption, setExitOption] = useState<ExitOption>('trade_sale')
   const [holdingStructure, setHoldingStructure] = useState<HoldingStructure>('direct')
@@ -224,6 +239,11 @@ export default function ExitStrategyPlanner() {
 
   return (
     <main>
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
       <ToolPageSchema slug="exit-strategy" />
       <Navbar />
 

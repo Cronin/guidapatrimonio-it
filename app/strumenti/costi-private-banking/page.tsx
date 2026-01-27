@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 interface ScenarioData {
   name: string
@@ -13,6 +13,18 @@ interface ScenarioData {
 
 export default function CostiPrivateBanking() {
   const [patrimonio, setPatrimonio] = useState(2000000)
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  useEffect(() => {
+    if (patrimonio >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(patrimonio)
+      setShowPopup(true)
+    }
+  }, [patrimonio, THRESHOLD, shouldShowPopup])
   const [costoTotaleAttuale, setCostoTotaleAttuale] = useState(1.8)
   const [rendimentoLordo, setRendimentoLordo] = useState(7)
   const [anniProiezione, setAnniProiezione] = useState(20)
@@ -490,6 +502,12 @@ export default function CostiPrivateBanking() {
           </Link>
         </div>
       </section>
+
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
 
       <Footer />
     </main>

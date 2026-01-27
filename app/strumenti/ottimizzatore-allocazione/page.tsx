@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 type Obiettivo = 'crescita' | 'reddito' | 'preservazione'
 
@@ -67,6 +67,18 @@ export default function OttimizzatoreAllocazione() {
   const [tolleranza, setTolleranza] = useState(5)
   const [obiettivo, setObiettivo] = useState<Obiettivo>('crescita')
   const [patrimonio, setPatrimonio] = useState(500000)
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  useEffect(() => {
+    if (patrimonio >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(patrimonio)
+      setShowPopup(true)
+    }
+  }, [patrimonio, THRESHOLD, shouldShowPopup])
 
   const allocazione = useMemo((): Allocazione => {
     // Regola base: 120 - eta = % azioni
@@ -278,6 +290,11 @@ export default function OttimizzatoreAllocazione() {
 
   return (
     <main>
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
       <ToolPageSchema slug="ottimizzatore-allocazione" />
       <Navbar />
 

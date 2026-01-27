@@ -1,11 +1,23 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 export default function CalcolatoreInflazione() {
   const [importo, setImporto] = useState(100000)
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  useEffect(() => {
+    if (importo >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(importo)
+      setShowPopup(true)
+    }
+  }, [importo, THRESHOLD, shouldShowPopup])
   const [inflazione, setInflazione] = useState(3)
   const [anni, setAnni] = useState(10)
   const [modalita, setModalita] = useState<'futuro' | 'passato'>('futuro')
@@ -289,6 +301,12 @@ export default function CalcolatoreInflazione() {
       <div className="container-custom py-8">
         <RatingWidget toolSlug="inflazione" toolName="inflazione" />
       </div>
+
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
 
       <Footer />
     </main>

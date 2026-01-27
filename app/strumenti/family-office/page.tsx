@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer, RelatedTools, toolCorrelations , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 type ServiceOption = 'private-banking' | 'multi-fo' | 'single-fo'
 
@@ -33,6 +33,18 @@ export default function CalcolatoreFamilyOffice() {
   const [attivitaEstere, setAttivitaEstere] = useState(false)
   const [holdingStrutture, setHoldingStrutture] = useState(false)
   const [realEstate, setRealEstate] = useState(true)
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  useEffect(() => {
+    if (patrimonio >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(patrimonio)
+      setShowPopup(true)
+    }
+  }, [patrimonio, THRESHOLD, shouldShowPopup])
 
   const risultati = useMemo(() => {
     // Costi Private Banking (1-2% AUM)
@@ -581,6 +593,12 @@ export default function CalcolatoreFamilyOffice() {
           </Link>
         </div>
       </section>
+
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
 
       <Footer />
     </main>

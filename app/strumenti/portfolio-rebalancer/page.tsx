@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 interface AssetClass {
   name: string
@@ -54,6 +54,18 @@ const riskProfiles: RiskProfile[] = [
 export default function PortfolioRebalancer() {
   const [patrimonio, setPatrimonio] = useState(500000)
   const [commissionePercent, setCommissionePercent] = useState(0.1)
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  useEffect(() => {
+    if (patrimonio >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(patrimonio)
+      setShowPopup(true)
+    }
+  }, [patrimonio, THRESHOLD, shouldShowPopup])
 
   // Allocazione attuale
   const [currentAzioni, setCurrentAzioni] = useState(45)
@@ -167,6 +179,11 @@ export default function PortfolioRebalancer() {
 
   return (
     <main>
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
       <ToolPageSchema slug="portfolio-rebalancer" />
       <Navbar />
 

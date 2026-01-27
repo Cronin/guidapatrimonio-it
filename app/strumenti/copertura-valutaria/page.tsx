@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 interface ScenarioData {
   anno: number
@@ -13,6 +13,18 @@ interface ScenarioData {
 
 export default function CoperturaValutaria() {
   const [importoUSD, setImportoUSD] = useState(100000)
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  useEffect(() => {
+    if (importoUSD >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(importoUSD)
+      setShowPopup(true)
+    }
+  }, [importoUSD, THRESHOLD, shouldShowPopup])
   const [orizzonteAnni, setOrizzonteAnni] = useState(5)
   const [costoHedgingAnnuo, setCostoHedgingAnnuo] = useState(1.0)
   const [rendimentoAttesoUSD, setRendimentoAttesoUSD] = useState(7)
@@ -567,6 +579,12 @@ export default function CoperturaValutaria() {
       <div className="container-custom py-8">
         <RatingWidget toolSlug="copertura-valutaria" toolName="copertura-valutaria" />
       </div>
+
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
 
       <Footer />
     </main>

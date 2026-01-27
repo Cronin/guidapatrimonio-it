@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 interface SimulationResult {
   anno: number
@@ -25,6 +25,18 @@ export default function CalcolatoreTassoPrelievoSicuro() {
   const [rendimentoAtteso, setRendimentoAtteso] = useState(6)
   const [inflazione, setInflazione] = useState(2)
   const [orizzonteTemporale, setOrizzonteTemporale] = useState(30)
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  useEffect(() => {
+    if (patrimonio >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(patrimonio)
+      setShowPopup(true)
+    }
+  }, [patrimonio, THRESHOLD, shouldShowPopup])
 
   const risultati = useMemo(() => {
     const prelievoAnnuoIniziale = patrimonio * (tassoPrelievo / 100)
@@ -640,6 +652,12 @@ export default function CalcolatoreTassoPrelievoSicuro() {
       <div className="container-custom py-8">
         <RatingWidget toolSlug="tasso-prelievo-sicuro" toolName="tasso-prelievo-sicuro" />
       </div>
+
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
 
       <Footer />
     </main>

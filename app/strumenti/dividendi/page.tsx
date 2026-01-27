@@ -1,11 +1,23 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 export default function CalcolatoreDividendi() {
   const [investimento, setInvestimento] = useState(50000)
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  useEffect(() => {
+    if (investimento >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(investimento)
+      setShowPopup(true)
+    }
+  }, [investimento, THRESHOLD, shouldShowPopup])
   const [dividendYield, setDividendYield] = useState(4)
   const [crescitaDividendo, setCrescitaDividendo] = useState(3)
   const [reinvesti, setReinvesti] = useState(true)
@@ -293,6 +305,12 @@ export default function CalcolatoreDividendi() {
           </Link>
         </div>
       </section>
+
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
 
       <Footer />
     </main>

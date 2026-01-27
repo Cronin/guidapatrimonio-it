@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 import {
   AreaChart,
   Area,
@@ -27,6 +27,18 @@ export default function InteresseCompostoAvanzato() {
   const [inflazione, setInflazione] = useState(2)
   const [aliquotaTasse, setAliquotaTasse] = useState(26)
   const [obiettivo, setObiettivo] = useState(500000)
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  useEffect(() => {
+    if (capitaleIniziale >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(capitaleIniziale)
+      setShowPopup(true)
+    }
+  }, [capitaleIniziale, THRESHOLD, shouldShowPopup])
 
   // Scenario rates
   const rendimentoPessimistico = Math.max(1, rendimentoBase - 3)
@@ -858,6 +870,12 @@ export default function InteresseCompostoAvanzato() {
       <div className="container-custom py-8">
         <RatingWidget toolSlug="interesse-composto-avanzato" toolName="interesse-composto-avanzato" />
       </div>
+
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
 
       <Footer />
     </main>

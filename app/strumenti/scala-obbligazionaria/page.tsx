@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { Navbar, Footer , RatingWidget, ToolPageSchema} from '@/components'
+import { Navbar, Footer , RatingWidget, ToolPageSchema, ConsultationPopup, useConsultationPopup} from '@/components'
 
 interface BondData {
   name: string
@@ -111,6 +111,18 @@ export default function ScalaObbligazionaria() {
   const [tipoObbligazione, setTipoObbligazione] = useState<TipoObbligazione>('BTP')
   const [obiettivo, setObiettivo] = useState<Obiettivo>('rendimento')
   const [intervalloAnni, setIntervalloAnni] = useState(2)
+
+  // Consultation popup state
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupAmount, setPopupAmount] = useState(0)
+  const { shouldShowPopup, THRESHOLD } = useConsultationPopup()
+
+  useEffect(() => {
+    if (capitale >= THRESHOLD && shouldShowPopup()) {
+      setPopupAmount(capitale)
+      setShowPopup(true)
+    }
+  }, [capitale, THRESHOLD, shouldShowPopup])
 
   // Live BTP yields state
   const [btpYields, setBtpYields] = useState(defaultBtpYields)
@@ -578,6 +590,12 @@ export default function ScalaObbligazionaria() {
           </Link>
         </div>
       </section>
+
+      <ConsultationPopup
+        isOpen={showPopup}
+        amount={popupAmount}
+        onClose={() => setShowPopup(false)}
+      />
 
       <Footer />
     </main>
