@@ -151,9 +151,21 @@ export const toolCorrelations: Record<string, RelatedTool[]> = {
     { title: 'Costo Mantenimento Yacht', description: 'Calcola IVIE su yacht esteri', href: '/strumenti/costo-mantenimento-yacht', icon: 'yacht' },
   ],
   'costo-mantenimento-yacht': [
+    { title: 'Costo Jet Privato', description: 'Possesso vs fractional vs charter', href: '/strumenti/costo-jet-privato', icon: 'chart' },
     { title: 'IVAFE/IVIE Calculator', description: 'Calcola imposte su beni esteri', href: '/strumenti/ivafe-ivie', icon: 'globe' },
-    { title: 'Aste Immobiliari Luxury', description: 'Immobili di pregio alle aste', href: '/strumenti/aste-immobiliari-luxury', icon: 'home' },
-    { title: 'Mercato Immobiliare Luxury', description: 'Prezzi zone premium', href: '/strumenti/mercato-immobiliare-luxury', icon: 'building' },
+    { title: 'Family Office', description: 'Gestione patrimoni UHNWI', href: '/strumenti/family-office', icon: 'family' },
+    { title: 'Costo Auto Collezione', description: 'Supercar e auto storiche', href: '/strumenti/costo-auto-collezione', icon: 'money' },
+  ],
+  'costo-jet-privato': [
+    { title: 'Costo Mantenimento Yacht', description: 'Ormeggio, equipaggio, IVIE', href: '/strumenti/costo-mantenimento-yacht', icon: 'yacht' },
+    { title: 'Family Office', description: 'Gestione patrimoni UHNWI', href: '/strumenti/family-office', icon: 'family' },
+    { title: 'IVAFE/IVIE Calculator', description: 'Imposte su beni esteri', href: '/strumenti/ivafe-ivie', icon: 'globe' },
+    { title: 'Costo Auto Collezione', description: 'Supercar e auto storiche', href: '/strumenti/costo-auto-collezione', icon: 'money' },
+  ],
+  'costo-auto-collezione': [
+    { title: 'Costo Mantenimento Yacht', description: 'Ormeggio, equipaggio, IVIE', href: '/strumenti/costo-mantenimento-yacht', icon: 'yacht' },
+    { title: 'Costo Jet Privato', description: 'Possesso vs fractional vs charter', href: '/strumenti/costo-jet-privato', icon: 'chart' },
+    { title: 'Mercato Immobiliare Luxury', description: 'Immobili di pregio', href: '/strumenti/mercato-immobiliare-luxury', icon: 'home' },
     { title: 'Family Office', description: 'Gestione patrimoni UHNWI', href: '/strumenti/family-office', icon: 'family' },
   ],
 }

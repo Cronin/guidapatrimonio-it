@@ -21,7 +21,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
+  // All tools - comprehensive list
   const tools = [
+    // Calcolatori Fiscali
+    'calcolatore-plusvalenze',
+    'calcolatore-minusvalenze',
+    'tax-loss-harvesting',
+    // Portfolio & Investimenti
+    'portfolio-tracker',
+    'backtest-portafoglio',
+    'simulatore-monte-carlo',
+    'analizzatore-costi-fondi',
+    'confronto-etf',
+    'pac',
+    'calcolatore-dividendi',
+    'dividendi',
+    'ottimizzatore-allocazione',
+    'portfolio-rebalancer',
     // Strutture Societarie
     'holding',
     'family-office',
@@ -32,6 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Fiscalità Internazionale
     'flat-tax-100k',
     'ivafe-ivie',
+    'copertura-valutaria',
     // Private Wealth
     'confronto-private-banking',
     'costi-private-banking',
@@ -39,6 +56,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'aste-immobiliari-luxury',
     'mercato-immobiliare-luxury',
     'portafoglio-immobiliare',
+    'rendita-immobiliare',
+    'immobiliare-vs-azioni',
+    // Luxury Assets
+    'costo-mantenimento-yacht',
+    'costo-jet-privato',
+    'costo-auto-collezione',
+    // Calcolatori Base
+    'patrimonio-netto',
+    'calcolatore-patrimonio-netto',
+    'stipendio-netto',
+    'mutuo',
+    'prestito',
+    'fondo-emergenza',
+    'budget',
+    'interesse-composto',
+    'interesse-composto-avanzato',
+    'inflazione',
+    // FIRE & Pensione
+    'fire',
+    'pensione',
+    'tfr',
+    'tasso-prelievo-sicuro',
+    'proiezione-patrimoniale',
+    // Altri strumenti
+    'dashboard-macro',
+    'scala-obbligazionaria',
+    'ai-advisor',
   ]
 
   const toolUrls = tools.map(tool => ({
@@ -46,6 +90,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
+  }))
+
+  // Landing pages
+  const landingPages = [
+    { url: `${baseUrl}/investire-100mila`, priority: 0.8 },
+    { url: `${baseUrl}/gestione-patrimonio`, priority: 0.8 },
+    { url: `${baseUrl}/protezione-patrimonio`, priority: 0.8 },
+    { url: `${baseUrl}/consulenza-patrimoniale`, priority: 0.8 },
+    { url: `${baseUrl}/consulenza-patrimoniale-milano`, priority: 0.7 },
+    { url: `${baseUrl}/consulenza-patrimoniale-roma`, priority: 0.7 },
+    { url: `${baseUrl}/consulenza-patrimoniale-svizzera`, priority: 0.7 },
+    { url: `${baseUrl}/faq`, priority: 0.5 },
+  ]
+
+  const landingUrls = landingPages.map(page => ({
+    url: page.url,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: page.priority,
   }))
 
   return [
@@ -56,18 +119,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${baseUrl}/investire-100mila`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
       url: `${baseUrl}/strumenti`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.9,
     },
     ...toolUrls,
+    ...landingUrls,
     {
       url: `${baseUrl}/blog`,
       lastModified: new Date(),
