@@ -182,6 +182,27 @@ const toolCategories: ToolCategory[] = [
       },
     ],
   },
+  {
+    title: 'Luxury Assets',
+    tools: [
+      {
+        title: 'Costo Mantenimento Yacht',
+        description: 'Ormeggio, equipaggio, assicurazione, IVIE. La regola del 10%.',
+        href: '/strumenti/costo-mantenimento-yacht',
+        featured: true
+      },
+      {
+        title: 'Costo Jet Privato',
+        description: 'Possesso vs fractional vs charter. Costi reali di un jet.',
+        href: '/strumenti/costo-jet-privato',
+      },
+      {
+        title: 'Costo Auto Collezione',
+        description: 'Supercar e auto storiche: assicurazione, manutenzione, storage.',
+        href: '/strumenti/costo-auto-collezione',
+      },
+    ],
+  },
 ]
 
 const totalTools = toolCategories.reduce((sum, cat) => sum + cat.tools.length, 0)

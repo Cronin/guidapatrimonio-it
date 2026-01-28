@@ -4,7 +4,7 @@ interface RelatedTool {
   title: string
   description: string
   href: string
-  icon: 'chart' | 'building' | 'shield' | 'calculator' | 'family' | 'globe' | 'home' | 'money' | 'briefcase' | 'scale'
+  icon: 'chart' | 'building' | 'shield' | 'calculator' | 'family' | 'globe' | 'home' | 'money' | 'briefcase' | 'scale' | 'yacht'
 }
 
 interface RelatedToolsProps {
@@ -61,6 +61,11 @@ const iconMap = {
   scale: (
     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+    </svg>
+  ),
+  yacht: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 17h18M5 17l2-7h10l2 7M12 3v7m-4-3l4 3 4-3" />
     </svg>
   ),
 }
@@ -143,7 +148,13 @@ export const toolCorrelations: Record<string, RelatedTool[]> = {
     { title: 'Flat Tax Neo-Residenti', description: 'Regime 100k per redditi esteri', href: '/strumenti/flat-tax-100k', icon: 'globe' },
     { title: 'Copertura Valutaria', description: 'Gestisci rischio cambio', href: '/strumenti/copertura-valutaria', icon: 'shield' },
     { title: 'Portafoglio Immobiliare', description: 'Immobili esteri', href: '/strumenti/portafoglio-immobiliare', icon: 'home' },
-    { title: 'Confronto ETF', description: 'ETF domiciliati estero', href: '/strumenti/confronto-etf', icon: 'chart' },
+    { title: 'Costo Mantenimento Yacht', description: 'Calcola IVIE su yacht esteri', href: '/strumenti/costo-mantenimento-yacht', icon: 'yacht' },
+  ],
+  'costo-mantenimento-yacht': [
+    { title: 'IVAFE/IVIE Calculator', description: 'Calcola imposte su beni esteri', href: '/strumenti/ivafe-ivie', icon: 'globe' },
+    { title: 'Aste Immobiliari Luxury', description: 'Immobili di pregio alle aste', href: '/strumenti/aste-immobiliari-luxury', icon: 'home' },
+    { title: 'Mercato Immobiliare Luxury', description: 'Prezzi zone premium', href: '/strumenti/mercato-immobiliare-luxury', icon: 'building' },
+    { title: 'Family Office', description: 'Gestione patrimoni UHNWI', href: '/strumenti/family-office', icon: 'family' },
   ],
 }
 
