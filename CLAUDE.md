@@ -154,3 +154,40 @@ git push
 ```
 
 Auto-deploy to Vercel on push to main.
+
+---
+
+## BOSS WHATSAPP INTEGRATION
+
+**Boss Emanuele:** +39 347 394 6608
+
+Quando Boss manda task via WhatsApp:
+1. Rispondi "TASK X PRESA IN CARICO!" con breve descrizione
+2. Esegui la modifica
+3. Push automatico (MAI chiedere all'utente)
+4. Screenshot della modifica
+5. Invia screenshot + conferma "TASK X COMPLETATA!"
+
+### Task Numbering
+Continua dalla numerazione esistente. Ultima task: **TASK 14** (2026-01-27).
+
+### Siti Autorizzati per Boss
+Boss puo' richiedere modifiche SOLO per:
+- guidapatrimonio.it
+- cybersecuritydome.com
+
+Se chiede modifiche ad altri siti → rispondi che non hai accesso.
+
+---
+
+## MODIFICHE RECENTI
+
+### TASK 13 (2026-01-27)
+- `formatCurrency()` mostra "100k" invece di "100.000 €"
+- Y-axis min calcolato dinamicamente da `Math.min(...proiezioni.map(p => p.conservativo))`
+
+### TASK 14 (2026-01-27)
+- Hover tooltip sul grafico proiezioni in `ContactForm.tsx`
+- Linea verticale tratteggiata
+- Pallini colorati su ogni strategia
+- Tooltip in alto a destra con Anno + valori
