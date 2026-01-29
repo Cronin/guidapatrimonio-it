@@ -657,6 +657,31 @@ export default function BacktestPortafoglio() {
                 </div>
               </div>
 
+              {/* Orizzonte Temporale */}
+              <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+                <h2 className="font-heading text-lg text-forest mb-4">Orizzonte Temporale</h2>
+                <div className="grid grid-cols-5 gap-2">
+                  {[10, 15, 20, 30, 40].map((anni) => (
+                    <button
+                      key={anni}
+                      onClick={() => setPeriodoBacktest(anni)}
+                      className={`py-3 rounded-xl border-2 transition-all text-center ${
+                        periodoBacktest === anni
+                          ? 'border-green-500 bg-green-50 shadow-sm'
+                          : 'border-gray-100 hover:border-green-200'
+                      }`}
+                    >
+                      <span className={`block font-heading text-lg ${
+                        periodoBacktest === anni ? 'text-green-700' : 'text-gray-700'
+                      }`}>
+                        {anni}
+                      </span>
+                      <span className="text-xs text-gray-400">anni</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               {/* Allocazione Asset */}
               <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
                 <div className="flex items-center justify-between mb-4">
@@ -806,33 +831,6 @@ export default function BacktestPortafoglio() {
                     <div className="flex justify-between text-xs text-gray-400 mt-1">
                       <span>0</span>
                       <span>50K/anno</span>
-                    </div>
-                  </div>
-
-                  {/* Periodo */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-3">
-                      Orizzonte temporale
-                    </label>
-                    <div className="grid grid-cols-5 gap-2">
-                      {[10, 15, 20, 30, 40].map((anni) => (
-                        <button
-                          key={anni}
-                          onClick={() => setPeriodoBacktest(anni)}
-                          className={`py-3 rounded-xl border-2 transition-all text-center ${
-                            periodoBacktest === anni
-                              ? 'border-green-500 bg-green-50 shadow-sm'
-                              : 'border-gray-100 hover:border-green-200'
-                          }`}
-                        >
-                          <span className={`block font-heading text-lg ${
-                            periodoBacktest === anni ? 'text-green-700' : 'text-gray-700'
-                          }`}>
-                            {anni}
-                          </span>
-                          <span className="text-xs text-gray-400">anni</span>
-                        </button>
-                      ))}
                     </div>
                   </div>
 
