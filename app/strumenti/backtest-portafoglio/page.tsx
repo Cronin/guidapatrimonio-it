@@ -967,7 +967,7 @@ export default function BacktestPortafoglio() {
                       {/* Crescita Chart */}
                       {activeTab === 'crescita' && (
                         <div>
-                          <div className="h-72 md:h-80 flex items-end gap-[2px] relative">
+                          <div className="h-72 md:h-80 flex items-end gap-[2px] relative overflow-hidden">
                             {/* Y-axis labels */}
                             <div className="absolute left-0 top-0 bottom-8 flex flex-col justify-between text-xs text-gray-400 -ml-2 w-16 text-right">
                               <span>{formatCurrency(maxValoreGrafico)}</span>
