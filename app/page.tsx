@@ -17,8 +17,8 @@ export default function Home() {
       <About />
       <WhoWeHelp />
       <HowWeHelp />
-      <CTA />
       <Contact />
+      <CTA />
       <Footer />
     </main>
   )
