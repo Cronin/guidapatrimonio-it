@@ -3,6 +3,7 @@ import {
   Hero,
   About,
   WhoWeHelp,
+  SwissHolding,
   HowWeHelp,
   CTA,
   Contact,
@@ -16,6 +17,7 @@ export default function Home() {
       <Hero />
       <About />
       <WhoWeHelp />
+      <SwissHolding />
       <HowWeHelp />
       <Contact />
       <CTA />
