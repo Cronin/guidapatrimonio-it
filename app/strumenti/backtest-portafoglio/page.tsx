@@ -552,11 +552,12 @@ export default function BacktestPortafoglio() {
   // Trova il valore massimo per il grafico
   const maxValoreGrafico = useMemo(() => {
     if (!metriche) return metricheSP500.valoreFinale
-    return Math.max(
-      metriche.valoreFinale,
-      metricheSP500.valoreFinale,
-      metriche6040.valoreFinale
-    ) * 1.1
+    const allValues = [
+      ...metriche.crescitaAnnuale.map(d => d.valore),
+      ...metricheSP500.crescitaAnnuale.map(d => d.valore),
+      ...metriche6040.crescitaAnnuale.map(d => d.valore),
+    ]
+    return Math.max(...allValues) * 1.1
   }, [metriche, metricheSP500, metriche6040])
 
   // Calcola composizione visiva del portafoglio
@@ -1077,7 +1078,7 @@ export default function BacktestPortafoglio() {
                               <div className="absolute top-2/3 left-0 right-0 h-1/3 bg-gradient-to-b from-red-50 to-red-100" />
 
                               {/* Drawdown line */}
-                              <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+                              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                                 <defs>
                                   <linearGradient id="drawdownGradient" x1="0" y1="0" x2="0" y2="1">
                                     <stop offset="0%" stopColor="#EF4444" stopOpacity="0.1" />
