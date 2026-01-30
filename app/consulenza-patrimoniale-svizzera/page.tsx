@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 const localBusinessSchema = {
   '@context': 'https://schema.org',
-  '@type': 'FinancialService',
+  '@type': 'FinancialPlanning',
   '@id': 'https://guidapatrimonio.it/consulenza-patrimoniale-svizzera#local',
   name: 'Guida Patrimonio - Consulenza Patrimoniale Svizzera',
   description: 'Consulenza patrimoniale per clienti italiani con asset in Svizzera. Wealth management cross-border.',
