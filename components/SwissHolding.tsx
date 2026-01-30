@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 const vantaggi = [
   {
@@ -90,7 +91,16 @@ export default function SwissHolding() {
               Servizio riservato a patrimoni superiori a 500.000 EUR
             </p>
           </div>
-          <div className="shrink-0">
+          <div className="shrink-0 flex flex-col items-center gap-4">
+            <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-green-300 flex-shrink-0">
+              <Image
+                src="/images/team/giacomo.jpg"
+                alt="Giacomo - Wealth Manager"
+                width={80}
+                height={80}
+                className="w-full h-full object-cover object-top"
+              />
+            </div>
             <Link
               href="#contatti"
               className="inline-flex items-center gap-2 bg-white text-forest px-8 py-4 rounded-button font-semibold hover:bg-green-50 transition-colors"

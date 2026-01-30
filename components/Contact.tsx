@@ -1,4 +1,26 @@
+import Image from 'next/image'
 import ContactForm from './ContactForm'
+
+function GiacomoAvatar({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
+  const sizeClasses = {
+    sm: 'w-12 h-12',
+    md: 'w-20 h-20',
+    lg: 'w-24 h-24',
+  }
+  return (
+    <div className={`${sizeClasses[size]} rounded-full overflow-hidden border-2 border-green-200 flex-shrink-0`}>
+      <Image
+        src="/images/team/giacomo.jpg"
+        alt="Giacomo - Wealth Manager"
+        width={96}
+        height={96}
+        className="w-full h-full object-cover object-top"
+      />
+    </div>
+  )
+}
+
+export { GiacomoAvatar }
 
 export default function Contact() {
   return (
@@ -16,6 +38,16 @@ export default function Contact() {
               Ti aiuteremo a capire se le soluzioni di investimento proposte
               sono adatte al tuo profilo.
             </p>
+
+            {/* Giacomo card */}
+            <div className="flex items-center gap-4 bg-white rounded-xl p-5 border border-gray-100 mb-8">
+              <GiacomoAvatar size="md" />
+              <div>
+                <p className="font-heading text-lg text-forest">Giacomo</p>
+                <p className="text-sm text-gray-500">Wealth Manager Associato</p>
+                <p className="text-xs text-green-600 mt-1">Disponibile per consulenze</p>
+              </div>
+            </div>
 
             <div className="space-y-6">
               {/* Email */}
