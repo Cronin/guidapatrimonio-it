@@ -117,7 +117,7 @@ export default function Footer() {
               © {new Date().getFullYear()} Guida Patrimonio. Tutti i diritti riservati.
             </p>
             <p className="text-body-sm text-white/50">
-              Partner: Ginevra, Svizzera | Regolamentazione CSSF
+              <a href="tel:+393756448324" className="hover:text-white/70 transition-colors">+39 375 644 8324</a> | <a href="mailto:info@guidapatrimonio.it" className="hover:text-white/70 transition-colors">info@guidapatrimonio.it</a> | Partner: Ginevra, Svizzera
             </p>
           </div>
         </div>

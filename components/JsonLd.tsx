@@ -49,9 +49,15 @@ export const organizationSchema = {
     closes: '23:59',
   },
   areaServed: {
-    '@type': 'Country',
-    name: 'Italia',
+    '@type': 'City',
+    name: 'Milano',
+    containedInPlace: {
+      '@type': 'AdministrativeArea',
+      name: 'Città Metropolitana di Milano',
+    },
   },
+  telephone: '+39 375 644 8324',
+  email: 'info@guidapatrimonio.it',
   priceRange: '$$$$',
   serviceType: [
     'Consulenza Patrimoniale',
