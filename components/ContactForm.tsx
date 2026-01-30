@@ -375,11 +375,10 @@ export default function ContactForm() {
         </div>
       </div>
 
-      {/* SECTION 4: Proiezione (ALWAYS VISIBLE - updates live!) */}
-      <div>
+      {/* SECTION 4: Proiezione (visible only after selecting orizzonte + obiettivo) */}
+      {orizzonte && obiettivo && <div>
         <h3 className="font-heading text-xl text-forest mb-4">
           Proiezione in {anni} anni
-          {!orizzonte && <span className="text-sm font-normal text-gray-400 ml-2">(seleziona orizzonte per personalizzare)</span>}
         </h3>
           <div className="bg-gray-50 rounded-xl p-4 relative overflow-hidden">
             <svg
@@ -490,6 +489,17 @@ export default function ContactForm() {
                 )
               })}
 
+              {/* Starting value label at origin */}
+              {(() => {
+                const yStart = chartHeight - ((importo) / maxValue) * chartHeight + 10
+                return (
+                  <g>
+                    <circle cx="40" cy={Math.max(10, yStart)} r="3" fill="#1B4D3E" />
+                    <text x="46" y={Math.max(10, yStart) - 6} fontSize="9" fill="#1B4D3E" fontWeight="600">{formatCurrency(importo)}</text>
+                  </g>
+                )
+              })()}
+
               {/* Hover vertical line and dots */}
               {hoveredIndex !== null && proiezioni[hoveredIndex] && (() => {
                 const p = proiezioni[hoveredIndex]
@@ -509,8 +519,9 @@ export default function ContactForm() {
 
               {/* X axis labels */}
               <text x="40" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">0</text>
-              <text x="175" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{Math.round(anni/2)} anni</text>
-              <text x="310" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{anni} an</text>
+              <text x="175" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{Math.round(anni/2)}</text>
+              <text x="310" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{anni}</text>
+              <text x="175" y={chartHeight + 39} fontSize="8" fill="#c0c0c0" textAnchor="middle">anni</text>
 
               {/* Y axis labels - 0 at bottom, mid, max at top */}
               <text x="5" y="15" fontSize="9" fill="#6b7280" textAnchor="start" fontWeight="500">{formatCurrency(maxValue / 1.15)}</text>
@@ -588,7 +599,7 @@ export default function ContactForm() {
               <span className="font-semibold">Match perfetto!</span> Il tuo profilo è ideale per i nostri partner svizzeri.
             </div>
           )}
-        </div>
+        </div>}
 
       {/* SECTION 5: Contact Info */}
       <div>
