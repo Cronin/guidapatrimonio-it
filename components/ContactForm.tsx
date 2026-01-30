@@ -489,14 +489,11 @@ export default function ContactForm() {
                 )
               })}
 
-              {/* Starting value label on Y-axis */}
+              {/* Starting value tick on Y-axis */}
               {(() => {
                 const yStart = chartHeight - ((importo) / maxValue) * chartHeight + 10
                 return (
-                  <>
-                    <line x1="36" y1={Math.max(10, yStart)} x2="44" y2={Math.max(10, yStart)} stroke="#6b7280" strokeWidth="1" />
-                    <text x="5" y={Math.max(10, yStart) + 3} fontSize="9" fill="#6b7280" textAnchor="start" fontWeight="500">{formatCurrency(importo)}</text>
-                  </>
+                  <line x1="36" y1={Math.max(10, yStart)} x2="44" y2={Math.max(10, yStart)} stroke="#9ca3af" strokeWidth="1" />
                 )
               })()}
 
@@ -523,10 +520,19 @@ export default function ContactForm() {
               <text x="310" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{anni}</text>
               <text x="175" y={chartHeight + 39} fontSize="8" fill="#c0c0c0" textAnchor="middle">anni</text>
 
-              {/* Y axis labels - 0 at bottom, mid, max at top */}
-              <text x="5" y="15" fontSize="9" fill="#6b7280" textAnchor="start" fontWeight="500">{formatCurrency(maxValue / 1.15)}</text>
-              <text x="5" y={chartHeight / 2 + 10} fontSize="9" fill="#9ca3af" textAnchor="start">{formatCurrency(midValue / 1.15)}</text>
-              <text x="5" y={chartHeight + 10} fontSize="9" fill="#9ca3af" textAnchor="start">0</text>
+              {/* Y axis labels - importo at bottom, mid, max at top */}
+              {(() => {
+                const yStart = chartHeight - ((importo) / maxValue) * chartHeight + 10
+                const yMid = chartHeight / 2 + 13
+                const showMid = Math.abs(yMid - yStart) > 18
+                return (
+                  <>
+                    <text x="5" y="15" fontSize="9" fill="#6b7280" textAnchor="start" fontWeight="500">{formatCurrency(maxValue / 1.15)}</text>
+                    {showMid && <text x="5" y={yMid} fontSize="9" fill="#9ca3af" textAnchor="start">{formatCurrency(midValue / 1.15)}</text>}
+                    <text x="5" y={Math.max(10, yStart) + 3} fontSize="9" fill="#6b7280" textAnchor="start" fontWeight="500">{formatCurrency(importo)}</text>
+                  </>
+                )
+              })()}
             </svg>
 
             {/* Hover tooltip */}
