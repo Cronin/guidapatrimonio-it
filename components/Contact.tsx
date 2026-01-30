@@ -65,7 +65,6 @@ export default function Contact() {
                   </p>
                 </div>
               </div>
-            </div>
 
               {/* Hours */}
               <div className="flex items-start gap-4">
