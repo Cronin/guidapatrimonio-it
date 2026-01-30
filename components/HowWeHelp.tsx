@@ -39,24 +39,44 @@ export default function HowWeHelp() {
 
         {/* Steps */}
         <div className="grid md:grid-cols-2 gap-8">
-          {services.map((service, index) => (
-            <div
-              key={index}
-              className="flex gap-6 p-8 rounded-card bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-colors"
-            >
-              <span className="font-heading text-h4-lg text-green-300 opacity-70">
-                {service.number}
-              </span>
-              <div>
-                <h3 className="font-body text-h4 text-white mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-body-md text-white/70">
-                  {service.description}
-                </p>
+          {services.map((service, index) => {
+            const inner = (
+              <>
+                <span className="font-heading text-h4-lg text-green-300 opacity-70">
+                  {service.number}
+                </span>
+                <div>
+                  <h3 className="font-body text-h4 text-white mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-body-md text-white/70">
+                    {service.description}
+                  </p>
+                </div>
+              </>
+            )
+
+            if (index === 0) {
+              return (
+                <a
+                  key={index}
+                  href="#contatti"
+                  className="flex gap-6 p-8 rounded-card bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-colors cursor-pointer"
+                >
+                  {inner}
+                </a>
+              )
+            }
+
+            return (
+              <div
+                key={index}
+                className="flex gap-6 p-8 rounded-card bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-colors"
+              >
+                {inner}
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>
