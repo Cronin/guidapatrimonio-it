@@ -69,17 +69,31 @@ export default function About() {
             </div>
           </div>
 
-          {/* Image - Zurich from Wikipedia */}
-          <div className="relative">
+          {/* Office photos */}
+          <div className="space-y-4">
             <div className="aspect-[4/3] rounded-xl overflow-hidden">
               <img
-                src="/images/about/zurich-skyline.webp"
-                alt="Zurich, Svizzera - sede del nostro partner"
+                src="/images/ufficio/sala-riunioni.jpg"
+                alt="Sala riunioni - Guida Patrimonio, Via Monte Napoleone 28, Milano"
                 className="w-full h-full object-cover"
               />
             </div>
-            {/* Decorative element */}
-            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-green-50 rounded-xl -z-10" />
+            <div className="grid grid-cols-2 gap-4">
+              <div className="aspect-[4/3] rounded-lg overflow-hidden">
+                <img
+                  src="/images/ufficio/biblioteca.jpg"
+                  alt="Area lounge e biblioteca - Guida Patrimonio, Via Monte Napoleone 28, Milano"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="aspect-[4/3] rounded-lg overflow-hidden">
+                <img
+                  src="/images/ufficio/ufficio-consulenti.jpg"
+                  alt="Ufficio consulenti finanziari - Guida Patrimonio, Via Monte Napoleone 28, Milano"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
