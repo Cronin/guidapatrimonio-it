@@ -256,10 +256,10 @@ export default function ContactForm() {
   // CHART COMPONENT
   // ============================================================================
   const anni = orizzonte === '1-5' ? 5 : orizzonte === '5-10' ? 10 : orizzonte === '10-20' ? 20 : 30
-  const maxValue = proiezioni[proiezioni.length - 1]?.aggressivo || importo * 2
-  // Y minimum = minimum della strategia conservativa (dinamico, non fisso)
-  const minValue = Math.min(...proiezioni.map(p => p.conservativo))
-  const chartHeight = 140
+  const maxValue = (proiezioni[proiezioni.length - 1]?.aggressivo || importo * 2) * 1.15
+  const minValue = 0
+  const chartHeight = 160
+  const midValue = maxValue / 2
 
   // Hover state for interactive tooltip
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
@@ -381,7 +381,7 @@ export default function ContactForm() {
           Proiezione in {anni} anni
           {!orizzonte && <span className="text-sm font-normal text-gray-400 ml-2">(seleziona orizzonte per personalizzare)</span>}
         </h3>
-          <div className="bg-gray-50 rounded-xl p-4 relative">
+          <div className="bg-gray-50 rounded-xl p-4 relative overflow-hidden">
             <svg
               viewBox={`0 0 320 ${chartHeight + 40}`}
               className="w-full cursor-crosshair"
@@ -397,6 +397,22 @@ export default function ContactForm() {
               }}
               onMouseLeave={() => setHoveredIndex(null)}
             >
+              <defs>
+                {/* Area gradient fills */}
+                <linearGradient id="gradAgg" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor={PROFILI.aggressivo.color} stopOpacity="0.25" />
+                  <stop offset="100%" stopColor={PROFILI.aggressivo.color} stopOpacity="0.02" />
+                </linearGradient>
+                <linearGradient id="gradMod" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor={PROFILI.moderato.color} stopOpacity="0.2" />
+                  <stop offset="100%" stopColor={PROFILI.moderato.color} stopOpacity="0.02" />
+                </linearGradient>
+                <linearGradient id="gradCon" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor={PROFILI.conservativo.color} stopOpacity="0.15" />
+                  <stop offset="100%" stopColor={PROFILI.conservativo.color} stopOpacity="0.02" />
+                </linearGradient>
+              </defs>
+
               {/* Grid lines */}
               {[0, 0.25, 0.5, 0.75, 1].map((pct) => (
                 <line
@@ -406,65 +422,87 @@ export default function ContactForm() {
                   x2="310"
                   y2={chartHeight - pct * chartHeight + 10}
                   stroke="#e5e7eb"
-                  strokeWidth="1"
+                  strokeWidth="0.5"
+                  strokeDasharray={pct === 0 ? '0' : '4,4'}
                 />
               ))}
 
-              {/* Aggressivo line */}
-              <polyline
-                fill="none"
-                stroke={PROFILI.aggressivo.color}
-                strokeWidth={obiettivo === 'crescita' ? '4' : '2'}
-                opacity={obiettivo && obiettivo !== 'crescita' ? 0.4 : 1}
-                className="transition-all duration-500"
-                points={proiezioni.map((p, i) => {
+              {/* Area fills - from line down to baseline */}
+              {[
+                { key: 'aggressivo' as const, grad: 'url(#gradAgg)', field: 'crescita' },
+                { key: 'moderato' as const, grad: 'url(#gradMod)', field: 'rendita' },
+                { key: 'conservativo' as const, grad: 'url(#gradCon)', field: 'protezione' },
+              ].map(({ key, grad, field }) => {
+                const baseline = chartHeight + 10
+                const pts = proiezioni.map((p, i) => {
                   const x = 40 + (i / anni) * 270
-                  const y = chartHeight - ((p.aggressivo - minValue) / (maxValue - minValue)) * chartHeight + 10
+                  const y = chartHeight - ((p[key]) / maxValue) * chartHeight + 10
                   return `${x},${Math.max(10, y)}`
-                }).join(' ')}
-              />
+                })
+                const lastX = 40 + 270
+                const firstX = 40
+                return (
+                  <polygon
+                    key={key}
+                    fill={grad}
+                    opacity={obiettivo && obiettivo !== field ? 0.15 : 0.8}
+                    className="transition-all duration-700 ease-out"
+                    points={`${firstX},${baseline} ${pts.join(' ')} ${lastX},${baseline}`}
+                  />
+                )
+              })}
 
-              {/* Moderato line */}
-              <polyline
-                fill="none"
-                stroke={PROFILI.moderato.color}
-                strokeWidth={obiettivo === 'rendita' ? '4' : '2'}
-                opacity={obiettivo && obiettivo !== 'rendita' ? 0.4 : 1}
-                className="transition-all duration-500"
-                points={proiezioni.map((p, i) => {
-                  const x = 40 + (i / anni) * 270
-                  const y = chartHeight - ((p.moderato - minValue) / (maxValue - minValue)) * chartHeight + 10
-                  return `${x},${Math.max(10, y)}`
-                }).join(' ')}
-              />
+              {/* Lines */}
+              {[
+                { key: 'aggressivo' as const, color: PROFILI.aggressivo.color, obj: 'crescita' },
+                { key: 'moderato' as const, color: PROFILI.moderato.color, obj: 'rendita' },
+                { key: 'conservativo' as const, color: PROFILI.conservativo.color, obj: 'protezione' },
+              ].map(({ key, color, obj }) => (
+                <polyline
+                  key={key}
+                  fill="none"
+                  stroke={color}
+                  strokeWidth={obiettivo === obj ? '3.5' : '2'}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  opacity={obiettivo && obiettivo !== obj ? 0.3 : 1}
+                  className="transition-all duration-700 ease-out"
+                  points={proiezioni.map((p, i) => {
+                    const x = 40 + (i / anni) * 270
+                    const y = chartHeight - ((p[key]) / maxValue) * chartHeight + 10
+                    return `${x},${Math.max(10, y)}`
+                  }).join(' ')}
+                />
+              ))}
 
-              {/* Conservativo line */}
-              <polyline
-                fill="none"
-                stroke={PROFILI.conservativo.color}
-                strokeWidth={obiettivo === 'protezione' ? '4' : '2'}
-                opacity={obiettivo && obiettivo !== 'protezione' ? 0.4 : 1}
-                className="transition-all duration-500"
-                points={proiezioni.map((p, i) => {
-                  const x = 40 + (i / anni) * 270
-                  const y = chartHeight - ((p.conservativo - minValue) / (maxValue - minValue)) * chartHeight + 10
-                  return `${x},${Math.max(10, y)}`
-                }).join(' ')}
-              />
+              {/* End value labels on the right edge */}
+              {proiezioni.length > 0 && [
+                { key: 'aggressivo' as const, color: PROFILI.aggressivo.color, obj: 'crescita' },
+                { key: 'moderato' as const, color: PROFILI.moderato.color, obj: 'rendita' },
+                { key: 'conservativo' as const, color: PROFILI.conservativo.color, obj: 'protezione' },
+              ].map(({ key, color, obj }) => {
+                const last = proiezioni[proiezioni.length - 1]
+                const y = chartHeight - ((last[key]) / maxValue) * chartHeight + 10
+                return (
+                  <g key={`label-${key}`} opacity={obiettivo && obiettivo !== obj ? 0.3 : 1} className="transition-all duration-700 ease-out">
+                    <circle cx="310" cy={Math.max(10, y)} r="4" fill={color} stroke="white" strokeWidth="1.5" />
+                  </g>
+                )
+              })}
 
               {/* Hover vertical line and dots */}
               {hoveredIndex !== null && proiezioni[hoveredIndex] && (() => {
                 const p = proiezioni[hoveredIndex]
                 const x = 40 + (hoveredIndex / anni) * 270
-                const yAgg = chartHeight - ((p.aggressivo - minValue) / (maxValue - minValue)) * chartHeight + 10
-                const yMod = chartHeight - ((p.moderato - minValue) / (maxValue - minValue)) * chartHeight + 10
-                const yCon = chartHeight - ((p.conservativo - minValue) / (maxValue - minValue)) * chartHeight + 10
+                const yAgg = chartHeight - ((p.aggressivo) / maxValue) * chartHeight + 10
+                const yMod = chartHeight - ((p.moderato) / maxValue) * chartHeight + 10
+                const yCon = chartHeight - ((p.conservativo) / maxValue) * chartHeight + 10
                 return (
                   <>
                     <line x1={x} y1="10" x2={x} y2={chartHeight + 10} stroke="#9ca3af" strokeWidth="1" strokeDasharray="3,3" />
-                    <circle cx={x} cy={yAgg} r="5" fill={PROFILI.aggressivo.color} stroke="white" strokeWidth="2" />
-                    <circle cx={x} cy={yMod} r="5" fill={PROFILI.moderato.color} stroke="white" strokeWidth="2" />
-                    <circle cx={x} cy={yCon} r="5" fill={PROFILI.conservativo.color} stroke="white" strokeWidth="2" />
+                    <circle cx={x} cy={Math.max(10, yAgg)} r="6" fill={PROFILI.aggressivo.color} stroke="white" strokeWidth="2" />
+                    <circle cx={x} cy={Math.max(10, yMod)} r="6" fill={PROFILI.moderato.color} stroke="white" strokeWidth="2" />
+                    <circle cx={x} cy={Math.max(10, yCon)} r="6" fill={PROFILI.conservativo.color} stroke="white" strokeWidth="2" />
                   </>
                 )
               })()}
@@ -472,20 +510,32 @@ export default function ContactForm() {
               {/* X axis labels */}
               <text x="40" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">0</text>
               <text x="175" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{Math.round(anni/2)} anni</text>
-              <text x="310" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{anni} anni</text>
+              <text x="310" y={chartHeight + 30} fontSize="10" fill="#9ca3af" textAnchor="middle">{anni} an</text>
 
-              {/* Y axis labels */}
-              <text x="5" y="15" fontSize="10" fill="#6b7280" textAnchor="start" fontWeight="500">{formatCurrency(maxValue)}</text>
-              <text x="5" y={chartHeight + 10} fontSize="10" fill="#6b7280" textAnchor="start" fontWeight="500">{formatCurrency(minValue)}</text>
+              {/* Y axis labels - 0 at bottom, mid, max at top */}
+              <text x="5" y="15" fontSize="9" fill="#6b7280" textAnchor="start" fontWeight="500">{formatCurrency(maxValue / 1.15)}</text>
+              <text x="5" y={chartHeight / 2 + 10} fontSize="9" fill="#9ca3af" textAnchor="start">{formatCurrency(midValue / 1.15)}</text>
+              <text x="5" y={chartHeight + 10} fontSize="9" fill="#9ca3af" textAnchor="start">0</text>
             </svg>
 
             {/* Hover tooltip */}
             {hoveredIndex !== null && proiezioni[hoveredIndex] && (
-              <div className="absolute top-2 right-2 bg-white rounded-lg shadow-lg p-2 text-xs border border-gray-200 z-10">
-                <div className="font-semibold text-gray-700 mb-1">Anno {hoveredIndex}</div>
-                <div className="flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{backgroundColor: PROFILI.aggressivo.color}}></span> {formatCurrency(proiezioni[hoveredIndex].aggressivo)}</div>
-                <div className="flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{backgroundColor: PROFILI.moderato.color}}></span> {formatCurrency(proiezioni[hoveredIndex].moderato)}</div>
-                <div className="flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{backgroundColor: PROFILI.conservativo.color}}></span> {formatCurrency(proiezioni[hoveredIndex].conservativo)}</div>
+              <div className="absolute top-2 right-2 bg-white rounded-lg shadow-lg p-3 text-xs border border-gray-200 z-10 min-w-[140px]">
+                <div className="font-semibold text-gray-700 mb-2 pb-1 border-b border-gray-100">Anno {hoveredIndex}</div>
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full" style={{backgroundColor: PROFILI.aggressivo.color}} /> Aggressivo</span>
+                    <span className="font-medium">{formatCurrency(proiezioni[hoveredIndex].aggressivo)}</span>
+                  </div>
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full" style={{backgroundColor: PROFILI.moderato.color}} /> Moderato</span>
+                    <span className="font-medium">{formatCurrency(proiezioni[hoveredIndex].moderato)}</span>
+                  </div>
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full" style={{backgroundColor: PROFILI.conservativo.color}} /> Conservativo</span>
+                    <span className="font-medium">{formatCurrency(proiezioni[hoveredIndex].conservativo)}</span>
+                  </div>
+                </div>
               </div>
             )}
           </div>
