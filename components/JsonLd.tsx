@@ -16,11 +16,11 @@ export function JsonLd({ data }: JsonLdProps) {
 // Organization Schema for the main site
 export const organizationSchema = {
   '@context': 'https://schema.org',
-  '@type': 'FinancialService',
+  '@type': 'FinancialPlanning',
   '@id': 'https://guidapatrimonio.it/#organization',
   name: 'Guida Patrimonio',
   alternateName: 'GuidaPatrimonio',
-  description: 'Consulenza patrimoniale indipendente per HNWI. Pianificazione finanziaria, wealth management, ottimizzazione fiscale.',
+  description: 'Consulenza patrimoniale indipendente. Pianificazione finanziaria, wealth management, ottimizzazione fiscale per patrimoni oltre 150K.',
   url: 'https://guidapatrimonio.it',
   logo: {
     '@type': 'ImageObject',
@@ -42,12 +42,14 @@ export const organizationSchema = {
     latitude: 45.4686,
     longitude: 9.1954,
   },
-  openingHoursSpecification: {
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-    opens: '00:00',
-    closes: '23:59',
-  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '09:00',
+      closes: '18:00',
+    },
+  ],
   areaServed: {
     '@type': 'City',
     name: 'Milano',

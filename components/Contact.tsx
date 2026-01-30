@@ -12,9 +12,9 @@ export default function Contact() {
               Parliamo dei tuoi obiettivi
             </h2>
             <p className="text-body-lg text-gray-500 mb-8">
-              Compila il form per essere ricontattato dai nostri partner.
-              Ti aiuteremo a capire se le soluzioni di investimento proposte
-              sono adatte al tuo profilo.
+              Contattaci per una consulenza personalizzata sulla gestione
+              del tuo patrimonio. Il nostro team è a disposizione dal lunedì
+              al venerdì, dalle 9:00 alle 18:00.
             </p>
 
             <div className="space-y-6">
@@ -57,10 +57,28 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-medium text-forest">Partner</p>
+                  <p className="font-medium text-forest">Sede</p>
                   <p className="text-gray-500">
-                    Ginevra, Svizzera<br />
-                    <span className="text-sm">Consulenze in videochiamata</span>
+                    Via Monte Napoleone 28<br />
+                    20121 Milano (MI)<br />
+                    <span className="text-sm">Ricevimento su appuntamento</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+              {/* Hours */}
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center flex-shrink-0">
+                  <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="font-medium text-forest">Orari</p>
+                  <p className="text-gray-500">
+                    Lun - Ven: 09:00 - 18:00<br />
+                    <span className="text-sm">Sab e Dom: chiuso</span>
                   </p>
                 </div>
               </div>

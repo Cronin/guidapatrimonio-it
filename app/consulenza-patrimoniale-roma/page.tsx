@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 const localBusinessSchema = {
   '@context': 'https://schema.org',
-  '@type': 'FinancialService',
+  '@type': 'FinancialPlanning',
   '@id': 'https://guidapatrimonio.it/consulenza-patrimoniale-roma#local',
   name: 'Guida Patrimonio - Consulenza Patrimoniale Roma',
   description: 'Consulenza patrimoniale indipendente e wealth management per clienti HNWI a Roma',
