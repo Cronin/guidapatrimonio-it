@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 
 export default function CTA() {
   return (
@@ -7,14 +6,19 @@ export default function CTA() {
       <div className="container-custom">
         <div className="bg-forest rounded-[24px] p-12 md:p-16 text-center">
           <div className="flex justify-center mb-6">
-            <div className="w-20 h-20 rounded-full overflow-hidden border-3 border-green-300 flex-shrink-0">
-              <Image
-                src="/images/team/giacomo.jpg"
-                alt="Giacomo - Wealth Manager"
-                width={80}
-                height={80}
-                className="w-full h-full object-cover object-top"
-              />
+            <div className="relative inline-block">
+              <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-green-300 flex-shrink-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/team/giacomo.jpg"
+                  alt="Giacomo - Wealth Manager"
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+              <span className="absolute bottom-0 right-0 flex h-4 w-4">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-4 w-4 bg-green-500 border-2 border-forest" />
+              </span>
             </div>
           </div>
           <h2 className="font-heading text-h3-sm md:text-h3 text-white mb-6">

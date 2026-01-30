@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import ContactForm from './ContactForm'
 
 function GiacomoAvatar({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
@@ -8,14 +7,20 @@ function GiacomoAvatar({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
     lg: 'w-24 h-24',
   }
   return (
-    <div className={`${sizeClasses[size]} rounded-full overflow-hidden border-2 border-green-200 flex-shrink-0`}>
-      <Image
-        src="/images/team/giacomo.jpg"
-        alt="Giacomo - Wealth Manager"
-        width={96}
-        height={96}
-        className="w-full h-full object-cover object-top"
-      />
+    <div className="relative inline-block flex-shrink-0">
+      <div className={`${sizeClasses[size]} rounded-full overflow-hidden border-2 border-green-200`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/team/giacomo.jpg"
+          alt="Giacomo - Wealth Manager"
+          className="w-full h-full object-cover object-top"
+        />
+      </div>
+      {/* Pulsing green dot */}
+      <span className="absolute bottom-0 right-0 flex h-4 w-4">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+        <span className="relative inline-flex rounded-full h-4 w-4 bg-green-500 border-2 border-white" />
+      </span>
     </div>
   )
 }
@@ -45,7 +50,13 @@ export default function Contact() {
               <div>
                 <p className="font-heading text-lg text-forest">Giacomo</p>
                 <p className="text-sm text-gray-500">Wealth Manager Associato</p>
-                <p className="text-xs text-green-600 mt-1">Disponibile per consulenze</p>
+                <span className="inline-flex items-center gap-1.5 mt-1.5 bg-green-50 text-green-700 text-xs font-medium px-2.5 py-1 rounded-full">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+                  </span>
+                  Disponibile ora
+                </span>
               </div>
             </div>
 
