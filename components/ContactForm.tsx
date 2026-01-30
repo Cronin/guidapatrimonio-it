@@ -489,14 +489,14 @@ export default function ContactForm() {
                 )
               })}
 
-              {/* Starting value label at origin */}
+              {/* Starting value label on Y-axis */}
               {(() => {
                 const yStart = chartHeight - ((importo) / maxValue) * chartHeight + 10
                 return (
-                  <g>
-                    <circle cx="40" cy={Math.max(10, yStart)} r="3" fill="#1B4D3E" />
-                    <text x="46" y={Math.max(10, yStart) - 6} fontSize="9" fill="#1B4D3E" fontWeight="600">{formatCurrency(importo)}</text>
-                  </g>
+                  <>
+                    <line x1="36" y1={Math.max(10, yStart)} x2="44" y2={Math.max(10, yStart)} stroke="#6b7280" strokeWidth="1" />
+                    <text x="5" y={Math.max(10, yStart) + 3} fontSize="9" fill="#6b7280" textAnchor="start" fontWeight="500">{formatCurrency(importo)}</text>
+                  </>
                 )
               })()}
 
@@ -601,8 +601,27 @@ export default function ContactForm() {
           )}
         </div>}
 
+      {/* Prompt to complete selections */}
+      {(!orizzonte || !obiettivo) && (
+        <div className="bg-gray-50 rounded-xl p-6 text-center border-2 border-dashed border-gray-200">
+          <div className="text-gray-400 mb-2">
+            <svg className="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+            </svg>
+          </div>
+          <p className="text-gray-500 font-medium">Completa le selezioni per vedere la proiezione</p>
+          <p className="text-sm text-gray-400 mt-1">
+            {!orizzonte && !obiettivo
+              ? 'Seleziona orizzonte temporale e obiettivo principale'
+              : !orizzonte
+                ? 'Seleziona l\'orizzonte temporale'
+                : 'Seleziona l\'obiettivo principale'}
+          </p>
+        </div>
+      )}
+
       {/* SECTION 5: Contact Info */}
-      <div>
+      {orizzonte && obiettivo && <div>
         <h3 className="font-heading text-xl text-forest mb-4">
           I tuoi dati
         </h3>
@@ -635,10 +654,10 @@ export default function ContactForm() {
         <p className="text-xs text-gray-400 mt-3">
           * Campi obbligatori. I tuoi dati sono al sicuro.
         </p>
-      </div>
+      </div>}
 
       {/* SUBMIT BUTTON */}
-      <button
+      {orizzonte && obiettivo && <button
         type="button"
         onClick={handleSubmit}
         disabled={!formComplete}
@@ -652,7 +671,7 @@ export default function ContactForm() {
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
-      </button>
+      </button>}
     </div>
   )
 }
